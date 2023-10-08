@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "outDir": "./ts-build",
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "lib": ["es2020", "dom"],
+    "baseUrl": "./",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "paths": {
+      "src/*": ["./src/*"]
+    }
+  },
+  "types": ["node"],
+  "exclude": ["node_modules"]
+}

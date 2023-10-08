@@ -1,0 +1,5 @@
+.textures-preview-list {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-gap: 8px;
+}

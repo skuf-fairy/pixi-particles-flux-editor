@@ -1,0 +1,20 @@
+.side-panel {
+  width: 600px;
+  height: 100vh;
+  background-color: #4a6670;
+  padding: 0 16px;
+  overflow-y: auto;
+
+  &__textures {
+    padding-top: 32px;
+    margin-bottom: 16px;
+  }
+
+  &__emitter-config {
+    margin-bottom: 16px;
+  }
+
+  &__bloom-filter-config {
+    padding-bottom: 32px;
+  }
+}

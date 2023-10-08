@@ -1,0 +1,8 @@
+{
+  "extends": "eslint-config-recommended",
+
+  "rules": {
+    "jsx-quotes": [1, "prefer-double"]
+  },
+  "plugins": ["prettier"]
+}

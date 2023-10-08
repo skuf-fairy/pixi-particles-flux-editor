@@ -2,14 +2,14 @@ import { EmitterConfigV3 } from "@pixi/particle-emitter";
 
 export const baseParticlesEmitterConfig: EmitterConfigV3 = {
   lifetime: {
-    min: 0.5,
-    max: 0.8,
+    min: 0.8,
+    max: 1.4,
   },
   frequency: 0.008,
   spawnChance: 1,
   particlesPerWave: 1,
   emitterLifetime: -1,
-  maxParticles: 1000,
+  maxParticles: 60,
   pos: {
     x: 0,
     y: 0,
@@ -39,11 +39,11 @@ export const baseParticlesEmitterConfig: EmitterConfigV3 = {
         scale: {
           list: [
             {
-              value: 0.2,
+              value: 0.8,
               time: 0,
             },
             {
-              value: 0.01,
+              value: 0.1,
               time: 1,
             },
           ],
@@ -53,7 +53,7 @@ export const baseParticlesEmitterConfig: EmitterConfigV3 = {
     {
       type: "blendMode",
       config: {
-        blendMode: "screen",
+        blendMode: "normal",
       },
     },
     {
@@ -62,11 +62,11 @@ export const baseParticlesEmitterConfig: EmitterConfigV3 = {
         color: {
           list: [
             {
-              value: "fb1010",
+              value: "A7DCF5",
               time: 0,
             },
             {
-              value: "f5b830",
+              value: "AACAD9",
               time: 1,
             },
           ],
@@ -105,7 +105,7 @@ export const baseParticlesEmitterConfig: EmitterConfigV3 = {
         data: {
           x: 0,
           y: 0,
-          radius: 10,
+          radius: 150,
         },
       },
     },

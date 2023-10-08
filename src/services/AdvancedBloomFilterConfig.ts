@@ -18,11 +18,17 @@ export class AdvancedBloomFilterConfig {
       enabled: false,
       blendMode: BLEND_MODES.NORMAL,
       ...options,
+      threshold: 0.2,
     };
   }
 
   public getStringifyConfig() {
     return JSON.stringify(this.config, null, 2);
+  }
+
+  public setConfigFromString(config: string) {
+    this.config = JSON.parse(config);
+    this.emit();
   }
 
   // public setParam<K extends keyof AdvancedBloomFilterOptions>(key: K, value: AdvancedBloomFilterOptions[K]) {

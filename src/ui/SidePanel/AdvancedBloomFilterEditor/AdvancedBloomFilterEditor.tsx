@@ -20,9 +20,9 @@ export function AdvancedBloomFilterEditor({ className }: Props) {
         onChange={(e) => {
           setValue(e.target.value);
         }}
-        // onBlur={() => {
-        //   emitterConfig.setConfigFromStringAndMergeTexturues(value);
-        // }}
+        onBlur={() => {
+          advancedBloomFilterConfig.setConfigFromString(value);
+        }}
       />
     </section>
   );

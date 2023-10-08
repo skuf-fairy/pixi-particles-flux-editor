@@ -21,7 +21,7 @@ export function EmitterConfigEditor({ className }: Props) {
           setValue(e.target.value);
         }}
         onBlur={() => {
-          emitterConfig.setConfigFromStringAndMergeTexturues(value);
+          emitterConfig.setConfigFromStringAndMergeTextures(value);
         }}
       />
     </section>

@@ -31,11 +31,25 @@ export class EditorApp {
     this.rootContainer = new Container();
     this.app.stage.addChild(this.rootContainer);
 
-    this.particlesEmitter = new Emitter(this.rootContainer, this.emitterConfig.config);
+    const backgroundContainer = new Container();
+    this.rootContainer.addChild(backgroundContainer);
+    const background = new Graphics()
+      .beginFill(0x465760)
+      .drawRect(0, 0, this.app.renderer.width, this.app.renderer.height);
+    backgroundContainer.addChild(background);
+
+    background.interactive = true;
+    background.cursor = "pointer";
+
+    background.on("pointermove", this.handlePointerMove);
+    background.on("pointerleave", this.handlePointerLeave);
+
+    const emitterContainer = new Container();
+    this.rootContainer.addChild(emitterContainer);
+    this.particlesEmitter = new Emitter(emitterContainer, this.emitterConfig.config);
     this.particlesEmitter.autoUpdate = true;
 
-    this.particlesEmitter.spawnPos.x = this.app.renderer.width / 2;
-    this.particlesEmitter.spawnPos.y = this.app.renderer.height / 2;
+    this.setEmitterPosByCenter();
 
     this.emitterConfig.subscribeOnConfigChange(this.applyEmitterConfig);
 
@@ -43,18 +57,7 @@ export class EditorApp {
 
     this.advancedBloomFilterConfig.subscribeOnConfigChange(this.applyBloomFilterOptions, true);
 
-    this.rootContainer.filters = [this.bloomFilter];
-
-    const background = new Graphics()
-      .beginFill(0x465760)
-      .drawRect(0, 0, this.app.renderer.width, this.app.renderer.height);
-    this.rootContainer.addChild(background);
-
-    background.interactive = true;
-    background.cursor = "pointer";
-
-    background.on("pointermove", this.handlePointerMove);
-    background.on("pointerleave", this.handlePointerLeave);
+    emitterContainer.filters = [this.bloomFilter];
   }
 
   private handlePointerMove = (e: FederatedPointerEvent) => {
@@ -63,16 +66,22 @@ export class EditorApp {
   };
 
   private handlePointerLeave = (e: FederatedPointerEvent) => {
+    this.setEmitterPosByCenter();
+  };
+
+  private setEmitterPosByCenter() {
     this.particlesEmitter.spawnPos.x = this.app.renderer.width / 2;
     this.particlesEmitter.spawnPos.y = this.app.renderer.height / 2;
-  };
+  }
 
   private applyEmitterConfig = (config: EmitterConfigV3) => {
     this.particlesEmitter.init(config);
     this.particlesEmitter.autoUpdate = true;
+    this.setEmitterPosByCenter();
   };
 
   private applyBloomFilterOptions = (options: AdvancedBloomFilterConfigOptions) => {
+    console.log(options);
     this.bloomFilter.enabled = options.enabled;
     this.bloomFilter.blur = options.blur;
     this.bloomFilter.brightness = options.brightness;
@@ -80,7 +89,8 @@ export class EditorApp {
     this.bloomFilter.bloomScale = options.bloomScale;
     this.bloomFilter.kernels = options.kernels;
     this.bloomFilter.quality = options.quality;
-    this.bloomFilter.blendMode = options.blendMode;
+    // todo
+    // this.bloomFilter.blendMode = options.blendMode;
   };
 
   public destroy() {

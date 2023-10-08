@@ -1,5 +1,5 @@
 {
-  "name": "pixi-track",
+  "name": "pixi-particles-emitter",
   "version": "0.0.1",
   "description": "",
   "scripts": {
@@ -11,8 +11,6 @@
   "devDependencies": {
     "@babel/core": "7.20.12",
     "@trivago/prettier-plugin-sort-imports": "4.0.0",
-    "@types/lodash.random": "^3.2.7",
-    "@types/lodash.range": "^3.2.7",
     "@types/node": "18.11.17",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.10",
@@ -45,13 +43,11 @@
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
-    "@pixi/filter-advanced-bloom": "^5.1.1",
-    "@pixi/particle-emitter": "^5.0.8",
+    "@pixi/filter-advanced-bloom": "5.1.1",
+    "@pixi/particle-emitter": "5.0.8",
     "brandi": "4.0.2",
     "brandi-react": "4.0.2",
     "classnames": "2.3.2",
-    "lodash.random": "^3.2.0",
-    "lodash.range": "^3.2.0",
     "pixi.js": "7.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

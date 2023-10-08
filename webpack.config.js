@@ -1,7 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || "true")),
@@ -29,7 +28,6 @@ module.exports = {
       template: "src/index.html",
       filename: "index.html",
     }),
-    
   ],
   module: {
     rules: [

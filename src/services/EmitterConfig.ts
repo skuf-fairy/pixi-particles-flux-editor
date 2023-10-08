@@ -1,9 +1,7 @@
 import { EmitterConfigV3 } from "@pixi/particle-emitter";
 import { EventEmitter } from "@pixi/utils";
-import bloomParticle from "src/assets/bloom-particle.png";
-import bublikTexture from "src/assets/bublik.png";
-import coinImage from "src/assets/coin.png";
 import defaultParticle from "src/assets/default.png";
+import sparkleTexture from "src/assets/sparkle.png";
 
 export type TextureUrl = string;
 
@@ -12,31 +10,30 @@ export type TextureUrl = string;
 // todo presets
 export class EmitterConfig {
   private readonly emitEventname = "config-changed";
+  private readonly configTextureTypeNameList: string[] = [
+    "textureRandom",
+    "textureSingle",
+    "textureOrdered",
+    "animatedSingle",
+    "animatedRandom",
+  ];
+  private customTextureList: string[];
 
   constructor(public config: EmitterConfigV3, private readonly eventEmitter: EventEmitter) {
-    this.config.behaviors.push({
-      type: "textureRandom",
-      config: {
-        textures: [coinImage],
-      },
-    });
+    this.customTextureList = [defaultParticle, sparkleTexture];
+    this.mergeTextureListToConfig();
   }
 
   public getConfig = () => this.config;
 
   public getStringifyExcludedTexturesConfig() {
-    const behaviors = this.config.behaviors.filter((b) => b.type !== "textureRandom");
+    const behaviors = this.config.behaviors.filter((b) => !this.configTextureTypeNameList.includes(b.type));
     const validJSONConfig = { ...this.config, behaviors };
     return JSON.stringify(validJSONConfig, null, 2);
   }
 
-  public setConfigFromStringAndMergeTexturues(config: string) {
-    const textureBehavior = this.config.behaviors.find((b) => b.type === "textureRandom");
-
-    if (!textureBehavior) return;
-
+  public setConfigFromStringAndMergeTextures(config: string) {
     this.config = JSON.parse(config);
-    this.config.behaviors.push(textureBehavior);
 
     this.emit();
   }
@@ -49,40 +46,45 @@ export class EmitterConfig {
   };
 
   public pushTexture(file: File) {
-    const textureBehavior = this.config.behaviors.find((b) => b.type === "textureRandom");
+    this.customTextureList = [...this.customTextureList, URL.createObjectURL(file)];
 
-    if (!textureBehavior) return;
-
-    textureBehavior.config.textures.push(URL.createObjectURL(file));
-
-    this.config.behaviors = [...this.config.behaviors.filter((b) => b.type !== "textureRandom"), textureBehavior];
-
-    console.log(this.config);
     this.emit();
   }
 
   public getTextureList = (): string[] => {
-    const textureBehavior = this.config.behaviors.find((b) => b.type === "textureRandom");
-
-    if (!textureBehavior) return [];
-
-    return textureBehavior.config.textures as string[];
+    return this.customTextureList;
   };
 
   public removeTexture = (url: TextureUrl) => {
-    const textureBehavior = this.config.behaviors.find((b) => b.type === "textureRandom");
-
-    if (!textureBehavior) return;
-
-    textureBehavior.config.textures = textureBehavior.config.textures.filter((t: string) => t !== url);
-
-    this.config.behaviors = [...this.config.behaviors.filter((b) => b.type !== "textureRandom"), textureBehavior];
+    this.customTextureList = this.customTextureList.filter((t: string) => t !== url);
 
     this.emit();
   };
 
   private emit() {
+    this.mergeTextureListToConfig();
     this.config = { ...this.config };
     this.eventEmitter.emit(this.emitEventname);
+  }
+
+  private mergeTextureListToConfig() {
+    const behaviors = this.config.behaviors.filter((b) => !this.configTextureTypeNameList.includes(b.type));
+    if (this.customTextureList.length === 1) {
+      behaviors.push({
+        type: "textureSingle",
+        config: {
+          texture: this.customTextureList[0],
+        },
+      });
+    } else {
+      behaviors.push({
+        type: "textureRandom",
+        config: {
+          textures: this.customTextureList,
+        },
+      });
+    }
+
+    this.config.behaviors = behaviors;
   }
 }

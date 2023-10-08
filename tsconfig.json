@@ -11,7 +11,7 @@
     "allowJs": true,
     "lib": ["es2020", "dom"],
     "baseUrl": "./",
-    "noEmit": true,
+    "noEmit": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {

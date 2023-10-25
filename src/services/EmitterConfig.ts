@@ -1,7 +1,7 @@
 import { EmitterConfigV3 } from "@pixi/particle-emitter";
 import { EventEmitter } from "@pixi/utils";
 import defaultParticle from "src/assets/default.png";
-import sparkleTexture from "src/assets/sparkle.png";
+import sparkleTexture from "src/assets/star.png";
 
 export type TextureUrl = string;
 

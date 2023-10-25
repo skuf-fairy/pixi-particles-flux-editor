@@ -22,7 +22,7 @@ export const baseParticlesEmitterConfig: EmitterConfigV3 = {
         alpha: {
           list: [
             {
-              value: 0.8,
+              value: 1,
               time: 0,
             },
             {
@@ -39,11 +39,11 @@ export const baseParticlesEmitterConfig: EmitterConfigV3 = {
         scale: {
           list: [
             {
-              value: 0.8,
+              value: 0.4,
               time: 0,
             },
             {
-              value: 0.1,
+              value: 0.01,
               time: 1,
             },
           ],

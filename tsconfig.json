@@ -1,19 +1,15 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "outDir": "dist",
     "target": "es6",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "jsx": "react",
-    "outDir": "./ts-build",
-    "experimentalDecorators": true,
     "allowJs": true,
-    "lib": ["es2020", "dom"],
-    "baseUrl": "./",
-    "noEmit": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "jsx": "react",
+    "baseUrl": "./",
     "paths": {
       "src/*": ["./src/*"]
     }

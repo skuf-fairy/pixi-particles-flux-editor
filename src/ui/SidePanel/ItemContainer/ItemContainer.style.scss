@@ -1,0 +1,9 @@
+.item-container {
+  border-radius: 16px;
+  padding: 16px 8px;
+  background-color: #219ebc;
+
+  &__disabled {
+    opacity: 0.4;
+  }
+}

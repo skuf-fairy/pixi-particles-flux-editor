@@ -1,9 +1,12 @@
 .side-panel {
-  width: 600px;
   height: 100vh;
-  background-color: #4a6670;
-  padding: 0 16px;
+  background-color: #023047;
+  padding: 16px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  min-width: 400px;
 
   &__textures {
     padding-top: 32px;

@@ -10,9 +10,13 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "baseUrl": "./",
-    "paths": {
-      "src/*": ["./src/*"]
-    }
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "declaration": true,
+    "declarationMap": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "types": ["node"],
   "exclude": ["node_modules"]

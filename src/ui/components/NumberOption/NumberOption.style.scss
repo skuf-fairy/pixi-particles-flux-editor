@@ -1,0 +1,8 @@
+.number-option {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    margin-bottom: 4px;
+  }
+}

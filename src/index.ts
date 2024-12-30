@@ -1,8 +1,11 @@
-import "./styles/index.scss";
-
+import { createElement } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
-import { createElement } from "react";
+import "./styles/index.scss";
 
-const root = createRoot(document.getElementById("page-root"));
-root.render(createElement(App));
+const rootNode = document.getElementById("page-root");
+
+if (rootNode) {
+  const root = createRoot(rootNode);
+  root.render(createElement(App));
+}

@@ -5,7 +5,7 @@ export function FPSCounter() {
   const [fps, setFPS] = useState(0);
 
   useEffect(() => {
-    const times = [];
+    const times: number[] = [];
     let fps;
 
     function refreshLoop() {

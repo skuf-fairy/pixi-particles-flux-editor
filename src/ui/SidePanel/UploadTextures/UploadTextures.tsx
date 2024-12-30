@@ -1,19 +1,70 @@
-import cn from "classnames";
-import React from "react";
-import { TextureInput } from "../TextureInput/TextureInput";
-import { TexturePreviewList } from "../TexturePreviewList/TexturePreviewList";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Space, Upload, UploadFile } from "antd";
+import { Assets } from "pixi.js";
+import React, { useRef } from "react";
+import { useTexturesStore } from "src/hooks/useTexturesStore";
+import { ParticleTexture, TexturesStore } from "src/services/TexturesStore/TexturesStore";
+import { BehaviorName } from "../BehaviorName/BehaviorName";
+import { ItemContainer } from "../ItemContainer/ItemContainer";
 import "./UploadTextures.style.scss";
 
-interface Props {
-  className?: string;
+function mapConfigTexturesToAntdConfig(textureList: ParticleTexture[]): UploadFile[] {
+  return textureList.map((t, key) => ({
+    uid: key.toString(),
+    name: t.name,
+    status: "done",
+    url: t.url,
+    thumbUrl: t.url,
+  }));
 }
 
-export function UploadTextures({ className }: Props) {
-  return (
-    <section className={cn("upload-textures", className)}>
-      <h2 className="upload-textures__title">Upload Textures</h2>
+export function UploadTextures() {
+  const texturesStore = useTexturesStore();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const fileList = mapConfigTexturesToAntdConfig(texturesStore.getTextureList());
 
-      <TexturePreviewList uploadButton={<TextureInput />} />
-    </section>
+  const handleUpload = async () => {
+    if (!inputRef.current?.files) return;
+
+    const file = inputRef.current.files[0];
+    const url = URL.createObjectURL(file);
+
+    await Assets.load(url);
+
+    texturesStore.add({
+      url: url,
+      name: file.name,
+    });
+  };
+
+  const handleRemove = (file: UploadFile) => {
+    if (file.url) {
+      texturesStore.drop(file.name);
+      return true;
+    }
+
+    return false;
+  };
+
+  return (
+    <ItemContainer>
+      <BehaviorName name="Textures" />
+
+      <Space direction="vertical">
+        <Upload listType="picture" fileList={fileList} accept={TexturesStore.acceptMimeTypes} onRemove={handleRemove} />
+
+        <Button icon={<UploadOutlined />} onClick={() => inputRef.current?.click()}>
+          Upload
+        </Button>
+      </Space>
+
+      <input
+        ref={inputRef}
+        type="file"
+        accept={TexturesStore.acceptMimeTypes}
+        className="upload-input"
+        onChange={handleUpload}
+      />
+    </ItemContainer>
   );
 }

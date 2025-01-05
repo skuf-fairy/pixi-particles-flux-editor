@@ -4,8 +4,8 @@ import { Store } from "../Store";
 export class LifetimeBehaviorStore extends Store<LifeTimeRangeBehaviorConfig> {
   constructor() {
     super({
-      min: 500,
-      max: 1000,
+      min: 1500,
+      max: 4000,
     });
   }
 

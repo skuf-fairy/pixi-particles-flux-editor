@@ -1,7 +1,7 @@
 import {
-  DeltaRotationConfig,
   EasingName,
-  ScalarBehaviorConfig,
+  RotationBehaviorConfig,
+  ScalarDeltaBehaviorConfig,
   ScalarDynamicBehaviorConfig,
   ScalarStaticBehaviorConfig,
 } from "particle-flux";
@@ -11,8 +11,9 @@ import { BehaviorType } from "../types";
 export class RotationBehaviorStore extends Store<{
   dynamicConfig: ScalarDynamicBehaviorConfig;
   staticConfig: ScalarStaticBehaviorConfig;
-  deltaRotationConfig: DeltaRotationConfig;
-  activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic;
+  deltaConfig: ScalarDeltaBehaviorConfig;
+  activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.ScalarDelta;
+  availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
   constructor() {
@@ -26,12 +27,13 @@ export class RotationBehaviorStore extends Store<{
       staticConfig: {
         value: 0,
       },
-      deltaRotationConfig: {
-        angle: 0,
-        deltaAngle: 0,
+      deltaConfig: {
+        value: 0,
+        delta: 0,
       },
       activeType: BehaviorType.ScalarStatic,
       enabled: true,
+      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.ScalarDelta],
     });
   }
 
@@ -43,7 +45,11 @@ export class RotationBehaviorStore extends Store<{
     this.setState({ ...this.state, dynamicConfig: config });
   }
 
-  public getActiveConfig(): ScalarBehaviorConfig | undefined {
+  public setScalarDeltaConfig(config: ScalarDeltaBehaviorConfig): void {
+    this.setState({ ...this.state, deltaConfig: config });
+  }
+
+  public getActiveConfig(): RotationBehaviorConfig | undefined {
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
@@ -53,8 +59,8 @@ export class RotationBehaviorStore extends Store<{
       case BehaviorType.ScalarDynamic:
         return this.state.dynamicConfig;
 
-      default:
-        return this.state.staticConfig;
+      case BehaviorType.ScalarDelta:
+        return this.state.deltaConfig;
     }
   }
 
@@ -70,7 +76,9 @@ export class RotationBehaviorStore extends Store<{
     this.setState({ ...this.state, enabled: false });
   }
 
-  public setActiveConfigType(type: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic): void {
+  public setActiveConfigType(
+    type: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.ScalarDelta
+  ): void {
     this.setState({
       ...this.state,
       activeType: type,

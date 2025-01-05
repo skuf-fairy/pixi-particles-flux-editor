@@ -15,6 +15,7 @@ export class ScaleBehaviorStore extends Store<{
   scriptBehaviorConfig: ScriptBehaviorConfig<number>;
   vectorBehaviorConfig: VectorBehaviorConfig;
   activeType: BehaviorType;
+  availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
   constructor() {
@@ -51,6 +52,7 @@ export class ScaleBehaviorStore extends Store<{
       },
       activeType: BehaviorType.ScalarStatic,
       enabled: true,
+      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Script, BehaviorType.Vector],
     });
   }
 

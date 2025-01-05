@@ -29,8 +29,13 @@ export function RotationBehavior() {
         />
         <BehaviorTypeSelect
           type={state.activeType}
+          availableTypes={state.availableTypes}
           onChange={(type) => {
-            if (type === BehaviorType.ScalarStatic || type === BehaviorType.ScalarDynamic) {
+            if (
+              type === BehaviorType.ScalarStatic ||
+              type === BehaviorType.ScalarDynamic ||
+              type === BehaviorType.ScalarDelta
+            ) {
               store.setActiveConfigType(type);
             }
           }}

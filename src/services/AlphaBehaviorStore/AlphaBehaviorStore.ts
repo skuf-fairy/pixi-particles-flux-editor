@@ -13,6 +13,7 @@ export class AlphaBehaviorStore extends Store<{
   scalarDynamicBehaviorConfig: ScalarDynamicBehaviorConfig;
   scriptBehaviorConfig: ScriptBehaviorConfig<number>;
   activeType: BehaviorType;
+  availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
   constructor() {
@@ -36,6 +37,7 @@ export class AlphaBehaviorStore extends Store<{
       },
       activeType: BehaviorType.ScalarStatic,
       enabled: true,
+      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Script],
     });
   }
 
@@ -88,9 +90,6 @@ export class AlphaBehaviorStore extends Store<{
 
       case BehaviorType.Script:
         return this.state.scriptBehaviorConfig;
-
-      default:
-        return this.state.scalarStaticBehaviorConfig;
     }
   }
 }

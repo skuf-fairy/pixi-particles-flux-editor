@@ -4,6 +4,7 @@ import { BehaviorType } from "src/services/types";
 
 interface Props {
   type: BehaviorType;
+  availableTypes: BehaviorType[];
   onChange(type: BehaviorType): void;
 }
 

@@ -8,6 +8,7 @@ export class ColorBehaviorStore extends Store<{
   dynamicConfig: ColorDynamicBehaviorConfig;
   scriptConfig: ScriptBehaviorConfig<string>;
   activeConfig: BehaviorType;
+  availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
   constructor() {
@@ -27,6 +28,7 @@ export class ColorBehaviorStore extends Store<{
       },
       activeConfig: BehaviorType.ScalarStatic,
       enabled: true,
+      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Script],
     });
   }
 

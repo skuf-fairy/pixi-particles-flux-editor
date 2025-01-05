@@ -13,6 +13,7 @@ import { RotationBehavior } from "./Behaviors/RotationBehavior/RotationBehavior"
 import { ScaleBehavior } from "./Behaviors/ScaleBehavior/ScaleBehavior";
 import { SpawnShapeBehavior } from "./Behaviors/SpawnShapeBehavior/SpawnShapeBehavior";
 import { SpeedBehavior } from "./Behaviors/SpeedBehavior/SpeedBehavior";
+import { ConfigOptions } from "./ConfigOptions/ConfigOptions";
 import { Properties } from "./Properties/Properties";
 import "./SidePanel.style.scss";
 import { UploadTextures } from "./UploadTextures/UploadTextures";
@@ -33,7 +34,10 @@ export function SidePanel() {
       }}
     >
       <div className="side-panel">
-        <UploadTextures />
+        <Space direction="vertical" style={{ width: "100%" }}>
+          <ConfigOptions />
+          <UploadTextures />
+        </Space>
 
         <Typography.Title level={3} style={{ color: "white" }}>
           Properties

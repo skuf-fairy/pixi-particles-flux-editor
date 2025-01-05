@@ -1,4 +1,4 @@
-import { EasingName, Multiplicator, ScalarStaticBehaviorConfig } from "particle-flux";
+import { EasingName, ScalarStaticBehaviorConfig } from "particle-flux";
 import React from "react";
 import { EasingOption } from "../EasingOption/EasingOption";
 import { FieldsGrid } from "../FieldsGrid/FieldsGrid";
@@ -14,7 +14,7 @@ export function ScalarStaticBehaviorOption({ config, onChange }: Props) {
   return (
     <FieldsGrid columns={3}>
       <NumberOption value={config.value} text="Value" onChange={(v) => onChange({ ...config, value: v })} />
-      <MultiplicatorOption mult={config.mult || 1} onChange={(v) => onChange({ ...config, mult: v })} />
+      {config.mult && <MultiplicatorOption mult={config.mult} onChange={(v) => onChange({ ...config, mult: v })} />}
       <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({ ...config, easing: v })} />
     </FieldsGrid>
   );

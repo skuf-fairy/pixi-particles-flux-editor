@@ -1,33 +1,44 @@
-import { GravityBehaviorConfig, GravityRangeBehaviorConfig, GravityStaticBehaviorConfig } from "particle-flux";
+import {
+  EasingName,
+  GravityBehaviorConfig,
+  ScalarDynamicBehaviorConfig,
+  ScalarStaticBehaviorConfig,
+} from "particle-flux";
 import { Store } from "../Store";
 import { BehaviorType } from "../types";
 
 export class GravityBehaviorStore extends Store<{
-  rangeConfig: GravityRangeBehaviorConfig;
-  staticConfig: GravityStaticBehaviorConfig;
+  scalarStaticBehaviorConfig: ScalarStaticBehaviorConfig;
+  scalarDynamicBehaviorConfig: ScalarDynamicBehaviorConfig;
   activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic;
+  availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
   constructor() {
     super({
-      rangeConfig: {
-        min: 0,
-        max: 1,
+      scalarDynamicBehaviorConfig: {
+        start: 0,
+        end: 1,
+        mult: 1,
+        easing: EasingName.linear,
       },
-      staticConfig: {
-        value: 0,
+      scalarStaticBehaviorConfig: {
+        value: 1,
+        mult: 1,
+        easing: EasingName.linear,
       },
       activeType: BehaviorType.ScalarStatic,
+      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic],
       enabled: false,
     });
   }
 
-  public setRangeConfig(config: { min: number; max: number }): void {
-    this.setState({ ...this.state, rangeConfig: config });
+  public setDynamicConfig(config: ScalarDynamicBehaviorConfig): void {
+    this.setState({ ...this.state, scalarDynamicBehaviorConfig: config });
   }
 
   public setStaticConfig(config: { value: number }): void {
-    this.setState({ ...this.state, staticConfig: config });
+    this.setState({ ...this.state, scalarStaticBehaviorConfig: config });
   }
 
   public isEnabled(): boolean {
@@ -47,13 +58,10 @@ export class GravityBehaviorStore extends Store<{
 
     switch (this.state.activeType) {
       case BehaviorType.ScalarStatic:
-        return this.state.staticConfig;
+        return this.state.scalarDynamicBehaviorConfig;
 
       case BehaviorType.ScalarDynamic:
-        return this.state.rangeConfig;
-
-      default:
-        return this.state.staticConfig;
+        return this.state.scalarStaticBehaviorConfig;
     }
   }
 

@@ -36,12 +36,7 @@ export class SpeedBehaviorStore extends Store<{
         ],
       },
       activeType: BehaviorType.ScalarStatic,
-      availableTypes: [
-        BehaviorType.ScalarDelta,
-        BehaviorType.ScalarDynamic,
-        BehaviorType.ScalarStatic,
-        BehaviorType.Script,
-      ],
+      availableTypes: [BehaviorType.ScalarDynamic, BehaviorType.ScalarStatic, BehaviorType.Script],
       enabled: true,
     });
   }

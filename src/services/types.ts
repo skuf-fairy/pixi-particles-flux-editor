@@ -1,7 +1,7 @@
 export enum BehaviorType {
   ScalarStatic = "ScalarStatic",
   ScalarDynamic = "ScalarDynamic",
-  ScalarDelta = "ScalarDelta",
+  Delta = "Delta",
   Script = "Script",
   Vector = "Vector",
 }

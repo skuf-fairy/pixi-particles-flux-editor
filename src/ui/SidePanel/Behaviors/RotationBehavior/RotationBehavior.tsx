@@ -34,7 +34,7 @@ export function RotationBehavior() {
             if (
               type === BehaviorType.ScalarStatic ||
               type === BehaviorType.ScalarDynamic ||
-              type === BehaviorType.ScalarDelta
+              type === BehaviorType.Delta
             ) {
               store.setActiveConfigType(type);
             }

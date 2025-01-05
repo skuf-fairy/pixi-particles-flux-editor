@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "5.3.7",
-    "particle-flux": "0.0.40",
+    "particle-flux": "0.0.41",
     "antd": "5.19.1",
     "brandi": "5.0.0",
     "brandi-react": "5.0.0",

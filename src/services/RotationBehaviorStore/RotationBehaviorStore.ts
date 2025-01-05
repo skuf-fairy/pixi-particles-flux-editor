@@ -1,7 +1,7 @@
 import {
+  DeltaBehaviorConfig,
   EasingName,
   RotationBehaviorConfig,
-  ScalarDeltaBehaviorConfig,
   ScalarDynamicBehaviorConfig,
   ScalarStaticBehaviorConfig,
 } from "particle-flux";
@@ -11,8 +11,8 @@ import { BehaviorType } from "../types";
 export class RotationBehaviorStore extends Store<{
   dynamicConfig: ScalarDynamicBehaviorConfig;
   staticConfig: ScalarStaticBehaviorConfig;
-  deltaConfig: ScalarDeltaBehaviorConfig;
-  activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.ScalarDelta;
+  deltaConfig: DeltaBehaviorConfig;
+  activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.Delta;
   availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
@@ -33,7 +33,7 @@ export class RotationBehaviorStore extends Store<{
       },
       activeType: BehaviorType.ScalarStatic,
       enabled: true,
-      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.ScalarDelta],
+      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Delta],
     });
   }
 
@@ -45,7 +45,7 @@ export class RotationBehaviorStore extends Store<{
     this.setState({ ...this.state, dynamicConfig: config });
   }
 
-  public setScalarDeltaConfig(config: ScalarDeltaBehaviorConfig): void {
+  public setScalarDeltaConfig(config: DeltaBehaviorConfig): void {
     this.setState({ ...this.state, deltaConfig: config });
   }
 
@@ -59,7 +59,7 @@ export class RotationBehaviorStore extends Store<{
       case BehaviorType.ScalarDynamic:
         return this.state.dynamicConfig;
 
-      case BehaviorType.ScalarDelta:
+      case BehaviorType.Delta:
         return this.state.deltaConfig;
     }
   }
@@ -76,9 +76,7 @@ export class RotationBehaviorStore extends Store<{
     this.setState({ ...this.state, enabled: false });
   }
 
-  public setActiveConfigType(
-    type: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.ScalarDelta
-  ): void {
+  public setActiveConfigType(type: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.Delta): void {
     this.setState({
       ...this.state,
       activeType: type,

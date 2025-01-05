@@ -29,6 +29,7 @@ export function AlphaBehavior() {
         />
         <BehaviorTypeSelect
           type={state.activeType}
+          availableTypes={state.availableTypes}
           onChange={(type) => {
             store.setActiveType(type);
           }}

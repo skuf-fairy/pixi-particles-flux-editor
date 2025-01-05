@@ -27,7 +27,11 @@ export function SpeedBehavior() {
             }
           }}
         />
-        <BehaviorTypeSelect type={store.state.activeType} onChange={(t) => store.setActiveType(t)} />
+        <BehaviorTypeSelect
+          type={store.state.activeType}
+          availableTypes={state.availableTypes}
+          onChange={(t) => store.setActiveType(t)}
+        />
       </Flex>
 
       {state.activeType === BehaviorType.ScalarStatic && (

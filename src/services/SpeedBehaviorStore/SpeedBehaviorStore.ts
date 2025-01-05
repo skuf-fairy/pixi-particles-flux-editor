@@ -13,6 +13,7 @@ export class SpeedBehaviorStore extends Store<{
   scalarDynamicBehaviorConfig: ScalarDynamicBehaviorConfig;
   scriptBehaviorConfig: ScriptBehaviorConfig<number>;
   activeType: BehaviorType;
+  availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
   constructor() {
@@ -35,6 +36,12 @@ export class SpeedBehaviorStore extends Store<{
         ],
       },
       activeType: BehaviorType.ScalarStatic,
+      availableTypes: [
+        BehaviorType.ScalarDelta,
+        BehaviorType.ScalarDynamic,
+        BehaviorType.ScalarStatic,
+        BehaviorType.Script,
+      ],
       enabled: true,
     });
   }
@@ -88,9 +95,6 @@ export class SpeedBehaviorStore extends Store<{
 
       case BehaviorType.Script:
         return this.state.scriptBehaviorConfig;
-
-      default:
-        return this.state.scalarStaticBehaviorConfig;
     }
   }
 }

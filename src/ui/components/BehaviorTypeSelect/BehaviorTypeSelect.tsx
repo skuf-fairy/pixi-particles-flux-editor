@@ -8,12 +8,12 @@ interface Props {
   onChange(type: BehaviorType): void;
 }
 
-export function BehaviorTypeSelect({ type, onChange }: Props) {
+export function BehaviorTypeSelect({ type, availableTypes, onChange }: Props) {
   return (
     <Select
       defaultValue={type}
       value={type}
-      options={Object.values(BehaviorType).map((t) => ({ value: t, label: t }))}
+      options={Object.values(availableTypes).map((t) => ({ value: t, label: t }))}
       onChange={(v) => onChange(v)}
     />
   );

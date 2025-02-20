@@ -13,7 +13,7 @@ interface Props {
 export function NumberOption({ value, text, min, max, onChange }: Props) {
   return (
     <Space direction="vertical">
-      <Typography.Text className="number-option__title" style={{ color: "#023047" }}>
+      <Typography.Text className="number-option__title" style={{ color: "var(--title-color)" }}>
         {text}
       </Typography.Text>
       <InputNumber

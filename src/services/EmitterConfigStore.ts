@@ -6,8 +6,8 @@ export class EmitterConfigStore extends Store<EmitterConfig> {
     super({
       // spawnTime: 100,
       spawnInterval: {
-        min: 1000,
-        max: 2500,
+        min: 250,
+        max: 500,
       },
       spawnParticlesPerWave: 1,
       maxParticles: 500,

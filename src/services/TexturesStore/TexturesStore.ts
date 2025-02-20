@@ -19,7 +19,7 @@ export class TexturesStore extends Store<{
 
   constructor() {
     super({
-      list: [],
+      list: [TexturesStore.defaultParticle],
     });
   }
 

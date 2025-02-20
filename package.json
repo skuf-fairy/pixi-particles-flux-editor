@@ -51,12 +51,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "5.3.7",
-    "particle-flux": "0.0.41",
+    "particle-flux": "0.0.70",
     "antd": "5.19.1",
     "brandi": "5.0.0",
     "brandi-react": "5.0.0",
     "classnames": "2.3.2",
-    "pixi.js": "8.5.0",
+    "pixi.js": "8.7.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

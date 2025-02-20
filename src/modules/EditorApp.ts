@@ -1,7 +1,17 @@
 // import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import { injected } from "brandi";
-import { ParticleBehaviorConfig, ParticleFlux, ParticleLifeTimeBehaviorConfig, SpawnShapeType } from "particle-flux";
-import { Application, Assets, Container, FederatedPointerEvent, Graphics, Point, Sprite, Texture } from "pixi.js";
+import { ParticleBehaviorConfig, ParticleFlux } from "particle-flux";
+import {
+  Application,
+  Assets,
+  Container,
+  ContainerChild,
+  FederatedPointerEvent,
+  Graphics,
+  Point,
+  Sprite,
+  Texture,
+} from "pixi.js";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { AlphaBehaviorStore } from "src/services/AlphaBehaviorStore/AlphaBehaviorStore";
 import { ColorBehaviorStore } from "src/services/ColorBehaviorStore/ColorBehaviorStore";
@@ -22,7 +32,7 @@ export class EditorApp {
   private rootContainer: Container;
   // private bloomFilter: AdvancedBloomFilter;
   private particlesEmitter: ParticleFlux;
-  private behaviorConfig: ParticleLifeTimeBehaviorConfig;
+  private behaviorConfig: ParticleBehaviorConfig;
 
   constructor(
     private readonly emitterConfigStore: EmitterConfigStore,
@@ -46,7 +56,7 @@ export class EditorApp {
 
     this.behaviorConfig.alpha = this.alphaBehaviorStore.getActiveConfig();
     this.behaviorConfig.speed = this.speedBehaviorStore.getActiveConfig();
-    // this.behaviorConfig.scale = this.scaleBehaviorStore.getActiveConfig();
+    this.behaviorConfig.scale = this.scaleBehaviorStore.getActiveConfig();
     this.behaviorConfig.spawnShape = this.spawnShapeBehaviorStore.getActiveConfig();
     this.behaviorConfig.color = this.colorBehaviorStore.getActiveConfig();
     this.behaviorConfig.lifeTime = this.lifetimeBehaviorStore.getState();
@@ -56,77 +66,41 @@ export class EditorApp {
     // todo
     // this.state.path = this.pathBehaviorStore.getState()
 
-    this.alphaBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        alpha: this.alphaBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
-
-    this.speedBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        speed: this.speedBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
-    this.scaleBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        scale: this.scaleBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
-    this.spawnShapeBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        spawnShape: this.spawnShapeBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
-    this.colorBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        color: this.colorBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
-    this.lifetimeBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        lifeTime: this.lifetimeBehaviorStore.getState(),
-      };
-
-      this.updateParticleFlux();
-    });
-    this.directionBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        direction: this.directionBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
-    this.rotationBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        rotation: this.rotationBehaviorStore.getActiveConfig(),
-      };
-    });
-    this.gravityBehaviorStore.subscribe(() => {
-      this.behaviorConfig = {
-        ...this.behaviorConfig,
-        gravity: this.gravityBehaviorStore.getActiveConfig(),
-      };
-
-      this.updateParticleFlux();
-    });
+    // this.alphaBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.alpha = this.alphaBehaviorStore.getActiveConfig();
+    // });
+    // this.speedBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.speed = this.alphaBehaviorStore.getActiveConfig();
+    // });
+    // this.scaleBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.scale = this.alphaBehaviorStore.getActiveConfig();
+    // });
+    // this.spawnShapeBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.spawnShape = this.spawnShapeBehaviorStore.getActiveConfig();
+    // });
+    // this.colorBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.color = this.colorBehaviorStore.getActiveConfig();
+    // });
+    // this.lifetimeBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.lifeTime = this.lifetimeBehaviorStore.getState();
+    // });
+    // this.directionBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.direction = this.directionBehaviorStore.getActiveConfig();
+    // });
+    // this.rotationBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.rotation = this.rotationBehaviorStore.getActiveConfig();
+    // });
+    // this.gravityBehaviorStore.subscribe(() => {
+    //   this.particlesEmitter.config.gravity = this.gravityBehaviorStore.getActiveConfig();
+    // });
+    // this.emitterConfigStore.subscribe(() => {
+    //   const config = this.emitterConfigStore.getState();
+    //   this.particlesEmitter.config.spawnInterval = config.spawnInterval;
+    //   this.particlesEmitter.config.spawnParticlesPerWave = config.spawnParticlesPerWave;
+    //   this.particlesEmitter.config.maxParticles = config.maxParticles;
+    //   this.particlesEmitter.config.spawnChance = config.spawnChance;
+    // });
+    // todo textures
   }
 
   public async init(containerNode: HTMLElement) {
@@ -149,20 +123,22 @@ export class EditorApp {
     containerNode.appendChild(this.app.canvas);
 
     this.rootContainer = this.app.stage;
+    const background = new Graphics().rect(0, 0, widthContainer, heightContainer).fill({ color: 0x465760 });
 
-    // background.interactive = true;
-    // background.cursor = "pointer";
+    background.interactive = true;
+    background.cursor = "pointer";
 
-    // todo
-    // background.on("pointermove", this.handlePointerMove);
-    // background.on("pointerleave", this.handlePointerLeave);
+    this.rootContainer.addChild(background);
+
+    background.on("pointermove", this.handlePointerMove);
+    background.on("pointerleave", this.handlePointerLeave);
 
     this.behaviorConfig.spawnPosition = {
       x: widthContainer / 2,
       y: heightContainer / 2,
     };
 
-    this.particlesEmitter = new ParticleFlux(
+    this.particlesEmitter = new ParticleFlux<ContainerChild>(
       this.rootContainer,
       this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
       {
@@ -181,42 +157,28 @@ export class EditorApp {
 
   private createParticle(texture: Texture): Sprite {
     const sprite = new Sprite(texture);
+    sprite.anchor.set(0.5);
 
     return sprite;
   }
 
-  private updateParticleFlux(): void {
-    this.particlesEmitter.stopEmit();
+  private handlePointerMove = (e: FederatedPointerEvent) => {
+    this.particlesEmitter.config.spawnPosition = {
+      x: e.globalX,
+      y: e.globalY,
+    };
+  };
 
-    this.particlesEmitter = new ParticleFlux(
-      this.rootContainer,
-      this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
-      {
-        emitterConfig: this.emitterConfigStore.getState(),
-        particleBehaviorsConfig: this.behaviorConfig,
-      }
-    );
+  private handlePointerLeave = (e: FederatedPointerEvent) => {
+    this.setEmitterPosByCenter();
+  };
+
+  private setEmitterPosByCenter() {
+    this.particlesEmitter.config.spawnPosition = {
+      x: this.app.renderer.width / 2,
+      y: this.app.renderer.height / 2,
+    };
   }
-
-  // private handlePointerMove = (e: FederatedPointerEvent) => {
-  //   this.particlesEmitter.spawnPos.x = e.globalX;
-  //   this.particlesEmitter.spawnPos.y = e.globalY;
-  // };
-
-  // private handlePointerLeave = (e: FederatedPointerEvent) => {
-  //   this.setEmitterPosByCenter();
-  // };
-
-  // private setEmitterPosByCenter() {
-  //   this.particlesEmitter.spawnPos.x = this.app.renderer.width / 2;
-  //   this.particlesEmitter.spawnPos.y = this.app.renderer.height / 2;
-  // }
-
-  // private applyEmitterConfig = (config: EmitterConfigV3) => {
-  //   this.particlesEmitter.init(config);
-  //   this.particlesEmitter.autoUpdate = true;
-  //   this.setEmitterPosByCenter();
-  // };
 
   ///todo
   // private applyBloomFilterOptions = (options: AdvancedBloomFilterConfigOptions) => {

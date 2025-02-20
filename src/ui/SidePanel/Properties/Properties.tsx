@@ -1,8 +1,10 @@
+import { isRangeValue } from "particle-flux";
 import React from "react";
 import { useEmitterConfigStore } from "src/hooks/useEmitterConfigStore";
 import { FieldsGrid } from "src/ui/components/FieldsGrid/FieldsGrid";
 import { NumberOption } from "../../components/NumberOption/NumberOption";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
+import { IntervalRangeValue } from "./IntervalRangeValue";
 
 export function Properties() {
   const emitterConfigStore = useEmitterConfigStore();
@@ -22,6 +24,12 @@ export function Properties() {
           <NumberOption
             value={state.spawnInterval}
             text="Spawn interval"
+            onChange={(v) => emitterConfigStore.setState({ ...state, spawnInterval: v })}
+          />
+        )}
+        {state.spawnInterval !== undefined && isRangeValue(state.spawnInterval) && (
+          <IntervalRangeValue
+            interval={state.spawnInterval}
             onChange={(v) => emitterConfigStore.setState({ ...state, spawnInterval: v })}
           />
         )}

@@ -1,16 +1,16 @@
 import {
   PolygonalChainShape,
-  SpawnCircleShape,
   SpawnPointShape,
   SpawnRectangleShape,
-  SpawnShape,
+  SpawnShapeBehavior,
   SpawnShapeType,
+  SpawnTorusShape,
 } from "particle-flux";
 import { Store } from "../Store";
 
 export class SpawnShapeBehaviorStore extends Store<{
   pointShape: SpawnPointShape;
-  circleShape: SpawnCircleShape;
+  circleShape: SpawnTorusShape;
   rectangleShape: SpawnRectangleShape;
   polygonalShape: PolygonalChainShape;
   activeShape: SpawnShapeType;
@@ -24,10 +24,11 @@ export class SpawnShapeBehaviorStore extends Store<{
         y: 0,
       },
       circleShape: {
-        type: SpawnShapeType.Circle,
+        type: SpawnShapeType.Torus,
         x: 0,
         y: 0,
-        radius: 0,
+        innerRadius: 0,
+        outerRadius: 0,
       },
       rectangleShape: {
         type: SpawnShapeType.Rectangle,
@@ -55,7 +56,7 @@ export class SpawnShapeBehaviorStore extends Store<{
     });
   }
 
-  public setCircleShapeConfig(config: SpawnCircleShape): void {
+  public setTorusShapeConfig(config: SpawnTorusShape): void {
     this.setState({
       ...this.state,
       circleShape: config,
@@ -84,8 +85,8 @@ export class SpawnShapeBehaviorStore extends Store<{
     return this.state.activeShape === SpawnShapeType.Rectangle;
   }
 
-  public isCircleShapeActive(): boolean {
-    return this.state.activeShape === SpawnShapeType.Circle;
+  public isTorusShapeActive(): boolean {
+    return this.state.activeShape === SpawnShapeType.Torus;
   }
 
   public isPointShapeActive(): boolean {
@@ -96,12 +97,12 @@ export class SpawnShapeBehaviorStore extends Store<{
     return this.state.activeShape === SpawnShapeType.Polygon;
   }
 
-  public getActiveConfig(): SpawnShape {
+  public getActiveConfig(): SpawnShapeBehavior {
     switch (this.state.activeShape) {
       case SpawnShapeType.Point:
         return this.state.pointShape;
 
-      case SpawnShapeType.Circle:
+      case SpawnShapeType.Torus:
         return this.state.circleShape;
 
       case SpawnShapeType.Rectangle:

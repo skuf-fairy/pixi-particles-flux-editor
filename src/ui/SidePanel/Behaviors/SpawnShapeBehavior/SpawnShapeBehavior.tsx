@@ -26,8 +26,8 @@ export function SpawnShapeBehavior() {
       {store.isPointShapeActive() && (
         <PointSpawnShapeBehavior config={pointShape} onChange={(v) => store.setPointShapeConfig(v)} />
       )}
-      {store.isCircleShapeActive() && (
-        <CircleSpawnShapeBehavior config={circleShape} onChange={(v) => store.setCircleShapeConfig(v)} />
+      {store.isTorusShapeActive() && (
+        <CircleSpawnShapeBehavior config={circleShape} onChange={(v) => store.setTorusShapeConfig(v)} />
       )}
     </ItemContainer>
   );

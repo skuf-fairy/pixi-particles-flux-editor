@@ -19,20 +19,20 @@ export class SpeedBehaviorStore extends Store<{
   constructor() {
     super({
       scalarStaticBehaviorConfig: {
-        value: 0.1,
+        value: 3,
         mult: 1,
         easing: EasingName.linear,
       },
       scalarDynamicBehaviorConfig: {
         start: 0,
         end: 1,
-        mult: 1,
+        mult: 3,
         easing: EasingName.linear,
       },
       scriptBehaviorConfig: {
         script: [
           { time: 0, value: 0 },
-          { time: 1, value: 1 },
+          { time: 1, value: 3 },
         ],
       },
       activeType: BehaviorType.ScalarStatic,

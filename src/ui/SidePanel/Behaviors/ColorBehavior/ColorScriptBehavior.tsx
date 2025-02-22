@@ -1,8 +1,9 @@
-import { ColorPicker, Space, Typography } from "antd";
+import { ColorPicker, Space } from "antd";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
+import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 
 export function ColorScriptBehavior() {
   const store = useColorBehaviorStore();
@@ -39,7 +40,7 @@ export function ColorScriptBehavior() {
             }
             disabled={key === config.script.length - 1 || key === 0}
           >
-            <Typography.Text>-</Typography.Text>
+            <Typography variant={TypographyVariant.P}>-</Typography>
           </Button>
         </Space>
       ))}
@@ -50,7 +51,7 @@ export function ColorScriptBehavior() {
           store.setScriptBehaviorConfig({ script: [...config.script, { ...config.script[config.script.length - 1] }] })
         }
       >
-        <Typography.Text>+</Typography.Text>
+        <Typography variant={TypographyVariant.P}>+</Typography>
       </Button>
     </Space>
   );

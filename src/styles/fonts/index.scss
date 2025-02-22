@@ -1,0 +1,15 @@
+// path должен быть указан без расширения
+@mixin fontFace($name, $path, $bold) {
+  @font-face {
+    font-weight: $bold;
+    font-family: $name;
+    font-style: normal;
+    src: url($path + ".woff") format("woff"), url($path + ".ttf") format("ttf");
+  }
+}
+
+@include fontFace("BalooRegular", "fonts/Baloo/Baloo-Regular", 400);
+@include fontFace("BalooMedium", "fonts/Baloo/Baloo-Medium", 500);
+@include fontFace("BalooSemiBold", "fonts/Baloo/Baloo-SemiBold", 600);
+@include fontFace("BalooBold", "fonts/Baloo/Baloo-Bold", 700);
+@include fontFace("BalooExtraBold", "fonts/Baloo/Baloo-ExtraBold", 800);

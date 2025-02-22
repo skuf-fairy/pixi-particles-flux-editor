@@ -1,0 +1,13 @@
+@import "src/styles/typography.scss";
+
+.paragraph {
+  @include text;
+}
+
+.h2-text {
+  @include head2;
+}
+
+.h3-text {
+  @include head3;
+}

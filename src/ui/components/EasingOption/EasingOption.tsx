@@ -1,7 +1,7 @@
-import { Space, Typography } from "antd";
+import { Space } from "antd";
 import { EasingName } from "particle-flux";
-import { config } from "process";
 import React from "react";
+import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { EasingeSelect } from "../EasingSelect/EasingSelect";
 
 interface Props {
@@ -11,11 +11,11 @@ interface Props {
 
 export function EasingOption({ easing, onChange }: Props) {
   return (
-    <Space direction="vertical">
-      <Typography.Text className="number-option__title" style={{ color: "var(--title-color)" }}>
+    <div className="easing-option">
+      <Typography variant={TypographyVariant.P} className="easing-option__title">
         Easing
-      </Typography.Text>
+      </Typography>
       <EasingeSelect value={easing} onChange={(v) => onChange(v)} />
-    </Space>
+    </div>
   );
 }

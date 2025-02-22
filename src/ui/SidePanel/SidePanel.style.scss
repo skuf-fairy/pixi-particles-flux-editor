@@ -8,6 +8,10 @@
   flex: none;
   min-width: 400px;
 
+  &__title {
+    margin-bottom: 16px;
+  }
+
   &__textures {
     padding-top: 32px;
     margin-bottom: 16px;

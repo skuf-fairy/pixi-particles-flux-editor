@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env) => {
   const definePlugin = new webpack.DefinePlugin({
@@ -34,6 +35,14 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: "src/index.html",
         filename: "index.html",
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(__dirname, "src/styles/fonts"),
+            to: path.join(__dirname, "build/fonts"),
+          },
+        ],
       }),
     ],
     module: {

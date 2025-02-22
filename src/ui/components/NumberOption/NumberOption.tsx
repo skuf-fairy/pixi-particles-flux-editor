@@ -1,6 +1,6 @@
-import { Space, Typography } from "antd";
 import React from "react";
 import { InputNumber } from "src/ui/kit/Input/InputNumber";
+import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import "./NumberOption.style.scss";
 
 interface Props {
@@ -13,10 +13,10 @@ interface Props {
 
 export function NumberOption({ value, text, min, max, onChange }: Props) {
   return (
-    <Space direction="vertical">
-      <Typography.Text className="number-option__title" style={{ color: "var(--title-color)" }}>
+    <div className="number-option">
+      <Typography variant={TypographyVariant.P} className="number-option__title">
         {text}
-      </Typography.Text>
+      </Typography>
       <InputNumber
         value={value}
         min={min}
@@ -25,6 +25,6 @@ export function NumberOption({ value, text, min, max, onChange }: Props) {
           onChange(e);
         }}
       />
-    </Space>
+    </div>
   );
 }

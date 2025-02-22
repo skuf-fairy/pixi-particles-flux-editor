@@ -1,7 +1,8 @@
-import { Space, Typography } from "antd";
+import { Space } from "antd";
 import { TimeScriptConfig } from "particle-flux";
 import React from "react";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
+import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { NumberOption } from "../../components/NumberOption/NumberOption";
 import "./ScriptBehaviorOption.style.scss";
 
@@ -36,13 +37,13 @@ export function ScriptBehaviorOption({ script, onChange }: Props) {
             onClick={() => onChange(script.filter((item, n) => key !== n))}
             disabled={key === script.length - 1 || key === 0}
           >
-            <Typography.Text>-</Typography.Text>
+            <Typography variant={TypographyVariant.P}>-</Typography>
           </Button>
         </Space>
       ))}
 
       <Button size={ButtonSize.Small} onClick={() => onChange([...script, { ...script[script.length - 1] }])}>
-        <Typography.Text>+</Typography.Text>
+        <Typography variant={TypographyVariant.P}>+</Typography>
       </Button>
     </Space>
   );

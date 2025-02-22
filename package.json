@@ -50,7 +50,6 @@
     "webpack-dev-server": "4.11.1"
   },
   "dependencies": {
-    "@ant-design/icons": "5.3.7",
     "particle-flux": "0.0.70",
     "antd": "5.19.1",
     "brandi": "5.0.0",

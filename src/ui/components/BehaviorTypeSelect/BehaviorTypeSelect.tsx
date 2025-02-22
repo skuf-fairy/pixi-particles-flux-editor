@@ -1,6 +1,6 @@
-import { Select } from "antd";
 import React from "react";
 import { BehaviorType } from "src/services/types";
+import { DropDown } from "src/ui/kit/DropDown/DropDown";
 
 interface Props {
   type: BehaviorType;
@@ -10,11 +10,10 @@ interface Props {
 
 export function BehaviorTypeSelect({ type, availableTypes, onChange }: Props) {
   return (
-    <Select
-      defaultValue={type}
-      value={type}
-      options={Object.values(availableTypes).map((t) => ({ value: t, label: t }))}
-      onChange={(v) => onChange(v)}
+    <DropDown
+      value={{ value: type, key: type }}
+      options={Object.values(availableTypes).map((t) => ({ value: t, key: t }))}
+      onChange={(v) => onChange(v.value as BehaviorType)}
     />
   );
 }

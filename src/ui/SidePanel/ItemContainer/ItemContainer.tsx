@@ -5,9 +5,8 @@ import "./ItemContainer.style.scss";
 
 interface Props {
   className?: string;
-  isDisabled?: boolean;
 }
 
-export function ItemContainer({ className, isDisabled, children }: PropsWithChildren<Props>) {
+export function ItemContainer({ className, children }: PropsWithChildren<Props>) {
   return <div className={cn("item-container", className)}>{children}</div>;
 }

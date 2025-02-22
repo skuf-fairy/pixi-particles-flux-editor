@@ -4,7 +4,6 @@ import { useScaleBehaviorStore } from "src/hooks/useScaleBehaviorStore";
 import { BehaviorType } from "src/services/types";
 import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
 import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
-import { StylizedDivider } from "src/ui/components/StylizedDivider/StylizedDivider";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
 import { ScriptBehaviorOption } from "../../ScriptBehaviorOption/ScriptBehaviorOption";
@@ -15,7 +14,7 @@ export function ScaleBehavior() {
   const state = store.getState();
 
   return (
-    <ItemContainer isDisabled={!store.isEnabled()}>
+    <ItemContainer>
       <Space direction="vertical">
         <BehaviorName
           name="Scale"

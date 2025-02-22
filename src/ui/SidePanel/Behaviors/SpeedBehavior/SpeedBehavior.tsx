@@ -14,7 +14,7 @@ export function SpeedBehavior() {
   const state = store.getState();
 
   return (
-    <ItemContainer isDisabled={!store.isEnabled()}>
+    <ItemContainer>
       <Flex justify="space-between">
         <BehaviorName
           name="Speed"

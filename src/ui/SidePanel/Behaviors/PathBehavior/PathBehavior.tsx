@@ -9,7 +9,7 @@ export function PathBehavior() {
   const path = store.getPath();
 
   return (
-    <ItemContainer isDisabled={!store.isEnabled()}>
+    <ItemContainer>
       <BehaviorName
         name="Path"
         isEnabled={store.isEnabled()}

@@ -14,7 +14,7 @@ export function RotationBehavior() {
   const configType = state.activeType;
 
   return (
-    <ItemContainer isDisabled={!store.isEnabled()}>
+    <ItemContainer>
       <Flex justify="space-between">
         <BehaviorName
           name="Rotation"

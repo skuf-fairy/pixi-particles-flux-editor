@@ -23,5 +23,11 @@
   font-size: 14px;
   font-family: "BalooRegular";
   line-height: 120%;
-  color: #b7cbc9;
+}
+
+@mixin button-text {
+  font-size: 14px;
+  font-family: "BalooRegular";
+  line-height: 120%;
+  color: rgb(3, 17, 22);
 }

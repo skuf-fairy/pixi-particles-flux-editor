@@ -11,7 +11,7 @@ export function DirectionBehavior() {
   const { minAngle, maxAngle } = state.rangeConfig;
 
   return (
-    <ItemContainer isDisabled={!store.isEnabled()}>
+    <ItemContainer>
       <BehaviorName
         name="Direction"
         isEnabled={store.isEnabled()}

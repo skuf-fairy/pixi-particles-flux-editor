@@ -14,13 +14,12 @@ export function AlphaBehavior() {
   const state = store.getState();
 
   return (
-    <ItemContainer isDisabled={!store.isEnabled()}>
+    <ItemContainer>
       <Flex justify="space-between">
         <BehaviorName
           name="Alpha"
           isEnabled={store.isEnabled()}
           onEnabledChange={(isEnabled: boolean) => {
-            console.log(isEnabled);
             if (isEnabled) {
               store.enable();
             } else {

@@ -7,7 +7,7 @@ export class ColorBehaviorStore extends Store<{
   staticConfig: ColorStaticBehaviorConfig;
   dynamicConfig: ColorDynamicBehaviorConfig;
   scriptConfig: ScriptBehaviorConfig<string>;
-  activeConfig: BehaviorType;
+  activeType: BehaviorType;
   availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
@@ -26,7 +26,7 @@ export class ColorBehaviorStore extends Store<{
           { time: 1, value: "#ffffff" },
         ],
       },
-      activeConfig: BehaviorType.ScalarStatic,
+      activeType: BehaviorType.ScalarStatic,
       enabled: true,
       availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Script],
     });
@@ -66,13 +66,13 @@ export class ColorBehaviorStore extends Store<{
   }
 
   public setActiveType(type: BehaviorType): void {
-    this.setState({ ...this.state, activeConfig: type });
+    this.setState({ ...this.state, activeType: type });
   }
 
   public getActiveConfig(): ColorBehaviorConfig | undefined {
     if (!this.isEnabled()) return;
 
-    switch (this.state.activeConfig) {
+    switch (this.state.activeType) {
       case BehaviorType.ScalarStatic:
         return this.state.staticConfig;
 
@@ -88,14 +88,14 @@ export class ColorBehaviorStore extends Store<{
   }
 
   public isStaticConfigActive(): boolean {
-    return this.state.activeConfig === BehaviorType.ScalarStatic;
+    return this.state.activeType === BehaviorType.ScalarStatic;
   }
 
   public isDynamicConfigActive(): boolean {
-    return this.state.activeConfig === BehaviorType.ScalarDynamic;
+    return this.state.activeType === BehaviorType.ScalarDynamic;
   }
 
   public isScriptConfigActive(): boolean {
-    return this.state.activeConfig === BehaviorType.Script;
+    return this.state.activeType === BehaviorType.Script;
   }
 }

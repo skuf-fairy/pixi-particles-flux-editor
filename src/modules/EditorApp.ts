@@ -112,7 +112,7 @@ export class EditorApp {
     this.texturesStore.add(TexturesStore.defaultParticle);
 
     await this.app.init({
-      background: "#465760",
+      background: "#475b60",
       width: widthContainer,
       height: heightContainer,
     });

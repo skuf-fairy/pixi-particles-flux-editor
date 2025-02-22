@@ -1,5 +1,6 @@
-import { InputNumber, Space, Typography } from "antd";
+import { Space, Typography } from "antd";
 import React from "react";
+import { InputNumber } from "src/ui/kit/Input/InputNumber";
 import "./NumberOption.style.scss";
 
 interface Props {
@@ -21,9 +22,7 @@ export function NumberOption({ value, text, min, max, onChange }: Props) {
         min={min}
         max={max}
         onChange={(e) => {
-          if (e !== null) {
-            onChange(e);
-          }
+          onChange(e);
         }}
       />
     </Space>

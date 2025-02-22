@@ -1,0 +1,46 @@
+#switch {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.switch {
+  position: relative;
+
+  cursor: pointer;
+  border-radius: 10px;
+  width: 48px;
+  height: 22px;
+  border: 1px solid transparent;
+
+  &__checked {
+    border-color: rgb(20 244 111);
+    background-color: rgb(18 31 35);
+  }
+
+  &__unchecked {
+    background-color: rgb(18 31 35);
+  }
+
+  &__slider {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: left var(--default-transition-time) var(--default-transition-easing);
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    transform: translate(0, -50%);
+    pointer-events: none;
+  }
+
+  &__slider--checked {
+    background-color: rgb(20 244 111);
+    left: calc(100% - 4px - 16px);
+  }
+
+  &__slider--unchecked {
+    left: 4px;
+    background-color: rgb(106, 133, 130);
+  }
+}

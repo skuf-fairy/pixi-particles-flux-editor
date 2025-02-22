@@ -20,6 +20,7 @@ export function AlphaBehavior() {
           name="Alpha"
           isEnabled={store.isEnabled()}
           onEnabledChange={(isEnabled: boolean) => {
+            console.log(isEnabled);
             if (isEnabled) {
               store.enable();
             } else {

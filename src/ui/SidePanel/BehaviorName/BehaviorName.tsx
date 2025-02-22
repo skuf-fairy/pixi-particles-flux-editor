@@ -1,6 +1,6 @@
 import { Typography } from "antd";
-import { Switch } from "antd";
 import React from "react";
+import { Switch } from "src/ui/kit/Switch/Switch";
 import "./BehaviorName.style.scss";
 
 interface Props {
@@ -15,8 +15,8 @@ export function BehaviorName({ name, isEnabled, onEnabledChange }: Props) {
       <Typography.Title level={3} style={{ color: "white" }}>
         {name}
       </Typography.Title>
-      {isEnabled !== undefined && (
-        <Switch defaultChecked={isEnabled} onChange={onEnabledChange} className="behavior-name__switch" />
+      {isEnabled !== undefined && onEnabledChange && (
+        <Switch checked={isEnabled} onChange={onEnabledChange} className="behavior-name__switch" />
       )}
     </div>
   );

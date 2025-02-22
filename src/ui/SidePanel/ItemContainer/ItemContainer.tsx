@@ -9,7 +9,5 @@ interface Props {
 }
 
 export function ItemContainer({ className, isDisabled, children }: PropsWithChildren<Props>) {
-  return (
-    <div className={cn("item-container", className, { ["item-container__disabled"]: isDisabled })}>{children}</div>
-  );
+  return <div className={cn("item-container", className)}>{children}</div>;
 }

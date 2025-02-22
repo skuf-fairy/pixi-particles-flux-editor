@@ -1,0 +1,25 @@
+.button {
+  background-color: rgb(20, 244, 111);
+  border-radius: 10px;
+  color: rgb(3, 17, 22);
+  cursor: pointer;
+  font-size: 14px;
+
+  &--disabled {
+    background-color: rgba(20, 244, 111, 0.4);
+    cursor: not-allowed;
+  }
+
+  &--small {
+    padding: 4px 12px;
+    border-radius: 4px;
+  }
+
+  &--medium {
+    padding: 12px;
+  }
+
+  &--large {
+    padding: 16px;
+  }
+}

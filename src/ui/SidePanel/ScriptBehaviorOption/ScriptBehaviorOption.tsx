@@ -1,6 +1,7 @@
-import { Button, Space, Typography } from "antd";
+import { Space, Typography } from "antd";
 import { TimeScriptConfig } from "particle-flux";
 import React from "react";
+import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { NumberOption } from "../../components/NumberOption/NumberOption";
 import "./ScriptBehaviorOption.style.scss";
 
@@ -10,7 +11,6 @@ interface Props {
 }
 
 export function ScriptBehaviorOption({ script, onChange }: Props) {
-  console.log(script);
   return (
     <Space direction="vertical">
       {script.map((item, key) => (
@@ -32,7 +32,7 @@ export function ScriptBehaviorOption({ script, onChange }: Props) {
             }}
           />
           <Button
-            type="default"
+            size={ButtonSize.Small}
             onClick={() => onChange(script.filter((item, n) => key !== n))}
             disabled={key === script.length - 1 || key === 0}
           >
@@ -41,7 +41,7 @@ export function ScriptBehaviorOption({ script, onChange }: Props) {
         </Space>
       ))}
 
-      <Button type="primary" onClick={() => onChange([...script, { ...script[script.length - 1] }])}>
+      <Button size={ButtonSize.Small} onClick={() => onChange([...script, { ...script[script.length - 1] }])}>
         <Typography.Text>+</Typography.Text>
       </Button>
     </Space>

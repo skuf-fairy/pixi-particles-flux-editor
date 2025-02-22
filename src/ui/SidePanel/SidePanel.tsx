@@ -27,9 +27,6 @@ export function SidePanel() {
           Divider: {
             marginLG: 8,
           },
-          Button: {
-            colorPrimary: "#ffffff",
-          },
         },
       }}
     >

@@ -1,7 +1,8 @@
-import { Button, ColorPicker, Space, Typography } from "antd";
+import { ColorPicker, Space, Typography } from "antd";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
+import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 
 export function ColorScriptBehavior() {
   const store = useColorBehaviorStore();
@@ -30,7 +31,7 @@ export function ColorScriptBehavior() {
             }}
           />
           <Button
-            type="default"
+            size={ButtonSize.Small}
             onClick={() =>
               store.setScriptBehaviorConfig({
                 script: config.script.filter((item, n) => key !== n),
@@ -44,7 +45,7 @@ export function ColorScriptBehavior() {
       ))}
 
       <Button
-        type="primary"
+        size={ButtonSize.Small}
         onClick={() =>
           store.setScriptBehaviorConfig({ script: [...config.script, { ...config.script[config.script.length - 1] }] })
         }

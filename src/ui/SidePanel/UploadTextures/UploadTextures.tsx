@@ -1,9 +1,10 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Space, Upload, UploadFile } from "antd";
+import { Space, Upload, UploadFile } from "antd";
 import { Assets } from "pixi.js";
 import React, { useRef } from "react";
 import { useTexturesStore } from "src/hooks/useTexturesStore";
 import { ParticleTexture, TexturesStore } from "src/services/TexturesStore/TexturesStore";
+import { Button } from "src/ui/kit/Button/Button";
 import { BehaviorName } from "../BehaviorName/BehaviorName";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
 import "./UploadTextures.style.scss";
@@ -53,8 +54,11 @@ export function UploadTextures() {
       <Space direction="vertical">
         <Upload listType="picture" fileList={fileList} accept={TexturesStore.acceptMimeTypes} onRemove={handleRemove} />
 
-        <Button icon={<UploadOutlined />} onClick={() => inputRef.current?.click()}>
-          Upload
+        <Button onClick={() => inputRef.current?.click()}>
+          <div className="upload-button__content">
+            <UploadOutlined />
+            <p>Upload</p>
+          </div>
         </Button>
       </Space>
 

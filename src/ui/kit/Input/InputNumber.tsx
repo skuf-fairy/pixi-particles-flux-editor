@@ -1,5 +1,5 @@
 import React from "react";
-import "./InputNumber.style.scss";
+import "./Input.style.scss";
 
 interface Props {
   value: number;

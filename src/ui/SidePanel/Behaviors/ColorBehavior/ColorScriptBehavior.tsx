@@ -1,8 +1,9 @@
-import { ColorPicker, Space } from "antd";
+import { Space } from "antd";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
+import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 
 export function ColorScriptBehavior() {
@@ -14,10 +15,9 @@ export function ColorScriptBehavior() {
       {config.script.map((option, key) => (
         <Space key={key} direction="horizontal" align="end">
           <ColorPicker
-            value={option.value}
-            size="large"
+            color={option.value}
             onChange={(v) => {
-              option.value = v.toHexString();
+              option.value = v;
               store.setScriptBehaviorConfig({ script: [...config.script] });
             }}
           />

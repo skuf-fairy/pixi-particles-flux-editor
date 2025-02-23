@@ -1,8 +1,6 @@
-import { ConfigProvider, Space, theme } from "antd";
+import { ConfigProvider, Space } from "antd";
 import React from "react";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import { StylizedDivider } from "../components/StylizedDivider/StylizedDivider";
-import { BehaviorName } from "./BehaviorName/BehaviorName";
 import { AlphaBehavior } from "./Behaviors/AlphaBehavior/AlphaBehavior";
 import { ColorBehavior } from "./Behaviors/ColorBehavior/ColorBehavior";
 import { DirectionBehavior } from "./Behaviors/DirectionBehavior/DirectionBehavior";
@@ -41,7 +39,9 @@ export function SidePanel() {
 
         <Properties />
 
-        <BehaviorName name="Behaviors" />
+        <Typography variant={TypographyVariant.H2} className="side-panel__title">
+          Behaviors
+        </Typography>
 
         <Space direction="vertical" style={{ width: "100%" }}>
           <LifetimeBehavior />

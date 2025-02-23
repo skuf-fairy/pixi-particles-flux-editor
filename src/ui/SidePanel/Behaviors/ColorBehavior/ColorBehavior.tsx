@@ -1,7 +1,8 @@
-import { ColorPicker, Flex } from "antd";
+import { Flex } from "antd";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
+import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
 import { ColorScriptBehavior } from "./ColorScriptBehavior";
@@ -34,10 +35,9 @@ export function ColorBehavior() {
 
       {store.isStaticConfigActive() && (
         <ColorPicker
-          value={store.getState().staticConfig.value}
-          size="large"
+          color={store.getState().staticConfig.value}
           onChange={(v) => {
-            store.setStaticBehaviorConfig({ value: v.toHexString() });
+            store.setStaticBehaviorConfig({ value: v });
           }}
         />
       )}

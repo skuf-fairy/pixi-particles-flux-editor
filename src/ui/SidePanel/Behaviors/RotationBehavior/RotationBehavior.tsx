@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import React from "react";
 import { useRotationBehaviorStore } from "src/hooks/useRotationBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -15,7 +14,7 @@ export function RotationBehavior() {
 
   return (
     <ItemContainer>
-      <Flex justify="space-between">
+      <div>
         <BehaviorName
           name="Rotation"
           isEnabled={store.isEnabled()}
@@ -40,7 +39,7 @@ export function RotationBehavior() {
             }
           }}
         />
-      </Flex>
+      </div>
 
       {configType === BehaviorType.ScalarStatic && (
         <ScalarStaticBehaviorOption config={state.staticConfig} onChange={(v) => store.setStaticConfig(v)} />

@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import React from "react";
 import { useAlphaBehaviorStore } from "src/hooks/useAlphaBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -15,7 +14,7 @@ export function AlphaBehavior() {
 
   return (
     <ItemContainer>
-      <Flex justify="space-between">
+      <div>
         <BehaviorName
           name="Alpha"
           isEnabled={store.isEnabled()}
@@ -34,7 +33,7 @@ export function AlphaBehavior() {
             store.setActiveType(type);
           }}
         />
-      </Flex>
+      </div>
 
       {state.activeType === BehaviorType.ScalarStatic && (
         <ScalarStaticBehaviorOption

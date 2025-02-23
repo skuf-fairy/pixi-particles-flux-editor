@@ -1,4 +1,3 @@
-import { Space } from "antd";
 import React from "react";
 import { useScaleBehaviorStore } from "src/hooks/useScaleBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -7,6 +6,7 @@ import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavi
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
 import { ScriptBehaviorOption } from "../../ScriptBehaviorOption/ScriptBehaviorOption";
+import "./ScaleBehavior.style.scss";
 
 export function ScaleBehavior() {
   const store = useScaleBehaviorStore();
@@ -15,7 +15,7 @@ export function ScaleBehavior() {
 
   return (
     <ItemContainer>
-      <Space direction="vertical">
+      <div className="scale-behavior">
         <BehaviorName
           name="Scale"
           isEnabled={store.isEnabled()}
@@ -48,7 +48,7 @@ export function ScaleBehavior() {
             onChange={(v) => store.setScriptBehaviorConfig({ script: v })}
           />
         )}
-      </Space>
+      </div>
     </ItemContainer>
   );
 }

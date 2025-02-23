@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import React from "react";
 import { useSpawnShapeBehaviorStore } from "src/hooks/useSpawnShapeBehaviorStore";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
@@ -14,11 +13,11 @@ export function SpawnShapeBehavior() {
 
   return (
     <ItemContainer>
-      <Flex justify="space-between">
+      <div>
         <BehaviorName name="Spawn Shape" />
 
         <SpawnShapeSelect />
-      </Flex>
+      </div>
 
       {store.isRectangleShapeActive() && (
         <RectangleSpawnShapeBehavior config={rectangleShape} onChange={(v) => store.setRectangleShapeConfig(v)} />

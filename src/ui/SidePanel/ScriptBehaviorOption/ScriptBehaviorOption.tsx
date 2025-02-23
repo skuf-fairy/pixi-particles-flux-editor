@@ -1,4 +1,3 @@
-import { Space } from "antd";
 import { TimeScriptConfig } from "particle-flux";
 import React from "react";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
@@ -13,9 +12,9 @@ interface Props {
 
 export function ScriptBehaviorOption({ script, onChange }: Props) {
   return (
-    <Space direction="vertical">
+    <div className="script-behavior">
       {script.map((item, key) => (
-        <Space key={key} direction="horizontal" align="end">
+        <div key={key} className="script-behavior__item">
           <NumberOption
             value={item.time}
             text={"Time"}
@@ -39,12 +38,12 @@ export function ScriptBehaviorOption({ script, onChange }: Props) {
           >
             <Typography variant={TypographyVariant.P}>-</Typography>
           </Button>
-        </Space>
+        </div>
       ))}
 
       <Button size={ButtonSize.Small} onClick={() => onChange([...script, { ...script[script.length - 1] }])}>
         <Typography variant={TypographyVariant.P}>+</Typography>
       </Button>
-    </Space>
+    </div>
   );
 }

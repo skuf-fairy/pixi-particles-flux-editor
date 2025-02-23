@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import React from "react";
 import { useGravityBehaviorStore } from "src/hooks/useGravityBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -15,7 +14,7 @@ export function GravityBehavior() {
 
   return (
     <ItemContainer>
-      <Flex justify="space-between">
+      <div>
         <BehaviorName
           name="Gravity"
           isEnabled={store.isEnabled()}
@@ -36,7 +35,7 @@ export function GravityBehavior() {
             }
           }}
         />
-      </Flex>
+      </div>
 
       {configType === BehaviorType.ScalarStatic && (
         <ScalarStaticBehaviorOption

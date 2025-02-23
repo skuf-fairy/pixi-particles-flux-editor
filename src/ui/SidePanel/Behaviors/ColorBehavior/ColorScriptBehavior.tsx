@@ -1,25 +1,26 @@
-import { Space } from "antd";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import "./ColorScriptBehavior.style.scss";
 
 export function ColorScriptBehavior() {
   const store = useColorBehaviorStore();
   const config = store.getState().scriptConfig;
 
   return (
-    <Space direction="vertical" align="start">
+    <div className="color-script-behavior">
       {config.script.map((option, key) => (
-        <Space key={key} direction="horizontal" align="end">
+        <div key={key} className="color-script-behavior__option">
           <ColorPicker
             color={option.value}
             onChange={(v) => {
               option.value = v;
               store.setScriptBehaviorConfig({ script: [...config.script] });
             }}
+            className="color-script-behavior__color-picker"
           />
           <NumberOption
             value={option.time}
@@ -30,6 +31,7 @@ export function ColorScriptBehavior() {
               option.time = v;
               store.setScriptBehaviorConfig({ script: [...config.script] });
             }}
+            className="color-script-behavior__number-option"
           />
           <Button
             size={ButtonSize.Small}
@@ -42,7 +44,7 @@ export function ColorScriptBehavior() {
           >
             <Typography variant={TypographyVariant.P}>-</Typography>
           </Button>
-        </Space>
+        </div>
       ))}
 
       <Button
@@ -53,6 +55,6 @@ export function ColorScriptBehavior() {
       >
         <Typography variant={TypographyVariant.P}>+</Typography>
       </Button>
-    </Space>
+    </div>
   );
 }

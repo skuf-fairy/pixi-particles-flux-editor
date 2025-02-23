@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
@@ -12,7 +11,7 @@ export function ColorBehavior() {
 
   return (
     <ItemContainer>
-      <Flex justify="space-between">
+      <div>
         <BehaviorName
           name="Color"
           isEnabled={store.isEnabled()}
@@ -31,7 +30,7 @@ export function ColorBehavior() {
             store.setActiveType(type);
           }}
         />
-      </Flex>
+      </div>
 
       {store.isStaticConfigActive() && (
         <ColorPicker

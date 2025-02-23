@@ -1,0 +1,20 @@
+.color-script-behavior {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &__option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  &__color-picker {
+    margin-right: 12px;
+  }
+
+  &__number-option {
+    width: 48px;
+    margin-right: 12px;
+  }
+}

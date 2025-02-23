@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import React from "react";
 import { useSpeedBehaviorStore } from "src/hooks/useSpeedBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -15,7 +14,7 @@ export function SpeedBehavior() {
 
   return (
     <ItemContainer>
-      <Flex justify="space-between">
+      <div>
         <BehaviorName
           name="Speed"
           isEnabled={store.isEnabled()}
@@ -32,7 +31,7 @@ export function SpeedBehavior() {
           availableTypes={state.availableTypes}
           onChange={(t) => store.setActiveType(t)}
         />
-      </Flex>
+      </div>
 
       {state.activeType === BehaviorType.ScalarStatic && (
         <ScalarStaticBehaviorOption

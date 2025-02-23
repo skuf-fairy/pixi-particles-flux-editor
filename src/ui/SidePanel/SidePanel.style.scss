@@ -12,16 +12,16 @@
     margin-bottom: 16px;
   }
 
-  &__textures {
-    padding-top: 32px;
+  &__config {
     margin-bottom: 16px;
   }
 
-  &__emitter-config {
-    margin-bottom: 16px;
+  &__behaviors {
+    display: flex;
+    flex-direction: column;
   }
 
-  &__bloom-filter-config {
-    padding-bottom: 32px;
+  &__behaviors-item {
+    margin-bottom: 8px;
   }
 }

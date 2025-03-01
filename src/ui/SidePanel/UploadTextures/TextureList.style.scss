@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  margin-bottom: var(--gap);
+  margin-bottom: var(--gap2x);
 
   &__item {
     display: flex;
@@ -34,6 +34,6 @@
   &__delete-icon {
     width: 18px;
     height: 18px;
-    color: var(--primary-text-color);
+    stroke: var(--primary-text-color);
   }
 }

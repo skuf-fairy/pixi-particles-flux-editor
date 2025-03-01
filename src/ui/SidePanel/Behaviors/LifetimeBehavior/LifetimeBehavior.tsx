@@ -2,6 +2,7 @@ import React from "react";
 import { useLifetimeBehaviorStore } from "src/hooks/useLifetimeBehaviorStore";
 import { FieldsGrid } from "src/ui/components/FieldsGrid/FieldsGrid";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
+import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
 
@@ -12,7 +13,7 @@ export function LifetimeBehavior() {
 
   return (
     <ItemContainer>
-      <BehaviorName name="Life time" />
+      <BehaviorHeader left={<BehaviorName name="Life time" />} right={null} />
 
       <FieldsGrid columns={2}>
         <NumberOption value={min} text="Min" onChange={(v) => store.setRangeConfig({ ...config, min: v })} />

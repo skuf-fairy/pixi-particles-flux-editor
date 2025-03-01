@@ -9,12 +9,12 @@
   min-width: 400px;
 
   &__title {
-    margin-bottom: 16px;
+    margin-bottom: var(--gap2x);
     color: var(--primary-title-color);
   }
 
   &__config {
-    margin-bottom: 16px;
+    margin-bottom: var(--gap2x);
   }
 
   &__behaviors {
@@ -23,11 +23,11 @@
   }
 
   &__behaviors-item {
-    margin-bottom: 8px;
+    margin-bottom: var(--gap);
   }
 
   &__properties {
-    margin-bottom: 16px;
+    margin-bottom: var(--gap2x);
   }
 
   &__options {

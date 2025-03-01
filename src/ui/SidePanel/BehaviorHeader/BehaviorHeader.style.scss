@@ -1,6 +1,6 @@
 .behavior-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: calc(var(--gap) * 2);
+  margin-bottom: var(--gap2x);
   width: 100%;
 }

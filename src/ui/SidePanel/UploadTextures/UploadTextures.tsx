@@ -4,6 +4,7 @@ import { useTexturesStore } from "src/hooks/useTexturesStore";
 import { ParticleTexture, TexturesStore } from "src/services/TexturesStore/TexturesStore";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { UploadIcon } from "src/ui/kit/icons/UploadIcon";
+import { BehaviorHeader } from "../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../BehaviorName/BehaviorName";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
 import { TextureList } from "./TextureList";
@@ -34,7 +35,7 @@ export function UploadTextures() {
 
   return (
     <ItemContainer>
-      <BehaviorName name="Textures" />
+      <BehaviorHeader left={<BehaviorName name="Textures" />} right={null} />
 
       <div>
         <TextureList textureList={textureList} onRemove={handleRemove} />

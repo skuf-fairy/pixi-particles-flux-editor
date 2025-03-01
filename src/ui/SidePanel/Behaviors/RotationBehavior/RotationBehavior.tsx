@@ -2,6 +2,7 @@ import React from "react";
 import { useRotationBehaviorStore } from "src/hooks/useRotationBehaviorStore";
 import { BehaviorType } from "src/services/types";
 import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
+import { DeltaBehaviorRotation } from "src/ui/components/DeltaBehaviorOption/DeltaBehaviorOption";
 import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
 import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
@@ -48,6 +49,10 @@ export function RotationBehavior() {
 
       {state.activeType === BehaviorType.Dynamic && (
         <ScalarDynamicBehaviorOption config={state.dynamicConfig} onChange={(v) => store.setDynamicConfig(v)} />
+      )}
+
+      {state.activeType === BehaviorType.Delta && (
+        <DeltaBehaviorRotation config={state.deltaConfig} onChange={(v) => store.setScalarDeltaConfig(v)} />
       )}
     </ItemContainer>
   );

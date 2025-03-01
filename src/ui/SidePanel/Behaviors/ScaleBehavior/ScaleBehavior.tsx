@@ -3,17 +3,16 @@ import { useScaleBehaviorStore } from "src/hooks/useScaleBehaviorStore";
 import { BehaviorType } from "src/services/types";
 import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
 import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
+import { ScriptBehaviorOption } from "../../../components/ScriptBehaviorOption/ScriptBehaviorOption";
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { ScriptBehaviorOption } from "../../ScriptBehaviorOption/ScriptBehaviorOption";
 import "./ScaleBehavior.style.scss";
 
 export function ScaleBehavior() {
   const store = useScaleBehaviorStore();
 
   const state = store.getState();
-  console.log(state);
 
   return (
     <ItemContainer>

@@ -26,10 +26,12 @@ export class RotationBehaviorStore extends Store<{
       },
       staticConfig: {
         value: 0,
+        mult: 1,
       },
       deltaConfig: {
         value: 0,
         delta: 0,
+        mult: 1,
       },
       activeType: BehaviorType.Static,
       enabled: true,

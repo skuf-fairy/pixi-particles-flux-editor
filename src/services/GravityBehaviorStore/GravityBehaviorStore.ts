@@ -10,7 +10,7 @@ import { BehaviorType } from "../types";
 export class GravityBehaviorStore extends Store<{
   scalarStaticBehaviorConfig: ScalarStaticBehaviorConfig;
   scalarDynamicBehaviorConfig: ScalarDynamicBehaviorConfig;
-  activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic;
+  activeType: BehaviorType.Dynamic | BehaviorType.Static;
   availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
@@ -27,8 +27,8 @@ export class GravityBehaviorStore extends Store<{
         mult: 1,
         easing: EasingName.linear,
       },
-      activeType: BehaviorType.ScalarStatic,
-      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic],
+      activeType: BehaviorType.Static,
+      availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],
       enabled: false,
     });
   }
@@ -57,15 +57,15 @@ export class GravityBehaviorStore extends Store<{
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
-      case BehaviorType.ScalarStatic:
+      case BehaviorType.Static:
         return this.state.scalarDynamicBehaviorConfig;
 
-      case BehaviorType.ScalarDynamic:
+      case BehaviorType.Dynamic:
         return this.state.scalarStaticBehaviorConfig;
     }
   }
 
-  public setActiveConfigType(type: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic): void {
+  public setActiveConfigType(type: BehaviorType.Dynamic | BehaviorType.Static): void {
     this.setState({
       ...this.state,
       activeType: type,

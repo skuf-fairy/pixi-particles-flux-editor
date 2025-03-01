@@ -3,12 +3,12 @@
 .button {
   @include button-text;
 
-  background-color: rgb(20, 244, 111);
+  background-color: var(--primary-button-color);
   border-radius: 10px;
   cursor: pointer;
 
   &--disabled {
-    background-color: rgba(20, 244, 111, 0.4);
+    opacity: 0.4;
     cursor: not-allowed;
   }
 

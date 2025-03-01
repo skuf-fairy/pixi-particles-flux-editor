@@ -18,17 +18,15 @@ export function ColorPicker({ color, onChange, className }: Props) {
         {color}
       </Typography>
 
-      <div className="color-picker__input-wrapper">
-        <input
-          ref={inputRef}
-          value={color}
-          type="color"
-          className="color-picker__input"
-          onChange={(e) => {
-            onChange(e.target.value);
-          }}
-        />
-      </div>
+      <input
+        ref={inputRef}
+        value={color}
+        type="color"
+        className="color-picker__input"
+        onChange={(e) => {
+          onChange(e.target.value);
+        }}
+      />
     </div>
   );
 }

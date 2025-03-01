@@ -34,7 +34,7 @@ export function GravityBehavior() {
             type={state.activeType}
             availableTypes={state.availableTypes}
             onChange={(type) => {
-              if (type === BehaviorType.ScalarStatic || type === BehaviorType.ScalarDynamic) {
+              if (type === BehaviorType.Static || type === BehaviorType.Dynamic) {
                 store.setActiveConfigType(type);
               }
             }}
@@ -42,14 +42,14 @@ export function GravityBehavior() {
         }
       />
 
-      {configType === BehaviorType.ScalarStatic && (
+      {configType === BehaviorType.Static && (
         <ScalarStaticBehaviorOption
           config={state.scalarStaticBehaviorConfig}
           onChange={(v) => store.setStaticConfig(v)}
         />
       )}
 
-      {state.activeType === BehaviorType.ScalarDynamic && (
+      {state.activeType === BehaviorType.Dynamic && (
         <ScalarDynamicBehaviorOption
           config={state.scalarDynamicBehaviorConfig}
           onChange={(v) => store.setDynamicConfig(v)}

@@ -26,9 +26,9 @@ export class ColorBehaviorStore extends Store<{
           { time: 1, value: "#ffffff" },
         ],
       },
-      activeType: BehaviorType.ScalarStatic,
+      activeType: BehaviorType.Static,
       enabled: true,
-      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Script],
+      availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Script],
     });
   }
 
@@ -73,10 +73,10 @@ export class ColorBehaviorStore extends Store<{
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
-      case BehaviorType.ScalarStatic:
+      case BehaviorType.Static:
         return this.state.staticConfig;
 
-      case BehaviorType.ScalarDynamic:
+      case BehaviorType.Dynamic:
         return this.state.dynamicConfig;
 
       case BehaviorType.Script:
@@ -88,11 +88,11 @@ export class ColorBehaviorStore extends Store<{
   }
 
   public isStaticConfigActive(): boolean {
-    return this.state.activeType === BehaviorType.ScalarStatic;
+    return this.state.activeType === BehaviorType.Static;
   }
 
   public isDynamicConfigActive(): boolean {
-    return this.state.activeType === BehaviorType.ScalarDynamic;
+    return this.state.activeType === BehaviorType.Dynamic;
   }
 
   public isScriptConfigActive(): boolean {

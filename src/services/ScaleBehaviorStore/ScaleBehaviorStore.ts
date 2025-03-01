@@ -50,9 +50,9 @@ export class ScaleBehaviorStore extends Store<{
           easing: EasingName.linear,
         },
       },
-      activeType: BehaviorType.ScalarStatic,
+      activeType: BehaviorType.Static,
       enabled: true,
-      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Script, BehaviorType.Vector],
+      availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Script, BehaviorType.Vector],
     });
   }
 
@@ -97,10 +97,10 @@ export class ScaleBehaviorStore extends Store<{
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
-      case BehaviorType.ScalarStatic:
+      case BehaviorType.Static:
         return this.state.scalarStaticBehaviorConfig;
 
-      case BehaviorType.ScalarDynamic:
+      case BehaviorType.Dynamic:
         return this.state.scalarDynamicBehaviorConfig;
 
       case BehaviorType.Script:

@@ -35,8 +35,8 @@ export class SpeedBehaviorStore extends Store<{
           { time: 1, value: 3 },
         ],
       },
-      activeType: BehaviorType.ScalarStatic,
-      availableTypes: [BehaviorType.ScalarDynamic, BehaviorType.ScalarStatic, BehaviorType.Script],
+      activeType: BehaviorType.Static,
+      availableTypes: [BehaviorType.Dynamic, BehaviorType.Static, BehaviorType.Script],
       enabled: true,
     });
   }
@@ -82,10 +82,10 @@ export class SpeedBehaviorStore extends Store<{
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
-      case BehaviorType.ScalarStatic:
+      case BehaviorType.Static:
         return this.state.scalarStaticBehaviorConfig;
 
-      case BehaviorType.ScalarDynamic:
+      case BehaviorType.Dynamic:
         return this.state.scalarDynamicBehaviorConfig;
 
       case BehaviorType.Script:

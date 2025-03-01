@@ -35,14 +35,14 @@ export function ScaleBehavior() {
           right={null}
         />
 
-        {state.activeType === BehaviorType.ScalarStatic && (
+        {state.activeType === BehaviorType.Static && (
           <ScalarStaticBehaviorOption
             config={state.scalarStaticBehaviorConfig}
             onChange={(v) => store.setScalarStaticBehaviorConfig(v)}
           />
         )}
 
-        {state.activeType === BehaviorType.ScalarDynamic && (
+        {state.activeType === BehaviorType.Dynamic && (
           <ScalarDynamicBehaviorOption
             config={state.scalarDynamicBehaviorConfig}
             onChange={(v) => store.setScalarDynamicBehaviorConfig(v)}

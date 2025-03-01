@@ -12,7 +12,7 @@ export class RotationBehaviorStore extends Store<{
   dynamicConfig: ScalarDynamicBehaviorConfig;
   staticConfig: ScalarStaticBehaviorConfig;
   deltaConfig: DeltaBehaviorConfig;
-  activeType: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.Delta;
+  activeType: BehaviorType.Dynamic | BehaviorType.Static | BehaviorType.Delta;
   availableTypes: BehaviorType[];
   enabled: boolean;
 }> {
@@ -31,9 +31,9 @@ export class RotationBehaviorStore extends Store<{
         value: 0,
         delta: 0,
       },
-      activeType: BehaviorType.ScalarStatic,
+      activeType: BehaviorType.Static,
       enabled: true,
-      availableTypes: [BehaviorType.ScalarStatic, BehaviorType.ScalarDynamic, BehaviorType.Delta],
+      availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Delta],
     });
   }
 
@@ -53,10 +53,10 @@ export class RotationBehaviorStore extends Store<{
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
-      case BehaviorType.ScalarStatic:
+      case BehaviorType.Static:
         return this.state.staticConfig;
 
-      case BehaviorType.ScalarDynamic:
+      case BehaviorType.Dynamic:
         return this.state.dynamicConfig;
 
       case BehaviorType.Delta:
@@ -76,7 +76,7 @@ export class RotationBehaviorStore extends Store<{
     this.setState({ ...this.state, enabled: false });
   }
 
-  public setActiveConfigType(type: BehaviorType.ScalarDynamic | BehaviorType.ScalarStatic | BehaviorType.Delta): void {
+  public setActiveConfigType(type: BehaviorType.Dynamic | BehaviorType.Static | BehaviorType.Delta): void {
     this.setState({
       ...this.state,
       activeType: type,

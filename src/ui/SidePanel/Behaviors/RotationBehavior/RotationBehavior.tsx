@@ -34,11 +34,7 @@ export function RotationBehavior() {
             type={state.activeType}
             availableTypes={state.availableTypes}
             onChange={(type) => {
-              if (
-                type === BehaviorType.ScalarStatic ||
-                type === BehaviorType.ScalarDynamic ||
-                type === BehaviorType.Delta
-              ) {
+              if (type === BehaviorType.Static || type === BehaviorType.Dynamic || type === BehaviorType.Delta) {
                 store.setActiveConfigType(type);
               }
             }}
@@ -46,11 +42,11 @@ export function RotationBehavior() {
         }
       />
 
-      {configType === BehaviorType.ScalarStatic && (
+      {configType === BehaviorType.Static && (
         <ScalarStaticBehaviorOption config={state.staticConfig} onChange={(v) => store.setStaticConfig(v)} />
       )}
 
-      {state.activeType === BehaviorType.ScalarDynamic && (
+      {state.activeType === BehaviorType.Dynamic && (
         <ScalarDynamicBehaviorOption config={state.dynamicConfig} onChange={(v) => store.setDynamicConfig(v)} />
       )}
     </ItemContainer>

@@ -1,3 +1,6 @@
+@import "src/styles/typography.scss";
+
 .fps-counter {
-  font-size: 12px;
+  @include text;
+  color: var(--primary-text-color);
 }

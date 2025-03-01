@@ -3,6 +3,7 @@
   flex-direction: column;
 
   &__title {
-    margin-bottom: 4px;
+    margin-bottom: var(--label-gap);
+    color: var(--primary-text-color);
   }
 }

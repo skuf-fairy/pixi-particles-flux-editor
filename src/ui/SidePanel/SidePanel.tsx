@@ -19,7 +19,9 @@ export function SidePanel() {
   return (
     <div className="side-panel">
       <div className="side-panel__config">
-        <ConfigOptions />
+        <div className="side-panel__options">
+          <ConfigOptions />
+        </div>
         <UploadTextures />
       </div>
 
@@ -27,7 +29,9 @@ export function SidePanel() {
         Properties
       </Typography>
 
-      <Properties />
+      <div className="side-panel__properties">
+        <Properties />
+      </div>
 
       <Typography variant={TypographyVariant.H2} className="side-panel__title">
         Behaviors

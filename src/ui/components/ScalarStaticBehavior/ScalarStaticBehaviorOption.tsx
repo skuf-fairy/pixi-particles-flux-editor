@@ -13,7 +13,7 @@ interface Props {
 export function ScalarStaticBehaviorOption({ config, onChange }: Props) {
   return (
     <FieldsGrid columns={3}>
-      <NumberOption value={config.value} text="Value" onChange={(v) => onChange({ ...config, value: v })} />
+      <NumberOption value={config.value} text="Value" onBlur={(v) => onChange({ ...config, value: v })} />
       {config.mult && <MultiplicatorOption mult={config.mult} onChange={(v) => onChange({ ...config, mult: v })} />}
       <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({ ...config, easing: v })} />
     </FieldsGrid>

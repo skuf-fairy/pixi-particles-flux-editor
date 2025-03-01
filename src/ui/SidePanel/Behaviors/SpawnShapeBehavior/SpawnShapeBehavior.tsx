@@ -1,5 +1,6 @@
 import React from "react";
 import { useSpawnShapeBehaviorStore } from "src/hooks/useSpawnShapeBehaviorStore";
+import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
 import { CircleSpawnShapeBehavior } from "./CircleSpawnShapeBehavior";
@@ -13,11 +14,7 @@ export function SpawnShapeBehavior() {
 
   return (
     <ItemContainer>
-      <div>
-        <BehaviorName name="Spawn Shape" />
-
-        <SpawnShapeSelect />
-      </div>
+      <BehaviorHeader left={<BehaviorName name="Spawn Shape" />} right={<SpawnShapeSelect />} />
 
       {store.isRectangleShapeActive() && (
         <RectangleSpawnShapeBehavior config={rectangleShape} onChange={(v) => store.setRectangleShapeConfig(v)} />

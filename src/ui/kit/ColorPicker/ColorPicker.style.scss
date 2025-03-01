@@ -1,17 +1,21 @@
 .color-picker {
   display: flex;
   align-items: center;
+  flex-direction: column;
 
   &__input {
     cursor: pointer;
-    height: 64px;
-    width: 64px;
+    height: 33.5px;
+    width: 33.5px;
   }
 
   &__input-wrapper {
     padding: 0 2px;
     background-color: rgb(71, 91, 96);
     border-radius: 4px;
-    margin-right: 8px;
+  }
+
+  &__hex {
+    color: var(--primary-text-color);
   }
 }

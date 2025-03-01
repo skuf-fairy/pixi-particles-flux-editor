@@ -2,7 +2,7 @@ import { Assets } from "pixi.js";
 import React, { useRef } from "react";
 import { useTexturesStore } from "src/hooks/useTexturesStore";
 import { ParticleTexture, TexturesStore } from "src/services/TexturesStore/TexturesStore";
-import { Button } from "src/ui/kit/Button/Button";
+import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { UploadIcon } from "src/ui/kit/icons/UploadIcon";
 import { BehaviorName } from "../BehaviorName/BehaviorName";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
@@ -39,10 +39,10 @@ export function UploadTextures() {
       <div>
         <TextureList textureList={textureList} onRemove={handleRemove} />
 
-        <Button onClick={() => inputRef.current?.click()}>
+        <Button size={ButtonSize.Medium} onClick={() => inputRef.current?.click()}>
           <div className="upload-button__content">
             <UploadIcon className="upload-button__icon" />
-            <p>Upload</p>
+            <p className="upload-button__text">Upload</p>
           </div>
         </Button>
       </div>

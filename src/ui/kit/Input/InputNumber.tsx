@@ -3,14 +3,15 @@ import "./Input.style.scss";
 
 interface Props {
   value: number;
-  onChange(v: number): void;
+  onChange?(v: number): void;
+  onBlur?(v: number): void;
   min?: number;
   max?: number;
   disabled?: boolean;
   placeholder?: string;
 }
 
-export function InputNumber({ value, onChange, min, max, disabled, placeholder }: Props) {
+export function InputNumber({ value, onChange, onBlur, min, max, disabled, placeholder }: Props) {
   return (
     <input
       type="number"
@@ -21,7 +22,13 @@ export function InputNumber({ value, onChange, min, max, disabled, placeholder }
       onChange={(e) => {
         const v = Number(e.target.value);
         if (!isNaN(v)) {
-          onChange(v);
+          onChange?.(v);
+        }
+      }}
+      onBlur={(e) => {
+        const v = Number(e.target.value);
+        if (!isNaN(v)) {
+          onBlur?.(v);
         }
       }}
       className="input"

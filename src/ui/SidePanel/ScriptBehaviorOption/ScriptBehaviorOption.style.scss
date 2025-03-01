@@ -5,10 +5,15 @@
 
   &__item {
     display: flex;
-    align-items: center;
+    align-items: end;
+    gap: var(--gap);
 
     &:not(:last-child) {
-      margin-bottom: 8px;
+      margin-bottom: var(--gap);
     }
+  }
+
+  &__steps-list {
+    margin-bottom: var(--gap);
   }
 }

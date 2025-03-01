@@ -2,15 +2,13 @@
   --default-transition-time: 250ms;
   --default-transition-easing: ease;
 
+  --primary-title-color: #ffffff;
+  --primary-text-color: #b7cbc9;
+  --secondary-text-color: rgb(3, 17, 22);
+
   --color-primary-dark-green: #071e22;
-  --color-primary-green: #1d7874;
-  --color-primary-soft-green: #679289;
-  --color-primary-peach: #f4c095;
   --color-primary-red: #ee2e31;
 
-  --title-color: rgb(173 255 206);
-  --text-color: rgb(183 203 193);
-
-  --app-container-width: 600px;
-  --app-container-height: 600px;
+  --gap: 8px;
+  --label-gap: 4px;
 }

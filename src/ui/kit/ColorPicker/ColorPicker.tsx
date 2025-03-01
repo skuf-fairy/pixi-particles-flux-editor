@@ -14,6 +14,10 @@ export function ColorPicker({ color, onChange, className }: Props) {
 
   return (
     <div className={cn("color-picker", className)}>
+      <Typography variant={TypographyVariant.P} className="color-picker__hex">
+        {color}
+      </Typography>
+
       <div className="color-picker__input-wrapper">
         <input
           ref={inputRef}
@@ -25,8 +29,6 @@ export function ColorPicker({ color, onChange, className }: Props) {
           }}
         />
       </div>
-
-      <Typography variant={TypographyVariant.P}>{color}</Typography>
     </div>
   );
 }

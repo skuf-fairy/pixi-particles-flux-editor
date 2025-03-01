@@ -5,15 +5,21 @@
   top: -1000px;
 }
 
-.upload-button__content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.upload-button {
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.upload-button__icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 8px;
-  fill: rgb(3, 17, 22);
+  &__icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    fill: rgb(3, 17, 22);
+  }
+
+  &__text {
+    color: var(--secondary-text-color);
+  }
 }

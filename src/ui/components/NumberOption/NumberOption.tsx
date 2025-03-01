@@ -9,24 +9,18 @@ interface Props {
   text: string;
   min?: number;
   max?: number;
-  onChange(v: number): void;
+  onChange?(v: number): void;
+  onBlur?(v: number): void;
   className?: string;
 }
 
-export function NumberOption({ value, text, min, max, onChange, className }: Props) {
+export function NumberOption({ value, text, min, max, onChange, onBlur, className }: Props) {
   return (
     <div className={cn("number-option", className)}>
       <Typography variant={TypographyVariant.P} className="number-option__title">
         {text}
       </Typography>
-      <InputNumber
-        value={value}
-        min={min}
-        max={max}
-        onChange={(e) => {
-          onChange(e);
-        }}
-      />
+      <InputNumber value={value} min={min} max={max} onChange={onChange} onBlur={onBlur} />
     </div>
   );
 }

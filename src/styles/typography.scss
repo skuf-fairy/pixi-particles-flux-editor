@@ -2,21 +2,18 @@
   font-size: 56px;
   font-family: "BalooBold";
   line-height: 120%;
-  color: white;
 }
 
 @mixin head2 {
   font-size: 32px;
   font-family: "BalooBold";
   line-height: 120%;
-  color: white;
 }
 
 @mixin head3 {
   font-size: 24px;
   font-family: "BalooSemiBold";
   line-height: 120%;
-  color: white;
 }
 
 @mixin text {
@@ -29,5 +26,5 @@
   font-size: 14px;
   font-family: "BalooRegular";
   line-height: 120%;
-  color: rgb(3, 17, 22);
+  color: var(--primary-text-color);
 }

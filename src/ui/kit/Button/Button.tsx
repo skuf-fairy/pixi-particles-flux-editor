@@ -15,7 +15,7 @@ interface Props {
   className?: string;
 }
 
-export function Button({ children, disabled, size = ButtonSize.Medium, onClick, className }: PropsWithChildren<Props>) {
+export function Button({ children, disabled, size, onClick, className }: PropsWithChildren<Props>) {
   return (
     <button
       disabled={disabled}

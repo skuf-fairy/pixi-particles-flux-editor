@@ -1,13 +1,13 @@
 .behavior-name {
   display: flex;
   align-items: center;
+  margin-bottom: var(--gap);
 
   &__switch {
-    margin-left: 8px;
-    margin-bottom: 0.5em;
+    margin-left: var(--gap);
   }
 
   &__title {
-    margin-bottom: 12px;
+    color: var(--primary-title-color);
   }
 }

@@ -12,9 +12,9 @@ interface Props {
 
 export function ScalarDynamicBehaviorOption({ config, onChange }: Props) {
   return (
-    <FieldsGrid columns={4}>
-      <NumberOption value={config.start} text="Value start" onChange={(v) => onChange({ ...config, start: v })} />
-      <NumberOption value={config.end} text="Value end" onChange={(v) => onChange({ ...config, end: v })} />
+    <FieldsGrid columns={2}>
+      <NumberOption value={config.start} text="Start Value" onChange={(v) => onChange({ ...config, start: v })} />
+      <NumberOption value={config.end} text="End Value" onChange={(v) => onChange({ ...config, end: v })} />
       {config.mult && <MultiplicatorOption mult={config.mult} onChange={(v) => onChange({ ...config, mult: v })} />}
       <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({ ...config, easing: v })} />
     </FieldsGrid>

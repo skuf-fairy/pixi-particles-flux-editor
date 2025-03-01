@@ -11,8 +11,8 @@ interface Props {
 export function PointSpawnShapeBehavior({ config, onChange }: Props) {
   return (
     <FieldsGrid columns={2} className="properties">
-      <NumberOption value={config.x} text="x" onChange={(v) => onChange({ ...config, x: v })} />
-      <NumberOption value={config.y} text="y" onChange={(v) => onChange({ ...config, y: v })} />
+      <NumberOption value={config.x} text="x" onBlur={(v) => onChange({ ...config, x: v })} />
+      <NumberOption value={config.y} text="y" onBlur={(v) => onChange({ ...config, y: v })} />
     </FieldsGrid>
   );
 }

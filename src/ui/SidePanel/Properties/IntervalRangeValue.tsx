@@ -13,12 +13,12 @@ export function IntervalRangeValue({ interval, onChange }: Props) {
       <NumberOption
         value={interval.min}
         text="Spawn interval min"
-        onChange={(v) => onChange({ min: v, max: interval.max })}
+        onBlur={(v) => onChange({ min: v, max: interval.max })}
       />
       <NumberOption
         value={interval.max}
         text="Spawn interval max"
-        onChange={(v) => onChange({ max: v, min: interval.min })}
+        onBlur={(v) => onChange({ max: v, min: interval.min })}
       />
     </>
   );

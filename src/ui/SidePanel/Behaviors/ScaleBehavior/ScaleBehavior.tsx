@@ -13,6 +13,7 @@ export function ScaleBehavior() {
   const store = useScaleBehaviorStore();
 
   const state = store.getState();
+  console.log(state);
 
   return (
     <ItemContainer>

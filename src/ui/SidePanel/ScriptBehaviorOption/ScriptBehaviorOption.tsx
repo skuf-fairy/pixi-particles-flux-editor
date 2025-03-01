@@ -17,16 +17,18 @@ export function ScriptBehaviorOption({ script, onChange }: Props) {
           <div key={key} className="script-behavior__item">
             <NumberOption
               value={item.time}
-              text={"Time"}
-              onChange={(v) => {
+              max={1}
+              min={0}
+              text="Time"
+              onBlur={(v) => {
                 item.time = v;
                 onChange([...script]);
               }}
             />
             <NumberOption
               value={item.value}
-              text={"Value"}
-              onChange={(v) => {
+              text="Value"
+              onBlur={(v) => {
                 item.value = v;
                 onChange([...script]);
               }}

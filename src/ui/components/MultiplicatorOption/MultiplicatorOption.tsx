@@ -11,11 +11,11 @@ export function MultiplicatorOption({ mult, onChange }: Props) {
   if (isRangeValue(mult)) {
     return (
       <>
-        <NumberOption value={mult.min} text="Mult min" onChange={(v) => onChange({ ...mult, min: v })} />
-        <NumberOption value={mult.max} text="Mult max" onChange={(v) => onChange({ ...mult, max: v })} />
+        <NumberOption value={mult.min} text="Mult min" onBlur={(v) => onChange({ ...mult, min: v })} />
+        <NumberOption value={mult.max} text="Mult max" onBlur={(v) => onChange({ ...mult, max: v })} />
       </>
     );
   }
 
-  return <NumberOption value={mult} text="Mult" onChange={(v) => onChange(v)} />;
+  return <NumberOption value={mult} text="Mult" onBlur={(v) => onChange(v)} />;
 }

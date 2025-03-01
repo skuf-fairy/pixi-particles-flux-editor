@@ -26,7 +26,7 @@ export function ColorScriptBehavior() {
             text="Time"
             min={0}
             max={1}
-            onChange={(v) => {
+            onBlur={(v) => {
               option.time = v;
               store.setScriptBehaviorConfig({ script: [...config.script] });
             }}

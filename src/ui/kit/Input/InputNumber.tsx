@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Input.style.scss";
 
 interface Props {
   value: number;
-  onChange?(v: number): void;
   onBlur?(v: number): void;
   min?: number;
   max?: number;
@@ -11,28 +10,34 @@ interface Props {
   placeholder?: string;
 }
 
-export function InputNumber({ value, onChange, onBlur, min, max, disabled, placeholder }: Props) {
+export function InputNumber({ value, onBlur, min, max, disabled, placeholder }: Props) {
+  const [inputValue, setInputValue] = useState(value.toString());
+
   return (
     <input
-      type="number"
-      min={min}
-      max={max}
+      type="string"
       disabled={disabled}
-      value={value}
+      value={inputValue}
       onChange={(e) => {
-        const v = Number(e.target.value);
-        if (!isNaN(v)) {
-          onChange?.(v);
-        }
+        setInputValue(e.target.value);
       }}
-      onBlur={(e) => {
-        const v = Number(e.target.value);
-        if (!isNaN(v)) {
-          onBlur?.(v);
+      onBlur={() => {
+        const v = parseFloatNumber(inputValue);
+
+        if (v !== null) {
+          const clampedValue = Math.min(Math.max(v, min ?? -Infinity), max ?? Infinity);
+          onBlur?.(clampedValue);
+          setInputValue(clampedValue.toString());
         }
       }}
       className="input"
       placeholder={placeholder}
     />
   );
+}
+
+function parseFloatNumber(str: string): number | null {
+  const regex = /[-+]?[0-9]*\.?[0-9]+/;
+  const match = str.match(regex);
+  return match ? parseFloat(match[0]) : null;
 }

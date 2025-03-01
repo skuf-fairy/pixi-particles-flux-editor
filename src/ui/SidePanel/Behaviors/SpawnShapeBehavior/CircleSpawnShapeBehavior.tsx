@@ -11,17 +11,17 @@ interface Props {
 export function CircleSpawnShapeBehavior({ config, onChange }: Props) {
   return (
     <FieldsGrid columns={3} className="properties">
-      <NumberOption value={config.x} text="x" onChange={(v) => onChange({ ...config, x: v })} />
-      <NumberOption value={config.y} text="y" onChange={(v) => onChange({ ...config, y: v })} />
+      <NumberOption value={config.x} text="x" onBlur={(v) => onChange({ ...config, x: v })} />
+      <NumberOption value={config.y} text="y" onBlur={(v) => onChange({ ...config, y: v })} />
       <NumberOption
         value={config.innerRadius || 0}
         text="Inner radius"
-        onChange={(v) => onChange({ ...config, innerRadius: v })}
+        onBlur={(v) => onChange({ ...config, innerRadius: v })}
       />
       <NumberOption
         value={config.outerRadius}
         text="Outer radius"
-        onChange={(v) => onChange({ ...config, innerRadius: v })}
+        onBlur={(v) => onChange({ ...config, innerRadius: v })}
       />
     </FieldsGrid>
   );

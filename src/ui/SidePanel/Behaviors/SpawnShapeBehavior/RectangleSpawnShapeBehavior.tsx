@@ -11,10 +11,10 @@ interface Props {
 export function RectangleSpawnShapeBehavior({ config, onChange }: Props) {
   return (
     <FieldsGrid columns={2} className="properties">
-      <NumberOption value={config.x} text="x" onChange={(v) => onChange({ ...config, x: v })} />
-      <NumberOption value={config.y} text="y" onChange={(v) => onChange({ ...config, y: v })} />
-      <NumberOption value={config.width} text="Width" onChange={(v) => onChange({ ...config, width: v })} />
-      <NumberOption value={config.height} text="Height" onChange={(v) => onChange({ ...config, height: v })} />
+      <NumberOption value={config.x} text="x" onBlur={(v) => onChange({ ...config, x: v })} />
+      <NumberOption value={config.y} text="y" onBlur={(v) => onChange({ ...config, y: v })} />
+      <NumberOption value={config.width} text="Width" onBlur={(v) => onChange({ ...config, width: v })} />
+      <NumberOption value={config.height} text="Height" onBlur={(v) => onChange({ ...config, height: v })} />
     </FieldsGrid>
   );
 }

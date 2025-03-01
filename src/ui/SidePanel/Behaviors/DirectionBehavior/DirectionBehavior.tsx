@@ -34,12 +34,12 @@ export function DirectionBehavior() {
         <NumberOption
           value={minAngle}
           text="Min angle"
-          onChange={(v) => store.setRangeAngle({ maxAngle: state.rangeConfig.maxAngle, minAngle: v })}
+          onBlur={(v) => store.setRangeAngle({ maxAngle: state.rangeConfig.maxAngle, minAngle: v })}
         />
         <NumberOption
           value={maxAngle}
           text="Max angle"
-          onChange={(v) => store.setRangeAngle({ minAngle: state.rangeConfig.minAngle, maxAngle: v })}
+          onBlur={(v) => store.setRangeAngle({ minAngle: state.rangeConfig.minAngle, maxAngle: v })}
         />
       </FieldsGrid>
     </ItemContainer>

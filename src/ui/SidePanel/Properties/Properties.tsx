@@ -24,7 +24,7 @@ export function Properties() {
           <NumberOption
             value={state.spawnInterval}
             text="Spawn interval"
-            onChange={(v) => emitterConfigStore.setState({ ...state, spawnInterval: v })}
+            onBlur={(v) => emitterConfigStore.setState({ ...state, spawnInterval: v })}
           />
         )}
         {state.spawnInterval !== undefined && isRangeValue(state.spawnInterval) && (
@@ -37,21 +37,21 @@ export function Properties() {
           <NumberOption
             value={state.spawnParticlesPerWave}
             text="Particles per wave"
-            onChange={(v) => emitterConfigStore.setState({ ...state, spawnParticlesPerWave: v })}
+            onBlur={(v) => emitterConfigStore.setState({ ...state, spawnParticlesPerWave: v })}
           />
         )}
         {state.maxParticles !== undefined && (
           <NumberOption
             value={state.maxParticles}
             text="Max particles"
-            onChange={(v) => emitterConfigStore.setState({ ...state, maxParticles: v })}
+            onBlur={(v) => emitterConfigStore.setState({ ...state, maxParticles: v })}
           />
         )}
         {state.spawnChance !== undefined && (
           <NumberOption
             value={state.spawnChance}
             text="Spawn chance"
-            onChange={(v) => emitterConfigStore.setState({ ...state, spawnChance: v })}
+            onBlur={(v) => emitterConfigStore.setState({ ...state, spawnChance: v })}
           />
         )}
       </FieldsGrid>

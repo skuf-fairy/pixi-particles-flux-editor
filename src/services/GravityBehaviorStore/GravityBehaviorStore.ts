@@ -19,13 +19,11 @@ export class GravityBehaviorStore extends Store<{
       scalarDynamicBehaviorConfig: {
         start: 0,
         end: 1,
-        mult: 1,
+        multiplier: 1,
         easing: EasingName.linear,
       },
       scalarStaticBehaviorConfig: {
         value: 1,
-        mult: 1,
-        easing: EasingName.linear,
       },
       activeType: BehaviorType.Static,
       availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],

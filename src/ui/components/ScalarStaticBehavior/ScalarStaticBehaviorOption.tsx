@@ -1,21 +1,29 @@
-import { EasingName, ScalarStaticBehaviorConfig } from "particle-flux";
+import { ScalarStaticBehaviorConfig } from "particle-flux";
 import React from "react";
-import { EasingOption } from "../EasingOption/EasingOption";
 import { FieldsGrid } from "../FieldsGrid/FieldsGrid";
-import { MultiplicatorOption } from "../MultiplicatorOption/MultiplicatorOption";
+import { MultiplierOption } from "../MultiplierOption/MultiplierOption";
 import { NumberOption } from "../NumberOption/NumberOption";
 
 interface Props {
   config: ScalarStaticBehaviorConfig;
   onChange(v: ScalarStaticBehaviorConfig): void;
+  min?: number;
+  max?: number;
 }
 
-export function ScalarStaticBehaviorOption({ config, onChange }: Props) {
+export function ScalarStaticBehaviorOption({ config, onChange, min, max }: Props) {
   return (
-    <FieldsGrid columns={3}>
-      <NumberOption value={config.value} text="Value" onBlur={(v) => onChange({ ...config, value: v })} />
-      {config.mult && <MultiplicatorOption mult={config.mult} onChange={(v) => onChange({ ...config, mult: v })} />}
-      <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({ ...config, easing: v })} />
+    <FieldsGrid columns={2}>
+      <NumberOption
+        value={config.value}
+        text="Value"
+        min={min}
+        max={max}
+        onBlur={(v) => onChange({ ...config, value: v })}
+      />
+      {config.multiplier && (
+        <MultiplierOption multiplier={config.multiplier} onChange={(v) => onChange({ ...config, multiplier: v })} />
+      )}
     </FieldsGrid>
   );
 }

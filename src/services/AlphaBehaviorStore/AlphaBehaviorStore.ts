@@ -20,13 +20,11 @@ export class AlphaBehaviorStore extends Store<{
     super({
       scalarStaticBehaviorConfig: {
         value: 1,
-        mult: 1,
-        easing: EasingName.linear,
       },
       scalarDynamicBehaviorConfig: {
         start: 0,
         end: 1,
-        mult: 1,
+        multiplier: 1,
         easing: EasingName.linear,
       },
       scriptBehaviorConfig: {

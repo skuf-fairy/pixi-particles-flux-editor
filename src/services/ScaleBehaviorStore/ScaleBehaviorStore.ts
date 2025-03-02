@@ -22,13 +22,11 @@ export class ScaleBehaviorStore extends Store<{
     super({
       scalarStaticBehaviorConfig: {
         value: 1,
-        mult: 1,
-        easing: EasingName.linear,
       },
       scalarDynamicBehaviorConfig: {
         start: 0,
         end: 1,
-        mult: 1,
+        multiplier: 1,
         easing: EasingName.linear,
       },
       scriptBehaviorConfig: {
@@ -41,16 +39,15 @@ export class ScaleBehaviorStore extends Store<{
       vectorBehaviorConfig: {
         x: {
           value: 1,
-          mult: 1,
-          easing: EasingName.linear,
         },
         y: {
-          value: 1,
-          mult: 1,
+          start: 0,
+          end: 1,
+          multiplier: 1,
           easing: EasingName.linear,
         },
       },
-      activeType: BehaviorType.Static,
+      activeType: BehaviorType.Vector,
       enabled: true,
       availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Script, BehaviorType.Vector],
     });
@@ -74,6 +71,13 @@ export class ScaleBehaviorStore extends Store<{
     this.setState({
       ...this.state,
       scriptBehaviorConfig: config,
+    });
+  }
+
+  public setVectorBehaviorConfig(config: VectorBehaviorConfig): void {
+    this.setState({
+      ...this.state,
+      vectorBehaviorConfig: config,
     });
   }
 

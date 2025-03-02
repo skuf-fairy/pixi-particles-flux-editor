@@ -21,17 +21,16 @@ export class RotationBehaviorStore extends Store<{
       dynamicConfig: {
         start: 0,
         end: 1,
-        mult: 1,
+        multiplier: 1,
         easing: EasingName.linear,
       },
       staticConfig: {
         value: 0,
-        mult: 1,
       },
       deltaConfig: {
         value: 0,
         delta: 0,
-        mult: 1,
+        multiplier: 1,
       },
       activeType: BehaviorType.Static,
       enabled: true,

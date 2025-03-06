@@ -1,3 +1,9 @@
+import {
+  ScalarBehaviorConfig,
+  ScalarDynamicBehaviorConfig,
+  ScalarStaticBehaviorConfig,
+  TimeScriptConfig,
+} from "particle-flux";
 import React from "react";
 import { useSpeedBehaviorStore } from "src/hooks/useSpeedBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -33,29 +39,29 @@ export function SpeedBehavior() {
           <BehaviorTypeSelect
             type={store.state.activeType}
             availableTypes={state.availableTypes}
-            onChange={(t) => store.setActiveType(t)}
+            onChange={(t) => store.setActiveConfigType(t)}
           />
         }
       />
 
-      {state.activeType === BehaviorType.Static && (
+      {store.isStaticConfigActive() && (
         <ScalarStaticBehaviorOption
-          config={state.scalarStaticBehaviorConfig}
-          onChange={(v) => store.setScalarStaticBehaviorConfig(v)}
+          config={state.staticConfig as ScalarStaticBehaviorConfig}
+          onChange={(v) => store.setStaticConfig(v)}
         />
       )}
 
-      {state.activeType === BehaviorType.Dynamic && (
+      {store.isDynamicConfigActive() && (
         <ScalarDynamicBehaviorOption
-          config={state.scalarDynamicBehaviorConfig}
-          onChange={(v) => store.setScalarDynamicBehaviorConfig(v)}
+          config={state.dynamicConfig as ScalarDynamicBehaviorConfig}
+          onChange={(v) => store.setDynamicConfig(v)}
         />
       )}
 
-      {state.activeType === BehaviorType.Script && (
+      {store.isScriptConfigActive() && (
         <ScriptBehaviorOption
-          script={state.scriptBehaviorConfig.script}
-          onChange={(v) => store.setScriptBehaviorConfig({ script: v })}
+          script={state.scriptConfig.script as TimeScriptConfig<number>}
+          onChange={(v) => store.setScriptConfig({ script: v })}
         />
       )}
     </ItemContainer>

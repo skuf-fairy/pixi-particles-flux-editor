@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from "react";
 import { useSpeedBehaviorStoreToken } from "src/di/di.hooks";
-import { SpeedBehaviorStore } from "src/services/SpeedBehaviorStore/SpeedBehaviorStore";
+import { BehaviorStore } from "src/services/BehaviorStore";
 
-export function useSpeedBehaviorStore(): SpeedBehaviorStore {
+export function useSpeedBehaviorStore(): BehaviorStore {
   const store = useSpeedBehaviorStoreToken();
 
   useSyncExternalStore(store.subscribe, store.getState);

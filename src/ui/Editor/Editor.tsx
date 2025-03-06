@@ -8,26 +8,26 @@ export function Editor() {
   const editorApp = useEditorAppToken();
   const [isReady, setReady] = useState(false);
 
-  // useEffect(() => {
-  //   if (containerRef.current) {
-  //     const initApp = async () => {
-  //       if (containerRef.current) {
-  //         await editorApp.init(containerRef.current);
-  //         setReady(true);
-  //       }
-  //     };
+  useEffect(() => {
+    if (containerRef.current) {
+      const initApp = async () => {
+        if (containerRef.current) {
+          await editorApp.init(containerRef.current);
+          setReady(true);
+        }
+      };
 
-  //     initApp();
+      initApp();
 
-  //     return editorApp.destroy;
-  //   }
-  // }, []);
+      return editorApp.destroy;
+    }
+  }, []);
 
   return (
     <>
       <div ref={containerRef} className="editor"></div>
 
-      {/* {!isReady && <PageLoader />} */}
+      {!isReady && <PageLoader />}
     </>
   );
 }

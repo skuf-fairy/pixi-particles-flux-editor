@@ -1,6 +1,6 @@
+import { ScalarDynamicBehaviorConfig, ScalarStaticBehaviorConfig, TimeScriptConfig } from "particle-flux";
 import React from "react";
 import { useScaleBehaviorStore } from "src/hooks/useScaleBehaviorStore";
-import { BehaviorType } from "src/services/types";
 import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
 import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
 import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
@@ -36,37 +36,37 @@ export function ScaleBehavior() {
             type={state.activeType}
             availableTypes={state.availableTypes}
             onChange={(type) => {
-              store.setActiveType(type);
+              store.setActiveConfigType(type);
             }}
           />
         }
       />
 
-      {state.activeType === BehaviorType.Static && (
+      {store.isStaticConfigActive() && (
         <ScalarStaticBehaviorOption
-          config={state.scalarStaticBehaviorConfig}
+          config={state.staticConfig as ScalarStaticBehaviorConfig}
           min={0}
           max={1}
-          onChange={(v) => store.setScalarStaticBehaviorConfig(v)}
+          onChange={(v) => store.setStaticConfig(v)}
         />
       )}
 
-      {state.activeType === BehaviorType.Dynamic && (
+      {store.isDynamicConfigActive() && (
         <ScalarDynamicBehaviorOption
-          config={state.scalarDynamicBehaviorConfig}
-          onChange={(v) => store.setScalarDynamicBehaviorConfig(v)}
+          config={state.dynamicConfig as ScalarDynamicBehaviorConfig}
+          onChange={(v) => store.setDynamicConfig(v)}
         />
       )}
 
-      {state.activeType === BehaviorType.Script && (
+      {store.isScriptConfigActive() && (
         <ScriptBehaviorOption
-          script={state.scriptBehaviorConfig.script}
-          onChange={(v) => store.setScriptBehaviorConfig({ script: v })}
+          script={state.scriptConfig.script as TimeScriptConfig<number>}
+          onChange={(v) => store.setScriptConfig({ script: v })}
         />
       )}
 
-      {state.activeType === BehaviorType.Vector && (
-        <VectorBehaviorOption config={state.vectorBehaviorConfig} onChange={(v) => store.setVectorBehaviorConfig(v)} />
+      {store.isVectorConfigActive() && (
+        <VectorBehaviorOption config={state.vectorConfig} onChange={(v) => store.setVectorConfig(v)} />
       )}
     </ItemContainer>
   );

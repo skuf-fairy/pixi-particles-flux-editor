@@ -31,7 +31,7 @@ export function ColorBehavior() {
             type={store.getState().activeType}
             availableTypes={store.getState().availableTypes}
             onChange={(type) => {
-              store.setActiveType(type);
+              store.setActiveConfigType(type);
             }}
           />
         }
@@ -39,9 +39,9 @@ export function ColorBehavior() {
 
       {store.isStaticConfigActive() && (
         <ColorPicker
-          color={store.getState().staticConfig.value}
+          color={store.getState().staticConfig.value as string}
           onChange={(v) => {
-            store.setStaticBehaviorConfig({ value: v });
+            store.setStaticConfig({ value: v });
           }}
         />
       )}

@@ -1,19 +1,18 @@
 import { Container } from "brandi";
+import { EasingName } from "particle-flux";
 import { EventEmitter } from "pixi.js";
 import { EditorApp } from "src/modules/EditorApp";
 // import { AdvancedBloomFilterConfig } from "src/services/AdvancedBloomFilterConfig";
-import { AlphaBehaviorStore } from "src/services/AlphaBehaviorStore/AlphaBehaviorStore";
+import { BehaviorStore } from "src/services/BehaviorStore";
 import { ColorBehaviorStore } from "src/services/ColorBehaviorStore/ColorBehaviorStore";
 import { DirectionBehaviorStore } from "src/services/DirectionBehaviorStore/DirectionBehaviorStore";
 import { EmitterConfigStore } from "src/services/EmitterConfigStore";
 import { GravityBehaviorStore } from "src/services/GravityBehaviorStore/GravityBehaviorStore";
 import { LifetimeBehaviorStore } from "src/services/LifetimeBehaviorStore/LifetimeBehaviorStore";
 import { PathBehaviorStore } from "src/services/PathBehaviorStore/PathBehaviorStore";
-import { RotationBehaviorStore } from "src/services/RotationBehaviorStore/RotationBehaviorStore";
-import { ScaleBehaviorStore } from "src/services/ScaleBehaviorStore/ScaleBehaviorStore";
 import { SpawnShapeBehaviorStore } from "src/services/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
-import { SpeedBehaviorStore } from "src/services/SpeedBehaviorStore/SpeedBehaviorStore";
 import { TexturesStore } from "src/services/TexturesStore/TexturesStore";
+import { BehaviorType } from "src/services/types";
 import { DI_TOKENS } from "./di.tokens";
 
 function createDIContainer(): Container {
@@ -26,15 +25,126 @@ function createDIContainer(): Container {
 
   container.bind(DI_TOKENS.eventEmitter).toInstance(EventEmitter).inResolutionScope();
 
-  container.bind(DI_TOKENS.alphaBehaviorStore).toInstance(AlphaBehaviorStore).inSingletonScope();
-  container.bind(DI_TOKENS.scaleBehaviorStore).toInstance(ScaleBehaviorStore).inSingletonScope();
-  container.bind(DI_TOKENS.speedBehaviorStore).toInstance(SpeedBehaviorStore).inSingletonScope();
+  container
+    .bind(DI_TOKENS.alphaBehaviorStore)
+    .toInstance(
+      () =>
+        new BehaviorStore({
+          staticConfig: {
+            value: 1,
+          },
+          dynamicConfig: {
+            start: 0,
+            end: 1,
+            multiplier: 1,
+            easing: EasingName.linear,
+          },
+          scriptConfig: {
+            script: [
+              { time: 0, value: 0 },
+              { time: 1, value: 1 },
+            ],
+          },
+          activeType: BehaviorType.Static,
+          enabled: true,
+          availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Script],
+        })
+    )
+    .inSingletonScope();
+  container
+    .bind(DI_TOKENS.scaleBehaviorStore)
+    .toInstance(
+      () =>
+        new BehaviorStore({
+          staticConfig: {
+            value: 1,
+          },
+          dynamicConfig: {
+            start: 0,
+            end: 1,
+            multiplier: 1,
+            easing: EasingName.linear,
+          },
+          scriptConfig: {
+            script: [
+              { time: 0, value: 0 },
+              { time: 1, value: 1 },
+            ],
+          },
+          // todo
+          vectorConfig: {
+            x: {
+              value: 1,
+            },
+            y: {
+              start: 0,
+              end: 1,
+              multiplier: 1,
+              easing: EasingName.linear,
+            },
+          },
+          activeType: BehaviorType.Static,
+          enabled: true,
+          availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Script, BehaviorType.Vector],
+        })
+    )
+    .inSingletonScope();
+  container
+    .bind(DI_TOKENS.speedBehaviorStore)
+    .toInstance(
+      () =>
+        new BehaviorStore({
+          staticConfig: {
+            value: 3,
+          },
+          dynamicConfig: {
+            start: 0,
+            end: 1,
+            multiplier: 3,
+            easing: EasingName.linear,
+          },
+          scriptConfig: {
+            script: [
+              { time: 0, value: 0 },
+              { time: 1, value: 3 },
+            ],
+          },
+          activeType: BehaviorType.Static,
+          availableTypes: [BehaviorType.Dynamic, BehaviorType.Static, BehaviorType.Script],
+          enabled: true,
+        })
+    )
+    .inSingletonScope();
   container.bind(DI_TOKENS.spawnShapeBehaviorStore).toInstance(SpawnShapeBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.colorBehaviorStore).toInstance(ColorBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.lifetimeBehaviorStore).toInstance(LifetimeBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.directionBehaviorStore).toInstance(DirectionBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.texturesStore).toInstance(TexturesStore).inSingletonScope();
-  container.bind(DI_TOKENS.rotationBehaviorStore).toInstance(RotationBehaviorStore).inSingletonScope();
+  container
+    .bind(DI_TOKENS.rotationBehaviorStore)
+    .toInstance(
+      () =>
+        new BehaviorStore({
+          dynamicConfig: {
+            start: 0,
+            end: 1,
+            multiplier: 1,
+            easing: EasingName.linear,
+          },
+          staticConfig: {
+            value: 0,
+          },
+          deltaConfig: {
+            value: 0,
+            delta: 0,
+            multiplier: 1,
+          },
+          activeType: BehaviorType.Static,
+          enabled: true,
+          availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Delta],
+        })
+    )
+    .inSingletonScope();
   container.bind(DI_TOKENS.gravityBehaviorStore).toInstance(GravityBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.pathBehaviorStore).toInstance(PathBehaviorStore).inSingletonScope();
 

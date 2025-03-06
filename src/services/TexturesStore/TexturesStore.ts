@@ -1,4 +1,3 @@
-import { Assets } from "pixi.js";
 import defaultParticle from "src/assets/default.png";
 import { Store } from "../Store";
 

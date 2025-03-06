@@ -1,3 +1,9 @@
+import {
+  ScalarDynamicBehaviorConfig,
+  ScalarStaticBehaviorConfig,
+  ScriptBehaviorConfig,
+  TimeScriptConfig,
+} from "particle-flux";
 import React from "react";
 import { useAlphaBehaviorStore } from "src/hooks/useAlphaBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -34,7 +40,7 @@ export function AlphaBehavior() {
             type={state.activeType}
             availableTypes={state.availableTypes}
             onChange={(type) => {
-              store.setActiveType(type);
+              store.setActiveConfigType(type);
             }}
           />
         }
@@ -42,22 +48,22 @@ export function AlphaBehavior() {
 
       {state.activeType === BehaviorType.Static && (
         <ScalarStaticBehaviorOption
-          config={state.scalarStaticBehaviorConfig}
-          onChange={(v) => store.setScalarStaticBehaviorConfig(v)}
+          config={state.staticConfig as ScalarStaticBehaviorConfig}
+          onChange={(v) => store.setStaticConfig(v)}
         />
       )}
 
       {state.activeType === BehaviorType.Dynamic && (
         <ScalarDynamicBehaviorOption
-          config={state.scalarDynamicBehaviorConfig}
-          onChange={(v) => store.setScalarDynamicBehaviorConfig(v)}
+          config={state.dynamicConfig as ScalarDynamicBehaviorConfig}
+          onChange={(v) => store.setDynamicConfig(v)}
         />
       )}
 
       {state.activeType === BehaviorType.Script && (
         <ScriptBehaviorOption
-          script={state.scriptBehaviorConfig.script}
-          onChange={(v) => store.setScriptBehaviorConfig({ script: v })}
+          script={state.scriptConfig.script as TimeScriptConfig<number>}
+          onChange={(v) => store.setScriptConfig({ script: v })}
         />
       )}
     </ItemContainer>

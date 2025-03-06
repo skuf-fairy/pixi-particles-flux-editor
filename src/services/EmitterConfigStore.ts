@@ -12,6 +12,7 @@ export class EmitterConfigStore extends Store<EmitterConfig> {
       spawnParticlesPerWave: 1,
       maxParticles: 500,
       spawnChance: 100,
+      autoStart: true,
     });
   }
 }

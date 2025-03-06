@@ -1,16 +1,17 @@
-import { ScriptBehaviorConfig } from "particle-flux";
-import { ColorBehaviorConfig, ColorDynamicBehaviorConfig, ColorStaticBehaviorConfig } from "particle-flux";
+import { ColorDynamicBehaviorConfig, ColorStaticBehaviorConfig, EasingName, ScriptBehaviorConfig } from "particle-flux";
 import { Store } from "../Store";
 import { BehaviorType } from "../types";
 
-export class ColorBehaviorStore extends Store<{
-  staticConfig: ColorStaticBehaviorConfig;
+export interface BehaviorStoreState {
   dynamicConfig: ColorDynamicBehaviorConfig;
+  staticConfig: ColorStaticBehaviorConfig;
   scriptConfig: ScriptBehaviorConfig<string>;
   activeType: BehaviorType;
   availableTypes: BehaviorType[];
   enabled: boolean;
-}> {
+}
+
+export class ColorBehaviorStore extends Store<BehaviorStoreState> {
   constructor() {
     super({
       staticConfig: {
@@ -32,25 +33,16 @@ export class ColorBehaviorStore extends Store<{
     });
   }
 
-  public setDynamicBehaviorConfig(config: ColorDynamicBehaviorConfig): void {
-    this.setState({
-      ...this.state,
-      dynamicConfig: config,
-    });
+  public setStaticConfig(staticConfig: ColorStaticBehaviorConfig): void {
+    this.setState({ ...this.state, staticConfig });
   }
 
-  public setStaticBehaviorConfig(config: ColorStaticBehaviorConfig): void {
-    this.setState({
-      ...this.state,
-      staticConfig: config,
-    });
+  public setDynamicConfig(dynamicConfig: ColorDynamicBehaviorConfig): void {
+    this.setState({ ...this.state, dynamicConfig });
   }
 
-  public setScriptBehaviorConfig(config: ScriptBehaviorConfig<string>): void {
-    this.setState({
-      ...this.state,
-      scriptConfig: config,
-    });
+  public setScriptConfig(scriptConfig: ScriptBehaviorConfig<string>): void {
+    this.setState({ ...this.state, scriptConfig });
   }
 
   public isEnabled(): boolean {
@@ -65,11 +57,22 @@ export class ColorBehaviorStore extends Store<{
     this.setState({ ...this.state, enabled: false });
   }
 
-  public setActiveType(type: BehaviorType): void {
-    this.setState({ ...this.state, activeType: type });
+  public setAvailableTypes(types: BehaviorType[]): void {
+    this.setState({ ...this.state, availableTypes: types });
   }
 
-  public getActiveConfig(): ColorBehaviorConfig | undefined {
+  public setActiveConfigType(type: BehaviorType): void {
+    this.setState({
+      ...this.state,
+      activeType: type,
+    });
+  }
+
+  public getActiveConfig():
+    | ColorDynamicBehaviorConfig
+    | ColorStaticBehaviorConfig
+    | ScriptBehaviorConfig<string>
+    | undefined {
     if (!this.isEnabled()) return;
 
     switch (this.state.activeType) {
@@ -81,9 +84,6 @@ export class ColorBehaviorStore extends Store<{
 
       case BehaviorType.Script:
         return this.state.scriptConfig;
-
-      default:
-        return this.state.staticConfig;
     }
   }
 

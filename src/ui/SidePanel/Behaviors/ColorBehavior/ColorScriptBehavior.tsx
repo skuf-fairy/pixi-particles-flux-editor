@@ -1,3 +1,4 @@
+import { TimeScriptConfig } from "particle-flux";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/useColorBehaviorStore";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
@@ -14,10 +15,11 @@ export function ColorScriptBehavior() {
       {config.script.map((option, key) => (
         <div key={key} className="color-script-behavior__option">
           <ColorPicker
-            color={option.value}
+            color={option.value as string}
             onChange={(v) => {
               option.value = v;
-              store.setScriptBehaviorConfig({ script: [...config.script] });
+              const script = config.script as TimeScriptConfig<string>;
+              store.setScriptConfig({ script: [...script] });
             }}
             className="color-script-behavior__color-picker"
           />
@@ -28,14 +30,15 @@ export function ColorScriptBehavior() {
             max={1}
             onBlur={(v) => {
               option.time = v;
-              store.setScriptBehaviorConfig({ script: [...config.script] });
+              const script = config.script as TimeScriptConfig<string>;
+              store.setScriptConfig({ script: [...script] });
             }}
             className="color-script-behavior__number-option"
           />
           <SymbolButton
             onClick={() =>
-              store.setScriptBehaviorConfig({
-                script: config.script.filter((item, n) => key !== n),
+              store.setScriptConfig({
+                script: config.script.filter((item, n) => key !== n) as TimeScriptConfig<string>,
               })
             }
             disabled={key === config.script.length - 1 || key === 0}
@@ -46,9 +49,10 @@ export function ColorScriptBehavior() {
       ))}
 
       <SymbolButton
-        onClick={() =>
-          store.setScriptBehaviorConfig({ script: [...config.script, { ...config.script[config.script.length - 1] }] })
-        }
+        onClick={() => {
+          const script = config.script as TimeScriptConfig<string>;
+          store.setScriptConfig({ script: [...script, { ...script[config.script.length - 1] }] });
+        }}
       >
         +
       </SymbolButton>

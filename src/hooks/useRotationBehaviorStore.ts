@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from "react";
 import { useRotationBehaviorStoreToken } from "src/di/di.hooks";
-import { RotationBehaviorStore } from "src/services/RotationBehaviorStore/RotationBehaviorStore";
+import { BehaviorStore } from "src/services/BehaviorStore";
 
-export function useRotationBehaviorStore(): RotationBehaviorStore {
+export function useRotationBehaviorStore(): BehaviorStore {
   const store = useRotationBehaviorStoreToken();
 
   useSyncExternalStore(store.subscribe, store.getState);

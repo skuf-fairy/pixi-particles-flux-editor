@@ -1,3 +1,4 @@
+import { ScalarDynamicBehaviorConfig, ScalarStaticBehaviorConfig } from "particle-flux";
 import React from "react";
 import { useRotationBehaviorStore } from "src/hooks/useRotationBehaviorStore";
 import { BehaviorType } from "src/services/types";
@@ -44,15 +45,21 @@ export function RotationBehavior() {
       />
 
       {configType === BehaviorType.Static && (
-        <ScalarStaticBehaviorOption config={state.staticConfig} onChange={(v) => store.setStaticConfig(v)} />
+        <ScalarStaticBehaviorOption
+          config={state.staticConfig as ScalarStaticBehaviorConfig}
+          onChange={(v) => store.setStaticConfig(v)}
+        />
       )}
 
       {state.activeType === BehaviorType.Dynamic && (
-        <ScalarDynamicBehaviorOption config={state.dynamicConfig} onChange={(v) => store.setDynamicConfig(v)} />
+        <ScalarDynamicBehaviorOption
+          config={state.dynamicConfig as ScalarDynamicBehaviorConfig}
+          onChange={(v) => store.setDynamicConfig(v)}
+        />
       )}
 
       {state.activeType === BehaviorType.Delta && (
-        <DeltaBehaviorRotation config={state.deltaConfig} onChange={(v) => store.setScalarDeltaConfig(v)} />
+        <DeltaBehaviorRotation config={state.deltaConfig} onChange={(v) => store.setDeltaConfig(v)} />
       )}
     </ItemContainer>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { BehaviorType } from "src/services/types";
+import { BehaviorType } from "src/stores/types";
 import { DropDown } from "src/ui/kit/DropDown/DropDown";
 
 interface Props {

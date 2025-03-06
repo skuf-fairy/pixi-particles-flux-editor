@@ -20,16 +20,16 @@ import {
   Texture,
 } from "pixi.js";
 import { DI_TOKENS } from "src/di/di.tokens";
-import { BehaviorStore } from "src/services/BehaviorStore";
-import { ColorBehaviorStore } from "src/services/ColorBehaviorStore/ColorBehaviorStore";
-import { DirectionBehaviorStore } from "src/services/DirectionBehaviorStore/DirectionBehaviorStore";
+import { BehaviorStore } from "src/stores/BehaviorStore";
+import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
+import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/DirectionBehaviorStore";
 // import { AdvancedBloomFilterConfig, AdvancedBloomFilterConfigOptions } from "src/services/AdvancedBloomFilterConfig";
-import { EmitterConfigStore } from "src/services/EmitterConfigStore";
-import { GravityBehaviorStore } from "src/services/GravityBehaviorStore/GravityBehaviorStore";
-import { LifetimeBehaviorStore } from "src/services/LifetimeBehaviorStore/LifetimeBehaviorStore";
-import { PathBehaviorStore } from "src/services/PathBehaviorStore/PathBehaviorStore";
-import { SpawnShapeBehaviorStore } from "src/services/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
-import { TexturesStore } from "src/services/TexturesStore/TexturesStore";
+import { EmitterConfigStore } from "src/stores/EmitterConfigStore";
+import { GravityBehaviorStore } from "src/stores/GravityBehaviorStore/GravityBehaviorStore";
+import { LifetimeBehaviorStore } from "src/stores/LifetimeBehaviorStore/LifetimeBehaviorStore";
+import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStore";
+import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
+import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 
 export class EditorApp {
   private app: Application;

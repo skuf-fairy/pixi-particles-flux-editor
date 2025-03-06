@@ -1,6 +1,7 @@
 import { Assets } from "pixi.js";
 import React, { useRef } from "react";
 import { useTexturesStore } from "src/hooks/useTexturesStore";
+import { useUploadFile } from "src/hooks/useUploadFile";
 import { ParticleTexture, TexturesStore } from "src/services/TexturesStore/TexturesStore";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { UploadIcon } from "src/ui/kit/icons/UploadIcon";
@@ -14,12 +15,14 @@ export function UploadTextures() {
   const texturesStore = useTexturesStore();
   const textureList = texturesStore.getTextureList();
   const inputRef = useRef<HTMLInputElement>(null);
+  const uploadFile = useUploadFile();
 
   const handleUpload = async () => {
     if (!inputRef.current?.files) return;
 
     const file = inputRef.current.files[0];
-    const url = URL.createObjectURL(file);
+
+    const url = (await uploadFile(file)) as string;
 
     await Assets.load(url);
 

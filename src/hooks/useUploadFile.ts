@@ -1,6 +1,13 @@
 import { useCallback, useRef } from "react";
 
-export function useUploadFile(): (file: File) => Promise<string | ArrayBuffer | null> {
+export enum ReaderContentType {
+  URL = "URL",
+  Text = "Text",
+}
+
+export function useUploadFile(
+  readerContentType: ReaderContentType
+): (file: File) => Promise<string | ArrayBuffer | null> {
   const reader = useRef(new FileReader());
 
   const uploadFile = useCallback((file: File) => {
@@ -14,7 +21,13 @@ export function useUploadFile(): (file: File) => Promise<string | ArrayBuffer | 
       reader.current.onerror = reject;
     });
 
-    reader.current.readAsDataURL(file);
+    if (readerContentType === ReaderContentType.URL) {
+      reader.current.readAsDataURL(file);
+    }
+
+    if (readerContentType === ReaderContentType.Text) {
+      reader.current.readAsText(file);
+    }
 
     return promise;
   }, []);

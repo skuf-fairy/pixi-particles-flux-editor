@@ -9,15 +9,15 @@ import { ItemContainer } from "../../ItemContainer/ItemContainer";
 export function LifetimeBehavior() {
   const store = useLifetimeBehaviorStore();
   const config = store.getState();
-  const { min, max } = config;
+  const { min, max } = config.rangeConfig;
 
   return (
     <ItemContainer>
       <BehaviorHeader left={<BehaviorName name="Life time" />} right={null} />
 
       <FieldsGrid columns={2}>
-        <NumberOption value={min} text="Min" onBlur={(v) => store.setRangeConfig({ ...config, min: v })} />
-        <NumberOption value={max} text="Max" onBlur={(v) => store.setRangeConfig({ ...config, max: v })} />
+        <NumberOption value={min} text="Min" onBlur={(v) => store.setRangeConfig({ min: v, max })} />
+        <NumberOption value={max} text="Max" onBlur={(v) => store.setRangeConfig({ min, max: v })} />
       </FieldsGrid>
     </ItemContainer>
   );

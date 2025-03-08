@@ -14,7 +14,6 @@ export function Switch({ checked, onChange, className }: Props) {
       onClick={() => onChange(!checked)}
       className={cn("switch", className, { ["switch__checked"]: checked, ["switch__unchecked"]: !checked })}
     >
-      {/* <input type="checkbox" id="switch" checked={checked} onChange={() => onChange(!checked)} /> */}
       <div
         className={cn("switch__slider", {
           ["switch__slider--checked"]: checked,

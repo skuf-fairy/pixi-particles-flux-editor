@@ -16,6 +16,9 @@ const [
   useRotationBehaviorStoreToken,
   useGravityBehaviorStoreToken,
   usePathBehaviorStoreToken,
+  useParticleFluxConfigStoreToken,
+  // services
+  useConfigJSONServiceToken,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
   // DI_TOKENS.advancedBloomFilterConfig,
@@ -31,7 +34,10 @@ const [
   DI_TOKENS.texturesStore,
   DI_TOKENS.rotationBehaviorStore,
   DI_TOKENS.gravityBehaviorStore,
-  DI_TOKENS.pathBehaviorStore
+  DI_TOKENS.pathBehaviorStore,
+  DI_TOKENS.particleFluxConfigStore,
+  // services
+  DI_TOKENS.configJSONService
 );
 
 export {
@@ -49,4 +55,7 @@ export {
   useRotationBehaviorStoreToken,
   useGravityBehaviorStoreToken,
   usePathBehaviorStoreToken,
+  useParticleFluxConfigStoreToken,
+  // services
+  useConfigJSONServiceToken,
 };

@@ -112,4 +112,18 @@ export class SpawnShapeBehaviorStore extends Store<{
         return this.state.polygonalShape;
     }
   }
+
+  public restore(config: SpawnShapeBehavior): void {
+    if (config.type === SpawnShapeType.Point) {
+      this.setPointShapeConfig(config);
+    } else if (config.type === SpawnShapeType.Torus) {
+      this.setTorusShapeConfig(config);
+    } else if (config.type === SpawnShapeType.Rectangle) {
+      this.setRectangleShapeConfig(config);
+    } else if (config.type === SpawnShapeType.Polygon) {
+      this.setPolygonalShapeConfig(config);
+    }
+
+    this.setActiveType(config.type);
+  }
 }

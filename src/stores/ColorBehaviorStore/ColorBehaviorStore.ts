@@ -1,4 +1,12 @@
-import { ColorDynamicBehaviorConfig, ColorStaticBehaviorConfig, EasingName, ScriptBehaviorConfig } from "particle-flux";
+import {
+  ColorDynamicBehaviorConfig,
+  ColorStaticBehaviorConfig,
+  EasingName,
+  ScriptBehaviorConfig,
+  isColorDynamicBehaviorConfig,
+  isColorStaticBehaviorConfig,
+  isScriptBehaviorConfig,
+} from "particle-flux";
 import { Store } from "../Store";
 import { BehaviorType } from "../types";
 
@@ -97,5 +105,21 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
 
   public isScriptConfigActive(): boolean {
     return this.state.activeType === BehaviorType.Script;
+  }
+
+  public restore(config: ColorDynamicBehaviorConfig | ColorStaticBehaviorConfig | ScriptBehaviorConfig<string>): void {
+    if (isColorDynamicBehaviorConfig(config)) {
+      this.setDynamicConfig(config);
+      this.setActiveConfigType(BehaviorType.Dynamic);
+      this.enable();
+    } else if (isColorStaticBehaviorConfig(config)) {
+      this.setStaticConfig(config);
+      this.setActiveConfigType(BehaviorType.Static);
+      this.enable();
+    } else if (isScriptBehaviorConfig(config)) {
+      this.setScriptConfig(config);
+      this.setActiveConfigType(BehaviorType.Script);
+      this.enable();
+    }
   }
 }

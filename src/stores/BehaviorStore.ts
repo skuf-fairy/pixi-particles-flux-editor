@@ -1,10 +1,16 @@
 import {
   DeltaBehaviorConfig,
   EasingName,
+  Point2d,
   ScalarDynamicBehaviorConfig,
   ScalarStaticBehaviorConfig,
   ScriptBehaviorConfig,
   VectorBehaviorConfig,
+  isDeltaBehaviorConfig,
+  isScalarDynamicBehavior,
+  isScalarStaticBehavior,
+  isScriptBehaviorConfig,
+  isVectorBehaviorConfig,
 } from "particle-flux";
 import { Store } from "./Store";
 import { BehaviorType } from "./types";
@@ -73,8 +79,9 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
     this.setState({ ...this.state, vectorConfig });
   }
 
-  public setScriptConfig(scriptConfig: ScriptBehaviorConfig<number>): void {
-    this.setState({ ...this.state, scriptConfig });
+  public setScriptConfig(scriptConfig: ScriptBehaviorConfig<number | Point2d>): void {
+    // todo
+    this.setState({ ...this.state, scriptConfig: scriptConfig as ScriptBehaviorConfig<number> });
   }
 
   public setDeltaConfig(deltaConfig: DeltaBehaviorConfig): void {
@@ -149,5 +156,36 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
 
   public isVectorConfigActive(): boolean {
     return this.state.activeType === BehaviorType.Vector;
+  }
+
+  public restore(
+    config:
+      | ScalarDynamicBehaviorConfig
+      | ScalarStaticBehaviorConfig
+      | ScriptBehaviorConfig<number | Point2d>
+      | VectorBehaviorConfig
+      | DeltaBehaviorConfig
+  ): void {
+    if (isScalarDynamicBehavior(config)) {
+      this.setDynamicConfig(config);
+      this.setActiveConfigType(BehaviorType.Dynamic);
+      this.enable();
+    } else if (isScalarStaticBehavior(config)) {
+      this.setStaticConfig(config);
+      this.setActiveConfigType(BehaviorType.Static);
+      this.enable();
+    } else if (isScriptBehaviorConfig(config)) {
+      this.setScriptConfig(config);
+      this.setActiveConfigType(BehaviorType.Script);
+      this.enable();
+    } else if (isVectorBehaviorConfig(config)) {
+      this.setVectorConfig(config);
+      this.setActiveConfigType(BehaviorType.Vector);
+      this.enable();
+    } else if (isDeltaBehaviorConfig(config)) {
+      this.setDeltaConfig(config);
+      this.setActiveConfigType(BehaviorType.Delta);
+      this.enable();
+    }
   }
 }

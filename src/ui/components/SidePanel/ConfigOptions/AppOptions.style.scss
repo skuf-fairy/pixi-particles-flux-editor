@@ -1,0 +1,22 @@
+.config-options {
+  display: flex;
+  margin-bottom: var(--gap);
+
+  &__button {
+    color: var(--secondary-text-color);
+
+    &:not(:last-child) {
+      margin-right: var(--gap);
+    }
+  }
+
+  &__color {
+    display: flex;
+    align-items: center;
+  }
+
+  &__color-text {
+    color: var(--primary-title-color);
+    margin-right: var(--gap);
+  }
+}

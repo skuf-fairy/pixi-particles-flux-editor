@@ -6,6 +6,7 @@ import {
   useEmitterConfigToken,
   useGravityBehaviorStoreToken,
   useLifetimeBehaviorStoreToken,
+  useParticleFluxConfigStoreToken,
   usePathBehaviorStoreToken,
   useRotationBehaviorStoreToken,
   useScaleBehaviorStoreToken,
@@ -19,6 +20,7 @@ import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/Direct
 import { EmitterConfigStore } from "src/stores/EmitterConfigStore";
 import { GravityBehaviorStore } from "src/stores/GravityBehaviorStore/GravityBehaviorStore";
 import { LifetimeBehaviorStore } from "src/stores/LifetimeBehaviorStore/LifetimeBehaviorStore";
+import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
@@ -113,6 +115,14 @@ export function useSpeedBehaviorStore(): BehaviorStore {
 
 export function useTexturesStore(): TexturesStore {
   const store = useTexturesStoreToken();
+
+  useSyncExternalStore(store.subscribe, store.getState);
+
+  return store;
+}
+
+export function useParticleFluxConfigStore(): ParticleFluxConfigStore {
+  const store = useParticleFluxConfigStoreToken();
 
   useSyncExternalStore(store.subscribe, store.getState);
 

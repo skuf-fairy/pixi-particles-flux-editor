@@ -9,6 +9,7 @@ import { IntervalRangeValue } from "./IntervalRangeValue";
 export function Properties() {
   const emitterConfigStore = useEmitterConfigStore();
   const state = emitterConfigStore.getState();
+  console.log(state);
 
   return (
     <ItemContainer>

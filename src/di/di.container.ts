@@ -2,6 +2,7 @@ import { Container } from "brandi";
 import { EasingName } from "particle-flux";
 import { EventEmitter } from "pixi.js";
 import { EditorApp } from "src/modules/EditorApp";
+import { ConfigJSONService } from "src/services/ConfigJSONService";
 // import { AdvancedBloomFilterConfig } from "src/services/AdvancedBloomFilterConfig";
 import { BehaviorStore } from "src/stores/BehaviorStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
@@ -9,6 +10,7 @@ import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/Direct
 import { EmitterConfigStore } from "src/stores/EmitterConfigStore";
 import { GravityBehaviorStore } from "src/stores/GravityBehaviorStore/GravityBehaviorStore";
 import { LifetimeBehaviorStore } from "src/stores/LifetimeBehaviorStore/LifetimeBehaviorStore";
+import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
@@ -147,6 +149,10 @@ function createDIContainer(): Container {
     .inSingletonScope();
   container.bind(DI_TOKENS.gravityBehaviorStore).toInstance(GravityBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.pathBehaviorStore).toInstance(PathBehaviorStore).inSingletonScope();
+  container.bind(DI_TOKENS.particleFluxConfigStore).toInstance(ParticleFluxConfigStore).inSingletonScope();
+
+  // service
+  container.bind(DI_TOKENS.configJSONService).toInstance(ConfigJSONService).inSingletonScope();
 
   return container;
 }

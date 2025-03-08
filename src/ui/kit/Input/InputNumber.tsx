@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Input.style.scss";
 
 interface Props {
@@ -12,6 +12,14 @@ interface Props {
 
 export function InputNumber({ value, onBlur, min, max, disabled, placeholder }: Props) {
   const [inputValue, setInputValue] = useState(value.toString());
+
+  useEffect(() => {
+    const currentValue = parseFloatNumber(inputValue);
+    if (currentValue !== null && currentValue !== value) {
+      const clampedValue = Math.min(Math.max(value, min ?? -Infinity), max ?? Infinity);
+      setInputValue(clampedValue.toString());
+    }
+  }, [value]);
 
   return (
     <input

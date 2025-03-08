@@ -39,4 +39,9 @@ export class PathBehaviorStore extends Store<{
 
     return this.state.config;
   }
+
+  public restore(config: PathBehaviorConfig): void {
+    this.setValue("config", config);
+    this.enable();
+  }
 }

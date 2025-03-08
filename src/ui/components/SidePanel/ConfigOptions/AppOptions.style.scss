@@ -19,4 +19,9 @@
     color: var(--primary-title-color);
     margin-right: var(--gap);
   }
+
+  &__switch-wrapper {
+    display: flex;
+    align-items: center;
+  }
 }

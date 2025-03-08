@@ -1,7 +1,9 @@
-import { Factory, token } from "brandi";
-import { Container, EventEmitter } from "pixi.js";
+import { token } from "brandi";
+import { EventEmitter } from "pixi.js";
 import { EditorApp } from "src/modules/EditorApp";
 import { ConfigJSONService } from "src/services/ConfigJSONService";
+import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
+import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 // import { AdvancedBloomFilterConfig } from "src/services/AdvancedBloomFilterConfig";
 import { BehaviorStore } from "src/stores/BehaviorStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
@@ -32,6 +34,8 @@ export const DI_TOKENS = {
   gravityBehaviorStore: token<GravityBehaviorStore>("gravityBehaviorStore"),
   pathBehaviorStore: token<PathBehaviorStore>("pathBehaviorStore"),
   particleFluxConfigStore: token<ParticleFluxConfigStore>("particleFluxConfigStore"),
+  appConfigStore: token<AppConfigStore>("appConfigStore"),
   // services
   configJSONService: token<ConfigJSONService>("configJSONService"),
+  localConfigStorageService: token<LocalConfigStorageService>("localConfigStorageService"),
 };

@@ -3,6 +3,8 @@ import { EasingName } from "particle-flux";
 import { EventEmitter } from "pixi.js";
 import { EditorApp } from "src/modules/EditorApp";
 import { ConfigJSONService } from "src/services/ConfigJSONService";
+import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
+import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 // import { AdvancedBloomFilterConfig } from "src/services/AdvancedBloomFilterConfig";
 import { BehaviorStore } from "src/stores/BehaviorStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
@@ -150,9 +152,11 @@ function createDIContainer(): Container {
   container.bind(DI_TOKENS.gravityBehaviorStore).toInstance(GravityBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.pathBehaviorStore).toInstance(PathBehaviorStore).inSingletonScope();
   container.bind(DI_TOKENS.particleFluxConfigStore).toInstance(ParticleFluxConfigStore).inSingletonScope();
+  container.bind(DI_TOKENS.appConfigStore).toInstance(AppConfigStore).inSingletonScope();
 
   // service
   container.bind(DI_TOKENS.configJSONService).toInstance(ConfigJSONService).inSingletonScope();
+  container.bind(DI_TOKENS.localConfigStorageService).toInstance(LocalConfigStorageService).inSingletonScope();
 
   return container;
 }

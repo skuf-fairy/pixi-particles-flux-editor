@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useRef } from "react";
-import { useConfigJSONServiceToken, useEditorAppToken } from "src/di/di.hooks";
+import { useConfigJSONServiceToken, useEditorAppToken, useLocalConfigStorageService } from "src/di/di.hooks";
+import { useAppConfigStore } from "src/hooks/connectors";
 import { ReaderContentType, useUploadFile } from "src/hooks/useUploadFile";
 import { CopyService } from "src/services/CopyService";
 import { DownloadService } from "src/services/DownloadService";
@@ -13,6 +14,8 @@ import "./AppOptions.style.scss";
 export function AppOptions() {
   const configJSONServiceToken = useConfigJSONServiceToken();
   const editorApp = useEditorAppToken();
+  const localStorageService = useLocalConfigStorageService();
+  const appConfigStore = useAppConfigStore();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const uploadFile = useUploadFile(ReaderContentType.Text);
@@ -82,8 +85,20 @@ export function AppOptions() {
         <ColorPicker color="#ffffff" onChange={() => {}} />
       </div>
 
-      <div>
-        <Switch checked onChange={() => {}} />
+      <div className="config-options__switch-wrapper">
+        <Switch
+          checked={appConfigStore.getState().isLocalStorageSaveEnabled}
+          onChange={(checked) => {
+            console.log(checked);
+            if (checked) {
+              localStorageService.enableAutoSave();
+              appConfigStore.setValue("isLocalStorageSaveEnabled", true);
+            } else {
+              localStorageService.disableAutoSave();
+              appConfigStore.setValue("isLocalStorageSaveEnabled", false);
+            }
+          }}
+        />
         <Typography variant={TypographyVariant.P} className="config-options__color-text">
           Autosave
         </Typography>

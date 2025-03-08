@@ -12,6 +12,8 @@ import {
   Texture,
 } from "pixi.js";
 import { DI_TOKENS } from "src/di/di.tokens";
+import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
+import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 // import { AdvancedBloomFilterConfig, AdvancedBloomFilterConfigOptions } from "src/services/AdvancedBloomFilterConfig";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
@@ -24,10 +26,16 @@ export class EditorApp {
 
   constructor(
     private readonly particleFluxConfigStore: ParticleFluxConfigStore,
+    private readonly localStorage: LocalConfigStorageService,
+    private readonly appConfigStore: AppConfigStore,
     private readonly texturesStore: TexturesStore // private readonly advancedBloomFilterConfig: AdvancedBloomFilterConfig
   ) {
+    this.appConfigStore.setValue("isLocalStorageSaveEnabled", this.localStorage.isAutoSaveEnabled());
+
     this.particleFluxConfigStore.subscribe((config) => {
       if (!this.particlesEmitter) return;
+
+      this.localStorage.setParticleFluxConfig(config);
 
       this.particlesEmitter.config.spawnInterval = config.emitterConfig.spawnInterval;
       this.particlesEmitter.config.spawnParticlesPerWave = config.emitterConfig.spawnParticlesPerWave;
@@ -47,10 +55,30 @@ export class EditorApp {
     });
 
     this.texturesStore.subscribe(() => {
-      this.particlesEmitter.config.view = this.texturesStore
-        .getTextureList()
-        .map((t) => () => this.createParticle(Texture.from(t.url)));
+      const textures = this.texturesStore.getTextureList();
+
+      this.localStorage.setTexturesConfig(textures);
+
+      if (this.particlesEmitter) {
+        this.particlesEmitter.config.view = textures.map((t) => () => this.createParticle(Texture.from(t.url)));
+      }
     });
+
+    const config = this.localStorage.getParticleFluxConfig();
+
+    if (config) {
+      this.particleFluxConfigStore.restore(config);
+    } else {
+      this.localStorage.setParticleFluxConfig(this.particleFluxConfigStore.getState());
+    }
+
+    const textures = this.localStorage.getTexturesConfig();
+
+    if (textures) {
+      this.texturesStore.setTextures(textures);
+    } else {
+      this.localStorage.setTexturesConfig(this.texturesStore.getTextureList());
+    }
   }
 
   public async init(containerNode: HTMLElement) {
@@ -151,4 +179,10 @@ export class EditorApp {
   }
 }
 
-injected(EditorApp, DI_TOKENS.particleFluxConfigStore, DI_TOKENS.texturesStore);
+injected(
+  EditorApp,
+  DI_TOKENS.particleFluxConfigStore,
+  DI_TOKENS.localConfigStorageService,
+  DI_TOKENS.appConfigStore,
+  DI_TOKENS.texturesStore
+);

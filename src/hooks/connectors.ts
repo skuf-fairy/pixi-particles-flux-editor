@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import {
   useAlphaBehaviorStoreToken,
+  useAppConfigStoreToken,
   useColorBehaviorStoreToken,
   useDirectionBehaviorStoreToken,
   useEmitterConfigToken,
@@ -14,6 +15,7 @@ import {
   useSpeedBehaviorStoreToken,
   useTexturesStoreToken,
 } from "src/di/di.hooks";
+import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { BehaviorStore } from "src/stores/BehaviorStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
 import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/DirectionBehaviorStore";
@@ -123,6 +125,14 @@ export function useTexturesStore(): TexturesStore {
 
 export function useParticleFluxConfigStore(): ParticleFluxConfigStore {
   const store = useParticleFluxConfigStoreToken();
+
+  useSyncExternalStore(store.subscribe, store.getState);
+
+  return store;
+}
+
+export function useAppConfigStore(): AppConfigStore {
+  const store = useAppConfigStoreToken();
 
   useSyncExternalStore(store.subscribe, store.getState);
 

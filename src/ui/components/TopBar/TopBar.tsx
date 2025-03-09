@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import { MenuModal } from "../MenuModal/MenuModal";
+import { AppSettingsModal } from "../MenuModal/AppSettingsModal";
 import "./TopBar.style.scss";
 
 export function TopBar() {
-  const [isMenuModalOpened, setMenuModalOpened] = useState(false);
+  const [isAppSettingsModalOpened, setAppSettingsModalOpened] = useState(false);
 
   return (
     <>
       <header className="top-bar">
-        <button onClick={() => setMenuModalOpened(true)} className="top-bar__item">
+        <button onClick={() => setAppSettingsModalOpened(true)} className="top-bar__item">
           <Typography variant={TypographyVariant.P} className="top-bar__item-text">
-            Main Menu
+            Settings
           </Typography>
         </button>
 
@@ -27,7 +27,7 @@ export function TopBar() {
           </Typography>
         </button>
       </header>
-      {isMenuModalOpened && <MenuModal onClose={() => setMenuModalOpened(false)} />}
+      {isAppSettingsModalOpened && <AppSettingsModal onClose={() => setAppSettingsModalOpened(false)} />}
     </>
   );
 }

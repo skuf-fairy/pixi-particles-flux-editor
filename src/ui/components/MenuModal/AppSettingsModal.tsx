@@ -5,13 +5,13 @@ import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { Modal } from "src/ui/kit/Modal/Modal";
 import { Switch } from "src/ui/kit/Switch/Switch";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import "./MenuModal.style.scss";
+import "./AppSettingsModal.style.scss";
 
 interface Props {
   onClose: VoidFunction;
 }
 
-export function MenuModal({ onClose }: Props) {
+export function AppSettingsModal({ onClose }: Props) {
   const appConfigStore = useAppConfigStore();
   const toggleLocalStorageSaveUseCase = useToggleLocalStorageSaveUseCaseToken();
 

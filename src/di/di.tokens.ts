@@ -4,8 +4,8 @@ import { EditorApp } from "src/modules/EditorApp";
 import { ConfigJSONService } from "src/services/ConfigJSONService";
 import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
-// import { AdvancedBloomFilterConfig } from "src/services/AdvancedBloomFilterConfig";
 import { BehaviorStore } from "src/stores/BehaviorStore";
+import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
 import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/DirectionBehaviorStore";
 import { EmitterConfigStore } from "src/stores/EmitterConfigStore";
@@ -19,8 +19,8 @@ import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 export const DI_TOKENS = {
   editorApp: token<EditorApp>("editorApp"),
   eventEmitter: token<EventEmitter>("eventEmitter"),
-  // advancedBloomFilterConfig: token<AdvancedBloomFilterConfig>("AdvancedBloomFilterConfig"),
   // stores
+  bloomFilterConfigStore: token<BloomFilterConfigStore>("AdvancedBloomFilterConfig"),
   emitterConfigStore: token<EmitterConfigStore>("emitterConfigStore"),
   alphaBehaviorStore: token<BehaviorStore>("alphaBehaviorStore"),
   scaleBehaviorStore: token<BehaviorStore>("scaleBehaviorStore"),

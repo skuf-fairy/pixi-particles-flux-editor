@@ -10,6 +10,7 @@ import { RotationBehavior } from "./Behaviors/RotationBehavior/RotationBehavior"
 import { ScaleBehavior } from "./Behaviors/ScaleBehavior/ScaleBehavior";
 import { SpawnShapeBehavior } from "./Behaviors/SpawnShapeBehavior/SpawnShapeBehavior";
 import { SpeedBehavior } from "./Behaviors/SpeedBehavior/SpeedBehavior";
+import { BloomFilterConfig } from "./BloomFilterConfig/BloomFilterConfig";
 import { AppOptions } from "./ConfigOptions/AppOptions";
 import { Properties } from "./Properties/Properties";
 import "./SidePanel.style.scss";
@@ -70,7 +71,7 @@ export function SidePanel() {
         </div>
       </div>
 
-      {/*  <AdvancedBloomFilterEditor className="side-panel__bloom-filter-config" /> */}
+      <BloomFilterConfig />
     </div>
   );
 }

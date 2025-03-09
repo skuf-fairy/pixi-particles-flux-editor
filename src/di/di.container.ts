@@ -5,8 +5,8 @@ import { EditorApp } from "src/modules/EditorApp";
 import { ConfigJSONService } from "src/services/ConfigJSONService";
 import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
-// import { AdvancedBloomFilterConfig } from "src/services/AdvancedBloomFilterConfig";
 import { BehaviorStore } from "src/stores/BehaviorStore";
+import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
 import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/DirectionBehaviorStore";
 import { EmitterConfigStore } from "src/stores/EmitterConfigStore";
@@ -25,7 +25,7 @@ function createDIContainer(): Container {
   container.bind(DI_TOKENS.editorApp).toInstance(EditorApp).inSingletonScope();
   container.bind(DI_TOKENS.emitterConfigStore).toInstance(EmitterConfigStore).inSingletonScope();
 
-  // container.bind(DI_TOKENS.advancedBloomFilterConfig).toInstance(AdvancedBloomFilterConfig).inSingletonScope();
+  container.bind(DI_TOKENS.bloomFilterConfigStore).toInstance(BloomFilterConfigStore).inSingletonScope();
 
   container.bind(DI_TOKENS.eventEmitter).toInstance(EventEmitter).inResolutionScope();
 

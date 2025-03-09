@@ -4,7 +4,7 @@ import { AppConfigStoreState } from "./AppConfigStore.types";
 export class AppConfigStore extends Store<AppConfigStoreState> {
   constructor() {
     super({
-      backgroundColor: "#ffffff",
+      backgroundColor: "#475b60",
       isLocalStorageSaveEnabled: false,
     });
   }

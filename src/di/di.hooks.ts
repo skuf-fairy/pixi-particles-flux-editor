@@ -3,7 +3,7 @@ import { DI_TOKENS } from "./di.tokens";
 
 const [
   useEditorAppToken,
-  // useAdvancedBloomFilterConfigToken,
+  useBloomFilterConfigStoreToken,
   useEmitterConfigToken,
   useAlphaBehaviorStoreToken,
   useScaleBehaviorStoreToken,
@@ -23,8 +23,8 @@ const [
   useLocalConfigStorageService,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
-  // DI_TOKENS.advancedBloomFilterConfig,
   //stores
+  DI_TOKENS.bloomFilterConfigStore,
   DI_TOKENS.emitterConfigStore,
   DI_TOKENS.alphaBehaviorStore,
   DI_TOKENS.scaleBehaviorStore,
@@ -47,7 +47,7 @@ const [
 export {
   useEditorAppToken,
   useEmitterConfigToken,
-  // useAdvancedBloomFilterConfigToken,
+  useBloomFilterConfigStoreToken,
   useAlphaBehaviorStoreToken,
   useScaleBehaviorStoreToken,
   useSpeedBehaviorStoreToken,

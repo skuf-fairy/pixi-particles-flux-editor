@@ -1,6 +1,6 @@
-// import { AdvancedBloomFilter } from "@pixi/filter-advanced-bloom";
 import { injected } from "brandi";
 import { ParticleFlux } from "particle-flux";
+import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
   Assets,
@@ -14,21 +14,22 @@ import {
 import { DI_TOKENS } from "src/di/di.tokens";
 import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
-// import { AdvancedBloomFilterConfig, AdvancedBloomFilterConfigOptions } from "src/services/AdvancedBloomFilterConfig";
+import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 
 export class EditorApp {
   private app: Application;
   private rootContainer: Container;
-  // private bloomFilter: AdvancedBloomFilter;
+  private bloomFilter: AdvancedBloomFilter;
   private particlesEmitter: ParticleFlux;
 
   constructor(
     private readonly particleFluxConfigStore: ParticleFluxConfigStore,
     private readonly localStorage: LocalConfigStorageService,
     private readonly appConfigStore: AppConfigStore,
-    private readonly texturesStore: TexturesStore // private readonly advancedBloomFilterConfig: AdvancedBloomFilterConfig
+    private readonly texturesStore: TexturesStore,
+    private readonly bloomFilterConfigStore: BloomFilterConfigStore
   ) {
     this.appConfigStore.setValue("isLocalStorageSaveEnabled", this.localStorage.isAutoSaveEnabled());
 
@@ -64,6 +65,17 @@ export class EditorApp {
       }
     });
 
+    this.bloomFilterConfigStore.subscribe((state) => {
+      if (this.bloomFilter) {
+        this.bloomFilter.enabled = state.enabled;
+        this.bloomFilter.quality = state.options.quality || 1;
+        this.bloomFilter.brightness = state.options.brightness || 1;
+        this.bloomFilter.blur = state.options.blur || 1;
+        this.bloomFilter.quality = state.options.quality || 1;
+        this.bloomFilter.threshold = state.options.threshold || 1;
+      }
+    });
+
     const config = this.localStorage.getParticleFluxConfig();
 
     if (config) {
@@ -89,7 +101,7 @@ export class EditorApp {
     await Assets.load(TexturesStore.defaultParticle.url);
 
     await this.app.init({
-      background: "#475b60",
+      background: this.appConfigStore.getState().backgroundColor,
       width: widthContainer,
       height: heightContainer,
     });
@@ -100,7 +112,9 @@ export class EditorApp {
     containerNode.appendChild(this.app.canvas);
 
     this.rootContainer = this.app.stage;
-    const background = new Graphics().rect(0, 0, widthContainer, heightContainer).fill({ color: 0x465760 });
+    const background = new Graphics()
+      .rect(0, 0, widthContainer, heightContainer)
+      .fill({ color: this.appConfigStore.getState().backgroundColor });
 
     background.interactive = true;
     background.cursor = "pointer";
@@ -120,14 +134,12 @@ export class EditorApp {
       this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
       this.particleFluxConfigStore.getState()
     );
-    console.log(this.particleFluxConfigStore.getState());
 
-    // this.bloomFilter = new AdvancedBloomFilter();
+    this.bloomFilter = new AdvancedBloomFilter(this.bloomFilterConfigStore.getOptions());
 
-    // this.advancedBloomFilterConfig.subscribeOnConfigChange(this.applyBloomFilterOptions, true);
+    this.bloomFilter.enabled = this.bloomFilterConfigStore.isEnabled();
 
-    // todo
-    // emitterContainer.filters = [this.bloomFilter];
+    this.rootContainer.filters = [this.bloomFilter];
   }
 
   private createParticle(texture: Texture): Sprite {
@@ -155,20 +167,6 @@ export class EditorApp {
     };
   }
 
-  ///todo
-  // private applyBloomFilterOptions = (options: AdvancedBloomFilterConfigOptions) => {
-  //   console.log(options);
-  //   // this.bloomFilter.enabled = options.enabled;
-  //   this.bloomFilter.blur = options.blur;
-  //   this.bloomFilter.brightness = options.brightness;
-  //   this.bloomFilter.threshold = options.threshold;
-  //   this.bloomFilter.bloomScale = options.bloomScale;
-  //   // this.bloomFilter.kernels = options.kernels;
-  //   this.bloomFilter.quality = options.quality;
-  //   // todo
-  //   // this.bloomFilter.blendMode = options.blendMode;
-  // };
-
   public destroy() {
     this.app.destroy();
   }
@@ -184,5 +182,6 @@ injected(
   DI_TOKENS.particleFluxConfigStore,
   DI_TOKENS.localConfigStorageService,
   DI_TOKENS.appConfigStore,
-  DI_TOKENS.texturesStore
+  DI_TOKENS.texturesStore,
+  DI_TOKENS.bloomFilterConfigStore
 );

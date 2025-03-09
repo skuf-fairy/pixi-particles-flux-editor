@@ -2,6 +2,7 @@ import { useSyncExternalStore } from "react";
 import {
   useAlphaBehaviorStoreToken,
   useAppConfigStoreToken,
+  useBloomFilterConfigStoreToken,
   useColorBehaviorStoreToken,
   useDirectionBehaviorStoreToken,
   useEmitterConfigToken,
@@ -17,6 +18,7 @@ import {
 } from "src/di/di.hooks";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { BehaviorStore } from "src/stores/BehaviorStore";
+import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ColorBehaviorStore } from "src/stores/ColorBehaviorStore/ColorBehaviorStore";
 import { DirectionBehaviorStore } from "src/stores/DirectionBehaviorStore/DirectionBehaviorStore";
 import { EmitterConfigStore } from "src/stores/EmitterConfigStore";
@@ -133,6 +135,14 @@ export function useParticleFluxConfigStore(): ParticleFluxConfigStore {
 
 export function useAppConfigStore(): AppConfigStore {
   const store = useAppConfigStoreToken();
+
+  useSyncExternalStore(store.subscribe, store.getState);
+
+  return store;
+}
+
+export function useBloomFilterConfigStore(): BloomFilterConfigStore {
+  const store = useBloomFilterConfigStoreToken();
 
   useSyncExternalStore(store.subscribe, store.getState);
 

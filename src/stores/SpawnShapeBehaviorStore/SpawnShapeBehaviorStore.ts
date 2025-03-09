@@ -14,6 +14,7 @@ export class SpawnShapeBehaviorStore extends Store<{
   rectangleShape: SpawnRectangleShape;
   polygonalShape: PolygonalChainShape;
   activeShape: SpawnShapeType;
+  isDisplayShape: boolean;
 }> {
   constructor() {
     super({
@@ -46,6 +47,7 @@ export class SpawnShapeBehaviorStore extends Store<{
           },
         ],
       },
+      isDisplayShape: false,
     });
   }
 
@@ -125,5 +127,13 @@ export class SpawnShapeBehaviorStore extends Store<{
     }
 
     this.setActiveType(config.type);
+  }
+
+  public setDisplayShape(isDisplayShape: boolean): void {
+    this.setValue("isDisplayShape", isDisplayShape);
+  }
+
+  public isDisplayShape(): boolean {
+    return this.state.isDisplayShape;
   }
 }

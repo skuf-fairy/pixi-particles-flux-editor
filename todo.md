@@ -9,3 +9,5 @@ AdvancedBloomFilter -> BloomFilter
 css modules
 уведомление об ошибке
 loader
+
+polygonalShape

@@ -1,5 +1,5 @@
 import { injected } from "brandi";
-import { ParticleFlux } from "particle-flux";
+import { ParticleFlux, Point2d, SpawnShapeBehavior, SpawnShapeType } from "particle-flux";
 import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
@@ -8,6 +8,7 @@ import {
   ContainerChild,
   FederatedPointerEvent,
   Graphics,
+  Point,
   Sprite,
   Texture,
 } from "pixi.js";
@@ -15,6 +16,7 @@ import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
+import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 
 export class EditorApp {
@@ -23,11 +25,13 @@ export class EditorApp {
   private particlesEmitter: ParticleFlux;
   private background: Graphics;
   private particlesContainer: Container;
+  private spawnShape: Graphics;
 
   constructor(
     private readonly particleFluxConfigStore: ParticleFluxConfigStore,
     private readonly appConfigStore: AppConfigStore,
     private readonly texturesStore: TexturesStore,
+    private readonly spawnShapeStore: SpawnShapeBehaviorStore,
     private readonly bloomFilterConfigStore: BloomFilterConfigStore
   ) {}
 
@@ -55,16 +59,21 @@ export class EditorApp {
       .fill({ color: this.appConfigStore.getBackgroundColor() });
 
     this.appConfigStore.subscribe((state) => {
-      this.background.rect(0, 0, widthContainer, heightContainer).fill({ color: state.backgroundColor });
-    });
+      this.background.clear().rect(0, 0, widthContainer, heightContainer).fill({ color: state.backgroundColor });
 
-    this.background.interactive = true;
-    this.background.cursor = "pointer";
+      if (this.appConfigStore.isFollowPointer()) {
+        this.enableFollowPointer();
+      } else {
+        this.disableFollowPointer();
+        this.handlePointerLeave();
+      }
+    });
 
     rootContainer.addChild(this.background);
 
-    this.background.on("pointermove", this.handlePointerMove);
-    this.background.on("pointerleave", this.handlePointerLeave);
+    if (this.appConfigStore.isFollowPointer()) {
+      this.enableFollowPointer();
+    }
 
     this.particlesContainer = new Container();
     rootContainer.addChild(this.particlesContainer);
@@ -115,6 +124,37 @@ export class EditorApp {
       this.bloomFilter.quality = state.options.quality || 1;
       this.bloomFilter.threshold = state.options.threshold || 1;
     });
+
+    this.spawnShape = new Graphics();
+    rootContainer.addChild(this.spawnShape);
+
+    this.renderSpawnShape(
+      this.particlesEmitter.config.spawnPosition || new Point(),
+      this.spawnShapeStore.getActiveConfig(),
+      this.spawnShapeStore.isDisplayShape()
+    );
+
+    this.spawnShapeStore.subscribe((state) => {
+      this.renderSpawnShape(
+        this.particlesEmitter.config.spawnPosition || new Point(),
+        this.spawnShapeStore.getActiveConfig(),
+        state.isDisplayShape
+      );
+    });
+  }
+
+  private enableFollowPointer() {
+    this.background.interactive = true;
+    this.background.cursor = "pointer";
+    this.background.on("pointermove", this.handlePointerMove);
+    this.background.on("pointerleave", this.handlePointerLeave);
+  }
+
+  private disableFollowPointer() {
+    this.background.interactive = false;
+    this.background.cursor = "";
+    this.background.off("pointermove", this.handlePointerMove);
+    this.background.off("pointerleave", this.handlePointerLeave);
   }
 
   private createParticle(texture: Texture): Sprite {
@@ -129,10 +169,22 @@ export class EditorApp {
       x: e.globalX,
       y: e.globalY,
     };
+
+    this.renderSpawnShape(
+      this.particlesEmitter.config.spawnPosition || new Point(),
+      this.spawnShapeStore.getActiveConfig(),
+      this.spawnShapeStore.isDisplayShape()
+    );
   };
 
   private handlePointerLeave = () => {
     this.setEmitterPosByCenter();
+
+    this.renderSpawnShape(
+      this.particlesEmitter.config.spawnPosition || new Point(),
+      this.spawnShapeStore.getActiveConfig(),
+      this.spawnShapeStore.isDisplayShape()
+    );
   };
 
   private setEmitterPosByCenter() {
@@ -140,6 +192,29 @@ export class EditorApp {
       x: this.app.renderer.width / 2,
       y: this.app.renderer.height / 2,
     };
+  }
+
+  private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShapeBehavior, isDisplay: boolean) {
+    if (spawnShape.type === SpawnShapeType.Point) {
+      this.spawnShape.clear().circle(spawnPosition.x, spawnPosition.y, 1).stroke({ color: "#ffffff", width: 4 });
+    } else if (spawnShape.type === SpawnShapeType.Rectangle) {
+      this.spawnShape
+        .clear()
+        .rect(spawnPosition.x, spawnPosition.y, spawnShape.width || 1, spawnShape.height || 1)
+        .stroke({ color: "#ffffff", width: 4 });
+    } else if (spawnShape.type === SpawnShapeType.Torus) {
+      this.spawnShape.clear();
+      if (spawnShape.innerRadius !== undefined && spawnShape.innerRadius !== 0) {
+        this.spawnShape.circle(spawnPosition.x, spawnPosition.y, spawnShape.innerRadius);
+      }
+      this.spawnShape
+        .circle(spawnPosition.x, spawnPosition.y, spawnShape.outerRadius || 1)
+        .stroke({ color: "#ffffff", width: 4 });
+    } else if (spawnShape.type === SpawnShapeType.Polygon) {
+      // todo
+    }
+
+    this.spawnShape.visible = isDisplay;
   }
 
   public destroy() {
@@ -152,5 +227,6 @@ injected(
   DI_TOKENS.particleFluxConfigStore,
   DI_TOKENS.appConfigStore,
   DI_TOKENS.texturesStore,
+  DI_TOKENS.spawnShapeBehaviorStore,
   DI_TOKENS.bloomFilterConfigStore
 );

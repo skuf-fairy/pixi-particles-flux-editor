@@ -40,8 +40,21 @@ export function MenuModal({ onClose }: Props) {
           </Typography>
 
           <Switch
-            checked={appConfigStore.getState().isLocalStorageSaveEnabled}
+            checked={appConfigStore.isLocalStorageSaveEnabled()}
             onChange={toggleLocalStorageSaveUseCase.toggle}
+          />
+        </div>
+
+        <div className="menu-modal__option-container">
+          <Typography variant={TypographyVariant.P} className="menu-modal__option-title">
+            Follow Pointer
+          </Typography>
+
+          <Switch
+            checked={appConfigStore.isFollowPointer()}
+            onChange={(checked) => {
+              appConfigStore.setFollowPointer(checked);
+            }}
           />
         </div>
       </div>

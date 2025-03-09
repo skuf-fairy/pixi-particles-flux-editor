@@ -6,6 +6,7 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
     super({
       backgroundColor: "#475b60",
       isLocalStorageSaveEnabled: false,
+      isFollowPointer: true,
     });
   }
 
@@ -27,5 +28,13 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
 
   public setLocalStorageSaveDisabled(): void {
     this.setValue("isLocalStorageSaveEnabled", false);
+  }
+
+  public isFollowPointer(): boolean {
+    return this.state.isFollowPointer;
+  }
+
+  public setFollowPointer(isFollowPointer: boolean): void {
+    this.setValue("isFollowPointer", isFollowPointer);
   }
 }

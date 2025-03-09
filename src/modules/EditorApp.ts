@@ -16,13 +16,13 @@ import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
-import { LocalStorageKeys, LocalStorageUtils } from "src/utils/LocalStorageUtils";
 
 export class EditorApp {
   private app: Application;
-  private rootContainer: Container;
   private bloomFilter: AdvancedBloomFilter;
   private particlesEmitter: ParticleFlux;
+  private background: Graphics;
+  private particlesContainer: Container;
 
   constructor(
     private readonly particleFluxConfigStore: ParticleFluxConfigStore,
@@ -49,43 +49,41 @@ export class EditorApp {
 
     containerNode.appendChild(this.app.canvas);
 
-    this.rootContainer = this.app.stage;
-    const background = new Graphics()
+    const rootContainer = this.app.stage;
+    this.background = new Graphics()
       .rect(0, 0, widthContainer, heightContainer)
       .fill({ color: this.appConfigStore.getBackgroundColor() });
 
     this.appConfigStore.subscribe((state) => {
-      background.rect(0, 0, widthContainer, heightContainer).fill({ color: state.backgroundColor });
+      this.background.rect(0, 0, widthContainer, heightContainer).fill({ color: state.backgroundColor });
     });
 
-    background.interactive = true;
-    background.cursor = "pointer";
+    this.background.interactive = true;
+    this.background.cursor = "pointer";
 
-    this.rootContainer.addChild(background);
+    rootContainer.addChild(this.background);
 
-    background.on("pointermove", this.handlePointerMove);
-    background.on("pointerleave", this.handlePointerLeave);
+    this.background.on("pointermove", this.handlePointerMove);
+    this.background.on("pointerleave", this.handlePointerLeave);
 
-    this.particleFluxConfigStore.setSpawnPosition({
-      x: widthContainer / 2,
-      y: heightContainer / 2,
-    });
+    this.particlesContainer = new Container();
+    rootContainer.addChild(this.particlesContainer);
 
     this.particlesEmitter = new ParticleFlux<ContainerChild>(
-      this.rootContainer,
+      this.particlesContainer,
       this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
       this.particleFluxConfigStore.getState()
     );
+
+    this.setEmitterPosByCenter();
 
     this.bloomFilter = new AdvancedBloomFilter(this.bloomFilterConfigStore.getOptions());
 
     this.bloomFilter.enabled = this.bloomFilterConfigStore.isEnabled();
 
-    this.rootContainer.filters = [this.bloomFilter];
+    this.particlesContainer.filters = [this.bloomFilter];
 
     this.particleFluxConfigStore.subscribe((config) => {
-      LocalStorageUtils.setItem(LocalStorageKeys.Config, config);
-
       this.particlesEmitter.config.spawnInterval = config.emitterConfig.spawnInterval;
       this.particlesEmitter.config.spawnParticlesPerWave = config.emitterConfig.spawnParticlesPerWave;
       this.particlesEmitter.config.maxParticles = config.emitterConfig.maxParticles;
@@ -105,8 +103,6 @@ export class EditorApp {
 
     this.texturesStore.subscribe(() => {
       const textures = this.texturesStore.getTextureList();
-
-      LocalStorageUtils.setItem(LocalStorageKeys.Textures, textures);
 
       this.particlesEmitter.config.view = textures.map((t) => () => this.createParticle(Texture.from(t.url)));
     });

@@ -16,11 +16,13 @@ import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/Spaw
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { BehaviorType } from "src/stores/types";
 import { CopyParticleFluxConfigUseCase } from "src/use-cases/CopyParticleFluxConfigUseCase";
+import { DropTextureUseCase } from "src/use-cases/DropTextureUseCase";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
 import { ResetParticleFluxConfigUseCase } from "src/use-cases/ResetParticleFluxConfigUseCase";
 import { RestoreParticleFluxConfigUseCase } from "src/use-cases/RestoreParticleFluxConfigUseCase";
 import { SaveParticleFluxConfigUseCase } from "src/use-cases/SaveParticleFluxConfigUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
+import { UploadTextureUseCase } from "src/use-cases/UploadTextureUseCase";
 import { DI_TOKENS } from "./di.tokens";
 
 function createDIContainer(): Container {
@@ -171,6 +173,8 @@ function createDIContainer(): Container {
     .toInstance(ResetParticleFluxConfigUseCase)
     .inSingletonScope();
   container.bind(DI_TOKENS.toggleLocalStorageSaveUseCase).toInstance(ToggleLocalStorageSaveUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.uploadTextureUseCase).toInstance(UploadTextureUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.dropTextureUseCase).toInstance(DropTextureUseCase).inSingletonScope();
 
   return container;
 }

@@ -1,8 +1,7 @@
-import { Assets } from "pixi.js";
 import React, { useRef } from "react";
+import { useDropTextureUseCaseToken, useUploadTextureUseCaseToken } from "src/di/di.hooks";
 import { useTexturesStore } from "src/hooks/connectors";
-import { ReaderContentType, useUploadFile } from "src/hooks/useUploadFile";
-import { ParticleTexture, TexturesStore } from "src/stores/TexturesStore/TexturesStore";
+import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { UploadIcon } from "src/ui/kit/icons/UploadIcon";
 import { BehaviorHeader } from "../BehaviorHeader/BehaviorHeader";
@@ -15,37 +14,16 @@ export function UploadTextures() {
   const texturesStore = useTexturesStore();
   const textureList = texturesStore.getTextureList();
   const inputRef = useRef<HTMLInputElement>(null);
-  const uploadFile = useUploadFile(ReaderContentType.URL);
 
-  const handleUpload = async () => {
-    // todo error
-
-    if (!inputRef.current?.files) return;
-
-    const file = inputRef.current.files[0];
-
-    const url = await uploadFile(file);
-
-    if (typeof url === "string") {
-      await Assets.load(url);
-
-      texturesStore.add({
-        url: url,
-        name: file.name,
-      });
-    }
-  };
-
-  const handleRemove = (file: ParticleTexture) => {
-    texturesStore.drop(file.name);
-  };
+  const uploadTextureUseCase = useUploadTextureUseCaseToken();
+  const dropTextureUseCase = useDropTextureUseCaseToken();
 
   return (
     <ItemContainer>
       <BehaviorHeader left={<BehaviorName name="Textures" />} right={null} />
 
       <div>
-        <TextureList textureList={textureList} onRemove={handleRemove} />
+        <TextureList textureList={textureList} onRemove={dropTextureUseCase.drop} />
 
         <Button size={ButtonSize.Medium} onClick={() => inputRef.current?.click()}>
           <div className="upload-button__content">
@@ -60,7 +38,7 @@ export function UploadTextures() {
         type="file"
         accept={TexturesStore.acceptMimeTypes}
         className="upload-input"
-        onChange={handleUpload}
+        onChange={uploadTextureUseCase.upload}
       />
     </ItemContainer>
   );

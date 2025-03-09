@@ -31,6 +31,14 @@ export class InitializeUseCase {
     } else {
       this.setTexturesConfig(this.texturesStore.getTextureList());
     }
+
+    this.particleFluxConfigStore.subscribe((config) => {
+      LocalStorageUtils.setItem(LocalStorageKeys.Config, config);
+    });
+
+    this.texturesStore.subscribe(() => {
+      LocalStorageUtils.setItem(LocalStorageKeys.Textures, this.texturesStore.getTextureList());
+    });
   }
 
   private isAutoSaveEnabled(): boolean {

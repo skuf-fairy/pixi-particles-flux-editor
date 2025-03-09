@@ -1,0 +1,19 @@
+.top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 8px 16px;
+  background-color: var(--primary-background-color);
+
+  display: flex;
+
+  &__item {
+    margin-right: var(--gap);
+  }
+
+  &__item-text {
+    color: var(--primary-text-color);
+    text-transform: uppercase;
+  }
+}

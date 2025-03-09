@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import "./ColorPicker.style.scss";
 
@@ -11,6 +11,11 @@ interface Props {
 
 export function ColorPicker({ color, onChange, className }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [currentColor, setCurrentColor] = useState(color);
+
+  useEffect(() => {
+    setCurrentColor(color);
+  }, [color]);
 
   return (
     <div className={cn("color-picker", className)}>
@@ -20,11 +25,14 @@ export function ColorPicker({ color, onChange, className }: Props) {
 
       <input
         ref={inputRef}
-        value={color}
+        value={currentColor}
         type="color"
         className="color-picker__input"
         onChange={(e) => {
-          onChange(e.target.value);
+          setCurrentColor(e.target.value);
+        }}
+        onBlur={() => {
+          onChange(currentColor);
         }}
       />
     </div>

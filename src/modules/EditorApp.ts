@@ -101,7 +101,7 @@ export class EditorApp {
     await Assets.load(TexturesStore.defaultParticle.url);
 
     await this.app.init({
-      background: this.appConfigStore.getState().backgroundColor,
+      background: this.appConfigStore.getBackgroundColor(),
       width: widthContainer,
       height: heightContainer,
     });
@@ -114,7 +114,11 @@ export class EditorApp {
     this.rootContainer = this.app.stage;
     const background = new Graphics()
       .rect(0, 0, widthContainer, heightContainer)
-      .fill({ color: this.appConfigStore.getState().backgroundColor });
+      .fill({ color: this.appConfigStore.getBackgroundColor() });
+
+    this.appConfigStore.subscribe((state) => {
+      background.rect(0, 0, widthContainer, heightContainer).fill({ color: state.backgroundColor });
+    });
 
     background.interactive = true;
     background.cursor = "pointer";
@@ -156,7 +160,7 @@ export class EditorApp {
     };
   };
 
-  private handlePointerLeave = (e: FederatedPointerEvent) => {
+  private handlePointerLeave = () => {
     this.setEmitterPosByCenter();
   };
 

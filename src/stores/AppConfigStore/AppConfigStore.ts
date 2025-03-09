@@ -8,4 +8,12 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
       isLocalStorageSaveEnabled: false,
     });
   }
+
+  public getBackgroundColor(): string {
+    return this.state.backgroundColor;
+  }
+
+  public setBackgroundColor(color: string): void {
+    this.setValue("backgroundColor", color);
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocalConfigStorageService } from "src/di/di.hooks";
+import { useToggleLocalStorageSaveUseCaseToken } from "src/di/di.hooks";
 import { useAppConfigStore } from "src/hooks/connectors";
 import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { Modal } from "src/ui/kit/Modal/Modal";
@@ -12,8 +12,8 @@ interface Props {
 }
 
 export function MenuModal({ onClose }: Props) {
-  const localStorageService = useLocalConfigStorageService();
   const appConfigStore = useAppConfigStore();
+  const toggleLocalStorageSaveUseCase = useToggleLocalStorageSaveUseCaseToken();
 
   return (
     <Modal onClose={onClose}>
@@ -41,15 +41,7 @@ export function MenuModal({ onClose }: Props) {
 
           <Switch
             checked={appConfigStore.getState().isLocalStorageSaveEnabled}
-            onChange={(checked) => {
-              if (checked) {
-                localStorageService.enableAutoSave();
-                appConfigStore.setValue("isLocalStorageSaveEnabled", true);
-              } else {
-                localStorageService.disableAutoSave();
-                appConfigStore.setValue("isLocalStorageSaveEnabled", false);
-              }
-            }}
+            onChange={toggleLocalStorageSaveUseCase.toggle}
           />
         </div>
       </div>

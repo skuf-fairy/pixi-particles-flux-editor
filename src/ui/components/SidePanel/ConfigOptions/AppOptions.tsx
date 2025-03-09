@@ -1,34 +1,24 @@
-import React, { ChangeEvent, useRef } from "react";
-import { useConfigJSONServiceToken, useEditorAppToken } from "src/di/di.hooks";
-import { ReaderContentType, useUploadFile } from "src/hooks/useUploadFile";
-import { CopyService } from "src/services/CopyService";
-import { DownloadService } from "src/services/DownloadService";
+import React, { useRef } from "react";
+import {
+  useCopyParticleFluxConfigUseCaseToken,
+  useEditorAppToken,
+  useResetParticleFluxConfigUseCaseToken,
+  useRestoreParticleFluxConfigUseCaseToken,
+  useSaveParticleFluxConfigUseCaseToken,
+} from "src/di/di.hooks";
 import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
 import "./AppOptions.style.scss";
 
 export function AppOptions() {
-  const configJSONServiceToken = useConfigJSONServiceToken();
   const editorApp = useEditorAppToken();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const uploadFile = useUploadFile(ReaderContentType.Text);
-
-  const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    // todo error
-    if (!e.target.files) return;
-
-    const file = e.target.files[0];
-
-    if (file && file.type === "application/json") {
-      const content = await uploadFile(file);
-
-      if (typeof content === "string") {
-        configJSONServiceToken.fromStringifiedConfig(content);
-      }
-    }
-  };
+  const saveParticleFluxConfigUseCase = useSaveParticleFluxConfigUseCaseToken();
+  const copyParticleFluxConfigUseCase = useCopyParticleFluxConfigUseCaseToken();
+  const restoreParticleFluxConfigUseCase = useRestoreParticleFluxConfigUseCaseToken();
+  const resetParticleFluxConfigUseCase = useResetParticleFluxConfigUseCaseToken();
 
   return (
     <ItemContainer>
@@ -40,32 +30,26 @@ export function AppOptions() {
             type="file"
             accept="application/json"
             className="upload-input"
-            onChange={handleUpload}
+            onChange={restoreParticleFluxConfigUseCase.restore}
           />
         </Button>
         <Button
           size={ButtonSize.Medium}
-          onClick={() => {
-            DownloadService.downloadJSON(configJSONServiceToken.getStringifiedConfig());
-          }}
+          onClick={saveParticleFluxConfigUseCase.save}
           className="config-options__button"
         >
           Download
         </Button>
         <Button
           size={ButtonSize.Medium}
-          onClick={() => {
-            CopyService.copyTextToClipboard(configJSONServiceToken.getStringifiedConfig());
-          }}
+          onClick={copyParticleFluxConfigUseCase.copy}
           className="config-options__button"
         >
           Copy
         </Button>
         <Button
           size={ButtonSize.Medium}
-          onClick={() => {
-            editorApp.reset();
-          }}
+          onClick={resetParticleFluxConfigUseCase.reset}
           className="config-options__button"
         >
           Reset

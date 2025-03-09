@@ -18,9 +18,13 @@ const [
   usePathBehaviorStoreToken,
   useParticleFluxConfigStoreToken,
   useAppConfigStoreToken,
-  // services
-  useConfigJSONServiceToken,
-  useLocalConfigStorageService,
+  // use-cases
+  useInitializeUseCaseToken,
+  useSaveParticleFluxConfigUseCaseToken,
+  useCopyParticleFluxConfigUseCaseToken,
+  useRestoreParticleFluxConfigUseCaseToken,
+  useResetParticleFluxConfigUseCaseToken,
+  useToggleLocalStorageSaveUseCaseToken,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
   //stores
@@ -39,9 +43,13 @@ const [
   DI_TOKENS.pathBehaviorStore,
   DI_TOKENS.particleFluxConfigStore,
   DI_TOKENS.appConfigStore,
-  // services
-  DI_TOKENS.configJSONService,
-  DI_TOKENS.localConfigStorageService
+  // use-cases
+  DI_TOKENS.initializeUseCase,
+  DI_TOKENS.saveParticleFluxConfigUseCase,
+  DI_TOKENS.copyParticleFluxConfigUseCase,
+  DI_TOKENS.restoreParticleFluxConfigUseCase,
+  DI_TOKENS.resetParticleFluxConfigUseCase,
+  DI_TOKENS.toggleLocalStorageSaveUseCase
 );
 
 export {
@@ -61,7 +69,11 @@ export {
   usePathBehaviorStoreToken,
   useParticleFluxConfigStoreToken,
   useAppConfigStoreToken,
-  // services
-  useConfigJSONServiceToken,
-  useLocalConfigStorageService,
+  // use-cases
+  useInitializeUseCaseToken,
+  useSaveParticleFluxConfigUseCaseToken,
+  useCopyParticleFluxConfigUseCaseToken,
+  useRestoreParticleFluxConfigUseCaseToken,
+  useResetParticleFluxConfigUseCaseToken,
+  useToggleLocalStorageSaveUseCaseToken,
 };

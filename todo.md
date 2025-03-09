@@ -7,3 +7,5 @@ AdvancedBloomFilter -> BloomFilter
 
 адаптивность
 css modules
+уведомление об ошибке
+loader

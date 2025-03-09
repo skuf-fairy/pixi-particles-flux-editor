@@ -225,6 +225,10 @@ export class ParticleFluxConfigStore extends Store<ParticleFluxConfig> {
       this.speedBehaviorStore.restore(speed);
     }
   }
+
+  public getConfig(): ParticleFluxConfig {
+    return this.state;
+  }
 }
 
 injected(

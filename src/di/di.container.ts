@@ -2,8 +2,6 @@ import { Container } from "brandi";
 import { EasingName } from "particle-flux";
 import { EventEmitter } from "pixi.js";
 import { EditorApp } from "src/modules/EditorApp";
-import { ConfigJSONService } from "src/services/ConfigJSONService";
-import { LocalConfigStorageService } from "src/services/LocalConfigStorageService";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { BehaviorStore } from "src/stores/BehaviorStore";
 import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
@@ -17,6 +15,12 @@ import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStor
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { BehaviorType } from "src/stores/types";
+import { CopyParticleFluxConfigUseCase } from "src/use-cases/CopyParticleFluxConfigUseCase";
+import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
+import { ResetParticleFluxConfigUseCase } from "src/use-cases/ResetParticleFluxConfigUseCase";
+import { RestoreParticleFluxConfigUseCase } from "src/use-cases/RestoreParticleFluxConfigUseCase";
+import { SaveParticleFluxConfigUseCase } from "src/use-cases/SaveParticleFluxConfigUseCase";
+import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
 import { DI_TOKENS } from "./di.tokens";
 
 function createDIContainer(): Container {
@@ -154,9 +158,19 @@ function createDIContainer(): Container {
   container.bind(DI_TOKENS.particleFluxConfigStore).toInstance(ParticleFluxConfigStore).inSingletonScope();
   container.bind(DI_TOKENS.appConfigStore).toInstance(AppConfigStore).inSingletonScope();
 
-  // service
-  container.bind(DI_TOKENS.configJSONService).toInstance(ConfigJSONService).inSingletonScope();
-  container.bind(DI_TOKENS.localConfigStorageService).toInstance(LocalConfigStorageService).inSingletonScope();
+  // use-cases
+  container.bind(DI_TOKENS.initializeUseCase).toInstance(InitializeUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.saveParticleFluxConfigUseCase).toInstance(SaveParticleFluxConfigUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.copyParticleFluxConfigUseCase).toInstance(CopyParticleFluxConfigUseCase).inSingletonScope();
+  container
+    .bind(DI_TOKENS.restoreParticleFluxConfigUseCase)
+    .toInstance(RestoreParticleFluxConfigUseCase)
+    .inSingletonScope();
+  container
+    .bind(DI_TOKENS.resetParticleFluxConfigUseCase)
+    .toInstance(ResetParticleFluxConfigUseCase)
+    .inSingletonScope();
+  container.bind(DI_TOKENS.toggleLocalStorageSaveUseCase).toInstance(ToggleLocalStorageSaveUseCase).inSingletonScope();
 
   return container;
 }

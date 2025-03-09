@@ -1,6 +1,6 @@
 .fields-grid {
-  display: grid;
-
-  grid-gap: var(--gap);
-  width: max-content;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: var(--gap);
 }

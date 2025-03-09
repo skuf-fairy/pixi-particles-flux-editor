@@ -13,7 +13,7 @@ interface Props {
 
 export function ScalarStaticBehaviorOption({ config, onChange, min, max }: Props) {
   return (
-    <FieldsGrid columns={2}>
+    <FieldsGrid>
       <NumberOption
         value={config.value}
         text="Value"

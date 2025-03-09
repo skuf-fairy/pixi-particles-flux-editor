@@ -15,7 +15,7 @@ export function LifetimeBehavior() {
     <ItemContainer>
       <BehaviorHeader left={<BehaviorName name="Life time" />} right={null} />
 
-      <FieldsGrid columns={2}>
+      <FieldsGrid>
         <NumberOption value={min} text="Min" onBlur={(v) => store.setRangeConfig({ min: v, max })} />
         <NumberOption value={max} text="Max" onBlur={(v) => store.setRangeConfig({ min, max: v })} />
       </FieldsGrid>

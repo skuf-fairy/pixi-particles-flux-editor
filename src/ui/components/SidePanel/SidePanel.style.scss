@@ -1,12 +1,10 @@
 .side-panel {
-  height: 100vh;
-  background-color: rgb(3 17 22);
+  background-color: var(--primary-background-color);
   padding: 16px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  flex: none;
-  min-width: 400px;
+  width: 30%;
+  overflow-y: auto;
 
   &__title {
     margin-bottom: var(--gap2x);

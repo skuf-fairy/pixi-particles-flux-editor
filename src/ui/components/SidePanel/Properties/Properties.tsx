@@ -13,7 +13,7 @@ export function Properties() {
 
   return (
     <ItemContainer>
-      <FieldsGrid columns={3}>
+      <FieldsGrid>
         {/* {state.spawnTime !== undefined && (
           <NumberOption
             value={state.spawnTime}

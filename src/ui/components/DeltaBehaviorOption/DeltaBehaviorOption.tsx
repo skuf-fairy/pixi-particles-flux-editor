@@ -11,7 +11,7 @@ interface Props {
 
 export function DeltaBehaviorRotation({ config, onChange }: Props) {
   return (
-    <FieldsGrid columns={3}>
+    <FieldsGrid>
       <NumberOption value={config.value} text="Value" onBlur={(v) => onChange({ ...config, value: v })} />
       <NumberOption value={config.value} text="Delta" onBlur={(v) => onChange({ ...config, delta: v })} />
       {config.multiplier && (

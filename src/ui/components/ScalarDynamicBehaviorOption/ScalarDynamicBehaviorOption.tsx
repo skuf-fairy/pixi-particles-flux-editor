@@ -12,7 +12,7 @@ interface Props {
 
 export function ScalarDynamicBehaviorOption({ config, onChange }: Props) {
   return (
-    <FieldsGrid columns={2}>
+    <FieldsGrid>
       <NumberOption value={config.start} text="Start Value" onBlur={(v) => onChange({ ...config, start: v })} />
       <NumberOption value={config.end} text="End Value" onBlur={(v) => onChange({ ...config, end: v })} />
       {config.multiplier && (

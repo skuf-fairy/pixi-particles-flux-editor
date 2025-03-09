@@ -30,7 +30,7 @@ export function DirectionBehavior() {
         right={null}
       />
 
-      <FieldsGrid columns={2}>
+      <FieldsGrid>
         <NumberOption
           value={minAngle}
           text="Min angle"

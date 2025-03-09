@@ -98,7 +98,7 @@ export class EditorApp {
 
     this.app = new Application();
 
-    await Assets.load(TexturesStore.defaultParticle.url);
+    await Assets.load(this.texturesStore.getTextureList().map((t) => t.url));
 
     await this.app.init({
       background: this.appConfigStore.getBackgroundColor(),

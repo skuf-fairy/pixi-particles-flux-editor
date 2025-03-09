@@ -1,12 +1,11 @@
 .top-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  padding: 8px 16px;
+  padding: 0 8px;
   background-color: var(--primary-background-color);
+  height: var(--top-bar-height);
 
   display: flex;
+  align-items: center;
 
   &__item {
     margin-right: var(--gap);

@@ -29,7 +29,7 @@ export function BloomFilterConfig() {
         }
         right={null}
       />
-      <FieldsGrid columns={3}>
+      <FieldsGrid>
         {options.threshold && (
           <NumberOption
             value={options.threshold}

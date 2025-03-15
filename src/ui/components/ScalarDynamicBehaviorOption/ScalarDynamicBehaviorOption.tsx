@@ -8,13 +8,27 @@ import { NumberOption } from "../NumberOption/NumberOption";
 interface Props {
   config: ScalarDynamicBehaviorConfig;
   onChange(v: ScalarDynamicBehaviorConfig): void;
+  min?: number;
+  max?: number;
 }
 
-export function ScalarDynamicBehaviorOption({ config, onChange }: Props) {
+export function ScalarDynamicBehaviorOption({ config, onChange, min, max }: Props) {
   return (
     <FieldsGrid>
-      <NumberOption value={config.start} text="Start Value" onBlur={(v) => onChange({ ...config, start: v })} />
-      <NumberOption value={config.end} text="End Value" onBlur={(v) => onChange({ ...config, end: v })} />
+      <NumberOption
+        value={config.start}
+        text="Start Value"
+        min={min}
+        max={max}
+        onBlur={(v) => onChange({ ...config, start: v })}
+      />
+      <NumberOption
+        value={config.end}
+        text="End Value"
+        min={min}
+        max={max}
+        onBlur={(v) => onChange({ ...config, end: v })}
+      />
       {config.multiplier && (
         <MultiplierOption multiplier={config.multiplier} onChange={(v) => onChange({ ...config, multiplier: v })} />
       )}

@@ -1,6 +1,4 @@
-выделение области спавна
 другие фильтры
-выбор текстур из часто используемых
 примеры
 
 AdvancedBloomFilter -> BloomFilter
@@ -10,5 +8,5 @@ css modules
 уведомление об ошибке
 loader
 
-polygonalShape
 фиксация spawn position
+spawnTime

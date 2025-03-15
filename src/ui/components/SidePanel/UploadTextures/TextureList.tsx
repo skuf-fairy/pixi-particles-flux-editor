@@ -1,5 +1,5 @@
 import React from "react";
-import { ParticleTexture } from "src/stores/TexturesStore/TexturesStore";
+import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { DeleteIcon } from "src/ui/kit/icons/DeleteIcon";
 import "./TextureList.style.scss";

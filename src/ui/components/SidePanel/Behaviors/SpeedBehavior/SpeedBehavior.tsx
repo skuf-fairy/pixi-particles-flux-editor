@@ -40,21 +40,27 @@ export function SpeedBehavior() {
 
       {store.isStaticConfigActive() && (
         <ScalarStaticBehaviorOption
-          config={state.staticConfig as ScalarStaticBehaviorConfig}
+          config={state.staticConfig}
+          min={0}
+          max={Number.MAX_SAFE_INTEGER}
           onChange={(v) => store.setStaticConfig(v)}
         />
       )}
 
       {store.isDynamicConfigActive() && (
         <ScalarDynamicBehaviorOption
-          config={state.dynamicConfig as ScalarDynamicBehaviorConfig}
+          config={state.dynamicConfig}
+          min={0}
+          max={Number.MAX_SAFE_INTEGER}
           onChange={(v) => store.setDynamicConfig(v)}
         />
       )}
 
       {store.isScriptConfigActive() && (
         <ScriptBehaviorOption
-          script={state.scriptConfig.script as TimeScriptConfig<number>}
+          script={state.scriptConfig.script}
+          min={0}
+          max={Number.MAX_SAFE_INTEGER}
           onChange={(v) => store.setScriptConfig({ script: v })}
         />
       )}

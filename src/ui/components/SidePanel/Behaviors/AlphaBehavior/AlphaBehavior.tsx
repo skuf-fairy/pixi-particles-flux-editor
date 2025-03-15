@@ -43,21 +43,27 @@ export function AlphaBehavior() {
 
       {state.activeType === BehaviorType.Static && (
         <ScalarStaticBehaviorOption
-          config={state.staticConfig as ScalarStaticBehaviorConfig}
+          config={state.staticConfig}
+          min={0}
+          max={1}
           onChange={(v) => store.setStaticConfig(v)}
         />
       )}
 
       {state.activeType === BehaviorType.Dynamic && (
         <ScalarDynamicBehaviorOption
-          config={state.dynamicConfig as ScalarDynamicBehaviorConfig}
+          config={state.dynamicConfig}
+          min={0}
+          max={1}
           onChange={(v) => store.setDynamicConfig(v)}
         />
       )}
 
       {state.activeType === BehaviorType.Script && (
         <ScriptBehaviorOption
-          script={state.scriptConfig.script as TimeScriptConfig<number>}
+          script={state.scriptConfig.script}
+          min={0}
+          max={1}
           onChange={(v) => store.setScriptConfig({ script: v })}
         />
       )}

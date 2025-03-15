@@ -7,7 +7,7 @@
   &__button {
     @include text;
     cursor: pointer;
-    border: 1px solid rgb(71, 91, 96);
+    border: 1px solid var(--secondary-border-color);
     border-radius: 10px;
     color: white;
     background-color: rgb(3 17 22);
@@ -32,7 +32,7 @@
     position: absolute;
     top: calc(100% + 4px);
     left: 0;
-    border: 1px solid rgb(71, 91, 96);
+    border: 1px solid var(--secondary-border-color);
     border-radius: 10px;
     background-color: rgb(3 17 22);
     z-index: 1000;

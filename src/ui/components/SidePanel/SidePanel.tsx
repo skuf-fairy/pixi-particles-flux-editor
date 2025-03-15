@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { AppOptions } from "./AppOptions/AppOptions";
 import { AlphaBehavior } from "./Behaviors/AlphaBehavior/AlphaBehavior";
 import { ColorBehavior } from "./Behaviors/ColorBehavior/ColorBehavior";
 import { DirectionBehavior } from "./Behaviors/DirectionBehavior/DirectionBehavior";
@@ -11,7 +12,6 @@ import { ScaleBehavior } from "./Behaviors/ScaleBehavior/ScaleBehavior";
 import { SpawnShapeBehavior } from "./Behaviors/SpawnShapeBehavior/SpawnShapeBehavior";
 import { SpeedBehavior } from "./Behaviors/SpeedBehavior/SpeedBehavior";
 import { BloomFilterConfig } from "./BloomFilterConfig/BloomFilterConfig";
-import { AppOptions } from "./ConfigOptions/AppOptions";
 import { Properties } from "./Properties/Properties";
 import "./SidePanel.style.scss";
 import { UploadTextures } from "./UploadTextures/UploadTextures";

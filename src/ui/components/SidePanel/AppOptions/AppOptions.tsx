@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import {
   useCopyParticleFluxConfigUseCaseToken,
-  useEditorAppToken,
   useResetParticleFluxConfigUseCaseToken,
   useRestoreParticleFluxConfigUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,
@@ -11,8 +10,6 @@ import { ItemContainer } from "../ItemContainer/ItemContainer";
 import "./AppOptions.style.scss";
 
 export function AppOptions() {
-  const editorApp = useEditorAppToken();
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const saveParticleFluxConfigUseCase = useSaveParticleFluxConfigUseCaseToken();

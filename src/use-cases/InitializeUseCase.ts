@@ -3,7 +3,8 @@ import { ParticleFluxConfig } from "particle-flux";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
-import { ParticleTexture, TexturesStore } from "src/stores/TexturesStore/TexturesStore";
+import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
+import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { LocalStorageKeys, LocalStorageUtils } from "src/utils/LocalStorageUtils";
 
 export class InitializeUseCase {

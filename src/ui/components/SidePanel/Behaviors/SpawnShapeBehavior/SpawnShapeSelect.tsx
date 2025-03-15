@@ -1,7 +1,7 @@
 import { SpawnShapeType } from "particle-flux";
 import React from "react";
 import { useSpawnShapeBehaviorStore } from "src/hooks/connectors";
-import { DropDown } from "src/ui/kit/DropDown/DropDown";
+import { DropDown, DropDownSize } from "src/ui/kit/DropDown/DropDown";
 
 export function SpawnShapeSelect() {
   const store = useSpawnShapeBehaviorStore();
@@ -12,6 +12,7 @@ export function SpawnShapeSelect() {
       value={{ value: activeShape, key: activeShape }}
       options={Object.values(SpawnShapeType).map((t) => ({ value: t, key: t }))}
       onChange={(v) => store.setActiveType(v.value as SpawnShapeType)}
+      size={DropDownSize.Small}
     />
   );
 }

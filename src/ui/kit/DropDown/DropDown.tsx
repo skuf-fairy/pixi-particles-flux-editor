@@ -1,15 +1,23 @@
+import cn from "classnames";
 import React, { useEffect, useState } from "react";
 import "./DropDown.style.scss";
 
 type DropDownItem = { key: string; value: string };
 
+export enum DropDownSize {
+  Small = "small",
+  Medium = "medium",
+  Large = "large",
+}
+
 interface Props {
   options: DropDownItem[];
   value: DropDownItem;
   onChange(v: DropDownItem): void;
+  size?: DropDownSize;
 }
 
-export function DropDown({ options, value, onChange }: Props) {
+export function DropDown({ options, value, onChange, size = DropDownSize.Medium }: Props) {
   const [isOptionsShown, setIsOptionsShown] = useState(false);
 
   useEffect(() => {
@@ -28,12 +36,26 @@ export function DropDown({ options, value, onChange }: Props) {
 
   return (
     <div className="drop-down">
-      <button onClick={() => setIsOptionsShown((v) => !v)} className="drop-down__button">
+      <button
+        onClick={() => setIsOptionsShown((v) => !v)}
+        className={cn("drop-down__button", {
+          ["drop-down__button--small"]: size === DropDownSize.Small,
+          ["drop-down__button--medium"]: size === DropDownSize.Medium,
+          ["drop-down__button--large"]: size === DropDownSize.Large,
+        })}
+      >
         {value.value}
       </button>
 
       {isOptionsShown && (
-        <div id="drop-down-options" className="drop-down__list">
+        <div
+          id="drop-down-options"
+          className={cn("drop-down__list", {
+            ["drop-down__list--small"]: size === DropDownSize.Small,
+            ["drop-down__list--medium"]: size === DropDownSize.Medium,
+            ["drop-down__list--large"]: size === DropDownSize.Large,
+          })}
+        >
           {options.map((item) => {
             return (
               <button

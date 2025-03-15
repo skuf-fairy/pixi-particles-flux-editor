@@ -6,6 +6,8 @@
 }
 
 .upload-button {
+  margin-right: var(--gap);
+
   &__content {
     display: flex;
     align-items: center;
@@ -22,4 +24,8 @@
   &__text {
     color: var(--secondary-text-color);
   }
+}
+
+.upload-panel {
+  display: flex;
 }

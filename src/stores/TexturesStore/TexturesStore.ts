@@ -1,17 +1,11 @@
-import defaultParticle from "src/assets/default.png";
+import defaultParticleTexture from "src/assets/default.png";
 import { Store } from "../Store";
+import { CollectionTexture, ParticleTexture, TexturesStoreState } from "./TextureStore.types";
 
-export interface ParticleTexture {
-  url: string;
-  name: string;
-}
-
-export class TexturesStore extends Store<{
-  list: ParticleTexture[];
-}> {
+export class TexturesStore extends Store<TexturesStoreState> {
   static defaultParticle: ParticleTexture = {
-    url: defaultParticle,
-    name: "default.png",
+    url: defaultParticleTexture,
+    name: CollectionTexture.DefaultParticle,
   };
 
   static acceptMimeTypes = "image/png, image/jpeg, image/jpg, image/webp, image/avif";

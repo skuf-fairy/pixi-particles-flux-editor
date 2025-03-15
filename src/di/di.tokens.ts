@@ -14,18 +14,19 @@ import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStor
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { CopyParticleFluxConfigUseCase } from "src/use-cases/CopyParticleFluxConfigUseCase";
-import { DropTextureUseCase } from "src/use-cases/DropTextureUseCase";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
 import { ResetParticleFluxConfigUseCase } from "src/use-cases/ResetParticleFluxConfigUseCase";
 import { RestoreParticleFluxConfigUseCase } from "src/use-cases/RestoreParticleFluxConfigUseCase";
 import { SaveParticleFluxConfigUseCase } from "src/use-cases/SaveParticleFluxConfigUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
-import { UploadTextureUseCase } from "src/use-cases/UploadTextureUseCase";
 import { AddChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainItemPointUseCase";
 import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainUseCase";
 import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
 import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
 import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
+import { DropTextureUseCase } from "src/use-cases/textures/DropTextureUseCase";
+import { SelectTextureFromCollectionUseCase } from "src/use-cases/textures/SelectTextureFromCollectionUseCase";
+import { UploadTextureUseCase } from "src/use-cases/textures/UploadTextureUseCase";
 
 export const DI_TOKENS = {
   editorApp: token<EditorApp>("editorApp"),
@@ -55,6 +56,7 @@ export const DI_TOKENS = {
   toggleLocalStorageSaveUseCase: token<ToggleLocalStorageSaveUseCase>("toggleLocalStorageSaveUseCase"),
   uploadTextureUseCase: token<UploadTextureUseCase>("uploadTextureUseCase"),
   dropTextureUseCase: token<DropTextureUseCase>("dropTextureUseCase"),
+  selectTextureFromCollectionUseCase: token<SelectTextureFromCollectionUseCase>("selectTextureFromCollectionUseCase"),
   addChainUseCase: token<AddChainUseCase>("addChainUseCase"),
   addChainItemPointUseCase: token<AddChainItemPointUseCase>("addChainItemPointUseCase"),
   dropChainItemPointUseCase: token<DropChainItemPointUseCase>("dropChainItemPointUseCase"),

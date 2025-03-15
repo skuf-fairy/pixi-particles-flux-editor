@@ -51,14 +51,6 @@ export class SpawnShapeBehaviorStore extends Store<{
             x: 0,
             y: 0,
           },
-          {
-            x: 0,
-            y: 0,
-          },
-          {
-            x: 0,
-            y: 0,
-          },
         ],
       },
       isDisplayShape: false,

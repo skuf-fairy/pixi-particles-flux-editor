@@ -1,5 +1,5 @@
 import { injected } from "brandi";
-import { ParticleFlux, Point2d, SpawnShapeBehavior, SpawnShapeType } from "particle-flux";
+import { ParticleFlux, Point2d, SpawnShapeBehavior, SpawnShapeType, isSinglePolygonalChain } from "particle-flux";
 import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
@@ -18,6 +18,7 @@ import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomF
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
+import { SPAWN_SHAPE_STROKE } from "./EditorApp.constants";
 
 export class EditorApp {
   private app: Application;
@@ -196,22 +197,35 @@ export class EditorApp {
 
   private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShapeBehavior, isDisplay: boolean) {
     if (spawnShape.type === SpawnShapeType.Point) {
-      this.spawnShape.clear().circle(spawnPosition.x, spawnPosition.y, 1).stroke({ color: "#ffffff", width: 4 });
+      this.spawnShape.clear().circle(spawnPosition.x, spawnPosition.y, 1).stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Rectangle) {
       this.spawnShape
         .clear()
         .rect(spawnPosition.x, spawnPosition.y, spawnShape.width || 1, spawnShape.height || 1)
-        .stroke({ color: "#ffffff", width: 4 });
+        .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Torus) {
       this.spawnShape.clear();
+
       if (spawnShape.innerRadius !== undefined && spawnShape.innerRadius !== 0) {
         this.spawnShape.circle(spawnPosition.x, spawnPosition.y, spawnShape.innerRadius);
       }
-      this.spawnShape
-        .circle(spawnPosition.x, spawnPosition.y, spawnShape.outerRadius || 1)
-        .stroke({ color: "#ffffff", width: 4 });
+
+      this.spawnShape.circle(spawnPosition.x, spawnPosition.y, spawnShape.outerRadius || 1).stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Polygon) {
-      // todo
+      if (isSinglePolygonalChain(spawnShape.chain)) {
+        this.spawnShape
+          .clear()
+          .poly(spawnShape.chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
+          .stroke(SPAWN_SHAPE_STROKE);
+      } else {
+        this.spawnShape.clear();
+
+        spawnShape.chain.forEach((chain) => {
+          this.spawnShape
+            .poly(chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
+            .stroke(SPAWN_SHAPE_STROKE);
+        });
+      }
     }
 
     this.spawnShape.visible = isDisplay;

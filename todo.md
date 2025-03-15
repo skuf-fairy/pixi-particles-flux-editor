@@ -11,3 +11,4 @@ css modules
 loader
 
 polygonalShape
+фиксация spawn position

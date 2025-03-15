@@ -1,10 +1,12 @@
 import {
+  PolygonalChain,
   PolygonalChainShape,
   SpawnPointShape,
   SpawnRectangleShape,
   SpawnShapeBehavior,
   SpawnShapeType,
   SpawnTorusShape,
+  isSinglePolygonalChain,
 } from "particle-flux";
 import { Store } from "../Store";
 
@@ -45,6 +47,18 @@ export class SpawnShapeBehaviorStore extends Store<{
             x: 0,
             y: 0,
           },
+          {
+            x: 0,
+            y: 0,
+          },
+          {
+            x: 0,
+            y: 0,
+          },
+          {
+            x: 0,
+            y: 0,
+          },
         ],
       },
       isDisplayShape: false,
@@ -75,7 +89,10 @@ export class SpawnShapeBehaviorStore extends Store<{
   public setPolygonalShapeConfig(config: PolygonalChainShape): void {
     this.setState({
       ...this.state,
-      polygonalShape: config,
+      polygonalShape: {
+        type: config.type,
+        chain: !isSinglePolygonalChain(config.chain) && config.chain.length === 1 ? config.chain[0] : config.chain,
+      },
     });
   }
 

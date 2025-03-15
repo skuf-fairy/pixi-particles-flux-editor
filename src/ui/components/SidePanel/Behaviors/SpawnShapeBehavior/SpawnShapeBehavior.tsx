@@ -5,11 +5,12 @@ import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography"
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { CircleSpawnShapeBehavior } from "./CircleSpawnShapeBehavior";
-import { PointSpawnShapeBehavior } from "./PointSpawnShapeBehavior";
-import { RectangleSpawnShapeBehavior } from "./RectangleSpawnShapeBehavior";
 import "./SpawnShapeBehavior.style.scss";
 import { SpawnShapeSelect } from "./SpawnShapeSelect";
+import { CircleSpawnShapeBehavior } from "./shapes/CircleSpawnShapeBehavior/CircleSpawnShapeBehavior";
+import { PointSpawnShapeBehavior } from "./shapes/PointSpawnShapeBehavior/PointSpawnShapeBehavior";
+import { PolygonalChainSpawnShape } from "./shapes/PolygonalChainSpawnShape/PolygonalChainSpawnShape";
+import { RectangleSpawnShapeBehavior } from "./shapes/RectangleSpawnShapeBehavior/RectangleSpawnShapeBehavior";
 
 export function SpawnShapeBehavior() {
   const store = useSpawnShapeBehaviorStore();
@@ -29,6 +30,8 @@ export function SpawnShapeBehavior() {
         {store.isTorusShapeActive() && (
           <CircleSpawnShapeBehavior config={circleShape} onChange={(v) => store.setTorusShapeConfig(v)} />
         )}
+
+        {store.isPolygonShapeActive() && <PolygonalChainSpawnShape chain={polygonalShape.chain} />}
       </div>
 
       <div className="display-shape">

@@ -1,0 +1,17 @@
+.polygonal-chain {
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--gap);
+  }
+
+  &__item {
+    margin-bottom: var(--gap);
+    align-items: end;
+  }
+
+  &__title {
+    color: var(--primary-title-color);
+    margin-right: var(--gap2x);
+  }
+}

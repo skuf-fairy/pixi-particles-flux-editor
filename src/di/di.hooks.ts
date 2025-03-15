@@ -27,6 +27,11 @@ const [
   useToggleLocalStorageSaveUseCaseToken,
   useUploadTextureUseCaseToken,
   useDropTextureUseCaseToken,
+  useAddChainUseCaseToken,
+  useAddChainItemPointUseCaseToken,
+  useDropChainItemPointUseCaseToken,
+  useChangeChainItemPointUseCaseToken,
+  useDropChainUseCaseToken,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
   //stores
@@ -53,7 +58,12 @@ const [
   DI_TOKENS.resetParticleFluxConfigUseCase,
   DI_TOKENS.toggleLocalStorageSaveUseCase,
   DI_TOKENS.uploadTextureUseCase,
-  DI_TOKENS.dropTextureUseCase
+  DI_TOKENS.dropTextureUseCase,
+  DI_TOKENS.addChainUseCase,
+  DI_TOKENS.addChainItemPointUseCase,
+  DI_TOKENS.dropChainItemPointUseCase,
+  DI_TOKENS.changeChainItemPointUseCase,
+  DI_TOKENS.dropChainUseCase
 );
 
 export {
@@ -82,4 +92,9 @@ export {
   useToggleLocalStorageSaveUseCaseToken,
   useUploadTextureUseCaseToken,
   useDropTextureUseCaseToken,
+  useAddChainUseCaseToken,
+  useAddChainItemPointUseCaseToken,
+  useDropChainItemPointUseCaseToken,
+  useChangeChainItemPointUseCaseToken,
+  useDropChainUseCaseToken,
 };

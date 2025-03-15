@@ -23,6 +23,11 @@ import { RestoreParticleFluxConfigUseCase } from "src/use-cases/RestoreParticleF
 import { SaveParticleFluxConfigUseCase } from "src/use-cases/SaveParticleFluxConfigUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
 import { UploadTextureUseCase } from "src/use-cases/UploadTextureUseCase";
+import { AddChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainItemPointUseCase";
+import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainUseCase";
+import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
+import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
+import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
 import { DI_TOKENS } from "./di.tokens";
 
 function createDIContainer(): Container {
@@ -175,6 +180,11 @@ function createDIContainer(): Container {
   container.bind(DI_TOKENS.toggleLocalStorageSaveUseCase).toInstance(ToggleLocalStorageSaveUseCase).inSingletonScope();
   container.bind(DI_TOKENS.uploadTextureUseCase).toInstance(UploadTextureUseCase).inSingletonScope();
   container.bind(DI_TOKENS.dropTextureUseCase).toInstance(DropTextureUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.addChainUseCase).toInstance(AddChainUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.addChainItemPointUseCase).toInstance(AddChainItemPointUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.dropChainItemPointUseCase).toInstance(DropChainItemPointUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.changeChainItemPointUseCase).toInstance(ChangeChainItemPointUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.dropChainUseCase).toInstance(DropChainUseCase).inSingletonScope();
 
   return container;
 }

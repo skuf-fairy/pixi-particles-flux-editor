@@ -21,6 +21,11 @@ import { RestoreParticleFluxConfigUseCase } from "src/use-cases/RestoreParticleF
 import { SaveParticleFluxConfigUseCase } from "src/use-cases/SaveParticleFluxConfigUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
 import { UploadTextureUseCase } from "src/use-cases/UploadTextureUseCase";
+import { AddChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainItemPointUseCase";
+import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainUseCase";
+import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
+import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
+import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
 
 export const DI_TOKENS = {
   editorApp: token<EditorApp>("editorApp"),
@@ -50,4 +55,9 @@ export const DI_TOKENS = {
   toggleLocalStorageSaveUseCase: token<ToggleLocalStorageSaveUseCase>("toggleLocalStorageSaveUseCase"),
   uploadTextureUseCase: token<UploadTextureUseCase>("uploadTextureUseCase"),
   dropTextureUseCase: token<DropTextureUseCase>("dropTextureUseCase"),
+  addChainUseCase: token<AddChainUseCase>("addChainUseCase"),
+  addChainItemPointUseCase: token<AddChainItemPointUseCase>("addChainItemPointUseCase"),
+  dropChainItemPointUseCase: token<DropChainItemPointUseCase>("dropChainItemPointUseCase"),
+  changeChainItemPointUseCase: token<ChangeChainItemPointUseCase>("changeChainItemPointUseCase"),
+  dropChainUseCase: token<DropChainUseCase>("dropChainUseCase"),
 };

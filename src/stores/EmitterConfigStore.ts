@@ -4,19 +4,18 @@ import { Store } from "./Store";
 export class EmitterConfigStore extends Store<EmitterConfig> {
   constructor() {
     super({
-      spawnInterval: {
-        min: 250,
-        max: 500,
-      },
+      spawnInterval: 250,
       spawnParticlesPerWave: 1,
       maxParticles: 500,
       spawnChance: 100,
+      spawnTimeout: 0,
+      spawnTime: 60000,
       autoStart: true,
     });
   }
 
   public restore(config: EmitterConfig): void {
-    const { spawnChance, spawnParticlesPerWave, maxParticles, spawnInterval } = config;
+    const { spawnChance, spawnParticlesPerWave, maxParticles, spawnInterval, spawnTime, spawnTimeout } = config;
 
     this.setState({
       ...this.state,
@@ -24,6 +23,12 @@ export class EmitterConfigStore extends Store<EmitterConfig> {
       spawnParticlesPerWave,
       maxParticles,
       spawnInterval,
+      spawnTime,
+      spawnTimeout,
     });
+  }
+
+  public getConfig(): EmitterConfig {
+    return this.state;
   }
 }

@@ -9,18 +9,10 @@ import { IntervalRangeValue } from "./IntervalRangeValue";
 export function Properties() {
   const emitterConfigStore = useEmitterConfigStore();
   const state = emitterConfigStore.getState();
-  console.log(state);
 
   return (
     <ItemContainer>
       <FieldsGrid>
-        {/* {state.spawnTime !== undefined && (
-          <NumberOption
-            value={state.spawnTime}
-            text="Spawn time"
-            onChange={(v) => emitterConfigStore.setState({ ...state, spawnTime: v })}
-          />
-        )} */}
         {state.spawnInterval !== undefined && typeof state.spawnInterval === "number" && (
           <NumberOption
             value={state.spawnInterval}
@@ -32,6 +24,20 @@ export function Properties() {
           <IntervalRangeValue
             interval={state.spawnInterval}
             onChange={(v) => emitterConfigStore.setState({ ...state, spawnInterval: v })}
+          />
+        )}
+        {state.spawnTime !== undefined && (
+          <NumberOption
+            value={state.spawnTime}
+            text="Spawn time"
+            onBlur={(v) => emitterConfigStore.setState({ ...state, spawnTime: v })}
+          />
+        )}
+        {state.spawnTimeout !== undefined && (
+          <NumberOption
+            value={state.spawnTimeout}
+            text="Spawn timeout"
+            onBlur={(v) => emitterConfigStore.setState({ ...state, spawnTimeout: v })}
           />
         )}
         {state.spawnParticlesPerWave !== undefined && (

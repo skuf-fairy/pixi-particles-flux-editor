@@ -1,5 +1,5 @@
 import { injected } from "brandi";
-import { ParticleFluxConfig } from "particle-flux";
+import { ParticleFullConfig } from "particle-flux";
 import { ChangeEvent } from "react";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
@@ -19,7 +19,7 @@ export class RestoreParticleFluxConfigUseCase {
       const content = await SaveLoadUtils.uploadFile(file, ReaderContentType.Text);
 
       if (typeof content === "string") {
-        const config = JSONUtils.parse<ParticleFluxConfig>(content);
+        const config = JSONUtils.parse<ParticleFullConfig>(content);
 
         this.particleFluxConfigStore.restore(config);
       }

@@ -18,6 +18,7 @@ const [
   usePathBehaviorStoreToken,
   useParticleFluxConfigStoreToken,
   useAppConfigStoreToken,
+  usePerformanceStoreToken,
   // use-cases
   useInitializeUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,
@@ -51,6 +52,7 @@ const [
   DI_TOKENS.pathBehaviorStore,
   DI_TOKENS.particleFluxConfigStore,
   DI_TOKENS.appConfigStore,
+  DI_TOKENS.performanceStore,
   // use-cases
   DI_TOKENS.initializeUseCase,
   DI_TOKENS.saveParticleFluxConfigUseCase,
@@ -85,6 +87,7 @@ export {
   usePathBehaviorStoreToken,
   useParticleFluxConfigStoreToken,
   useAppConfigStoreToken,
+  usePerformanceStoreToken,
   // use-cases
   useInitializeUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,

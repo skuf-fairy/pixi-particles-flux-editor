@@ -12,6 +12,7 @@ import { GravityBehaviorStore } from "src/stores/GravityBehaviorStore/GravityBeh
 import { LifetimeBehaviorStore } from "src/stores/LifetimeBehaviorStore/LifetimeBehaviorStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStore";
+import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { BehaviorType } from "src/stores/types";
@@ -190,6 +191,7 @@ function createDIContainer(): Container {
     .bind(DI_TOKENS.selectTextureFromCollectionUseCase)
     .toInstance(SelectTextureFromCollectionUseCase)
     .inSingletonScope();
+  container.bind(DI_TOKENS.performanceStore).toInstance(PerformanceStore).inSingletonScope();
 
   return container;
 }

@@ -1,15 +1,15 @@
 import {
-  DirectionBehaviorConfig,
-  DirectionRangeBehaviorConfig,
-  StaticDirectionBehaviorConfig,
+  DirectionConfig,
+  DirectionRangeConfig,
+  StaticDirectionConfig,
   isDirectionRangeBehaviorConfig,
 } from "particle-flux";
 import { Store } from "../Store";
 import { BehaviorType } from "../types";
 
 export class DirectionBehaviorStore extends Store<{
-  rangeConfig: DirectionRangeBehaviorConfig;
-  staticConfig: StaticDirectionBehaviorConfig;
+  rangeConfig: DirectionRangeConfig;
+  staticConfig: StaticDirectionConfig;
   activeType: BehaviorType;
   availableTypes: BehaviorType[];
   enabled: boolean;
@@ -29,14 +29,14 @@ export class DirectionBehaviorStore extends Store<{
     });
   }
 
-  public setRangeAngle(config: DirectionRangeBehaviorConfig): void {
+  public setRangeAngle(config: DirectionRangeConfig): void {
     this.setState({
       ...this.state,
       rangeConfig: config,
     });
   }
 
-  public setStaticAngle(config: StaticDirectionBehaviorConfig): void {
+  public setStaticAngle(config: StaticDirectionConfig): void {
     this.setState({
       ...this.state,
       staticConfig: config,
@@ -55,7 +55,7 @@ export class DirectionBehaviorStore extends Store<{
     this.setState({ ...this.state, enabled: false });
   }
 
-  public getActiveConfig(): DirectionBehaviorConfig | undefined {
+  public getActiveConfig(): DirectionConfig | undefined {
     if (!this.isEnabled()) return;
 
     if (this.state.activeType === BehaviorType.Static) {
@@ -67,7 +67,7 @@ export class DirectionBehaviorStore extends Store<{
     }
   }
 
-  public restore(config: DirectionBehaviorConfig): void {
+  public restore(config: DirectionConfig): void {
     if (isDirectionRangeBehaviorConfig(config)) {
       this.setRangeAngle(config);
       this.enable();

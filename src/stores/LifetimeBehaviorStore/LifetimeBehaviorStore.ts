@@ -17,11 +17,11 @@ export class LifetimeBehaviorStore extends Store<{
   constructor() {
     super({
       rangeConfig: {
-        min: 1500,
-        max: 4000,
+        min: 500,
+        max: 1500,
       },
       staticConfig: {
-        value: 1000,
+        value: 500,
       },
       activeType: BehaviorType.Static,
       availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],
@@ -44,17 +44,23 @@ export class LifetimeBehaviorStore extends Store<{
 
   public getActiveConfig(): LifeTimeBehaviorConfig {
     if (this.state.activeType === BehaviorType.Static) {
-      return this.state.rangeConfig;
+      return this.state.staticConfig;
     }
 
-    return this.state.staticConfig;
+    return this.state.rangeConfig;
   }
 
-  public setActiveType(type: BehaviorType.Static | BehaviorType.Dynamic): void {
+  public setActiveType(type: BehaviorType): void {
     this.setValue("activeType", type);
   }
 
-  public restore(config: LifeTimeBehaviorConfig): void {
+  public getActiveType(): BehaviorType {
+    return this.state.activeType;
+  }
+
+  public restore(config: LifeTimeBehaviorConfig | undefined): void {
+    if (config === undefined) return;
+
     if (isLifeTimeStaticBehaviorConfig(config)) {
       this.setStaticConfig(config);
       this.setActiveType(BehaviorType.Static);

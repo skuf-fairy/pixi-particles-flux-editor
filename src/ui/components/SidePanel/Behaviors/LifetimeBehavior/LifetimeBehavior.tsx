@@ -1,10 +1,12 @@
 import React from "react";
 import { useLifetimeBehaviorStore } from "src/hooks/connectors";
-import { FieldsGrid } from "src/ui/components/FieldsGrid/FieldsGrid";
-import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
+import { BehaviorType } from "src/stores/types";
+import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
+import { LifetimeRangeConfig } from "./LifetimeRangeConfig";
+import { LifetimeStaticConfig } from "./LifetimeStaticConfig";
 
 export function LifetimeBehavior() {
   const store = useLifetimeBehaviorStore();
@@ -13,24 +15,26 @@ export function LifetimeBehavior() {
 
   return (
     <ItemContainer>
-      <BehaviorHeader left={<BehaviorName name="Life time" />} right={null} />
+      <BehaviorHeader
+        left={<BehaviorName name="Life time" />}
+        right={
+          <BehaviorTypeSelect
+            type={config.activeType}
+            availableTypes={config.availableTypes}
+            onChange={(type) => {
+              store.setActiveType(type);
+            }}
+          />
+        }
+      />
 
-      <FieldsGrid>
-        <NumberOption
-          value={min}
-          min={0}
-          max={Number.MAX_SAFE_INTEGER}
-          text="Min"
-          onBlur={(v) => store.setRangeConfig({ min: v, max })}
-        />
-        <NumberOption
-          value={max}
-          min={0}
-          max={Number.MAX_SAFE_INTEGER}
-          text="Max"
-          onBlur={(v) => store.setRangeConfig({ min, max: v })}
-        />
-      </FieldsGrid>
+      {store.getActiveType() === BehaviorType.Dynamic && (
+        <LifetimeRangeConfig min={min} max={max} onChange={(v) => store.setRangeConfig(v)} />
+      )}
+
+      {store.getActiveType() === BehaviorType.Static && (
+        <LifetimeStaticConfig value={config.staticConfig.value} onChange={(v) => store.setStaticConfig({ value: v })} />
+      )}
     </ItemContainer>
   );
 }

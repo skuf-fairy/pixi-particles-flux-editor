@@ -1,5 +1,13 @@
 import { injected } from "brandi";
-import { ParticleFlux, Point2d, SpawnShapeBehavior, SpawnShapeType, isSinglePolygonalChain } from "particle-flux";
+import {
+  ParticleEmitter,
+  Point2d,
+  SpawnShapeBehavior,
+  SpawnShapeType,
+  ViewContainer,
+  ViewParticle,
+  isSinglePolygonalChain,
+} from "particle-flux";
 import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
@@ -8,6 +16,9 @@ import {
   ContainerChild,
   FederatedPointerEvent,
   Graphics,
+  Particle,
+  ParticleContainer,
+  IParticle as PixiParticle,
   Point,
   Sprite,
   Texture,
@@ -16,14 +27,63 @@ import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
+import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { SPAWN_SHAPE_STROKE } from "./EditorApp.constants";
 
+class ContainerAdapter implements ViewContainer<ParticleAdapter> {
+  constructor(private readonly container: ParticleContainer) {}
+
+  addChild(children: ParticleAdapter): void {
+    this.container.addParticle(children.particle);
+  }
+
+  removeChild(children: ParticleAdapter): void {
+    this.container.removeParticle(children.particle);
+  }
+}
+
+class ParticleAdapter implements ViewParticle {
+  constructor(public readonly particle: PixiParticle) {}
+
+  get position(): Point2d {
+    return { x: this.particle.x, y: this.particle.y };
+  }
+
+  set position(pos: Point2d) {
+    this.particle.x = pos.x;
+    this.particle.y = pos.y;
+  }
+
+  set scale(value: Point2d) {
+    this.particle.scaleX = value.x;
+    this.particle.scaleY = value.y;
+  }
+
+  set alpha(value: number) {
+    this.particle; // todo
+  }
+
+  set tint(value: string | number) {
+    if (typeof value === "number") {
+      this.particle.color = value;
+    }
+  }
+
+  set angle(angle: number) {
+    this.particle.rotation = angle; // todo
+  }
+
+  set destroyed(value: boolean) {
+    this.particle; // todo
+  }
+}
+
 export class EditorApp {
   private app: Application;
   private bloomFilter: AdvancedBloomFilter;
-  private particlesEmitter: ParticleFlux;
+  private particlesEmitter: ParticleEmitter;
   private background: Graphics;
   private particlesContainer: Container;
   private spawnShape: Graphics;
@@ -33,7 +93,8 @@ export class EditorApp {
     private readonly appConfigStore: AppConfigStore,
     private readonly texturesStore: TexturesStore,
     private readonly spawnShapeStore: SpawnShapeBehaviorStore,
-    private readonly bloomFilterConfigStore: BloomFilterConfigStore
+    private readonly bloomFilterConfigStore: BloomFilterConfigStore,
+    private readonly performanceStore: PerformanceStore
   ) {}
 
   public async init(containerNode: HTMLElement) {
@@ -41,6 +102,7 @@ export class EditorApp {
 
     this.app = new Application();
 
+    // todo init use case
     await Assets.load(this.texturesStore.getTextureList().map((t) => t.url));
 
     await this.app.init({
@@ -55,6 +117,7 @@ export class EditorApp {
     containerNode.appendChild(this.app.canvas);
 
     const rootContainer = this.app.stage;
+
     this.background = new Graphics()
       .rect(0, 0, widthContainer, heightContainer)
       .fill({ color: this.appConfigStore.getBackgroundColor() });
@@ -76,13 +139,53 @@ export class EditorApp {
       this.enableFollowPointer();
     }
 
+    // this.particlesContainer = new ParticleContainer({
+    //   dynamicProperties: {
+    //     position: true,
+    //     scale: true,
+    //     rotation: true,
+    //     tint: true,
+    //   },
+    // });
+
     this.particlesContainer = new Container();
+
     rootContainer.addChild(this.particlesContainer);
 
-    this.particlesEmitter = new ParticleFlux<ContainerChild>(
+    // падает при reset
+    // this.particlesEmitter = new ParticleEmitter<ParticleAdapter>(
+    //   new ContainerAdapter(this.particlesContainer as any),
+    //   this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
+    //   this.particleFluxConfigStore.getState()
+    // );
+    // this.particlesEmitter.fillPool(50000);
+
+    this.particlesEmitter = new ParticleEmitter(
+      //@ts-ignore
       this.particlesContainer,
-      this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
+      this.texturesStore.getTextureList().map((t) => () => this.createParticleSprite(Texture.from(t.url))),
       this.particleFluxConfigStore.getState()
+      // {
+      //   emitterConfig: {
+      //     autoStart: true,
+      //     spawnInterval: 1000,
+      //   },
+      //   particleConfig: {
+      //     lifeTime: {
+      //       value: 10000,
+      //     },
+      //     speed: {
+      //       value: 1,
+      //     },
+      //     direction: {
+      //       minAngle: 0,
+      //       maxAngle: 360,
+      //     },
+      //     alpha: {
+      //       value: 0.5,
+      //     },
+      //   },
+      // }
     );
 
     this.setEmitterPosByCenter();
@@ -94,27 +197,20 @@ export class EditorApp {
     this.particlesContainer.filters = [this.bloomFilter];
 
     this.particleFluxConfigStore.subscribe((config) => {
-      this.particlesEmitter.config.spawnInterval = config.emitterConfig.spawnInterval;
-      this.particlesEmitter.config.spawnParticlesPerWave = config.emitterConfig.spawnParticlesPerWave;
-      this.particlesEmitter.config.maxParticles = config.emitterConfig.maxParticles;
-      this.particlesEmitter.config.spawnChance = config.emitterConfig.spawnChance;
+      this.particlesEmitter.config.fullConfig = config;
+      this.setEmitterPosByCenter();
 
-      this.particlesEmitter.config.alpha = config.particleBehaviorsConfig.alpha;
-      this.particlesEmitter.config.color = config.particleBehaviorsConfig.color;
-      this.particlesEmitter.config.direction = config.particleBehaviorsConfig.direction;
-      this.particlesEmitter.config.gravity = config.particleBehaviorsConfig.gravity;
-      this.particlesEmitter.config.lifeTime = config.particleBehaviorsConfig.lifeTime;
-      this.particlesEmitter.config.path = config.particleBehaviorsConfig.path;
-      this.particlesEmitter.config.rotation = config.particleBehaviorsConfig.rotation;
-      this.particlesEmitter.config.scale = config.particleBehaviorsConfig.scale;
-      this.particlesEmitter.config.spawnShape = config.particleBehaviorsConfig.spawnShape;
-      this.particlesEmitter.config.speed = config.particleBehaviorsConfig.speed;
+      this.particlesEmitter.restart();
     });
+
+    window.setInterval(() => {
+      this.performanceStore.setParticlesCount(this.particlesEmitter.getParticlesCount());
+    }, 100);
 
     this.texturesStore.subscribe(() => {
       const textures = this.texturesStore.getTextureList();
 
-      this.particlesEmitter.config.view = textures.map((t) => () => this.createParticle(Texture.from(t.url)));
+      this.particlesEmitter.config.view = textures.map((t) => () => this.createParticleSprite(Texture.from(t.url)));
     });
 
     this.bloomFilterConfigStore.subscribe((state) => {
@@ -144,6 +240,10 @@ export class EditorApp {
     });
   }
 
+  public restart(): void {
+    this.particlesEmitter.restart();
+  }
+
   private enableFollowPointer() {
     this.background.interactive = true;
     this.background.cursor = "pointer";
@@ -158,11 +258,18 @@ export class EditorApp {
     this.background.off("pointerleave", this.handlePointerLeave);
   }
 
-  private createParticle(texture: Texture): Sprite {
+  private createParticleSprite(texture: Texture): Sprite {
     const sprite = new Sprite(texture);
     sprite.anchor.set(0.5);
 
     return sprite;
+  }
+
+  private createParticle(texture: Texture): ParticleAdapter {
+    const particle = new Particle({ texture, anchorX: 0.5, anchorY: 0.5 });
+    const particleAdapter = new ParticleAdapter(particle);
+
+    return particleAdapter;
   }
 
   private handlePointerMove = (e: FederatedPointerEvent) => {
@@ -242,5 +349,6 @@ injected(
   DI_TOKENS.appConfigStore,
   DI_TOKENS.texturesStore,
   DI_TOKENS.spawnShapeBehaviorStore,
-  DI_TOKENS.bloomFilterConfigStore
+  DI_TOKENS.bloomFilterConfigStore,
+  DI_TOKENS.performanceStore
 );

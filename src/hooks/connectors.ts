@@ -10,6 +10,7 @@ import {
   useLifetimeBehaviorStoreToken,
   useParticleFluxConfigStoreToken,
   usePathBehaviorStoreToken,
+  usePerformanceStoreToken,
   useRotationBehaviorStoreToken,
   useScaleBehaviorStoreToken,
   useSpawnShapeBehaviorStoreToken,
@@ -26,6 +27,7 @@ import { GravityBehaviorStore } from "src/stores/GravityBehaviorStore/GravityBeh
 import { LifetimeBehaviorStore } from "src/stores/LifetimeBehaviorStore/LifetimeBehaviorStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStore";
+import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 
@@ -143,6 +145,14 @@ export function useAppConfigStore(): AppConfigStore {
 
 export function useBloomFilterConfigStore(): BloomFilterConfigStore {
   const store = useBloomFilterConfigStoreToken();
+
+  useSyncExternalStore(store.subscribe, store.getState);
+
+  return store;
+}
+
+export function usePerformanceStore(): PerformanceStore {
+  const store = usePerformanceStoreToken();
 
   useSyncExternalStore(store.subscribe, store.getState);
 

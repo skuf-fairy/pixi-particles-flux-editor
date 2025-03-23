@@ -11,6 +11,7 @@ import { GravityBehaviorStore } from "src/stores/GravityBehaviorStore/GravityBeh
 import { LifetimeBehaviorStore } from "src/stores/LifetimeBehaviorStore/LifetimeBehaviorStore";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStore";
+import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
@@ -47,6 +48,7 @@ export const DI_TOKENS = {
   pathBehaviorStore: token<PathBehaviorStore>("pathBehaviorStore"),
   particleFluxConfigStore: token<ParticleFluxConfigStore>("particleFluxConfigStore"),
   appConfigStore: token<AppConfigStore>("appConfigStore"),
+  performanceStore: token<PerformanceStore>("performanceStore"),
   // use-cases
   initializeUseCase: token<InitializeUseCase>("initializeUseCase"),
   saveParticleFluxConfigUseCase: token<SaveParticleFluxConfigUseCase>("saveParticleFluxConfigUseCase"),

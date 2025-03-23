@@ -1,8 +1,8 @@
-import { PathBehaviorConfig } from "particle-flux";
+import { PathConfig } from "particle-flux";
 import { Store } from "../Store";
 
 export class PathBehaviorStore extends Store<{
-  config: PathBehaviorConfig;
+  config: PathConfig;
   enabled: boolean;
 }> {
   constructor() {
@@ -34,13 +34,13 @@ export class PathBehaviorStore extends Store<{
     this.setState({ ...this.state, enabled: false });
   }
 
-  public getActiveConfig(): PathBehaviorConfig | undefined {
+  public getActiveConfig(): PathConfig | undefined {
     if (!this.isEnabled()) return;
 
     return this.state.config;
   }
 
-  public restore(config: PathBehaviorConfig): void {
+  public restore(config: PathConfig): void {
     this.setValue("config", config);
     this.enable();
   }

@@ -1,7 +1,9 @@
 import React from "react";
 import { useToggleLocalStorageSaveUseCaseToken } from "src/di/di.hooks";
 import { useAppConfigStore } from "src/hooks/connectors";
+import { Button, ButtonSize } from "src/ui/kit/Button/Button";
 import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
+import { Divider } from "src/ui/kit/Divider/Divider";
 import { Modal } from "src/ui/kit/Modal/Modal";
 import { Switch } from "src/ui/kit/Switch/Switch";
 import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
@@ -21,6 +23,14 @@ export function AppSettingsModal({ onClose }: Props) {
         <Typography variant={TypographyVariant.H2} className="menu-modal__title">
           Menu
         </Typography>
+
+        <Divider className="menu-modal__divider" />
+
+        <div className="menu-modal__top-bar">
+          <Button size={ButtonSize.Medium} onClick={() => appConfigStore.reset()} className="menu-modal__button">
+            Reset to default
+          </Button>
+        </div>
 
         <div className="menu-modal__option-container">
           <Typography variant={TypographyVariant.P} className="menu-modal__option-title">

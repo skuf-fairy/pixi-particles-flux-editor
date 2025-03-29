@@ -2,6 +2,9 @@ import { injected } from "brandi";
 import { ParticleFullConfig } from "particle-flux";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
+import { AppConfigStoreState } from "src/stores/AppConfigStore/AppConfigStore.types";
+import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
+import { BloomFilterConfigStoreState } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore.types";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
@@ -11,43 +14,55 @@ export class InitializeUseCase {
   constructor(
     private readonly appConfigStore: AppConfigStore,
     private readonly particleFluxConfigStore: ParticleFluxConfigStore,
-    private readonly texturesStore: TexturesStore
+    private readonly texturesStore: TexturesStore,
+    private readonly bloomFilterConfigStore: BloomFilterConfigStore
   ) {}
 
   public init(): void {
-    this.appConfigStore.setValue("isLocalStorageSaveEnabled", this.isAutoSaveEnabled());
+    // this.appConfigStore.setValue("isLocalStorageSaveEnabled", this.isAutoSaveEnabled());
+
+    const appSettings = this.getSavedAppSettings();
+
+    if (appSettings) {
+      this.appConfigStore.setState(appSettings);
+    }
 
     const config = this.getParticleFluxConfig();
 
     if (config) {
       this.particleFluxConfigStore.restore(config);
-    } else {
-      this.setParticleFluxConfig(this.particleFluxConfigStore.getConfig());
     }
 
-    const textures = this.getTexturesConfig();
+    const textures = this.getSavedTexturesConfig();
 
     if (textures) {
       this.texturesStore.setTextures(textures);
-    } else {
-      this.setTexturesConfig(this.texturesStore.getTextureList());
     }
 
+    const bloomFilterConfig = this.getSavedBloomFilterConfig();
+    if (bloomFilterConfig) {
+      this.bloomFilterConfigStore.setState(bloomFilterConfig);
+    }
+
+    this.appConfigStore.subscribe((config) => {
+      this.setSavedAppSettings(config);
+    });
+
     this.particleFluxConfigStore.subscribe((config) => {
-      LocalStorageUtils.setItem(LocalStorageKeys.Config, config);
+      this.setParticleFluxConfig(config);
     });
 
     this.texturesStore.subscribe(() => {
-      LocalStorageUtils.setItem(LocalStorageKeys.Textures, this.texturesStore.getTextureList());
+      this.setTexturesConfig(this.texturesStore.getTextureList());
+    });
+
+    this.bloomFilterConfigStore.subscribe((config) => {
+      LocalStorageUtils.setItem(LocalStorageKeys.BloomFilter, config);
     });
   }
 
   private isAutoSaveEnabled(): boolean {
-    const isSavedOption = LocalStorageUtils.getItem<boolean>(LocalStorageKeys.AutoSave);
-
-    if (isSavedOption === undefined) return true;
-
-    return isSavedOption;
+    return this.appConfigStore.isLocalStorageSaveEnabled();
   }
 
   public getParticleFluxConfig(): ParticleFullConfig | undefined {
@@ -66,9 +81,27 @@ export class InitializeUseCase {
     }
   }
 
-  private getTexturesConfig(): ParticleTexture[] | undefined {
+  private setSavedAppSettings(config: AppConfigStoreState): void {
+    LocalStorageUtils.setItem(LocalStorageKeys.AppSettings, config);
+  }
+
+  private getSavedTexturesConfig(): ParticleTexture[] | undefined {
     return LocalStorageUtils.getItem(LocalStorageKeys.Textures);
+  }
+
+  private getSavedBloomFilterConfig(): BloomFilterConfigStoreState | undefined {
+    return LocalStorageUtils.getItem(LocalStorageKeys.BloomFilter);
+  }
+
+  private getSavedAppSettings(): AppConfigStoreState | undefined {
+    return LocalStorageUtils.getItem(LocalStorageKeys.AppSettings);
   }
 }
 
-injected(InitializeUseCase, DI_TOKENS.appConfigStore, DI_TOKENS.particleFluxConfigStore, DI_TOKENS.texturesStore);
+injected(
+  InitializeUseCase,
+  DI_TOKENS.appConfigStore,
+  DI_TOKENS.particleFluxConfigStore,
+  DI_TOKENS.texturesStore,
+  DI_TOKENS.bloomFilterConfigStore
+);

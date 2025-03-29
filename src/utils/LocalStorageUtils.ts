@@ -3,7 +3,8 @@ import { JSONUtils } from "./JSONUtils";
 export enum LocalStorageKeys {
   Config = "particle-flux-config",
   Textures = "particle-flux-textures",
-  AutoSave = "auto-save-enabled",
+  BloomFilter = "bloom-filter-option",
+  AppSettings = "app-settings",
 }
 
 export class LocalStorageUtils {

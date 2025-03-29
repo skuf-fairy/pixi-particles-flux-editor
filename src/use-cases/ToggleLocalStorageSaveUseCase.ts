@@ -8,7 +8,6 @@ export class ToggleLocalStorageSaveUseCase {
 
   public toggle = (isEnabled: boolean): void => {
     if (isEnabled) {
-      this.enableAutoSave();
       this.appConfigStore.setValue("isLocalStorageSaveEnabled", true);
     } else {
       this.disableAutoSave();
@@ -16,13 +15,7 @@ export class ToggleLocalStorageSaveUseCase {
     }
   };
 
-  public enableAutoSave(): void {
-    LocalStorageUtils.setItem(LocalStorageKeys.AutoSave, true);
-  }
-
   public disableAutoSave(): void {
-    LocalStorageUtils.setItem(LocalStorageKeys.AutoSave, false);
-
     LocalStorageUtils.dropItem(LocalStorageKeys.Config);
     LocalStorageUtils.dropItem(LocalStorageKeys.Textures);
   }

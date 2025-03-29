@@ -5,7 +5,7 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
   constructor() {
     super({
       backgroundColor: "#475b60",
-      isLocalStorageSaveEnabled: false,
+      isLocalStorageSaveEnabled: true,
       isFollowPointer: true,
     });
   }

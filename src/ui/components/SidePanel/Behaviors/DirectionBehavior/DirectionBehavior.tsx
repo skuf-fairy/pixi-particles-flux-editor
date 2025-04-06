@@ -13,22 +13,7 @@ export function DirectionBehavior() {
 
   return (
     <ItemContainer>
-      <BehaviorHeader
-        left={
-          <BehaviorName
-            name="Direction"
-            isEnabled={store.isEnabled()}
-            onEnabledChange={(isEnabled: boolean) => {
-              if (isEnabled) {
-                store.enable();
-              } else {
-                store.disable();
-              }
-            }}
-          />
-        }
-        right={null}
-      />
+      <BehaviorHeader left={<BehaviorName name="Direction" />} right={null} />
 
       <FieldsGrid>
         <NumberOption

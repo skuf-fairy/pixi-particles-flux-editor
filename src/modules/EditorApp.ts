@@ -1,24 +1,13 @@
 import { injected } from "brandi";
-import {
-  ParticleEmitter,
-  Point2d,
-  SpawnShapeBehavior,
-  SpawnShapeType,
-  ViewContainer,
-  ViewParticle,
-  isSinglePolygonalChain,
-} from "particle-flux";
+import { ParticleEmitter, Point2d, SpawnShapeBehavior, SpawnShapeType, isSinglePolygonalChain } from "particle-flux";
 import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
   Assets,
   Container,
-  ContainerChild,
   FederatedPointerEvent,
   Graphics,
   Particle,
-  ParticleContainer,
-  IParticle as PixiParticle,
   Point,
   Sprite,
   Texture,
@@ -30,55 +19,8 @@ import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
-import { SPAWN_SHAPE_STROKE } from "./EditorApp.constants";
-
-class ContainerAdapter implements ViewContainer<ParticleAdapter> {
-  constructor(private readonly container: ParticleContainer) {}
-
-  addChild(children: ParticleAdapter): void {
-    this.container.addParticle(children.particle);
-  }
-
-  removeChild(children: ParticleAdapter): void {
-    this.container.removeParticle(children.particle);
-  }
-}
-
-class ParticleAdapter implements ViewParticle {
-  constructor(public readonly particle: PixiParticle) {}
-
-  get position(): Point2d {
-    return { x: this.particle.x, y: this.particle.y };
-  }
-
-  set position(pos: Point2d) {
-    this.particle.x = pos.x;
-    this.particle.y = pos.y;
-  }
-
-  set scale(value: Point2d) {
-    this.particle.scaleX = value.x;
-    this.particle.scaleY = value.y;
-  }
-
-  set alpha(value: number) {
-    this.particle; // todo
-  }
-
-  set tint(value: string | number) {
-    if (typeof value === "number") {
-      this.particle.color = value;
-    }
-  }
-
-  set angle(angle: number) {
-    this.particle.rotation = angle; // todo
-  }
-
-  set destroyed(value: boolean) {
-    this.particle; // todo
-  }
-}
+import { SPAWN_SHAPE_STROKE, UPDATE_PARTICLE_COUNT_INTERVAL } from "./EditorApp.constants";
+import { ParticleAdapter } from "./ParticleAdapter";
 
 export class EditorApp {
   private app: Application;
@@ -87,6 +29,7 @@ export class EditorApp {
   private background: Graphics;
   private particlesContainer: Container;
   private spawnShape: Graphics;
+  private updateInterval: number;
 
   constructor(
     private readonly particleFluxConfigStore: ParticleFluxConfigStore,
@@ -95,7 +38,9 @@ export class EditorApp {
     private readonly spawnShapeStore: SpawnShapeBehaviorStore,
     private readonly bloomFilterConfigStore: BloomFilterConfigStore,
     private readonly performanceStore: PerformanceStore
-  ) {}
+  ) {
+    this.updateInterval = -1;
+  }
 
   public async init(containerNode: HTMLElement) {
     const { width: widthContainer, height: heightContainer } = containerNode.getBoundingClientRect();
@@ -142,9 +87,9 @@ export class EditorApp {
     // this.particlesContainer = new ParticleContainer({
     //   dynamicProperties: {
     //     position: true,
-    //     scale: true,
-    //     rotation: true,
-    //     tint: true,
+    //     scale: false,
+    //     rotation: false,
+    //     tint: false,
     //   },
     // });
 
@@ -156,7 +101,25 @@ export class EditorApp {
     // this.particlesEmitter = new ParticleEmitter<ParticleAdapter>(
     //   new ContainerAdapter(this.particlesContainer as any),
     //   this.texturesStore.getTextureList().map((t) => () => this.createParticle(Texture.from(t.url))),
-    //   this.particleFluxConfigStore.getState()
+    //   {
+    //     emitterConfig: {
+    //       spawnInterval: 250,
+    //       spawnParticlesPerWave: 1000,
+    //       autoStart: true,
+    //     },
+    //     particleConfig: {
+    //       lifeTime: {
+    //         value: 600000,
+    //       },
+    //       speed: {
+    //         value: 3,
+    //       },
+    //       direction: {
+    //         minAngle: 0,
+    //         maxAngle: 360,
+    //       },
+    //     },
+    //   }
     // );
     // this.particlesEmitter.fillPool(50000);
 
@@ -164,29 +127,28 @@ export class EditorApp {
       //@ts-ignore
       this.particlesContainer,
       this.texturesStore.getTextureList().map((t) => () => this.createParticleSprite(Texture.from(t.url))),
-      this.particleFluxConfigStore.getState()
+      this.particleFluxConfigStore.getConfig()
       // {
       //   emitterConfig: {
+      //     spawnInterval: 250,
+      //     spawnParticlesPerWave: 1000,
       //     autoStart: true,
-      //     spawnInterval: 1000,
       //   },
       //   particleConfig: {
       //     lifeTime: {
-      //       value: 10000,
+      //       value: 600000,
       //     },
       //     speed: {
-      //       value: 1,
+      //       value: 3,
       //     },
       //     direction: {
       //       minAngle: 0,
       //       maxAngle: 360,
       //     },
-      //     alpha: {
-      //       value: 0.5,
-      //     },
       //   },
       // }
     );
+    this.particlesEmitter.fillPool(20);
 
     this.setEmitterPosByCenter();
 
@@ -202,10 +164,6 @@ export class EditorApp {
 
       this.particlesEmitter.restart();
     });
-
-    window.setInterval(() => {
-      this.performanceStore.setParticlesCount(this.particlesEmitter.getParticlesCount());
-    }, 100);
 
     this.texturesStore.subscribe(() => {
       const textures = this.texturesStore.getTextureList();
@@ -238,10 +196,18 @@ export class EditorApp {
         state.isDisplayShape
       );
     });
+
+    this.updateParticleCount();
   }
 
   public restart(): void {
     this.particlesEmitter.restart();
+  }
+
+  private updateParticleCount(): void {
+    this.updateInterval = window.setInterval(() => {
+      this.performanceStore.setParticlesCount(this.particlesEmitter.getParticlesCount());
+    }, UPDATE_PARTICLE_COUNT_INTERVAL);
   }
 
   private enableFollowPointer() {
@@ -340,6 +306,7 @@ export class EditorApp {
 
   public destroy() {
     this.app.destroy();
+    window.clearInterval(this.updateInterval);
   }
 }
 

@@ -35,13 +35,26 @@ export function SidePanel() {
       </div>
 
       <Typography variant={TypographyVariant.H2} className="side-panel__title">
+        Spawn properties
+      </Typography>
+
+      <div className="side-panel__behaviors-item">
+        <LifetimeBehavior />
+      </div>
+
+      <div className="side-panel__behaviors-item">
+        <DirectionBehavior />
+      </div>
+
+      <div className="side-panel__behaviors-item">
+        <SpawnShapeBehavior />
+      </div>
+
+      <Typography variant={TypographyVariant.H2} className="side-panel__title">
         Behaviors
       </Typography>
 
       <div className="side-panel__behaviors">
-        <div className="side-panel__behaviors-item">
-          <LifetimeBehavior />
-        </div>
         <div className="side-panel__behaviors-item">
           <ScaleBehavior />
         </div>
@@ -52,9 +65,6 @@ export function SidePanel() {
           <SpeedBehavior />
         </div>
         <div className="side-panel__behaviors-item">
-          <DirectionBehavior />
-        </div>
-        <div className="side-panel__behaviors-item">
           <ColorBehavior />
         </div>
         <div className="side-panel__behaviors-item">
@@ -62,9 +72,6 @@ export function SidePanel() {
         </div>
         <div className="side-panel__behaviors-item">
           <GravityBehavior />
-        </div>
-        <div className="side-panel__behaviors-item">
-          <SpawnShapeBehavior />
         </div>
         <div className="side-panel__behaviors-item">
           <PathBehavior />

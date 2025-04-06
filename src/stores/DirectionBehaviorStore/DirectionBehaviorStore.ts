@@ -12,7 +12,6 @@ export class DirectionBehaviorStore extends Store<{
   staticConfig: StaticDirectionConfig;
   activeType: BehaviorType;
   availableTypes: BehaviorType[];
-  enabled: boolean;
 }> {
   constructor() {
     super({
@@ -25,7 +24,6 @@ export class DirectionBehaviorStore extends Store<{
       },
       activeType: BehaviorType.Dynamic,
       availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],
-      enabled: true,
     });
   }
 
@@ -43,21 +41,7 @@ export class DirectionBehaviorStore extends Store<{
     });
   }
 
-  public isEnabled(): boolean {
-    return this.state.enabled;
-  }
-
-  public enable(): void {
-    this.setState({ ...this.state, enabled: true });
-  }
-
-  public disable(): void {
-    this.setState({ ...this.state, enabled: false });
-  }
-
   public getActiveConfig(): DirectionConfig | undefined {
-    if (!this.isEnabled()) return;
-
     if (this.state.activeType === BehaviorType.Static) {
       return this.state.staticConfig;
     }
@@ -70,10 +54,8 @@ export class DirectionBehaviorStore extends Store<{
   public restore(config: DirectionConfig): void {
     if (isDirectionRangeBehaviorConfig(config)) {
       this.setRangeAngle(config);
-      this.enable();
     } else if (isDirectionRangeBehaviorConfig(config)) {
       this.setStaticAngle(config);
-      this.enable();
     }
   }
 }

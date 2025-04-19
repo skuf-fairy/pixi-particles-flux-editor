@@ -9,7 +9,7 @@ export class EmitterConfigStore extends Store<EmitterConfig> {
       maxParticles: 500,
       spawnChance: 100,
       spawnTimeout: 0,
-      spawnTime: 60000,
+      spawnTime: 6000000,
       autoStart: true,
     });
   }

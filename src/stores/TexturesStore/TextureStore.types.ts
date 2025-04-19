@@ -3,6 +3,8 @@ export enum CollectionTexture {
   Wave = "Wave",
   Star = "Star",
   BloomParticle = "BloomParticle",
+  Sparkle = "Sparkle",
+  Trail = "Trail",
 }
 
 export interface ParticleTexture {

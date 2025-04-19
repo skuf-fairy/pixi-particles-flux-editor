@@ -1,5 +1,5 @@
 import { injected } from "brandi";
-import { ParticleFullConfig } from "particle-flux";
+import { ParticleEmitterConfig } from "particle-flux";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { AppConfigStoreState } from "src/stores/AppConfigStore/AppConfigStore.types";
@@ -65,8 +65,8 @@ export class InitializeUseCase {
     return this.appConfigStore.isLocalStorageSaveEnabled();
   }
 
-  public getParticleFluxConfig(): ParticleFullConfig | undefined {
-    return LocalStorageUtils.getItem<ParticleFullConfig>(LocalStorageKeys.Config);
+  public getParticleFluxConfig(): ParticleEmitterConfig | undefined {
+    return LocalStorageUtils.getItem<ParticleEmitterConfig>(LocalStorageKeys.Config);
   }
 
   private setTexturesConfig(textures: ParticleTexture[]): void {
@@ -75,7 +75,7 @@ export class InitializeUseCase {
     }
   }
 
-  private setParticleFluxConfig(config: ParticleFullConfig): void {
+  private setParticleFluxConfig(config: ParticleEmitterConfig): void {
     if (this.isAutoSaveEnabled()) {
       LocalStorageUtils.setItem(LocalStorageKeys.Config, config);
     }

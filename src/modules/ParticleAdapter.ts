@@ -49,4 +49,12 @@ export class ParticleAdapter implements ViewParticle {
       this.particle.alpha = 0;
     }
   }
+
+  get width(): number {
+    return 0;
+  }
+
+  get height(): number {
+    return 0;
+  }
 }

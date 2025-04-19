@@ -1,7 +1,7 @@
 import { injected } from "brandi";
 import {
   AlphaBehaviorConfig,
-  ParticleFullConfig,
+  ParticleEmitterConfig,
   RotationBehaviorConfig,
   ScaleBehaviorConfig,
   SpawnPositionConfig,
@@ -18,7 +18,7 @@ import { PathBehaviorStore } from "./PathBehaviorStore/PathBehaviorStore";
 import { SpawnShapeBehaviorStore } from "./SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { Store } from "./Store";
 
-export class ParticleFluxConfigStore extends Store<ParticleFullConfig> {
+export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
   constructor(
     private readonly emitterConfigStore: EmitterConfigStore,
     private readonly alphaBehaviorStore: BehaviorStore,
@@ -173,11 +173,9 @@ export class ParticleFluxConfigStore extends Store<ParticleFullConfig> {
     this.rotationBehaviorStore.reset();
     this.gravityBehaviorStore.reset();
     this.pathBehaviorStore.reset();
-
-    console.log(this.state);
   }
 
-  public restore(config: ParticleFullConfig): void {
+  public restore(config: ParticleEmitterConfig): void {
     this.emitterConfigStore.restore(config.emitterConfig);
 
     const { alpha, color, direction, gravity, lifeTime, path, rotation, scale, spawnPosition, spawnShape, speed } =
@@ -227,7 +225,7 @@ export class ParticleFluxConfigStore extends Store<ParticleFullConfig> {
     }
   }
 
-  public getConfig(): ParticleFullConfig {
+  public getConfig(): ParticleEmitterConfig {
     return this.state;
   }
 }

@@ -1,0 +1,6 @@
+.color-dynamic-behavior {
+  &__title {
+    margin-bottom: var(--gap-half);
+    color: var(--primary-text-color);
+  }
+}

@@ -10,6 +10,7 @@ import { BehaviorType } from "../types";
 export class DirectionBehaviorStore extends Store<{
   rangeConfig: DirectionRangeConfig;
   staticConfig: StaticDirectionConfig;
+  isRotateByDirection: boolean;
   activeType: BehaviorType;
   availableTypes: BehaviorType[];
 }> {
@@ -22,9 +23,18 @@ export class DirectionBehaviorStore extends Store<{
       staticConfig: {
         angle: 0,
       },
+      isRotateByDirection: false,
       activeType: BehaviorType.Dynamic,
       availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],
     });
+  }
+
+  public isFollowDirection(): boolean {
+    return this.state.isRotateByDirection;
+  }
+
+  public toggleFollowDirection(): void {
+    this.setValue("isRotateByDirection", !this.isFollowDirection());
   }
 
   public setRangeAngle(config: DirectionRangeConfig): void {
@@ -43,11 +53,11 @@ export class DirectionBehaviorStore extends Store<{
 
   public getActiveConfig(): DirectionConfig | undefined {
     if (this.state.activeType === BehaviorType.Static) {
-      return this.state.staticConfig;
+      return { ...this.state.staticConfig, isRotateByDirection: this.state.isRotateByDirection };
     }
 
     if (this.state.activeType === BehaviorType.Dynamic) {
-      return this.state.rangeConfig;
+      return { ...this.state.rangeConfig, isRotateByDirection: this.state.isRotateByDirection };
     }
   }
 

@@ -1,0 +1,8 @@
+.boolean-value {
+  display: flex;
+  align-items: center;
+
+  &__label {
+    margin-right: var(--gap-half);
+  }
+}

@@ -1,6 +1,6 @@
 import { VectorBehaviorConfig, isScalarDynamicBehavior } from "particle-flux";
 import React from "react";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { ScalarDynamicBehaviorOption } from "../ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
 import { ScalarStaticBehaviorOption } from "../ScalarStaticBehavior/ScalarStaticBehaviorOption";
 import "./VectorBehaviorOption.style.scss";
@@ -14,7 +14,11 @@ export function VectorBehaviorOption({ config, onChange }: Props) {
   return (
     <div className="vector-behavior-option">
       <div className="vector-behavior-option__item">
-        <Typography variant={TypographyVariant.H3} className="vector-behavior-option__coordinate">
+        <Typography
+          color={TypographyColor.PrimaryTitle}
+          variant={TypographyVariant.H3}
+          className="vector-behavior-option__coordinate"
+        >
           X
         </Typography>
 
@@ -25,7 +29,11 @@ export function VectorBehaviorOption({ config, onChange }: Props) {
         )}
       </div>
       <div className="vector-behavior-option__item">
-        <Typography variant={TypographyVariant.H3} className="vector-behavior-option__coordinate">
+        <Typography
+          color={TypographyColor.PrimaryTitle}
+          variant={TypographyVariant.H3}
+          className="vector-behavior-option__coordinate"
+        >
           Y
         </Typography>
 

@@ -4,6 +4,7 @@ import { FieldsGrid } from "../../FieldsGrid/FieldsGrid";
 import { NumberOption } from "../../NumberOption/NumberOption";
 import { BehaviorHeader } from "../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../BehaviorName/BehaviorName";
+import { BehaviorEnabled } from "../Behaviors/BehaviorEnabled/BehaviorEnabled";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
 import "./BloomFilterConfig.style.scss";
 
@@ -14,11 +15,11 @@ export function BloomFilterConfig() {
   return (
     <ItemContainer>
       <BehaviorHeader
-        left={
-          <BehaviorName
-            name="Bloom Filter"
+        left={<BehaviorName name="Bloom Filter" />}
+        right={
+          <BehaviorEnabled
             isEnabled={store.isEnabled()}
-            onEnabledChange={(isEnabled: boolean) => {
+            onChange={(isEnabled: boolean) => {
               if (isEnabled) {
                 store.enable();
               } else {
@@ -27,8 +28,8 @@ export function BloomFilterConfig() {
             }}
           />
         }
-        right={null}
       />
+
       <FieldsGrid>
         {options.threshold && (
           <NumberOption

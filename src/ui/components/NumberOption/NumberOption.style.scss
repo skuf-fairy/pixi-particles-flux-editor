@@ -4,6 +4,9 @@
 
   &__title {
     margin-bottom: var(--gap-half);
-    color: var(--primary-text-color);
+  }
+
+  &__input {
+    width: min(100%, 157px);
   }
 }

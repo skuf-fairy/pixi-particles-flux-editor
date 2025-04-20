@@ -160,8 +160,6 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
   }
 
   public reset(): void {
-    // super.reset();
-
     this.emitterConfigStore.reset();
     this.alphaBehaviorStore.reset();
     this.scaleBehaviorStore.reset();
@@ -209,9 +207,6 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
 
     if (scale) {
       this.scaleBehaviorStore.restore(scale);
-    }
-
-    if (spawnPosition) {
       // todo
       // this.spawnShapeBehaviorStore.restore(config.particleConfig.scale);
     }

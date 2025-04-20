@@ -1,13 +1,13 @@
-import { ScalarDynamicBehaviorConfig, ScalarStaticBehaviorConfig, TimeScriptConfig } from "particle-flux";
 import React from "react";
 import { useSpeedBehaviorStore } from "src/hooks/connectors";
 import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
 import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
 import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
-import { ScriptBehaviorOption } from "../../../ScriptBehaviorOption/ScriptBehaviorOption";
+import { NumberScriptBehaviorOption } from "../../../NumberScriptBehaviorOption/NumberScriptBehaviorOption";
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
+import { BehaviorEnabled } from "../BehaviorEnabled/BehaviorEnabled";
 
 export function SpeedBehavior() {
   const store = useSpeedBehaviorStore();
@@ -16,25 +16,25 @@ export function SpeedBehavior() {
   return (
     <ItemContainer>
       <BehaviorHeader
-        left={
-          <BehaviorName
-            name="Speed"
-            isEnabled={store.isEnabled()}
-            onEnabledChange={(isEnabled: boolean) => {
-              if (isEnabled) {
-                store.enable();
-              } else {
-                store.disable();
-              }
-            }}
-          />
-        }
+        left={<BehaviorName name="Speed" />}
         right={
-          <BehaviorTypeSelect
-            type={store.state.activeType}
-            availableTypes={state.availableTypes}
-            onChange={(t) => store.setActiveConfigType(t)}
-          />
+          <>
+            <BehaviorTypeSelect
+              type={store.state.activeType}
+              availableTypes={state.availableTypes}
+              onChange={(t) => store.setActiveConfigType(t)}
+            />
+            <BehaviorEnabled
+              isEnabled={store.isEnabled()}
+              onChange={(isEnabled: boolean) => {
+                if (isEnabled) {
+                  store.enable();
+                } else {
+                  store.disable();
+                }
+              }}
+            />
+          </>
         }
       />
 
@@ -57,11 +57,11 @@ export function SpeedBehavior() {
       )}
 
       {store.isScriptConfigActive() && (
-        <ScriptBehaviorOption
-          script={state.scriptConfig.script}
+        <NumberScriptBehaviorOption
+          config={state.scriptConfig}
           min={0}
           max={Number.MAX_SAFE_INTEGER}
-          onChange={(v) => store.setScriptConfig({ script: v })}
+          onChange={(v) => store.setScriptConfig(v)}
         />
       )}
     </ItemContainer>

@@ -5,7 +5,7 @@ import {
   useRestoreParticleFluxConfigUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,
 } from "src/di/di.hooks";
-import { Button, ButtonSize } from "src/ui/kit/Button/Button";
+import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
 import { ItemContainer } from "../ItemContainer/ItemContainer";
 import "./AppOptions.style.scss";
 
@@ -20,7 +20,12 @@ export function AppOptions() {
   return (
     <ItemContainer>
       <div className="config-options">
-        <Button size={ButtonSize.Medium} onClick={() => inputRef.current?.click()} className="config-options__button">
+        <Button
+          styleType={ButtonStyleType.Primary}
+          size={ButtonSize.Medium}
+          onClick={() => inputRef.current?.click()}
+          className="config-options__button"
+        >
           Restore
           <input
             ref={inputRef}
@@ -31,6 +36,7 @@ export function AppOptions() {
           />
         </Button>
         <Button
+          styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={saveParticleFluxConfigUseCase.save}
           className="config-options__button"
@@ -38,6 +44,7 @@ export function AppOptions() {
           Download
         </Button>
         <Button
+          styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={copyParticleFluxConfigUseCase.copy}
           className="config-options__button"
@@ -45,6 +52,7 @@ export function AppOptions() {
           Copy
         </Button>
         <Button
+          styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={resetParticleFluxConfigUseCase.reset}
           className="config-options__button"

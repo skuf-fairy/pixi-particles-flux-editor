@@ -61,6 +61,7 @@ function createDIContainer(): Container {
               { time: 0, value: 0 },
               { time: 1, value: 1 },
             ],
+            isInterpolate: false,
           },
           activeType: BehaviorType.Static,
           enabled: true,
@@ -87,6 +88,7 @@ function createDIContainer(): Container {
               { time: 0, value: 0 },
               { time: 1, value: 1 },
             ],
+            isInterpolate: false,
           },
           // todo
           vectorConfig: {
@@ -125,6 +127,7 @@ function createDIContainer(): Container {
               { time: 0, value: 0 },
               { time: 1, value: 3 },
             ],
+            isInterpolate: false,
           },
           activeType: BehaviorType.Static,
           availableTypes: [BehaviorType.Dynamic, BehaviorType.Static, BehaviorType.Script],

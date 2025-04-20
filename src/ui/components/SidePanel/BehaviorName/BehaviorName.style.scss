@@ -1,12 +1,3 @@
 .behavior-name {
   display: flex;
-  align-items: center;
-
-  &__switch {
-    margin-left: var(--gap);
-  }
-
-  &__title {
-    color: var(--primary-title-color);
-  }
 }

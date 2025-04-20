@@ -8,9 +8,9 @@ import {
 } from "src/di/di.hooks";
 import { FieldsGrid } from "src/ui/components/FieldsGrid/FieldsGrid";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
-import { Button, ButtonSize } from "src/ui/kit/Button/Button";
+import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
 import { SymbolButton } from "src/ui/kit/SymbolButton/SymbolButton";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import "./PolygonalChain.style.scss";
 
 interface Props {
@@ -27,19 +27,22 @@ export function PolygonalChain({ chainIndex, chain }: Props) {
   return (
     <div className="polygonal-chain">
       <div className="polygonal-chain__header">
-        <Typography variant={TypographyVariant.H3} className="polygonal-chain__title">
+        <Typography
+          color={TypographyColor.PrimaryTitle}
+          variant={TypographyVariant.H3}
+          className="polygonal-chain__title"
+        >
           Chain {chainIndex + 1}
         </Typography>
 
         <Button
+          styleType={ButtonStyleType.Primary}
           size={ButtonSize.Small}
           onClick={() => {
             dropChainUseCase.dropChain(chainIndex);
           }}
         >
-          <Typography variant={TypographyVariant.P} className="polygonal-chain-spawn-shape__button-text">
-            Drop chain
-          </Typography>
+          Drop chain
         </Button>
       </div>
 

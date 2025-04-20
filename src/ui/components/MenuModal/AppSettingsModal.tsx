@@ -1,12 +1,12 @@
 import React from "react";
 import { useToggleLocalStorageSaveUseCaseToken } from "src/di/di.hooks";
 import { useAppConfigStore } from "src/hooks/connectors";
-import { Button, ButtonSize } from "src/ui/kit/Button/Button";
+import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
 import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { Divider } from "src/ui/kit/Divider/Divider";
 import { Modal } from "src/ui/kit/Modal/Modal";
 import { Switch } from "src/ui/kit/Switch/Switch";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import "./AppSettingsModal.style.scss";
 
 interface Props {
@@ -20,20 +20,24 @@ export function AppSettingsModal({ onClose }: Props) {
   return (
     <Modal onClose={onClose}>
       <div className="menu-modal">
-        <Typography variant={TypographyVariant.H2} className="menu-modal__title">
+        <Typography color={TypographyColor.PrimaryTitle} variant={TypographyVariant.H2} className="menu-modal__title">
           Menu
         </Typography>
 
         <Divider className="menu-modal__divider" />
 
         <div className="menu-modal__top-bar">
-          <Button size={ButtonSize.Medium} onClick={() => appConfigStore.reset()} className="menu-modal__button">
+          <Button styleType={ButtonStyleType.Primary} size={ButtonSize.Medium} onClick={() => appConfigStore.reset()}>
             Reset to default
           </Button>
         </div>
 
         <div className="menu-modal__option-container">
-          <Typography variant={TypographyVariant.P} className="menu-modal__option-title">
+          <Typography
+            color={TypographyColor.PrimaryTitle}
+            variant={TypographyVariant.P}
+            className="menu-modal__option-title"
+          >
             Background color
           </Typography>
 
@@ -45,7 +49,11 @@ export function AppSettingsModal({ onClose }: Props) {
         </div>
 
         <div className="menu-modal__option-container">
-          <Typography variant={TypographyVariant.P} className="menu-modal__option-title">
+          <Typography
+            color={TypographyColor.PrimaryTitle}
+            variant={TypographyVariant.P}
+            className="menu-modal__option-title"
+          >
             Autosave
           </Typography>
 
@@ -56,7 +64,11 @@ export function AppSettingsModal({ onClose }: Props) {
         </div>
 
         <div className="menu-modal__option-container">
-          <Typography variant={TypographyVariant.P} className="menu-modal__option-title">
+          <Typography
+            color={TypographyColor.PrimaryTitle}
+            variant={TypographyVariant.P}
+            className="menu-modal__option-title"
+          >
             Follow Pointer
           </Typography>
 

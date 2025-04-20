@@ -22,9 +22,7 @@
   }
 
   &__name {
-    @include text;
     margin-right: var(--gap);
-    color: var(--primary-text-color);
   }
 
   &__delete {

@@ -11,3 +11,21 @@
 .h3-text {
   @include head3;
 }
+
+.h5-text {
+  @include head5;
+}
+
+.typography__color {
+  &-primary-title {
+    color: var(--primary-title-color);
+  }
+
+  &-primary-text {
+    color: var(--primary-text-color);
+  }
+
+  &-secondary-text {
+    color: var(--secondary-text-color);
+  }
+}

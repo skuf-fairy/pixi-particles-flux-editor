@@ -1,6 +1,6 @@
 import cn from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import "./ColorPicker.style.scss";
 
 interface Props {
@@ -19,7 +19,7 @@ export function ColorPicker({ color, onChange, className }: Props) {
 
   return (
     <div className={cn("color-picker", className)}>
-      <Typography variant={TypographyVariant.P} className="color-picker__hex">
+      <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="color-picker__hex">
         {color}
       </Typography>
 

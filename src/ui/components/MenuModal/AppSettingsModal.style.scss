@@ -2,8 +2,7 @@
   padding: var(--gap2x);
 
   &__title {
-    color: var(--primary-title-color);
-    margin-bottom: var(--gap);
+    margin-bottom: var(--gap2x);
   }
 
   &__divider {
@@ -35,9 +34,5 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-  }
-
-  &__button {
-    color: var(--secondary-text-color);
   }
 }

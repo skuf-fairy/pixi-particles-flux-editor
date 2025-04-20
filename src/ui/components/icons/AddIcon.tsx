@@ -4,7 +4,7 @@ interface Props {
   className?: string;
 }
 
-export function Add({ className }: Props) {
+export function AddIcon({ className }: Props) {
   return (
     <svg
       className={className}

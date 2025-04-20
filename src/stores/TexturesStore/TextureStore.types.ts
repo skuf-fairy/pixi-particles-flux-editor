@@ -1,8 +1,8 @@
 export enum CollectionTexture {
-  DefaultParticle = "DefaultParticle",
+  DefaultParticle = "Default Particle",
   Wave = "Wave",
   Star = "Star",
-  BloomParticle = "BloomParticle",
+  BloomParticle = "Bloom Particle",
   Sparkle = "Sparkle",
   Trail = "Trail",
 }

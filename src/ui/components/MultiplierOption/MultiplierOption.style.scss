@@ -1,0 +1,19 @@
+.multiplier-option {
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--gap);
+  }
+
+  &__title {
+    margin-right: var(--gap);
+  }
+
+  &__content {
+    display: flex;
+    gap: var(--gap);
+  }
+}

@@ -1,4 +1,4 @@
-import { TimeScriptConfig } from "particle-flux";
+import { ScriptTimeConfig } from "particle-flux";
 import React from "react";
 import { useColorBehaviorStore } from "src/hooks/connectors";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
@@ -18,7 +18,7 @@ export function ColorScriptBehavior() {
             color={option.value as string}
             onChange={(v) => {
               option.value = v;
-              const script = config.script as TimeScriptConfig<string>;
+              const script = config.script as ScriptTimeConfig<string>;
               store.setScriptConfig({ script: [...script] });
             }}
             className="color-script-behavior__color-picker"
@@ -30,7 +30,7 @@ export function ColorScriptBehavior() {
             max={1}
             onBlur={(v) => {
               option.time = v;
-              const script = config.script as TimeScriptConfig<string>;
+              const script = config.script as ScriptTimeConfig<string>;
               store.setScriptConfig({ script: [...script] });
             }}
             className="color-script-behavior__number-option"
@@ -38,7 +38,7 @@ export function ColorScriptBehavior() {
           <SymbolButton
             onClick={() =>
               store.setScriptConfig({
-                script: config.script.filter((item, n) => key !== n) as TimeScriptConfig<string>,
+                script: config.script.filter((item, n) => key !== n) as ScriptTimeConfig<string>,
               })
             }
             disabled={key === config.script.length - 1 || key === 0}
@@ -50,7 +50,7 @@ export function ColorScriptBehavior() {
 
       <SymbolButton
         onClick={() => {
-          const script = config.script as TimeScriptConfig<string>;
+          const script = config.script as ScriptTimeConfig<string>;
           store.setScriptConfig({ script: [...script, { ...script[config.script.length - 1] }] });
         }}
       >

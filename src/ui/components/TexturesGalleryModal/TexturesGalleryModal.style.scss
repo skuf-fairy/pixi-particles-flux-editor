@@ -1,0 +1,40 @@
+$texturesImageSize: 64px;
+
+.textures-gallery-modal {
+  padding: var(--gap2x);
+
+  &__title {
+    color: var(--primary-title-color);
+    margin-bottom: var(--gap2x);
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--gap);
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--gap2x);
+    border-radius: 8px;
+    border: 1px solid var(--secondary-border-color);
+    width: calc($texturesImageSize + var(--gap2x) * 2);
+    height: 100%;
+  }
+
+  &__image {
+    width: $texturesImageSize;
+    height: $texturesImageSize;
+    object-fit: contain;
+    margin-bottom: var(--gap);
+  }
+
+  &__name {
+    color: var(--primary-text-color);
+    text-align: center;
+  }
+}

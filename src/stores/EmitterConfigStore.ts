@@ -1,34 +1,115 @@
-import { EmitterConfig } from "particle-flux";
+import { EmitterConfig, RangeValue, isRangeValue } from "particle-flux";
 import { Store } from "./Store";
 
-export class EmitterConfigStore extends Store<EmitterConfig> {
+export enum NumberValueType {
+  Static = "Static",
+  Range = "Range",
+}
+
+interface EmitterConfigStoreState {
+  spawnIntervalStatic: number;
+  spawnIntervalRange: RangeValue;
+  spawnIntervalType: NumberValueType;
+  spawnTime: number;
+  spawnTimeout: number;
+  maxParticles: number;
+  spawnParticlesPerWave: number;
+  spawnChance: number;
+}
+
+export class EmitterConfigStore extends Store<EmitterConfigStoreState> {
   constructor() {
     super({
-      spawnInterval: 250,
+      spawnIntervalStatic: 250,
+      spawnIntervalRange: {
+        min: 250,
+        max: 500,
+      },
+      spawnIntervalType: NumberValueType.Static,
       spawnParticlesPerWave: 1,
       maxParticles: 500,
       spawnChance: 100,
       spawnTimeout: 0,
-      spawnTime: 6000000,
-      autoStart: true,
+      spawnTime: 0,
     });
   }
 
   public restore(config: EmitterConfig): void {
     const { spawnChance, spawnParticlesPerWave, maxParticles, spawnInterval, spawnTime, spawnTimeout } = config;
 
-    this.setState({
-      ...this.state,
-      spawnChance,
-      spawnParticlesPerWave,
-      maxParticles,
-      spawnInterval,
-      spawnTime,
-      spawnTimeout,
-    });
+    if (spawnInterval) {
+      if (isRangeValue(spawnInterval)) {
+        this.setValue("spawnIntervalRange", spawnInterval);
+        this.setValue("spawnIntervalType", NumberValueType.Range);
+      } else {
+        this.setValue("spawnIntervalStatic", spawnInterval);
+        this.setValue("spawnIntervalType", NumberValueType.Static);
+      }
+    }
+
+    if (spawnChance) {
+      this.setValue("spawnChance", spawnChance);
+    }
+
+    if (spawnParticlesPerWave) {
+      this.setValue("spawnChance", spawnParticlesPerWave);
+    }
+
+    if (maxParticles) {
+      this.setValue("spawnChance", maxParticles);
+    }
+
+    if (spawnTime) {
+      this.setValue("spawnChance", spawnTime);
+    }
+
+    if (spawnTimeout) {
+      this.setValue("spawnChance", spawnTimeout);
+    }
+  }
+
+  public setActiveSpawnType(type: NumberValueType): void {
+    this.setValue("spawnIntervalType", type);
+  }
+
+  public getSpawnIntervalType(): NumberValueType {
+    return this.state.spawnIntervalType;
+  }
+
+  public getSpawnIntervalRange(): RangeValue {
+    return this.state.spawnIntervalRange;
+  }
+
+  public getSpawnIntervalStatic(): number {
+    return this.state.spawnIntervalStatic;
+  }
+
+  public setSpawnInterval(spawnInterval: RangeValue | number): void {
+    if (isRangeValue(spawnInterval)) {
+      this.setState({
+        ...this.state,
+        spawnIntervalRange: spawnInterval,
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        spawnIntervalStatic: spawnInterval,
+      });
+    }
   }
 
   public getConfig(): EmitterConfig {
-    return this.state;
+    const { spawnIntervalStatic, spawnIntervalRange, spawnIntervalType, ...rest } = this.state;
+
+    if (spawnIntervalType === NumberValueType.Static) {
+      return {
+        spawnInterval: spawnIntervalStatic,
+        ...rest,
+      };
+    }
+    return {
+      spawnInterval: spawnIntervalRange,
+      ...rest,
+    };
   }
 }

@@ -5,6 +5,8 @@ import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
+import { BehaviorEnabled } from "../BehaviorEnabled/BehaviorEnabled";
+import { ColorDynamicBehavior } from "./ColorDynamicBehavior";
 import { ColorScriptBehavior } from "./ColorScriptBehavior";
 
 export function ColorBehavior() {
@@ -13,27 +15,28 @@ export function ColorBehavior() {
   return (
     <ItemContainer>
       <BehaviorHeader
-        left={
-          <BehaviorName
-            name="Color"
-            isEnabled={store.isEnabled()}
-            onEnabledChange={(isEnabled: boolean) => {
-              if (isEnabled) {
-                store.enable();
-              } else {
-                store.disable();
-              }
-            }}
-          />
-        }
+        left={<BehaviorName name="Color" />}
         right={
-          <BehaviorTypeSelect
-            type={store.getState().activeType}
-            availableTypes={store.getState().availableTypes}
-            onChange={(type) => {
-              store.setActiveConfigType(type);
-            }}
-          />
+          <>
+            <BehaviorTypeSelect
+              type={store.getState().activeType}
+              availableTypes={store.getState().availableTypes}
+              onChange={(type) => {
+                store.setActiveConfigType(type);
+              }}
+            />
+
+            <BehaviorEnabled
+              isEnabled={store.isEnabled()}
+              onChange={(isEnabled: boolean) => {
+                if (isEnabled) {
+                  store.enable();
+                } else {
+                  store.disable();
+                }
+              }}
+            />
+          </>
         }
       />
 
@@ -43,6 +46,13 @@ export function ColorBehavior() {
           onChange={(v) => {
             store.setStaticConfig({ value: v });
           }}
+        />
+      )}
+
+      {store.isDynamicConfigActive() && (
+        <ColorDynamicBehavior
+          config={store.state.dynamicConfig}
+          onChange={(config) => store.setDynamicConfig(config)}
         />
       )}
 

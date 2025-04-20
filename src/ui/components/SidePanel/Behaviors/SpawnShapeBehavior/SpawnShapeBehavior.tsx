@@ -1,7 +1,6 @@
 import React from "react";
 import { useSpawnShapeBehaviorStore } from "src/hooks/connectors";
-import { Switch } from "src/ui/kit/Switch/Switch";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { BooleanValue } from "src/ui/components/BooleanValue/BooleanValue";
 import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
 import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
@@ -34,12 +33,11 @@ export function SpawnShapeBehavior() {
         {store.isPolygonShapeActive() && <PolygonalChainSpawnShape chain={polygonalShape.chain} />}
       </div>
 
-      <div className="display-shape">
-        <Typography variant={TypographyVariant.P} className="display-shape__title">
-          Display shape
-        </Typography>
-        <Switch checked={isDisplayShape} onChange={(checked) => store.setDisplayShape(checked)} />
-      </div>
+      <BooleanValue
+        checked={isDisplayShape}
+        label="Display shape"
+        onChange={(checked) => store.setDisplayShape(checked)}
+      />
     </ItemContainer>
   );
 }

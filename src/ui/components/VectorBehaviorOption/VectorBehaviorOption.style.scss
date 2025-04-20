@@ -9,8 +9,7 @@
   }
 
   &__coordinate {
-    color: var(--primary-title-color);
     margin-right: var(--gap2x);
-    margin-bottom: 3px;
+    margin-bottom: var(--gap-half);
   }
 }

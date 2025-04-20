@@ -1,6 +1,7 @@
 import { RangeValue } from "particle-flux/lib/types";
 import React from "react";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
+import { FieldsGrid } from "../../FieldsGrid/FieldsGrid";
 
 interface Props {
   interval: RangeValue;
@@ -9,7 +10,7 @@ interface Props {
 
 export function IntervalRangeValue({ interval, onChange }: Props) {
   return (
-    <>
+    <FieldsGrid>
       <NumberOption
         value={interval.min}
         min={0}
@@ -24,6 +25,6 @@ export function IntervalRangeValue({ interval, onChange }: Props) {
         text="Spawn interval max"
         onBlur={(v) => onChange({ max: v, min: interval.min })}
       />
-    </>
+    </FieldsGrid>
   );
 }

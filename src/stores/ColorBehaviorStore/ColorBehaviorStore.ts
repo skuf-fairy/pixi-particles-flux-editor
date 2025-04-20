@@ -27,7 +27,7 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
       },
       dynamicConfig: {
         start: "#ffffff",
-        end: "#ffffff",
+        end: "#9ed1f0",
       },
       scriptConfig: {
         script: [

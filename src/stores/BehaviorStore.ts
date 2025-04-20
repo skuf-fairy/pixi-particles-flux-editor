@@ -1,6 +1,7 @@
 import {
   DeltaBehaviorConfig,
   EasingName,
+  NumberScriptBehaviorConfig,
   Point2d,
   ScalarDynamicBehaviorConfig,
   ScalarStaticBehaviorConfig,
@@ -9,9 +10,9 @@ import {
   isDeltaBehaviorConfig,
   isScalarDynamicBehavior,
   isScalarStaticBehavior,
-  isScriptBehaviorConfig,
   isVectorBehaviorConfig,
 } from "particle-flux";
+import { isNumberScriptBehaviorConfig } from "particle-flux/lib/core/base-behaviors/script-behavior/number-script-behavior/number-script-behavior.typeguards";
 import { Store } from "./Store";
 import { BehaviorType } from "./types";
 
@@ -19,7 +20,7 @@ export interface BehaviorStoreState {
   dynamicConfig: ScalarDynamicBehaviorConfig;
   staticConfig: ScalarStaticBehaviorConfig;
   vectorConfig: VectorBehaviorConfig;
-  scriptConfig: ScriptBehaviorConfig<number>;
+  scriptConfig: NumberScriptBehaviorConfig;
   deltaConfig: DeltaBehaviorConfig;
   activeType: BehaviorType;
   availableTypes: BehaviorType[];
@@ -30,12 +31,12 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
   constructor(initialState: Partial<BehaviorStoreState>) {
     super({
       staticConfig: {
-        value: 0,
+        value: 1,
         multiplier: 1,
       },
       dynamicConfig: {
         start: 0,
-        end: 0,
+        end: 1,
         easing: EasingName.linear,
         multiplier: 1,
       },
@@ -52,8 +53,10 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
       scriptConfig: {
         script: [
           { value: 0, time: 1 },
+          { value: 0.5, time: 0.5 },
           { value: 0, time: 1 },
         ],
+        isInterpolate: false,
       },
       deltaConfig: {
         value: 0,
@@ -79,9 +82,8 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
     this.setState({ ...this.state, vectorConfig });
   }
 
-  public setScriptConfig(scriptConfig: ScriptBehaviorConfig<number | Point2d>): void {
-    // todo
-    this.setState({ ...this.state, scriptConfig: scriptConfig as ScriptBehaviorConfig<number> });
+  public setScriptConfig(scriptConfig: NumberScriptBehaviorConfig): void {
+    this.setState({ ...this.state, scriptConfig });
   }
 
   public setDeltaConfig(deltaConfig: DeltaBehaviorConfig): void {
@@ -114,7 +116,7 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
   public getActiveConfig():
     | ScalarDynamicBehaviorConfig
     | ScalarStaticBehaviorConfig
-    | ScriptBehaviorConfig<number>
+    | NumberScriptBehaviorConfig
     | VectorBehaviorConfig
     | DeltaBehaviorConfig
     | undefined {
@@ -174,7 +176,7 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
       this.setStaticConfig(config);
       this.setActiveConfigType(BehaviorType.Static);
       this.enable();
-    } else if (isScriptBehaviorConfig(config)) {
+    } else if (isNumberScriptBehaviorConfig(config)) {
       this.setScriptConfig(config);
       this.setActiveConfigType(BehaviorType.Script);
       this.enable();

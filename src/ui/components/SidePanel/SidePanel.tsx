@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { AppOptions } from "./AppOptions/AppOptions";
 import { AlphaBehavior } from "./Behaviors/AlphaBehavior/AlphaBehavior";
 import { ColorBehavior } from "./Behaviors/ColorBehavior/ColorBehavior";
@@ -26,7 +26,7 @@ export function SidePanel() {
         <UploadTextures />
       </div>
 
-      <Typography variant={TypographyVariant.H2} className="side-panel__title">
+      <Typography color={TypographyColor.PrimaryTitle} variant={TypographyVariant.H2} className="side-panel__title">
         Properties
       </Typography>
 
@@ -34,7 +34,7 @@ export function SidePanel() {
         <Properties />
       </div>
 
-      <Typography variant={TypographyVariant.H2} className="side-panel__title">
+      <Typography color={TypographyColor.PrimaryTitle} variant={TypographyVariant.H2} className="side-panel__title">
         Spawn properties
       </Typography>
 
@@ -50,7 +50,7 @@ export function SidePanel() {
         <SpawnShapeBehavior />
       </div>
 
-      <Typography variant={TypographyVariant.H2} className="side-panel__title">
+      <Typography color={TypographyColor.PrimaryTitle} variant={TypographyVariant.H2} className="side-panel__title">
         Behaviors
       </Typography>
 

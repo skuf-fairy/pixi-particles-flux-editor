@@ -29,10 +29,10 @@ export function ScalarDynamicBehaviorOption({ config, onChange, min, max }: Prop
         max={max}
         onBlur={(v) => onChange({ ...config, end: v })}
       />
+      <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({ ...config, easing: v })} />
       {config.multiplier && (
         <MultiplierOption multiplier={config.multiplier} onChange={(v) => onChange({ ...config, multiplier: v })} />
       )}
-      <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({ ...config, easing: v })} />
     </FieldsGrid>
   );
 }

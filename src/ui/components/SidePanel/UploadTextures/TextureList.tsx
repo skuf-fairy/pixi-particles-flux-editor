@@ -1,6 +1,6 @@
 import React from "react";
 import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { DeleteIcon } from "src/ui/kit/icons/DeleteIcon";
 import "./TextureList.style.scss";
 
@@ -16,7 +16,7 @@ export function TextureList({ textureList, onRemove }: Props) {
         <li key={texture.name} className="texture-list__item">
           <img src={texture.url} alt={texture.name} className="texture-list__image" />
 
-          <Typography variant={TypographyVariant.P} className="texture-list__name">
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="texture-list__name">
             {texture.name}
           </Typography>
           <button className="texture-list__delete" onClick={() => onRemove(texture)}>

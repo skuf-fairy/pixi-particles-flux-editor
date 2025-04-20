@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { AppSettingsModal } from "../MenuModal/AppSettingsModal";
 import "./TopBar.style.scss";
 
@@ -10,19 +10,19 @@ export function TopBar() {
     <>
       <header className="top-bar">
         <button onClick={() => setAppSettingsModalOpened(true)} className="top-bar__item">
-          <Typography variant={TypographyVariant.P} className="top-bar__item-text">
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
             Settings
           </Typography>
         </button>
 
         <button className="top-bar__item">
-          <Typography variant={TypographyVariant.P} className="top-bar__item-text">
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
             Examples
           </Typography>
         </button>
 
         <button className="top-bar__item">
-          <Typography variant={TypographyVariant.P} className="top-bar__item-text">
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
             Documentation
           </Typography>
         </button>

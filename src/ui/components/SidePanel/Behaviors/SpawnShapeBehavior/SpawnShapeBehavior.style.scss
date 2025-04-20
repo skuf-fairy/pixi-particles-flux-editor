@@ -1,13 +1,3 @@
-.display-shape {
-  display: flex;
-  align-items: center;
-
-  &__title {
-    color: var(--primary-text-color);
-    margin-right: var(--gap);
-  }
-}
-
 .spawn-shape-behavior {
-  margin-bottom: var(--gap2x);
+  margin-bottom: var(--gap);
 }

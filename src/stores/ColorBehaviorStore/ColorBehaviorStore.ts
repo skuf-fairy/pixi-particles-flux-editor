@@ -111,15 +111,13 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
     if (isColorDynamicBehaviorConfig(config)) {
       this.setDynamicConfig(config);
       this.setActiveConfigType(BehaviorType.Dynamic);
-      this.enable();
     } else if (isColorStaticBehaviorConfig(config)) {
       this.setStaticConfig(config);
       this.setActiveConfigType(BehaviorType.Static);
-      this.enable();
     } else if (isScriptBehaviorConfig(config)) {
       this.setScriptConfig(config);
       this.setActiveConfigType(BehaviorType.Script);
-      this.enable();
     }
+    this.enable();
   }
 }

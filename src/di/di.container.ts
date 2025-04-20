@@ -16,6 +16,7 @@ import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { BehaviorType } from "src/stores/types";
+import { ApplyExampleEmitterConfigUseCase } from "src/use-cases/ApplyExampleEmitterConfigUseCase";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
 import { CopyParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/CopyParticleFluxConfigUseCase";
@@ -195,6 +196,10 @@ function createDIContainer(): Container {
     .toInstance(SelectTextureFromCollectionUseCase)
     .inSingletonScope();
   container.bind(DI_TOKENS.performanceStore).toInstance(PerformanceStore).inSingletonScope();
+  container
+    .bind(DI_TOKENS.applyExampleEmitterConfigUseCase)
+    .toInstance(ApplyExampleEmitterConfigUseCase)
+    .inSingletonScope();
 
   return container;
 }

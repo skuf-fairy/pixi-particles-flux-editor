@@ -14,6 +14,7 @@ import { PathBehaviorStore } from "src/stores/PathBehaviorStore/PathBehaviorStor
 import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
 import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
+import { ApplyExampleEmitterConfigUseCase } from "src/use-cases/ApplyExampleEmitterConfigUseCase";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
 import { CopyParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/CopyParticleFluxConfigUseCase";
@@ -64,4 +65,5 @@ export const DI_TOKENS = {
   dropChainItemPointUseCase: token<DropChainItemPointUseCase>("dropChainItemPointUseCase"),
   changeChainItemPointUseCase: token<ChangeChainItemPointUseCase>("changeChainItemPointUseCase"),
   dropChainUseCase: token<DropChainUseCase>("dropChainUseCase"),
+  applyExampleEmitterConfigUseCase: token<ApplyExampleEmitterConfigUseCase>("applyExampleEmitterConfigUseCase"),
 };

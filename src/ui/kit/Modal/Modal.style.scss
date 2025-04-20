@@ -15,8 +15,9 @@
     position: relative;
     background-color: var(--primary-background-color);
     width: 600px;
-    height: 400px;
+
     border-radius: 16px;
+    overflow: hidden;
   }
 
   &__close-button {

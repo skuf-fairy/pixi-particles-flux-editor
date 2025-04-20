@@ -5,6 +5,10 @@ export enum CollectionTexture {
   BloomParticle = "Bloom Particle",
   Sparkle = "Sparkle",
   Trail = "Trail",
+  RainDrop = "Rain Drop",
+  Fire = "Fire",
+  CartoonSmoke = "Cartoon Smoke",
+  Bubble = "Bubble",
 }
 
 export interface ParticleTexture {

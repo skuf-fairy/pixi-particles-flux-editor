@@ -58,10 +58,10 @@ export class GravityBehaviorStore extends Store<{
 
     switch (this.state.activeType) {
       case BehaviorType.Static:
-        return this.state.scalarDynamicBehaviorConfig;
+        return this.state.scalarStaticBehaviorConfig;
 
       case BehaviorType.Dynamic:
-        return this.state.scalarStaticBehaviorConfig;
+        return this.state.scalarDynamicBehaviorConfig;
     }
   }
 

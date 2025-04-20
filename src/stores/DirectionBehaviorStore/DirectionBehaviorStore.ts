@@ -3,6 +3,7 @@ import {
   DirectionRangeConfig,
   StaticDirectionConfig,
   isDirectionRangeBehaviorConfig,
+  isStaticDirectionBehaviorConfig,
 } from "particle-flux";
 import { Store } from "../Store";
 import { BehaviorType } from "../types";
@@ -10,7 +11,6 @@ import { BehaviorType } from "../types";
 export class DirectionBehaviorStore extends Store<{
   rangeConfig: DirectionRangeConfig;
   staticConfig: StaticDirectionConfig;
-  isRotateByDirection: boolean;
   activeType: BehaviorType;
   availableTypes: BehaviorType[];
 }> {
@@ -19,32 +19,45 @@ export class DirectionBehaviorStore extends Store<{
       rangeConfig: {
         minAngle: 0,
         maxAngle: 360,
+        isRotateByDirection: false,
       },
       staticConfig: {
         angle: 0,
+        isRotateByDirection: false,
       },
-      isRotateByDirection: false,
       activeType: BehaviorType.Dynamic,
       availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],
     });
   }
 
   public isFollowDirection(): boolean {
-    return this.state.isRotateByDirection;
+    return !!this.getActiveConfig()?.isRotateByDirection;
   }
 
   public toggleFollowDirection(): void {
-    this.setValue("isRotateByDirection", !this.isFollowDirection());
+    if (this.state.activeType === BehaviorType.Static) {
+      return this.setStaticConfig({
+        ...this.state.staticConfig,
+        isRotateByDirection: !this.state.rangeConfig.isRotateByDirection,
+      });
+    }
+
+    if (this.state.activeType === BehaviorType.Dynamic) {
+      return this.setRangeConfig({
+        ...this.state.rangeConfig,
+        isRotateByDirection: !this.state.staticConfig.isRotateByDirection,
+      });
+    }
   }
 
-  public setRangeAngle(config: DirectionRangeConfig): void {
+  public setRangeConfig(config: DirectionRangeConfig): void {
     this.setState({
       ...this.state,
       rangeConfig: config,
     });
   }
 
-  public setStaticAngle(config: StaticDirectionConfig): void {
+  public setStaticConfig(config: StaticDirectionConfig): void {
     this.setState({
       ...this.state,
       staticConfig: config,
@@ -53,19 +66,19 @@ export class DirectionBehaviorStore extends Store<{
 
   public getActiveConfig(): DirectionConfig | undefined {
     if (this.state.activeType === BehaviorType.Static) {
-      return { ...this.state.staticConfig, isRotateByDirection: this.state.isRotateByDirection };
+      return this.state.staticConfig;
     }
 
     if (this.state.activeType === BehaviorType.Dynamic) {
-      return { ...this.state.rangeConfig, isRotateByDirection: this.state.isRotateByDirection };
+      return this.state.rangeConfig;
     }
   }
 
   public restore(config: DirectionConfig): void {
     if (isDirectionRangeBehaviorConfig(config)) {
-      this.setRangeAngle(config);
-    } else if (isDirectionRangeBehaviorConfig(config)) {
-      this.setStaticAngle(config);
+      this.setRangeConfig(config);
+    } else if (isStaticDirectionBehaviorConfig(config)) {
+      this.setStaticConfig(config);
     }
   }
 }

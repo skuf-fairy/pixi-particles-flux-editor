@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { ExamplesModal } from "../ExamplesModal/ExamplesModal";
 import { AppSettingsModal } from "../MenuModal/AppSettingsModal";
 import "./TopBar.style.scss";
 
 export function TopBar() {
   const [isAppSettingsModalOpened, setAppSettingsModalOpened] = useState(false);
+  const [isExamplesModalOpened, setExamplesModalOpened] = useState(false);
 
   return (
     <>
@@ -15,7 +17,7 @@ export function TopBar() {
           </Typography>
         </button>
 
-        <button className="top-bar__item">
+        <button onClick={() => setExamplesModalOpened(true)} className="top-bar__item">
           <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
             Examples
           </Typography>
@@ -28,6 +30,7 @@ export function TopBar() {
         </button>
       </header>
       {isAppSettingsModalOpened && <AppSettingsModal onClose={() => setAppSettingsModalOpened(false)} />}
+      {isExamplesModalOpened && <ExamplesModal onClose={() => setExamplesModalOpened(false)} />}
     </>
   );
 }

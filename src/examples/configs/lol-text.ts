@@ -1,6 +1,6 @@
 import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
 
-export const emitterConfig: ParticleEmitterConfig = {
+export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
     spawnInterval: 75,
     spawnParticlesPerWave: 20,
@@ -16,7 +16,8 @@ export const emitterConfig: ParticleEmitterConfig = {
     },
     scale: {
       start: 0.1,
-      end: 0.1 / 3,
+      end: 0.03,
+      multiplier: 10,
     },
     speed: {
       value: 0.05 * 4,

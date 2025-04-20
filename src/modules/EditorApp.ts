@@ -148,7 +148,6 @@ export class EditorApp {
       //   },
       // }
     );
-    this.particlesEmitter.fillPool(20);
 
     this.setEmitterPosByCenter();
 

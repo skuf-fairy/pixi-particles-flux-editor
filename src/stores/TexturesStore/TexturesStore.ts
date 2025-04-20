@@ -16,6 +16,10 @@ export class TexturesStore extends Store<TexturesStoreState> {
     });
   }
 
+  public set(textures: ParticleTexture[]): void {
+    this.setState({ list: textures });
+  }
+
   public add(texture: ParticleTexture): void {
     this.setState({ list: [...this.state.list, texture] });
   }

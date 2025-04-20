@@ -5,6 +5,7 @@ import {
   RotationBehaviorConfig,
   ScaleBehaviorConfig,
   SpawnPositionConfig,
+  SpawnShapeType,
   SpeedBehaviorConfig,
 } from "particle-flux";
 import { DI_TOKENS } from "src/di/di.tokens";
@@ -176,17 +177,23 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
   public restore(config: ParticleEmitterConfig): void {
     this.emitterConfigStore.restore(config.emitterConfig);
 
-    const { alpha, color, direction, gravity, lifeTime, path, rotation, scale, spawnPosition, spawnShape, speed } =
+    const { alpha, color, direction, gravity, lifeTime, path, rotation, scale, spawnShape, speed } =
       config.particleConfig;
 
     this.lifetimeBehaviorStore.restore(lifeTime);
 
     if (alpha) {
       this.alphaBehaviorStore.restore(alpha);
+    } else {
+      this.alphaBehaviorStore.disable();
+      this.alphaBehaviorStore.reset();
     }
 
     if (color) {
       this.colorBehaviorStore.restore(color);
+    } else {
+      this.colorBehaviorStore.disable();
+      this.colorBehaviorStore.reset();
     }
 
     if (direction) {
@@ -195,28 +202,50 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
 
     if (gravity) {
       this.gravityBehaviorStore.restore(gravity);
+    } else {
+      this.gravityBehaviorStore.disable();
+      this.gravityBehaviorStore.reset();
     }
 
     if (path) {
       this.pathBehaviorStore.restore(path);
+    } else {
+      this.pathBehaviorStore.disable();
+      this.pathBehaviorStore.reset();
     }
 
     if (rotation) {
       this.rotationBehaviorStore.restore(rotation);
+    } else {
+      this.rotationBehaviorStore.disable();
+      this.rotationBehaviorStore.reset();
     }
 
     if (scale) {
       this.scaleBehaviorStore.restore(scale);
       // todo
       // this.spawnShapeBehaviorStore.restore(config.particleConfig.scale);
+    } else {
+      this.scaleBehaviorStore.disable();
+      this.scaleBehaviorStore.reset();
     }
 
     if (spawnShape) {
       this.spawnShapeBehaviorStore.restore(spawnShape);
+    } else {
+      this.spawnShapeBehaviorStore.setPointShapeConfig({
+        x: 0,
+        y: 0,
+        type: SpawnShapeType.Point,
+      });
+      this.spawnShapeBehaviorStore.setActiveType(SpawnShapeType.Point);
     }
 
     if (speed) {
       this.speedBehaviorStore.restore(speed);
+    } else {
+      this.speedBehaviorStore.disable();
+      this.speedBehaviorStore.reset();
     }
   }
 

@@ -47,24 +47,24 @@ export class EmitterConfigStore extends Store<EmitterConfigStoreState> {
       }
     }
 
-    if (spawnChance) {
+    if (spawnChance !== undefined) {
       this.setValue("spawnChance", spawnChance);
     }
 
-    if (spawnParticlesPerWave) {
-      this.setValue("spawnChance", spawnParticlesPerWave);
+    if (spawnParticlesPerWave !== undefined) {
+      this.setValue("spawnParticlesPerWave", spawnParticlesPerWave);
     }
 
-    if (maxParticles) {
-      this.setValue("spawnChance", maxParticles);
+    if (maxParticles !== undefined) {
+      this.setValue("maxParticles", maxParticles);
     }
 
-    if (spawnTime) {
-      this.setValue("spawnChance", spawnTime);
+    if (spawnTime !== undefined) {
+      this.setValue("spawnTime", spawnTime);
     }
 
-    if (spawnTimeout) {
-      this.setValue("spawnChance", spawnTimeout);
+    if (spawnTimeout !== undefined) {
+      this.setValue("spawnTimeout", spawnTimeout);
     }
   }
 
@@ -103,13 +103,13 @@ export class EmitterConfigStore extends Store<EmitterConfigStoreState> {
 
     if (spawnIntervalType === NumberValueType.Static) {
       return {
-        spawnInterval: spawnIntervalStatic,
         ...rest,
+        spawnInterval: spawnIntervalStatic,
       };
     }
     return {
-      spawnInterval: spawnIntervalRange,
       ...rest,
+      spawnInterval: spawnIntervalRange,
     };
   }
 }

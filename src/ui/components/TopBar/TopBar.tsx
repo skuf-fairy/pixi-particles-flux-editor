@@ -23,9 +23,12 @@ export function TopBar() {
           </Typography>
         </button>
 
-        <button className="top-bar__item">
+        <button
+          className="top-bar__item"
+          onClick={() => window.open("https://www.npmjs.com/package/particle-flux", "_blank")}
+        >
           <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
-            Documentation
+            NPM
           </Typography>
         </button>
       </header>

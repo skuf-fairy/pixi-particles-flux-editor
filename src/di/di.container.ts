@@ -50,6 +50,7 @@ function createDIContainer(): Container {
         new BehaviorStore({
           staticConfig: {
             value: 1,
+            multiplier: 1,
           },
           dynamicConfig: {
             start: 0,
@@ -77,6 +78,7 @@ function createDIContainer(): Container {
         new BehaviorStore({
           staticConfig: {
             value: 1,
+            multiplier: 1,
           },
           dynamicConfig: {
             start: 0,
@@ -116,6 +118,7 @@ function createDIContainer(): Container {
         new BehaviorStore({
           staticConfig: {
             value: 3,
+            multiplier: 1,
           },
           dynamicConfig: {
             start: 0,
@@ -154,6 +157,7 @@ function createDIContainer(): Container {
           },
           staticConfig: {
             value: 0,
+            multiplier: 1,
           },
           deltaConfig: {
             value: 0,

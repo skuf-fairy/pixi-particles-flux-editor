@@ -1,8 +1,8 @@
 import { ScalarStaticBehaviorConfig } from "particle-flux";
 import React from "react";
-import { FieldsGrid } from "../FieldsGrid/FieldsGrid";
 import { MultiplierOption } from "../MultiplierOption/MultiplierOption";
 import { NumberOption } from "../NumberOption/NumberOption";
+import "./ScalarStaticBehaviorOption.style.scss";
 
 interface Props {
   config: ScalarStaticBehaviorConfig;
@@ -13,7 +13,7 @@ interface Props {
 
 export function ScalarStaticBehaviorOption({ config, onChange, min, max }: Props) {
   return (
-    <FieldsGrid>
+    <div className="scalar-static-behavior-config">
       <NumberOption
         value={config.value}
         text="Value"
@@ -24,6 +24,6 @@ export function ScalarStaticBehaviorOption({ config, onChange, min, max }: Props
       {config.multiplier && (
         <MultiplierOption multiplier={config.multiplier} onChange={(v) => onChange({ ...config, multiplier: v })} />
       )}
-    </FieldsGrid>
+    </div>
   );
 }

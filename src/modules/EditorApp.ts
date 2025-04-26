@@ -157,10 +157,9 @@ export class EditorApp {
 
     this.particlesContainer.filters = [this.bloomFilter];
 
-    console.log(this.particleFluxConfigStore.getConfig());
-
     this.particleFluxConfigStore.subscribe((config) => {
       this.particlesEmitter.config.fullConfig = config;
+
       this.setEmitterPosByCenter();
 
       this.particlesEmitter.restart();
@@ -271,20 +270,30 @@ export class EditorApp {
 
   private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShapeBehavior, isDisplay: boolean) {
     if (spawnShape.type === SpawnShapeType.Point) {
-      this.spawnShape.clear().circle(spawnPosition.x, spawnPosition.y, 1).stroke(SPAWN_SHAPE_STROKE);
+      this.spawnShape
+        .clear()
+        .circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, 1)
+        .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Rectangle) {
       this.spawnShape
         .clear()
-        .rect(spawnPosition.x, spawnPosition.y, spawnShape.width || 1, spawnShape.height || 1)
+        .rect(
+          spawnPosition.x + spawnShape.x,
+          spawnPosition.y + spawnShape.y,
+          spawnShape.width || 1,
+          spawnShape.height || 1
+        )
         .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Torus) {
       this.spawnShape.clear();
 
       if (spawnShape.innerRadius !== undefined && spawnShape.innerRadius !== 0) {
-        this.spawnShape.circle(spawnPosition.x, spawnPosition.y, spawnShape.innerRadius);
+        this.spawnShape.circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, spawnShape.innerRadius);
       }
 
-      this.spawnShape.circle(spawnPosition.x, spawnPosition.y, spawnShape.outerRadius || 1).stroke(SPAWN_SHAPE_STROKE);
+      this.spawnShape
+        .circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, spawnShape.outerRadius || 1)
+        .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Polygon) {
       if (isSinglePolygonalChain(spawnShape.chain)) {
         this.spawnShape

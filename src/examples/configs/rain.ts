@@ -6,9 +6,11 @@ export const RAIN_EMITTER_CONFIG: ParticleEmitterConfig = {
     spawnParticlesPerWave: 5,
   },
   particleConfig: {
+    lifeTime: {
+      value: 1000,
+    },
     speed: {
-      start: 1,
-      end: 1.8,
+      value: 8,
     },
     direction: {
       angle: 65,

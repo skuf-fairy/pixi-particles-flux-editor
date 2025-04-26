@@ -3,8 +3,8 @@ import {
   GravityBehaviorConfig,
   ScalarDynamicBehaviorConfig,
   ScalarStaticBehaviorConfig,
-  isScalarDynamicBehavior,
-  isScalarStaticBehavior,
+  isScalarDynamicBehaviorConfig,
+  isScalarStaticBehaviorConfig,
 } from "particle-flux";
 import { Store } from "../Store";
 import { BehaviorType } from "../types";
@@ -75,11 +75,11 @@ export class GravityBehaviorStore extends Store<{
   public restore(config: GravityBehaviorConfig): void {
     this.reset();
 
-    if (isScalarDynamicBehavior(config)) {
+    if (isScalarDynamicBehaviorConfig(config)) {
       this.setDynamicConfig(config);
       this.setActiveConfigType(BehaviorType.Dynamic);
       this.enable();
-    } else if (isScalarStaticBehavior(config)) {
+    } else if (isScalarStaticBehaviorConfig(config)) {
       this.setStaticConfig(config);
       this.setActiveConfigType(BehaviorType.Static);
       this.enable();

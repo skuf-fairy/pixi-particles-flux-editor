@@ -6,10 +6,10 @@ import { BehaviorName } from "../../BehaviorName/BehaviorName";
 import { ItemContainer } from "../../ItemContainer/ItemContainer";
 import "./SpawnShapeBehavior.style.scss";
 import { SpawnShapeSelect } from "./SpawnShapeSelect";
-import { CircleSpawnShapeBehavior } from "./shapes/CircleSpawnShapeBehavior/CircleSpawnShapeBehavior";
 import { PointSpawnShapeBehavior } from "./shapes/PointSpawnShapeBehavior/PointSpawnShapeBehavior";
 import { PolygonalChainSpawnShape } from "./shapes/PolygonalChainSpawnShape/PolygonalChainSpawnShape";
 import { RectangleSpawnShapeBehavior } from "./shapes/RectangleSpawnShapeBehavior/RectangleSpawnShapeBehavior";
+import { TorusSpawnShapeBehavior } from "./shapes/TorusSpawnShapeBehavior/TorusSpawnShapeBehavior";
 
 export function SpawnShapeBehavior() {
   const store = useSpawnShapeBehaviorStore();
@@ -27,7 +27,7 @@ export function SpawnShapeBehavior() {
           <PointSpawnShapeBehavior config={pointShape} onChange={(v) => store.setPointShapeConfig(v)} />
         )}
         {store.isTorusShapeActive() && (
-          <CircleSpawnShapeBehavior config={circleShape} onChange={(v) => store.setTorusShapeConfig(v)} />
+          <TorusSpawnShapeBehavior config={circleShape} onChange={(v) => store.setTorusShapeConfig(v)} />
         )}
 
         {store.isPolygonShapeActive() && <PolygonalChainSpawnShape chain={polygonalShape.chain} />}

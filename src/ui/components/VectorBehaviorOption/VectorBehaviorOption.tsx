@@ -1,4 +1,4 @@
-import { VectorBehaviorConfig, isScalarDynamicBehavior } from "particle-flux";
+import { VectorBehaviorConfig, isScalarDynamicBehaviorConfig } from "particle-flux";
 import React from "react";
 import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
 import { ScalarDynamicBehaviorOption } from "../ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
@@ -22,7 +22,7 @@ export function VectorBehaviorOption({ config, onChange }: Props) {
           X
         </Typography>
 
-        {isScalarDynamicBehavior(config.x) ? (
+        {isScalarDynamicBehaviorConfig(config.x) ? (
           <ScalarDynamicBehaviorOption config={config.x} onChange={(v) => onChange({ ...config, x: v })} />
         ) : (
           <ScalarStaticBehaviorOption config={config.x} onChange={(v) => onChange({ ...config, x: v })} />
@@ -37,7 +37,7 @@ export function VectorBehaviorOption({ config, onChange }: Props) {
           Y
         </Typography>
 
-        {isScalarDynamicBehavior(config.y) ? (
+        {isScalarDynamicBehaviorConfig(config.y) ? (
           <ScalarDynamicBehaviorOption config={config.y} onChange={(v) => onChange({ ...config, y: v })} />
         ) : (
           <ScalarStaticBehaviorOption config={config.y} onChange={(v) => onChange({ ...config, y: v })} />

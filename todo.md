@@ -1,6 +1,3 @@
-другие фильтры
-примеры
-
 AdvancedBloomFilter -> BloomFilter
 
 адаптивность
@@ -9,7 +6,6 @@ css modules
 loader
 
 фиксация spawn position
-spawnTime
 
 тултипки
 

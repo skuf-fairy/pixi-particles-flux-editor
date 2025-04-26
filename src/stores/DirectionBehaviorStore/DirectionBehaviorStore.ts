@@ -38,14 +38,14 @@ export class DirectionBehaviorStore extends Store<{
     if (this.state.activeType === BehaviorType.Static) {
       return this.setStaticConfig({
         ...this.state.staticConfig,
-        isRotateByDirection: !this.state.rangeConfig.isRotateByDirection,
+        isRotateByDirection: !this.state.staticConfig.isRotateByDirection,
       });
     }
 
     if (this.state.activeType === BehaviorType.Dynamic) {
       return this.setRangeConfig({
         ...this.state.rangeConfig,
-        isRotateByDirection: !this.state.staticConfig.isRotateByDirection,
+        isRotateByDirection: !this.state.rangeConfig.isRotateByDirection,
       });
     }
   }

@@ -8,7 +8,7 @@ interface Props {
   onChange(v: SpawnTorusShape): void;
 }
 
-export function CircleSpawnShapeBehavior({ config, onChange }: Props) {
+export function TorusSpawnShapeBehavior({ config, onChange }: Props) {
   return (
     <FieldsGrid>
       <NumberOption value={config.x} text="x" onBlur={(v) => onChange({ ...config, x: v })} />
@@ -21,7 +21,17 @@ export function CircleSpawnShapeBehavior({ config, onChange }: Props) {
       <NumberOption
         value={config.outerRadius}
         text="Outer radius"
-        onBlur={(v) => onChange({ ...config, innerRadius: v })}
+        onBlur={(v) => onChange({ ...config, outerRadius: v })}
+      />
+      <NumberOption
+        value={config.startAngle || 0}
+        text="Start angle"
+        onBlur={(v) => onChange({ ...config, startAngle: v })}
+      />
+      <NumberOption
+        value={config.endAngle || 360}
+        text="Start angle"
+        onBlur={(v) => onChange({ ...config, endAngle: v })}
       />
     </FieldsGrid>
   );

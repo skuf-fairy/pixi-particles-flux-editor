@@ -32,6 +32,8 @@ export class SpawnShapeBehaviorStore extends Store<{
         y: 0,
         innerRadius: 0,
         outerRadius: 0,
+        startAngle: 0,
+        endAngle: 360,
       },
       rectangleShape: {
         type: SpawnShapeType.Rectangle,

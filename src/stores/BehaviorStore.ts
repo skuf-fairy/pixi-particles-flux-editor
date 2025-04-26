@@ -8,8 +8,8 @@ import {
   ScriptBehaviorConfig,
   VectorBehaviorConfig,
   isDeltaBehaviorConfig,
-  isScalarDynamicBehavior,
-  isScalarStaticBehavior,
+  isScalarDynamicBehaviorConfig,
+  isScalarStaticBehaviorConfig,
   isVectorBehaviorConfig,
 } from "particle-flux";
 import { isNumberScriptBehaviorConfig } from "particle-flux/lib/core/base-behaviors/script-behavior/number-script-behavior/number-script-behavior.typeguards";
@@ -168,11 +168,11 @@ export class BehaviorStore extends Store<BehaviorStoreState> {
       | VectorBehaviorConfig
       | DeltaBehaviorConfig
   ): void {
-    if (isScalarDynamicBehavior(config)) {
+    if (isScalarDynamicBehaviorConfig(config)) {
       this.setDynamicConfig(config);
       this.setActiveConfigType(BehaviorType.Dynamic);
       this.enable();
-    } else if (isScalarStaticBehavior(config)) {
+    } else if (isScalarStaticBehaviorConfig(config)) {
       this.setStaticConfig(config);
       this.setActiveConfigType(BehaviorType.Static);
       this.enable();

@@ -11,13 +11,13 @@ module.exports = (env) => {
 
   return {
     entry: {
-      main: path.join(__dirname, "src/index.ts"),
+      main: path.resolve(__dirname, "src/index.ts"),
     },
     output: {
-      path: path.join(__dirname, "build"),
+      path: path.resolve(__dirname, "build"),
       filename: env.production ? "bundle.min.js" : "bundle.js",
       clean: true,
-      publicPath: "/",
+      publicPath: "./",
     },
     optimization: {
       minimize: env.production,
@@ -39,8 +39,8 @@ module.exports = (env) => {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: path.join(__dirname, "src/styles/fonts"),
-            to: path.join(__dirname, "build/fonts"),
+            from: path.resolve(__dirname, "src/styles/fonts"),
+            to: path.resolve(__dirname, "build/fonts"),
           },
         ],
       }),

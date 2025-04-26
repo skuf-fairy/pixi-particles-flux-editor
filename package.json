@@ -7,7 +7,7 @@
     "build": "webpack --env dev --progress",
     "build_prod": "webpack --env production --progress",
     "typecheck": "tsc --noEmit",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build_prod",
     "deploy": "gh-pages -d build"
   },
   "author": "thisboxforworkismine@gmail.com",

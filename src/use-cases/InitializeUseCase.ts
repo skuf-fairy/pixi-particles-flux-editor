@@ -1,5 +1,6 @@
 import { injected } from "brandi";
 import { ParticleEmitterConfig } from "particle-flux";
+import { DEFAULT_PARTICLE_CONFIG } from "src/constants";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
 import { AppConfigStoreState } from "src/stores/AppConfigStore/AppConfigStore.types";
@@ -31,6 +32,8 @@ export class InitializeUseCase {
 
     if (config) {
       this.particleFluxConfigStore.restore(config);
+    } else {
+      this.particleFluxConfigStore.restore(DEFAULT_PARTICLE_CONFIG);
     }
 
     const textures = this.getSavedTexturesConfig();

@@ -157,6 +157,8 @@ export class EditorApp {
 
     this.particlesContainer.filters = [this.bloomFilter];
 
+    console.log(this.particleFluxConfigStore.getConfig());
+
     this.particleFluxConfigStore.subscribe((config) => {
       this.particlesEmitter.config.fullConfig = config;
       this.setEmitterPosByCenter();

@@ -73,6 +73,8 @@ export class GravityBehaviorStore extends Store<{
   }
 
   public restore(config: GravityBehaviorConfig): void {
+    this.reset();
+
     if (isScalarDynamicBehavior(config)) {
       this.setDynamicConfig(config);
       this.setActiveConfigType(BehaviorType.Dynamic);

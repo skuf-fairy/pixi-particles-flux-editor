@@ -148,6 +148,15 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
         emitterConfig: this.emitterConfigStore.getConfig(),
       });
     });
+    this.pathBehaviorStore.subscribe(() => {
+      this.setState({
+        ...this.state,
+        particleConfig: {
+          ...this.state.particleConfig,
+          path: this.pathBehaviorStore.getActiveConfig(),
+        },
+      });
+    });
   }
 
   public setSpawnPosition(position: SpawnPositionConfig): void {
@@ -186,48 +195,42 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
       this.alphaBehaviorStore.restore(alpha);
     } else {
       this.alphaBehaviorStore.disable();
-      this.alphaBehaviorStore.reset();
     }
 
     if (color) {
       this.colorBehaviorStore.restore(color);
     } else {
       this.colorBehaviorStore.disable();
-      this.colorBehaviorStore.reset();
     }
 
     if (direction) {
       this.directionBehaviorStore.restore(direction);
+    } else {
+      this.directionBehaviorStore.reset();
     }
 
     if (gravity) {
       this.gravityBehaviorStore.restore(gravity);
     } else {
       this.gravityBehaviorStore.disable();
-      this.gravityBehaviorStore.reset();
     }
 
     if (path) {
       this.pathBehaviorStore.restore(path);
     } else {
       this.pathBehaviorStore.disable();
-      this.pathBehaviorStore.reset();
     }
 
     if (rotation) {
       this.rotationBehaviorStore.restore(rotation);
     } else {
       this.rotationBehaviorStore.disable();
-      this.rotationBehaviorStore.reset();
     }
 
     if (scale) {
       this.scaleBehaviorStore.restore(scale);
-      // todo
-      // this.spawnShapeBehaviorStore.restore(config.particleConfig.scale);
     } else {
       this.scaleBehaviorStore.disable();
-      this.scaleBehaviorStore.reset();
     }
 
     if (spawnShape) {
@@ -245,7 +248,6 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
       this.speedBehaviorStore.restore(speed);
     } else {
       this.speedBehaviorStore.disable();
-      this.speedBehaviorStore.reset();
     }
   }
 

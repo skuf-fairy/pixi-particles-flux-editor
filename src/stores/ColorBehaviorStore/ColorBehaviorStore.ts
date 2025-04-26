@@ -118,6 +118,7 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
       this.setScriptConfig(config);
       this.setActiveConfigType(BehaviorType.Script);
     }
+
     this.enable();
   }
 }

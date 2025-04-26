@@ -35,6 +35,8 @@ export class EmitterConfigStore extends Store<EmitterConfigStoreState> {
   }
 
   public restore(config: EmitterConfig): void {
+    this.reset();
+
     const { spawnChance, spawnParticlesPerWave, maxParticles, spawnInterval, spawnTime, spawnTimeout } = config;
 
     if (spawnInterval) {

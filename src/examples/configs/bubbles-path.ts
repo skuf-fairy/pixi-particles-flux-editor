@@ -17,8 +17,7 @@ export const BUBBLES_PATH_EMITTER_CONFIG: ParticleEmitterConfig = {
       value: 0.04 * 6,
     },
     direction: {
-      minAngle: -90,
-      maxAngle: -90,
+      angle: -90,
     },
     path: {
       path: "sin(x/10)*35",

@@ -74,11 +74,19 @@ export class DirectionBehaviorStore extends Store<{
     }
   }
 
+  public setActiveConfigType(type: BehaviorType): void {
+    this.setValue("activeType", type);
+  }
+
   public restore(config: DirectionConfig): void {
+    this.reset();
+
     if (isDirectionRangeBehaviorConfig(config)) {
       this.setRangeConfig(config);
+      this.setActiveConfigType(BehaviorType.Dynamic);
     } else if (isStaticDirectionBehaviorConfig(config)) {
       this.setStaticConfig(config);
+      this.setActiveConfigType(BehaviorType.Static);
     }
   }
 }

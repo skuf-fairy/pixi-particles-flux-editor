@@ -29,6 +29,7 @@ export const TRAIL_EMITTER_CONFIG: ParticleEmitterConfig = {
     direction: {
       minAngle: -150,
       maxAngle: -30,
+      isRotateByDirection: true,
     },
   },
 };

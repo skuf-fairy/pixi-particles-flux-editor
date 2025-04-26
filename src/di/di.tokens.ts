@@ -26,6 +26,7 @@ import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddCh
 import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
 import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
 import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
+import { DownloadTexturesUseCase } from "src/use-cases/textures/DownloadTexturesUseCase";
 import { DropTextureUseCase } from "src/use-cases/textures/DropTextureUseCase";
 import { SelectTextureFromCollectionUseCase } from "src/use-cases/textures/SelectTextureFromCollectionUseCase";
 import { UploadTextureUseCase } from "src/use-cases/textures/UploadTextureUseCase";
@@ -66,4 +67,5 @@ export const DI_TOKENS = {
   changeChainItemPointUseCase: token<ChangeChainItemPointUseCase>("changeChainItemPointUseCase"),
   dropChainUseCase: token<DropChainUseCase>("dropChainUseCase"),
   applyExampleEmitterConfigUseCase: token<ApplyExampleEmitterConfigUseCase>("applyExampleEmitterConfigUseCase"),
+  downloadTexturesUseCase: token<DownloadTexturesUseCase>("downloadTexturesUseCase"),
 };

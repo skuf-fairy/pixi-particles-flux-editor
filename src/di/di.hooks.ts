@@ -35,6 +35,7 @@ const [
   useDropChainUseCaseToken,
   useSelectTextureFromCollectionUseCaseToken,
   useApplyExampleEmitterConfigUseCaseToken,
+  useDownloadTexturesUseCaseToken,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
   //stores
@@ -69,7 +70,8 @@ const [
   DI_TOKENS.changeChainItemPointUseCase,
   DI_TOKENS.dropChainUseCase,
   DI_TOKENS.selectTextureFromCollectionUseCase,
-  DI_TOKENS.applyExampleEmitterConfigUseCase
+  DI_TOKENS.applyExampleEmitterConfigUseCase,
+  DI_TOKENS.downloadTexturesUseCase
 );
 
 export {
@@ -106,4 +108,5 @@ export {
   useDropChainUseCaseToken,
   useSelectTextureFromCollectionUseCaseToken,
   useApplyExampleEmitterConfigUseCaseToken,
+  useDownloadTexturesUseCaseToken,
 };

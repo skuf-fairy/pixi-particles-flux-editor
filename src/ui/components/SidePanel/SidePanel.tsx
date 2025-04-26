@@ -14,7 +14,7 @@ import { SpeedBehavior } from "./Behaviors/SpeedBehavior/SpeedBehavior";
 import { BloomFilterConfig } from "./BloomFilterConfig/BloomFilterConfig";
 import { Properties } from "./Properties/Properties";
 import "./SidePanel.style.scss";
-import { UploadTextures } from "./UploadTextures/UploadTextures";
+import { TexturesConfig } from "./TexturesConfig/TexturesConfig";
 
 export function SidePanel() {
   return (
@@ -23,7 +23,7 @@ export function SidePanel() {
         <div className="side-panel__options">
           <AppOptions />
         </div>
-        <UploadTextures />
+        <TexturesConfig />
       </div>
 
       <Typography color={TypographyColor.PrimaryTitle} variant={TypographyVariant.H2} className="side-panel__title">

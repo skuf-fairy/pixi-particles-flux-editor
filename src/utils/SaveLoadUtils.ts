@@ -1,3 +1,10 @@
+import { saveAs } from "file-saver";
+import JSZip from "jszip";
+import { TEXTURES_ZIP_FILE_NAME } from "src/constants";
+import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
+import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
+import { last } from "./last";
+
 export enum ReaderContentType {
   URL = "URL",
   Text = "Text",
@@ -37,5 +44,41 @@ export class SaveLoadUtils {
     }
 
     return promise;
+  }
+
+  public static async downloadTextures(particleList: ParticleTexture[]): Promise<void> {
+    const zip = new JSZip();
+
+    try {
+      for (const texture of particleList) {
+        const response = await fetch(texture.url);
+
+        if (!response.ok) {
+          // todo error
+          throw new Error("Download Texture Error");
+        }
+
+        const blob = await response.blob();
+
+        let fileType: string;
+        const fileTypeFromName = last(texture.name.split("."));
+
+        if (fileTypeFromName && TexturesStore.availableImageTypes.includes(fileTypeFromName)) {
+          fileType = "";
+        } else {
+          fileType = blob.type.split("/")[1] || TexturesStore.availableImageTypes[0];
+        }
+
+        const fileName = fileType !== "" ? texture.name + "." + fileType : texture.name;
+
+        zip.file(fileName, blob);
+      }
+
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, TEXTURES_ZIP_FILE_NAME);
+    } catch (e) {
+      // todo error
+      throw e;
+    }
   }
 }

@@ -1,20 +1,15 @@
 import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
 
-export const CONFIG_JSON_FILE_NAME = "config.json";
-export const TEXTURES_ZIP_FILE_NAME = "particle-textures.zip";
-
-export const DEFAULT_PARTICLE_CONFIG: ParticleEmitterConfig = {
+export const CRACKER_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
-    spawnParticlesPerWave: 10,
+    spawnParticlesPerWave: 15,
     maxParticles: 500,
     spawnChance: 100,
-    spawnTimeout: 0,
-    spawnTime: 0,
-    spawnInterval: 50,
+    spawnInterval: 1500,
   },
   particleConfig: {
     lifeTime: {
-      value: 800,
+      value: 1400,
     },
     alpha: {
       start: 1,
@@ -23,10 +18,13 @@ export const DEFAULT_PARTICLE_CONFIG: ParticleEmitterConfig = {
     },
     speed: {
       value: 5,
-      multiplier: 1,
+      multiplier: {
+        min: 0.7,
+        max: 2,
+      },
     },
     scale: {
-      value: 0.15,
+      value: 0.4,
       multiplier: 1,
     },
     spawnShape: {
@@ -38,13 +36,15 @@ export const DEFAULT_PARTICLE_CONFIG: ParticleEmitterConfig = {
       value: "#ffffff",
     },
     direction: {
-      minAngle: 0,
-      maxAngle: 360,
-      isRotateByDirection: false,
+      minAngle: -140,
+      maxAngle: -40,
     },
     rotation: {
       value: 0,
       multiplier: 1,
+    },
+    gravity: {
+      value: 0.1,
     },
   },
 };

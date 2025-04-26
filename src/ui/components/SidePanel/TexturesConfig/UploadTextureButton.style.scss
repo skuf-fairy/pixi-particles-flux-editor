@@ -1,13 +1,4 @@
-.upload-input {
-  opacity: 0;
-  position: absolute;
-  left: -1000px;
-  top: -1000px;
-}
-
 .upload-button {
-  margin-right: var(--gap);
-
   &__content {
     display: flex;
     align-items: center;
@@ -26,6 +17,9 @@
   }
 }
 
-.upload-panel {
-  display: flex;
+.upload-input {
+  opacity: 0;
+  position: absolute;
+  left: -1000px;
+  top: -1000px;
 }

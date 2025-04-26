@@ -1,5 +1,6 @@
 import { injected } from "brandi";
 import { Assets } from "pixi.js";
+import { DEFAULT_PARTICLE_CONFIG } from "src/constants";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
 import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
@@ -18,7 +19,7 @@ export class ResetParticleFluxConfigUseCase {
       await Assets.load(texture.url);
     }
 
-    this.particleFluxConfigStore.reset();
+    this.particleFluxConfigStore.restore(DEFAULT_PARTICLE_CONFIG);
   };
 }
 

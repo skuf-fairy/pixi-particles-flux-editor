@@ -8,7 +8,9 @@ export class TexturesStore extends Store<TexturesStoreState> {
     name: CollectionTexture.DefaultParticle,
   };
 
-  static acceptMimeTypes = "image/png, image/jpeg, image/jpg, image/webp, image/avif";
+  static availableImageTypes = ["png", "jpeg", "jpg", "webp", "avif"];
+
+  static acceptMimeTypes = TexturesStore.availableImageTypes.map((type) => "image/" + type);
 
   constructor() {
     super({

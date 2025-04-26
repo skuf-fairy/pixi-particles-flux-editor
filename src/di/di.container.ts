@@ -28,6 +28,7 @@ import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddCh
 import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
 import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
 import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
+import { DownloadTexturesUseCase } from "src/use-cases/textures/DownloadTexturesUseCase";
 import { DropTextureUseCase } from "src/use-cases/textures/DropTextureUseCase";
 import { SelectTextureFromCollectionUseCase } from "src/use-cases/textures/SelectTextureFromCollectionUseCase";
 import { UploadTextureUseCase } from "src/use-cases/textures/UploadTextureUseCase";
@@ -117,19 +118,19 @@ function createDIContainer(): Container {
       () =>
         new BehaviorStore({
           staticConfig: {
-            value: 3,
+            value: 1,
             multiplier: 1,
           },
           dynamicConfig: {
             start: 0,
             end: 1,
-            multiplier: 3,
+            multiplier: 1,
             easing: EasingName.linear,
           },
           scriptConfig: {
             script: [
               { time: 0, value: 0 },
-              { time: 1, value: 3 },
+              { time: 1, value: 1 },
             ],
             isInterpolate: false,
           },
@@ -204,6 +205,7 @@ function createDIContainer(): Container {
     .bind(DI_TOKENS.applyExampleEmitterConfigUseCase)
     .toInstance(ApplyExampleEmitterConfigUseCase)
     .inSingletonScope();
+  container.bind(DI_TOKENS.downloadTexturesUseCase).toInstance(DownloadTexturesUseCase).inSingletonScope();
 
   return container;
 }

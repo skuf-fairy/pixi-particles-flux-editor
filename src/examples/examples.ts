@@ -3,6 +3,7 @@ import { CollectionTexture } from "src/stores/TexturesStore/TextureStore.types";
 import { BUBBLES_EMITTER_CONFIG } from "./configs/bubbles";
 import { BUBBLES_PATH_EMITTER_CONFIG } from "./configs/bubbles-path";
 import { CARTOON_SMOKE_BLAST_EMITTER_CONFIG } from "./configs/cartoon-smoke-blast";
+import { CRACKER_EMITTER_CONFIG } from "./configs/cracker";
 import { FLAME_POLYGON_EMITTER_CONFIG } from "./configs/fire-polygon";
 import { FLAME_EMITTER_CONFIG } from "./configs/flame";
 import { FOUNTAIN_EMITTER_CONFIG } from "./configs/fountain";
@@ -22,6 +23,7 @@ export enum AnimationExample {
   CartoonSmokeBlast = "Cartoon Smoke Blast",
   BubblesPath = "Bubbles Path",
   Bubbles = "Bubbles",
+  Cracker = "Cracker",
 }
 
 export interface Example {
@@ -80,5 +82,10 @@ export const PARTICLE_EMITTER_EXAMPLES: Example[] = [
     name: AnimationExample.BubblesPath,
     config: BUBBLES_PATH_EMITTER_CONFIG,
     textures: [CollectionTexture.Bubble],
+  },
+  {
+    name: AnimationExample.Cracker,
+    config: CRACKER_EMITTER_CONFIG,
+    textures: [CollectionTexture.DefaultParticle],
   },
 ];

@@ -26,6 +26,7 @@ export function UploadTextureButton() {
       <input
         ref={inputRef}
         type="file"
+        // @ts-ignore
         accept={TexturesStore.acceptMimeTypes}
         className="upload-input"
         onChange={uploadTextureUseCase.upload}

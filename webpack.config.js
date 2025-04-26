@@ -10,15 +10,13 @@ module.exports = (env) => {
   });
 
   return {
-    entry: {
-      main: path.resolve(__dirname, "src/index.ts"),
-    },
+    entry: "./src/index.ts",
     output: {
       path: path.resolve(__dirname, "build"),
-      filename: env.production ? "bundle.min.js" : "bundle.js",
+      filename: env.production ? "js/[name].min.js" : "js/bundle.js",
       clean: true,
-      publicPath: "./",
     },
+    mode: env.production,
     optimization: {
       minimize: env.production,
       minimizer: [new TerserPlugin({ parallel: true })],

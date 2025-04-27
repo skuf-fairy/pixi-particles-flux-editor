@@ -1,5 +1,6 @@
 import { injected } from "brandi";
-import { ParticleEmitterConfig } from "particle-flux";
+import { ParticleEmitter, ParticleEmitterConfig } from "particle-flux";
+import { Application, Assets, Sprite, Texture } from "pixi.js";
 import { DEFAULT_PARTICLE_CONFIG } from "src/constants";
 import { DI_TOKENS } from "src/di/di.tokens";
 import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
@@ -19,7 +20,7 @@ export class InitializeUseCase {
     private readonly bloomFilterConfigStore: BloomFilterConfigStore
   ) {}
 
-  public init(): void {
+  public async init(): Promise<void> {
     // this.appConfigStore.setValue("isLocalStorageSaveEnabled", this.isAutoSaveEnabled());
 
     const appSettings = this.getSavedAppSettings();
@@ -31,7 +32,13 @@ export class InitializeUseCase {
     const config = this.getParticleFluxConfig();
 
     if (config) {
-      this.particleFluxConfigStore.restore(config);
+      try {
+        await this.testParticleEmitterConfig(config);
+        this.particleFluxConfigStore.restore(config);
+      } catch {
+        LocalStorageUtils.dropItem(LocalStorageKeys.Config);
+        this.particleFluxConfigStore.restore(DEFAULT_PARTICLE_CONFIG);
+      }
     } else {
       this.particleFluxConfigStore.restore(DEFAULT_PARTICLE_CONFIG);
     }
@@ -98,6 +105,26 @@ export class InitializeUseCase {
 
   private getSavedAppSettings(): AppConfigStoreState | undefined {
     return LocalStorageUtils.getItem(LocalStorageKeys.AppSettings);
+  }
+
+  private async testParticleEmitterConfig(config: ParticleEmitterConfig): Promise<void> {
+    const app = new Application();
+
+    await Assets.load(this.texturesStore.getTextureList().map((t) => t.url));
+
+    await app.init({
+      background: this.appConfigStore.getBackgroundColor(),
+      width: 0,
+      height: 0,
+    });
+
+    try {
+      new ParticleEmitter<Sprite>(app.stage, () => new Sprite(Texture.EMPTY), config);
+    } catch (e) {
+      throw e;
+    } finally {
+      app.destroy();
+    }
   }
 }
 

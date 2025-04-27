@@ -11,9 +11,9 @@ export function Editor() {
 
   useEffect(() => {
     if (containerRef.current) {
-      initUseCase.init();
-
       const initApp = async () => {
+        await initUseCase.init();
+
         if (containerRef.current) {
           await editorApp.init(containerRef.current);
           setReady(true);

@@ -150,7 +150,6 @@ export class EditorApp {
     );
 
     this.setEmitterPosByCenter();
-    console.log(this.particlesEmitter.config.fullConfig);
 
     this.bloomFilter = new AdvancedBloomFilter(this.bloomFilterConfigStore.getOptions());
 

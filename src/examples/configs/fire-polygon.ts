@@ -32,7 +32,7 @@ export const FLAME_POLYGON_EMITTER_CONFIG: ParticleEmitterConfig = {
     },
     spawnShape: {
       shape: {
-        type: SpawnShapeType.Polygon,
+        type: SpawnShapeType.Chain,
         chain: [
           {
             x: -300,

@@ -1,0 +1,15 @@
+.behavior-shape-name {
+  margin-bottom: var(--gap);
+  display: flex;
+  align-items: center;
+
+  &__name {
+    margin-right: var(--gap-half);
+  }
+
+  &__delete-icon {
+    width: 18px;
+    height: 18px;
+    stroke: var(--primary-text-color);
+  }
+}

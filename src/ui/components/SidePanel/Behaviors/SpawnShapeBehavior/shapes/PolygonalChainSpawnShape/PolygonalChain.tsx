@@ -1,80 +1,57 @@
-import { Chain } from "particle-flux";
+import { SpawnChainShape } from "particle-flux";
 import React from "react";
 import {
   useAddChainItemPointUseCaseToken,
   useChangeChainItemPointUseCaseToken,
   useDropChainItemPointUseCaseToken,
-  useDropChainUseCaseToken,
 } from "src/di/di.hooks";
 import { FieldsGrid } from "src/ui/components/FieldsGrid/FieldsGrid";
 import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
-import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
 import { SymbolButton } from "src/ui/kit/SymbolButton/SymbolButton";
-import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
+import { SpawnShapeName } from "../../SpawnShapeName";
 import "./PolygonalChain.style.scss";
 
 interface Props {
-  chainIndex: number;
-  chain: Chain;
+  shape: SpawnChainShape;
+  spawnShapeIndex: number;
 }
 
-export function PolygonalChain({ chainIndex, chain }: Props) {
+export function PolygonalChain({ shape, spawnShapeIndex }: Props) {
   const addChainItemPointUseCase = useAddChainItemPointUseCaseToken();
   const dropChainItemPointUseCase = useDropChainItemPointUseCaseToken();
   const changeChainItemPointUseCase = useChangeChainItemPointUseCaseToken();
-  const dropChainUseCase = useDropChainUseCaseToken();
 
   return (
     <div className="polygonal-chain">
-      <div className="polygonal-chain__header">
-        <Typography
-          color={TypographyColor.PrimaryTitle}
-          variant={TypographyVariant.H3}
-          className="polygonal-chain__title"
-        >
-          Chain {chainIndex + 1}
-        </Typography>
+      <SpawnShapeName title="Chain" spawnShapeIndex={spawnShapeIndex} />
 
-        <Button
-          styleType={ButtonStyleType.Primary}
-          size={ButtonSize.Small}
-          onClick={() => {
-            dropChainUseCase.dropChain(chainIndex);
-          }}
-        >
-          Drop chain
-        </Button>
-      </div>
-
-      {chain.map((point, key) => (
+      {shape.chain.map((point, key) => (
         <FieldsGrid key={key} className="polygonal-chain__item">
           <NumberOption
             value={point.x}
             text="x"
             onBlur={(v) => {
-              changeChainItemPointUseCase.setChainItemPoint(chainIndex, key, { x: v, y: point.y });
+              changeChainItemPointUseCase.setChainItemPoint(spawnShapeIndex, key, { x: v, y: point.y });
             }}
           />
           <NumberOption
             value={point.y}
             text="y"
             onBlur={(v) => {
-              changeChainItemPointUseCase.setChainItemPoint(chainIndex, key, { x: point.x, y: v });
+              changeChainItemPointUseCase.setChainItemPoint(spawnShapeIndex, key, { x: point.x, y: v });
             }}
           />
 
           <SymbolButton
-            onClick={() => dropChainItemPointUseCase.dropChainItemPoint(chainIndex, key)}
-            disabled={key === chain.length - 1 || key === 0}
+            onClick={() => dropChainItemPointUseCase.dropChainItemPoint(spawnShapeIndex, key)}
+            disabled={key === 0 || key === shape.chain.length - 1}
           >
             -
           </SymbolButton>
         </FieldsGrid>
       ))}
 
-      <SymbolButton
-        onClick={() => addChainItemPointUseCase.addChainItemPoint({ ...chain[chain.length - 1] }, chainIndex)}
-      >
+      <SymbolButton onClick={() => addChainItemPointUseCase.addChainItemPoint(spawnShapeIndex, { x: 0, y: 0 })}>
         +
       </SymbolButton>
     </div>

@@ -28,14 +28,14 @@ const [
   useToggleLocalStorageSaveUseCaseToken,
   useUploadTextureUseCaseToken,
   useDropTextureUseCaseToken,
-  useAddChainUseCaseToken,
   useAddChainItemPointUseCaseToken,
   useDropChainItemPointUseCaseToken,
   useChangeChainItemPointUseCaseToken,
-  useDropChainUseCaseToken,
   useSelectTextureFromCollectionUseCaseToken,
   useApplyExampleEmitterConfigUseCaseToken,
   useDownloadTexturesUseCaseToken,
+  useAddSpawnShapeItemToken,
+  useDropSpawnShapeItemToken,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
   //stores
@@ -64,14 +64,14 @@ const [
   DI_TOKENS.toggleLocalStorageSaveUseCase,
   DI_TOKENS.uploadTextureUseCase,
   DI_TOKENS.dropTextureUseCase,
-  DI_TOKENS.addChainUseCase,
   DI_TOKENS.addChainItemPointUseCase,
   DI_TOKENS.dropChainItemPointUseCase,
   DI_TOKENS.changeChainItemPointUseCase,
-  DI_TOKENS.dropChainUseCase,
   DI_TOKENS.selectTextureFromCollectionUseCase,
   DI_TOKENS.applyExampleEmitterConfigUseCase,
-  DI_TOKENS.downloadTexturesUseCase
+  DI_TOKENS.downloadTexturesUseCase,
+  DI_TOKENS.addSpawnShapeItem,
+  DI_TOKENS.dropSpawnShapeItem
 );
 
 export {
@@ -101,12 +101,12 @@ export {
   useToggleLocalStorageSaveUseCaseToken,
   useUploadTextureUseCaseToken,
   useDropTextureUseCaseToken,
-  useAddChainUseCaseToken,
   useAddChainItemPointUseCaseToken,
   useDropChainItemPointUseCaseToken,
   useChangeChainItemPointUseCaseToken,
-  useDropChainUseCaseToken,
   useSelectTextureFromCollectionUseCaseToken,
   useApplyExampleEmitterConfigUseCaseToken,
   useDownloadTexturesUseCaseToken,
+  useAddSpawnShapeItemToken,
+  useDropSpawnShapeItemToken,
 };

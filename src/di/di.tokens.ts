@@ -17,15 +17,15 @@ import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
 import { ApplyExampleEmitterConfigUseCase } from "src/use-cases/ApplyExampleEmitterConfigUseCase";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
+import { AddChainItemPointUseCase } from "src/use-cases/chain-spawn-shape/AddChainItemPointUseCase";
+import { ChangeChainItemPointUseCase } from "src/use-cases/chain-spawn-shape/ChangeChainItemPointUseCase";
+import { DropChainItemPointUseCase } from "src/use-cases/chain-spawn-shape/DropChainItemPointUseCase";
 import { CopyParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/CopyParticleFluxConfigUseCase";
 import { ResetParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/ResetParticleFluxConfigUseCase";
 import { RestoreParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/RestoreParticleFluxConfigUseCase";
 import { SaveParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/SaveParticleFluxConfigUseCase";
-import { AddChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainItemPointUseCase";
-import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainUseCase";
-import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
-import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
-import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
+import { AddSpawnShapeItem } from "src/use-cases/shapes/AddSpawnShapeItem";
+import { DropSpawnShapeItem } from "src/use-cases/shapes/DropSpawnShapeItem";
 import { DownloadTexturesUseCase } from "src/use-cases/textures/DownloadTexturesUseCase";
 import { DropTextureUseCase } from "src/use-cases/textures/DropTextureUseCase";
 import { SelectTextureFromCollectionUseCase } from "src/use-cases/textures/SelectTextureFromCollectionUseCase";
@@ -61,11 +61,11 @@ export const DI_TOKENS = {
   uploadTextureUseCase: token<UploadTextureUseCase>("uploadTextureUseCase"),
   dropTextureUseCase: token<DropTextureUseCase>("dropTextureUseCase"),
   selectTextureFromCollectionUseCase: token<SelectTextureFromCollectionUseCase>("selectTextureFromCollectionUseCase"),
-  addChainUseCase: token<AddChainUseCase>("addChainUseCase"),
   addChainItemPointUseCase: token<AddChainItemPointUseCase>("addChainItemPointUseCase"),
   dropChainItemPointUseCase: token<DropChainItemPointUseCase>("dropChainItemPointUseCase"),
   changeChainItemPointUseCase: token<ChangeChainItemPointUseCase>("changeChainItemPointUseCase"),
-  dropChainUseCase: token<DropChainUseCase>("dropChainUseCase"),
   applyExampleEmitterConfigUseCase: token<ApplyExampleEmitterConfigUseCase>("applyExampleEmitterConfigUseCase"),
   downloadTexturesUseCase: token<DownloadTexturesUseCase>("downloadTexturesUseCase"),
+  addSpawnShapeItem: token<AddSpawnShapeItem>("addSpawnShapeItem"),
+  dropSpawnShapeItem: token<DropSpawnShapeItem>("dropSpawnShapeItem"),
 };

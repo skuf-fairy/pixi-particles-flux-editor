@@ -1,12 +1,5 @@
 import { injected } from "brandi";
-import {
-  ParticleEmitter,
-  Point2d,
-  SpawnShape,
-  SpawnShapeBehavior,
-  SpawnShapeType,
-  isSinglePolygonalChain,
-} from "particle-flux";
+import { ParticleEmitter, Point2d, SpawnShape, SpawnShapeType } from "particle-flux";
 import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
@@ -193,14 +186,14 @@ export class EditorApp {
 
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
-      this.spawnShapeStore.getActiveConfig().shape,
+      this.spawnShapeStore.getShapeList(),
       this.spawnShapeStore.isDisplayShape()
     );
 
     this.spawnShapeStore.subscribe((state) => {
       this.renderSpawnShape(
         this.particlesEmitter.config.spawnPosition || new Point(),
-        this.spawnShapeStore.getActiveConfig().shape,
+        this.spawnShapeStore.getShapeList(),
         state.isDisplayShape
       );
     });
@@ -254,7 +247,7 @@ export class EditorApp {
 
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
-      this.spawnShapeStore.getActiveConfig().shape,
+      this.spawnShapeStore.getShapeList(),
       this.spawnShapeStore.isDisplayShape()
     );
   };
@@ -264,7 +257,7 @@ export class EditorApp {
 
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
-      this.spawnShapeStore.getActiveConfig().shape,
+      this.spawnShapeStore.getShapeList(),
       this.spawnShapeStore.isDisplayShape()
     );
   };
@@ -276,15 +269,23 @@ export class EditorApp {
     };
   }
 
-  private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShape, isDisplay: boolean) {
+  private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShape | SpawnShape[], isDisplay: boolean): void {
+    if (Array.isArray(spawnShape)) {
+      this.spawnShape.clear();
+      spawnShape.forEach((shape) => this.renderSingleSpawnShape(spawnPosition, shape, isDisplay));
+    } else {
+      this.spawnShape.clear();
+      this.renderSingleSpawnShape(spawnPosition, spawnShape, isDisplay);
+    }
+  }
+
+  private renderSingleSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShape, isDisplay: boolean) {
     if (spawnShape.type === SpawnShapeType.Point) {
       this.spawnShape
-        .clear()
         .circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, 1)
         .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Rectangle) {
       this.spawnShape
-        .clear()
         .rect(
           spawnPosition.x + spawnShape.x,
           spawnPosition.y + spawnShape.y,
@@ -293,8 +294,6 @@ export class EditorApp {
         )
         .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Torus) {
-      this.spawnShape.clear();
-
       if (spawnShape.innerRadius !== undefined && spawnShape.innerRadius !== 0) {
         this.spawnShape.circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, spawnShape.innerRadius);
       }
@@ -302,21 +301,25 @@ export class EditorApp {
       this.spawnShape
         .circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, spawnShape.outerRadius || 1)
         .stroke(SPAWN_SHAPE_STROKE);
-    } else if (spawnShape.type === SpawnShapeType.Polygon) {
-      if (isSinglePolygonalChain(spawnShape.chain)) {
-        this.spawnShape
-          .clear()
-          .poly(spawnShape.chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
-          .stroke(SPAWN_SHAPE_STROKE);
-      } else {
-        this.spawnShape.clear();
+    } else if (spawnShape.type === SpawnShapeType.Chain) {
+      // if (Array.isArray(spawnShape.chain)) {
+      //   this.spawnShape
+      //     .clear()
+      //     .poly(spawnShape.chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
+      //     .stroke(SPAWN_SHAPE_STROKE);
+      // } else {
+      //   this.spawnShape.clear();
 
-        spawnShape.chain.forEach((chain) => {
-          this.spawnShape
-            .poly(chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
-            .stroke(SPAWN_SHAPE_STROKE);
-        });
-      }
+      //   spawnShape.chain.forEach((chain) => {
+      //     this.spawnShape
+      //       .poly(chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
+      //       .stroke(SPAWN_SHAPE_STROKE);
+      //   });
+      // }
+
+      this.spawnShape
+        .poly(spawnShape.chain.map((point) => [spawnPosition.x + point.x, spawnPosition.y + point.y]).flat())
+        .stroke(SPAWN_SHAPE_STROKE);
     }
 
     this.spawnShape.visible = isDisplay;

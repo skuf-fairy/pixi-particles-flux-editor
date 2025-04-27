@@ -19,15 +19,15 @@ import { BehaviorType } from "src/stores/types";
 import { ApplyExampleEmitterConfigUseCase } from "src/use-cases/ApplyExampleEmitterConfigUseCase";
 import { InitializeUseCase } from "src/use-cases/InitializeUseCase";
 import { ToggleLocalStorageSaveUseCase } from "src/use-cases/ToggleLocalStorageSaveUseCase";
+import { AddChainItemPointUseCase } from "src/use-cases/chain-spawn-shape/AddChainItemPointUseCase";
+import { ChangeChainItemPointUseCase } from "src/use-cases/chain-spawn-shape/ChangeChainItemPointUseCase";
+import { DropChainItemPointUseCase } from "src/use-cases/chain-spawn-shape/DropChainItemPointUseCase";
 import { CopyParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/CopyParticleFluxConfigUseCase";
 import { ResetParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/ResetParticleFluxConfigUseCase";
 import { RestoreParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/RestoreParticleFluxConfigUseCase";
 import { SaveParticleFluxConfigUseCase } from "src/use-cases/particles-flux-config/SaveParticleFluxConfigUseCase";
-import { AddChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainItemPointUseCase";
-import { AddChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/AddChainUseCase";
-import { ChangeChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/ChangeChainItemPointUseCase";
-import { DropChainItemPointUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainItemPointUseCase";
-import { DropChainUseCase } from "src/use-cases/polygonal-chain-spawn-shape/DropChainUseCase";
+import { AddSpawnShapeItem } from "src/use-cases/shapes/AddSpawnShapeItem";
+import { DropSpawnShapeItem } from "src/use-cases/shapes/DropSpawnShapeItem";
 import { DownloadTexturesUseCase } from "src/use-cases/textures/DownloadTexturesUseCase";
 import { DropTextureUseCase } from "src/use-cases/textures/DropTextureUseCase";
 import { SelectTextureFromCollectionUseCase } from "src/use-cases/textures/SelectTextureFromCollectionUseCase";
@@ -191,11 +191,9 @@ function createDIContainer(): Container {
   container.bind(DI_TOKENS.toggleLocalStorageSaveUseCase).toInstance(ToggleLocalStorageSaveUseCase).inSingletonScope();
   container.bind(DI_TOKENS.uploadTextureUseCase).toInstance(UploadTextureUseCase).inSingletonScope();
   container.bind(DI_TOKENS.dropTextureUseCase).toInstance(DropTextureUseCase).inSingletonScope();
-  container.bind(DI_TOKENS.addChainUseCase).toInstance(AddChainUseCase).inSingletonScope();
   container.bind(DI_TOKENS.addChainItemPointUseCase).toInstance(AddChainItemPointUseCase).inSingletonScope();
   container.bind(DI_TOKENS.dropChainItemPointUseCase).toInstance(DropChainItemPointUseCase).inSingletonScope();
   container.bind(DI_TOKENS.changeChainItemPointUseCase).toInstance(ChangeChainItemPointUseCase).inSingletonScope();
-  container.bind(DI_TOKENS.dropChainUseCase).toInstance(DropChainUseCase).inSingletonScope();
   container
     .bind(DI_TOKENS.selectTextureFromCollectionUseCase)
     .toInstance(SelectTextureFromCollectionUseCase)
@@ -206,6 +204,8 @@ function createDIContainer(): Container {
     .toInstance(ApplyExampleEmitterConfigUseCase)
     .inSingletonScope();
   container.bind(DI_TOKENS.downloadTexturesUseCase).toInstance(DownloadTexturesUseCase).inSingletonScope();
+  container.bind(DI_TOKENS.addSpawnShapeItem).toInstance(AddSpawnShapeItem).inSingletonScope();
+  container.bind(DI_TOKENS.dropSpawnShapeItem).toInstance(DropSpawnShapeItem).inSingletonScope();
 
   return container;
 }

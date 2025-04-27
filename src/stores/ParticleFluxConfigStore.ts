@@ -53,7 +53,7 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
     this.state.particleConfig.alpha = this.alphaBehaviorStore.getActiveConfig() as AlphaBehaviorConfig;
     this.state.particleConfig.speed = this.speedBehaviorStore.getActiveConfig() as SpeedBehaviorConfig;
     this.state.particleConfig.scale = this.scaleBehaviorStore.getActiveConfig() as ScaleBehaviorConfig;
-    this.state.particleConfig.spawnShape = this.spawnShapeBehaviorStore.getActiveConfig();
+    this.state.particleConfig.spawnShape = this.spawnShapeBehaviorStore.getSpawnShapeBehavior();
     this.state.particleConfig.color = this.colorBehaviorStore.getActiveConfig();
     this.state.particleConfig.lifeTime = this.lifetimeBehaviorStore.getActiveConfig();
     this.state.particleConfig.direction = this.directionBehaviorStore.getActiveConfig();
@@ -93,7 +93,7 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
         ...this.state,
         particleConfig: {
           ...this.state.particleConfig,
-          spawnShape: this.spawnShapeBehaviorStore.getActiveConfig(),
+          spawnShape: this.spawnShapeBehaviorStore.getSpawnShapeBehavior(),
         },
       });
     });
@@ -236,12 +236,13 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
     if (spawnShape) {
       this.spawnShapeBehaviorStore.restore(spawnShape);
     } else {
-      this.spawnShapeBehaviorStore.setPointShapeConfig({
-        x: 0,
-        y: 0,
-        type: SpawnShapeType.Point,
-      });
-      this.spawnShapeBehaviorStore.setActiveType(SpawnShapeType.Point);
+      this.spawnShapeBehaviorStore.setShapeList([
+        {
+          x: 0,
+          y: 0,
+          type: SpawnShapeType.Point,
+        },
+      ]);
     }
 
     if (speed) {

@@ -31,31 +31,37 @@ export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
       end: "#ecf8ff",
     },
     spawnShape: {
-      shape: {
-        type: SpawnShapeType.Polygon,
-        chain: [
+      shape: [
+        {
+          type: SpawnShapeType.Chain,
           // L
-          [
+          chain: [
             { x: -250, y: 0 },
             { x: -250, y: 200 },
             { x: -150, y: 200 },
           ],
+        },
+        {
+          type: SpawnShapeType.Chain,
           // O
-          [
+          chain: [
             { x: -50, y: 0 },
             { x: 50, y: 0 },
             { x: 50, y: 200 },
             { x: -50, y: 200 },
             { x: -50, y: 0 },
           ],
+        },
+        {
+          type: SpawnShapeType.Chain,
           // L
-          [
+          chain: [
             { x: 150, y: 0 },
             { x: 150, y: 200 },
             { x: 250, y: 200 },
           ],
-        ],
-      },
+        },
+      ],
     },
   },
 };

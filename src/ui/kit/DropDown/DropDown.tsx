@@ -15,9 +15,10 @@ interface Props {
   value: DropDownItem;
   onChange(v: DropDownItem): void;
   size?: DropDownSize;
+  className?: string;
 }
 
-export function DropDown({ options, value, onChange, size = DropDownSize.Medium }: Props) {
+export function DropDown({ options, value, onChange, size = DropDownSize.Medium, className }: Props) {
   const [isOptionsShown, setIsOptionsShown] = useState(false);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export function DropDown({ options, value, onChange, size = DropDownSize.Medium 
   }, []);
 
   return (
-    <div className="drop-down">
+    <div className={cn("drop-down", className)}>
       <button
         onClick={() => setIsOptionsShown((v) => !v)}
         className={cn("drop-down__button", {

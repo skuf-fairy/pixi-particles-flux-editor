@@ -13,7 +13,7 @@ import { TorusSpawnShapeBehavior } from "./shapes/TorusSpawnShapeBehavior/TorusS
 
 export function SpawnShapeBehavior() {
   const store = useSpawnShapeBehaviorStore();
-  const { rectangleShape, circleShape, pointShape, polygonalShape, isDisplayShape } = store.getState();
+  const { rectangleShape, circleShape, pointShape, polygonalShape, isDisplayShape, isGroupWave } = store.getState();
 
   return (
     <ItemContainer>
@@ -37,6 +37,13 @@ export function SpawnShapeBehavior() {
         checked={isDisplayShape}
         label="Display shape"
         onChange={(checked) => store.setDisplayShape(checked)}
+        className="spawn-shape-behavior__toggle"
+      />
+      <BooleanValue
+        checked={isGroupWave}
+        label="Group Wave"
+        onChange={(checked) => store.setIsGroupWave(checked)}
+        className="spawn-shape-behavior__toggle"
       />
     </ItemContainer>
   );

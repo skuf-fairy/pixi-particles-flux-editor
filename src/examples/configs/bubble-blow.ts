@@ -5,7 +5,12 @@ export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
     spawnParticlesPerWave: 15,
     maxParticles: 500,
     spawnChance: 100,
-    spawnInterval: 1500,
+    spawnTimeout: 0,
+    spawnTime: 0,
+    spawnInterval: {
+      max: 1500,
+      min: 250,
+    },
   },
   particleConfig: {
     lifeTime: {
@@ -28,9 +33,14 @@ export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
       multiplier: 1,
     },
     spawnShape: {
-      type: SpawnShapeType.Point,
-      x: 0,
-      y: 0,
+      shape: {
+        type: SpawnShapeType.Rectangle,
+        x: -500,
+        y: -500,
+        width: 1000,
+        height: 1000,
+      },
+      isGroupWave: true,
     },
     color: {
       value: "#ffffff",

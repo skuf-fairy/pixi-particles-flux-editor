@@ -1,5 +1,12 @@
 import { injected } from "brandi";
-import { ParticleEmitter, Point2d, SpawnShapeBehavior, SpawnShapeType, isSinglePolygonalChain } from "particle-flux";
+import {
+  ParticleEmitter,
+  Point2d,
+  SpawnShape,
+  SpawnShapeBehavior,
+  SpawnShapeType,
+  isSinglePolygonalChain,
+} from "particle-flux";
 import { AdvancedBloomFilter } from "pixi-filters";
 import {
   Application,
@@ -186,14 +193,14 @@ export class EditorApp {
 
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
-      this.spawnShapeStore.getActiveConfig(),
+      this.spawnShapeStore.getActiveConfig().shape,
       this.spawnShapeStore.isDisplayShape()
     );
 
     this.spawnShapeStore.subscribe((state) => {
       this.renderSpawnShape(
         this.particlesEmitter.config.spawnPosition || new Point(),
-        this.spawnShapeStore.getActiveConfig(),
+        this.spawnShapeStore.getActiveConfig().shape,
         state.isDisplayShape
       );
     });
@@ -247,7 +254,7 @@ export class EditorApp {
 
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
-      this.spawnShapeStore.getActiveConfig(),
+      this.spawnShapeStore.getActiveConfig().shape,
       this.spawnShapeStore.isDisplayShape()
     );
   };
@@ -257,7 +264,7 @@ export class EditorApp {
 
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
-      this.spawnShapeStore.getActiveConfig(),
+      this.spawnShapeStore.getActiveConfig().shape,
       this.spawnShapeStore.isDisplayShape()
     );
   };
@@ -269,7 +276,7 @@ export class EditorApp {
     };
   }
 
-  private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShapeBehavior, isDisplay: boolean) {
+  private renderSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShape, isDisplay: boolean) {
     if (spawnShape.type === SpawnShapeType.Point) {
       this.spawnShape
         .clear()

@@ -1,3 +1,7 @@
 .spawn-shape-behavior {
   margin-bottom: var(--gap);
+
+  &__toggle:not(:last-child) {
+    margin-bottom: var(--gap);
+  }
 }

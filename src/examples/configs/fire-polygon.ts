@@ -31,33 +31,35 @@ export const FLAME_POLYGON_EMITTER_CONFIG: ParticleEmitterConfig = {
       end: "#ff622c",
     },
     spawnShape: {
-      type: SpawnShapeType.Polygon,
-      chain: [
-        {
-          x: -300,
-          y: 0,
-        },
-        {
-          x: -300,
-          y: -300,
-        },
-        {
-          x: 0,
-          y: -500,
-        },
-        {
-          x: 300,
-          y: -300,
-        },
-        {
-          x: 300,
-          y: 0,
-        },
-        {
-          x: -300,
-          y: 0,
-        },
-      ],
+      shape: {
+        type: SpawnShapeType.Polygon,
+        chain: [
+          {
+            x: -300,
+            y: 0,
+          },
+          {
+            x: -300,
+            y: -300,
+          },
+          {
+            x: 0,
+            y: -500,
+          },
+          {
+            x: 300,
+            y: -300,
+          },
+          {
+            x: 300,
+            y: 0,
+          },
+          {
+            x: -300,
+            y: 0,
+          },
+        ],
+      },
     },
   },
 };

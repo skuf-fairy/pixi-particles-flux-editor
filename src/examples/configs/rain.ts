@@ -19,11 +19,13 @@ export const RAIN_EMITTER_CONFIG: ParticleEmitterConfig = {
       value: 65,
     },
     spawnShape: {
-      type: SpawnShapeType.Rectangle,
-      x: -250,
-      y: -250,
-      width: 500,
-      height: 20,
+      shape: {
+        type: SpawnShapeType.Rectangle,
+        x: -250,
+        y: -250,
+        width: 500,
+        height: 20,
+      },
     },
   },
 };

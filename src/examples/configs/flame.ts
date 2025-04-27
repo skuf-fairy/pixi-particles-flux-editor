@@ -32,10 +32,12 @@ export const FLAME_EMITTER_CONFIG: ParticleEmitterConfig = {
       end: "#ff622c",
     },
     spawnShape: {
-      type: SpawnShapeType.Torus,
-      x: 0,
-      y: 0,
-      outerRadius: 5,
+      shape: {
+        type: SpawnShapeType.Torus,
+        x: 0,
+        y: 0,
+        outerRadius: 5,
+      },
     },
   },
 };

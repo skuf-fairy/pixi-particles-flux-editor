@@ -30,9 +30,11 @@ export const DEFAULT_PARTICLE_CONFIG: ParticleEmitterConfig = {
       multiplier: 1,
     },
     spawnShape: {
-      type: SpawnShapeType.Point,
-      x: 0,
-      y: 0,
+      shape: {
+        type: SpawnShapeType.Point,
+        x: 0,
+        y: 0,
+      },
     },
     color: {
       value: "#ffffff",

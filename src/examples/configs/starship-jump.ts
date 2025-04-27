@@ -56,13 +56,15 @@ export const STARSHIP_JUMP_EMITTER_CONFIG: ParticleEmitterConfig = {
       isInterpolate: true,
     },
     spawnShape: {
-      type: SpawnShapeType.Torus,
-      x: 0,
-      y: 0,
-      innerRadius: 0,
-      outerRadius: 100,
-      startAngle: 0,
-      endAngle: 360,
+      shape: {
+        type: SpawnShapeType.Torus,
+        x: 0,
+        y: 0,
+        innerRadius: 0,
+        outerRadius: 100,
+        startAngle: 0,
+        endAngle: 360,
+      },
     },
     color: {
       value: "#ffffff",

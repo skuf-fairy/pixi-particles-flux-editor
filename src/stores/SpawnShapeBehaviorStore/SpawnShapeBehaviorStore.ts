@@ -1,12 +1,15 @@
 import {
-  PolygonalChain,
-  PolygonalChainShape,
   SpawnPointShape,
+  SpawnPolygonalChainShape,
   SpawnRectangleShape,
   SpawnShapeBehavior,
   SpawnShapeType,
   SpawnTorusShape,
   isSinglePolygonalChain,
+  isSpawnPointShape,
+  isSpawnPolygonalShape,
+  isSpawnRectangleShape,
+  isSpawnTorusShape,
 } from "particle-flux";
 import { Store } from "../Store";
 
@@ -14,8 +17,9 @@ export class SpawnShapeBehaviorStore extends Store<{
   pointShape: SpawnPointShape;
   circleShape: SpawnTorusShape;
   rectangleShape: SpawnRectangleShape;
-  polygonalShape: PolygonalChainShape;
+  polygonalShape: SpawnPolygonalChainShape;
   activeShape: SpawnShapeType;
+  isGroupWave: boolean;
   isDisplayShape: boolean;
 }> {
   constructor() {
@@ -56,6 +60,7 @@ export class SpawnShapeBehaviorStore extends Store<{
         ],
       },
       isDisplayShape: false,
+      isGroupWave: false,
     });
   }
 
@@ -80,7 +85,7 @@ export class SpawnShapeBehaviorStore extends Store<{
     });
   }
 
-  public setPolygonalShapeConfig(config: PolygonalChainShape): void {
+  public setPolygonalShapeConfig(config: SpawnPolygonalChainShape): void {
     this.setState({
       ...this.state,
       polygonalShape: {
@@ -92,6 +97,14 @@ export class SpawnShapeBehaviorStore extends Store<{
 
   public setActiveType(type: SpawnShapeType): void {
     this.setState({ ...this.state, activeShape: type });
+  }
+
+  public setIsGroupWave(value: boolean): void {
+    this.setValue("isGroupWave", value);
+  }
+
+  public isGroupWave(): boolean {
+    return this.state.isGroupWave;
   }
 
   public isRectangleShapeActive(): boolean {
@@ -113,31 +126,45 @@ export class SpawnShapeBehaviorStore extends Store<{
   public getActiveConfig(): SpawnShapeBehavior {
     switch (this.state.activeShape) {
       case SpawnShapeType.Point:
-        return this.state.pointShape;
+        return {
+          shape: this.state.pointShape,
+          isGroupWave: this.state.isGroupWave,
+        };
 
       case SpawnShapeType.Torus:
-        return this.state.circleShape;
+        return {
+          shape: this.state.circleShape,
+          isGroupWave: this.state.isGroupWave,
+        };
 
       case SpawnShapeType.Rectangle:
-        return this.state.rectangleShape;
+        return {
+          shape: this.state.rectangleShape,
+          isGroupWave: this.state.isGroupWave,
+        };
 
       case SpawnShapeType.Polygon:
-        return this.state.polygonalShape;
+        return {
+          shape: this.state.polygonalShape,
+          isGroupWave: this.state.isGroupWave,
+        };
     }
   }
 
-  public restore(config: SpawnShapeBehavior): void {
-    if (config.type === SpawnShapeType.Point) {
-      this.setPointShapeConfig(config);
-    } else if (config.type === SpawnShapeType.Torus) {
-      this.setTorusShapeConfig(config);
-    } else if (config.type === SpawnShapeType.Rectangle) {
-      this.setRectangleShapeConfig(config);
-    } else if (config.type === SpawnShapeType.Polygon) {
-      this.setPolygonalShapeConfig(config);
+  public restore(shapeBehavior: SpawnShapeBehavior): void {
+    const shape = shapeBehavior.shape;
+    if (isSpawnPointShape(shape)) {
+      this.setPointShapeConfig(shape);
+    } else if (isSpawnTorusShape(shape)) {
+      this.setTorusShapeConfig(shape);
+    } else if (isSpawnRectangleShape(shape)) {
+      this.setRectangleShapeConfig(shape);
+    } else if (isSpawnPolygonalShape(shape)) {
+      this.setPolygonalShapeConfig(shape);
     }
 
-    this.setActiveType(config.type);
+    this.setIsGroupWave(shapeBehavior.isGroupWave || false);
+    this.setActiveType(shape.type);
   }
 
   public setDisplayShape(isDisplayShape: boolean): void {

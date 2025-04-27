@@ -1,6 +1,6 @@
 import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
 
-export const CRACKER_EMITTER_CONFIG: ParticleEmitterConfig = {
+export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
     spawnParticlesPerWave: 15,
     maxParticles: 500,

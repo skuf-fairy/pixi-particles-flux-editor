@@ -1,6 +1,7 @@
-import React from "react";
-import { BehaviorType } from "src/stores/types";
-import { DropDown, DropDownSize } from "src/ui/kit/DropDown/DropDown";
+import React from 'react';
+
+import {BehaviorType} from 'src/stores/types';
+import {DropDown, DropDownSize} from 'src/ui/kit/DropDown/DropDown';
 
 interface Props {
   type: BehaviorType;
@@ -8,11 +9,11 @@ interface Props {
   onChange(type: BehaviorType): void;
 }
 
-export function BehaviorTypeSelect({ type, availableTypes, onChange }: Props) {
+export function BehaviorTypeSelect({type, availableTypes, onChange}: Props) {
   return (
     <DropDown
-      value={{ value: type, key: type }}
-      options={Object.values(availableTypes).map((t) => ({ value: t, key: t }))}
+      value={{value: type, key: type}}
+      options={Object.values(availableTypes).map((t) => ({value: t, key: t}))}
       onChange={(v) => onChange(v.value as BehaviorType)}
       size={DropDownSize.Small}
     />

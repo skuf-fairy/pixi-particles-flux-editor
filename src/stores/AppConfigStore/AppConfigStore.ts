@@ -1,10 +1,11 @@
-import { Store } from "../Store";
-import { AppConfigStoreState } from "./AppConfigStore.types";
+import {AppConfigStoreState} from './AppConfigStore.types';
+
+import {Store} from '../Store';
 
 export class AppConfigStore extends Store<AppConfigStoreState> {
   constructor() {
     super({
-      backgroundColor: "#475b60",
+      backgroundColor: '#475b60',
       isLocalStorageSaveEnabled: true,
       isFollowPointer: true,
     });
@@ -15,7 +16,7 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
   }
 
   public setBackgroundColor(color: string): void {
-    this.setValue("backgroundColor", color);
+    this.setValue('backgroundColor', color);
   }
 
   public isLocalStorageSaveEnabled(): boolean {
@@ -23,11 +24,11 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
   }
 
   public setLocalStorageSaveEnabled(): void {
-    this.setValue("isLocalStorageSaveEnabled", true);
+    this.setValue('isLocalStorageSaveEnabled', true);
   }
 
   public setLocalStorageSaveDisabled(): void {
-    this.setValue("isLocalStorageSaveEnabled", false);
+    this.setValue('isLocalStorageSaveEnabled', false);
   }
 
   public isFollowPointer(): boolean {
@@ -35,6 +36,6 @@ export class AppConfigStore extends Store<AppConfigStoreState> {
   }
 
   public setFollowPointer(isFollowPointer: boolean): void {
-    this.setValue("isFollowPointer", isFollowPointer);
+    this.setValue('isFollowPointer', isFollowPointer);
   }
 }

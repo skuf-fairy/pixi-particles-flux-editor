@@ -1,16 +1,21 @@
-import React from "react";
-import { useColorBehaviorStore } from "src/hooks/connectors";
-import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
-import { ColorPicker } from "src/ui/kit/ColorPicker/ColorPicker";
-import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
-import { BehaviorName } from "../../BehaviorName/BehaviorName";
-import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { BehaviorEnabled } from "../BehaviorEnabled/BehaviorEnabled";
-import { ColorDynamicBehavior } from "./ColorDynamicBehavior";
-import { ColorScriptBehavior } from "./ColorScriptBehavior";
+import {ColorBehaviorType} from 'src/stores/ColorBehaviorStore/ColorBehaviorStore.types';
+
+import React from 'react';
+
+import {useColorBehaviorStore} from 'src/hooks/connectors';
+import {ColorPicker} from 'src/ui/kit/ColorPicker/ColorPicker';
+import {DropDown, DropDownSize} from 'src/ui/kit/DropDown/DropDown';
+
+import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
+import {BehaviorName} from '../../BehaviorName/BehaviorName';
+import {ItemContainer} from '../../ItemContainer/ItemContainer';
+import {BehaviorEnabled} from '../BehaviorEnabled/BehaviorEnabled';
+import {ColorDynamicBehavior} from './ColorDynamicBehavior';
+import {ColorScriptBehavior} from './ColorScriptBehavior';
 
 export function ColorBehavior() {
   const store = useColorBehaviorStore();
+  const type = store.getActiveType();
 
   return (
     <ItemContainer>
@@ -18,12 +23,11 @@ export function ColorBehavior() {
         left={<BehaviorName name="Color" />}
         right={
           <>
-            <BehaviorTypeSelect
-              type={store.getState().activeType}
-              availableTypes={store.getState().availableTypes}
-              onChange={(type) => {
-                store.setActiveConfigType(type);
-              }}
+            <DropDown
+              value={{value: type, key: type}}
+              options={Object.values(store.getAvailableTypes()).map((t) => ({value: t, key: t}))}
+              onChange={(v) => store.setActiveConfigType(v.value as ColorBehaviorType)}
+              size={DropDownSize.Small}
             />
 
             <BehaviorEnabled
@@ -44,15 +48,15 @@ export function ColorBehavior() {
         <ColorPicker
           color={store.getState().staticConfig.value as string}
           onChange={(v) => {
-            store.setStaticConfig({ value: v });
+            store.setStaticConfig({value: v});
           }}
         />
       )}
 
-      {store.isDynamicConfigActive() && (
+      {store.isTransitionConfigActive() && (
         <ColorDynamicBehavior
-          config={store.state.dynamicConfig}
-          onChange={(config) => store.setDynamicConfig(config)}
+          config={store.state.transitionConfig}
+          onChange={(config) => store.setTransitionConfig(config)}
         />
       )}
 

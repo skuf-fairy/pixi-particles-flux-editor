@@ -1,0 +1,10 @@
+.colorPicker {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  cursor: pointer;
+  height: 33.5px;
+  width: 33.5px;
+}

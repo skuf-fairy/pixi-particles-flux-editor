@@ -1,0 +1,38 @@
+.menuModal {
+  padding: var(--gap2x);
+}
+
+.title {
+  margin-bottom: var(--gap2x);
+}
+
+.divider {
+  margin-bottom: var(--gap);
+}
+
+.topBar {
+  margin-bottom: var(--gap);
+}
+
+.optionContainer {
+  border: 1px solid var(--secondary-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 8px;
+
+  &:not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+}
+
+.optionTitle {
+  color: var(--primary-text-color);
+}
+
+.colorPicker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

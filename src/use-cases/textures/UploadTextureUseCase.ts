@@ -1,32 +1,41 @@
-import { injected } from "brandi";
-import { Assets } from "pixi.js";
-import { ChangeEvent } from "react";
-import { DI_TOKENS } from "src/di/di.tokens";
-import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
-import { ReaderContentType, SaveLoadUtils } from "src/utils/SaveLoadUtils";
+import {Assets} from 'pixi.js';
+import {DI_TOKENS} from 'src/di/di.tokens';
+
+import {ChangeEvent} from 'react';
+
+import {injected} from 'brandi';
+import {ErrorsService} from 'src/services/ErrorsService';
+import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
+import {ReaderContentType, SaveLoadUtils} from 'src/utils/SaveLoadUtils';
 
 export class UploadTextureUseCase {
-  constructor(private readonly texturesStore: TexturesStore) {}
+  constructor(private readonly texturesStore: TexturesStore, private readonly errorsService: ErrorsService) {}
 
   public upload = async (e: ChangeEvent<HTMLInputElement>) => {
-    // todo error
     if (!e.target.files) return;
 
     const file = e.target.files[0];
 
     if (file) {
-      const url = await SaveLoadUtils.uploadFile(file, ReaderContentType.URL);
+      try {
+        const url = await SaveLoadUtils.uploadFile(file, ReaderContentType.URL);
 
-      if (typeof url === "string") {
-        await Assets.load(url);
+        if (typeof url === 'string') {
+          await Assets.load(url);
 
-        this.texturesStore.add({
-          url: url,
-          name: file.name,
+          this.texturesStore.add({
+            url: url,
+            name: file.name,
+          });
+        }
+      } catch {
+        this.errorsService.showError({
+          title: 'Ошибка при загрузке текстуры',
+          text: `Не удалось загрузить текстуру. Файл ${file.name} не является изображением`,
         });
       }
     }
   };
 }
 
-injected(UploadTextureUseCase, DI_TOKENS.texturesStore);
+injected(UploadTextureUseCase, DI_TOKENS.texturesStore, DI_TOKENS.errorsService);

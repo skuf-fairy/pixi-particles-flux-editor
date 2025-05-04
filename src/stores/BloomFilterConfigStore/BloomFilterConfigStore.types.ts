@@ -1,8 +1,9 @@
-import { AdvancedBloomFilterOptions } from "pixi-filters";
-import { BLEND_MODES } from "pixi.js";
+import {BLEND_MODES} from 'pixi.js';
+
+import {AdvancedBloomFilterOptions} from 'pixi-filters';
 
 export interface BloomFilterConfigStoreState {
   enabled: boolean;
   blendMode: BLEND_MODES;
-  options: Omit<AdvancedBloomFilterOptions, "kernels" | "pixelSize">;
+  options: Omit<AdvancedBloomFilterOptions, 'kernels' | 'pixelSize'>;
 }

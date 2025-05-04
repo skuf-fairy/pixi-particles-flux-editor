@@ -1,0 +1,14 @@
+.input {
+  padding: 8px;
+  border: 1px solid var(--secondary-border-color);
+  border-radius: 10px;
+  color: white;
+
+  &:hover {
+    border-color: rgb(124 150 141);
+  }
+
+  &::placeholder {
+    color: var(--secondary-border-color);
+  }
+}

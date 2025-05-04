@@ -1,0 +1,6 @@
+@import '../../styles/typography.css';
+
+.root {
+  composes: text;
+  color: var(--primary-text-color);
+}

@@ -1,38 +1,9 @@
-import { injected } from "brandi";
-import {
-  AlphaBehaviorConfig,
-  ParticleEmitterConfig,
-  RotationBehaviorConfig,
-  ScaleBehaviorConfig,
-  SpawnPositionConfig,
-  SpawnShapeType,
-  SpeedBehaviorConfig,
-} from "particle-flux";
-import { DI_TOKENS } from "src/di/di.tokens";
-import { BehaviorStore } from "./BehaviorStore";
-import { ColorBehaviorStore } from "./ColorBehaviorStore/ColorBehaviorStore";
-import { DirectionBehaviorStore } from "./DirectionBehaviorStore/DirectionBehaviorStore";
-import { EmitterConfigStore } from "./EmitterConfigStore";
-import { GravityBehaviorStore } from "./GravityBehaviorStore/GravityBehaviorStore";
-import { LifetimeBehaviorStore } from "./LifetimeBehaviorStore/LifetimeBehaviorStore";
-import { PathBehaviorStore } from "./PathBehaviorStore/PathBehaviorStore";
-import { SpawnShapeBehaviorStore } from "./SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
-import { Store } from "./Store";
+import {EmitterConfig, ParticleConfig, ParticleEmitterConfig} from 'particle-flux';
+
+import {Store} from './Store';
 
 export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
-  constructor(
-    private readonly emitterConfigStore: EmitterConfigStore,
-    private readonly alphaBehaviorStore: BehaviorStore,
-    private readonly scaleBehaviorStore: BehaviorStore,
-    private readonly speedBehaviorStore: BehaviorStore,
-    private readonly spawnShapeBehaviorStore: SpawnShapeBehaviorStore,
-    private readonly colorBehaviorStore: ColorBehaviorStore,
-    private readonly lifetimeBehaviorStore: LifetimeBehaviorStore,
-    private readonly directionBehaviorStore: DirectionBehaviorStore,
-    private readonly rotationBehaviorStore: BehaviorStore,
-    private readonly gravityBehaviorStore: GravityBehaviorStore,
-    private readonly pathBehaviorStore: PathBehaviorStore
-  ) {
+  constructor() {
     super({
       emitterConfig: {
         autoStart: true,
@@ -43,231 +14,37 @@ export class ParticleFluxConfigStore extends Store<ParticleEmitterConfig> {
         },
       },
     });
-
-    const emitterConfig = this.emitterConfigStore.getConfig();
-    this.state.emitterConfig.spawnInterval = emitterConfig.spawnInterval;
-    this.state.emitterConfig.spawnParticlesPerWave = emitterConfig.spawnParticlesPerWave;
-    this.state.emitterConfig.maxParticles = emitterConfig.maxParticles;
-    this.state.emitterConfig.spawnChance = emitterConfig.spawnChance;
-
-    this.state.particleConfig.alpha = this.alphaBehaviorStore.getActiveConfig() as AlphaBehaviorConfig;
-    this.state.particleConfig.speed = this.speedBehaviorStore.getActiveConfig() as SpeedBehaviorConfig;
-    this.state.particleConfig.scale = this.scaleBehaviorStore.getActiveConfig() as ScaleBehaviorConfig;
-    this.state.particleConfig.spawnShape = this.spawnShapeBehaviorStore.getSpawnShapeBehavior();
-    this.state.particleConfig.color = this.colorBehaviorStore.getActiveConfig();
-    this.state.particleConfig.lifeTime = this.lifetimeBehaviorStore.getActiveConfig();
-    this.state.particleConfig.direction = this.directionBehaviorStore.getActiveConfig();
-    this.state.particleConfig.rotation = this.rotationBehaviorStore.getActiveConfig() as RotationBehaviorConfig;
-    this.state.particleConfig.gravity = this.gravityBehaviorStore.getActiveConfig();
-    this.state.particleConfig.path = this.pathBehaviorStore.getActiveConfig();
-
-    this.alphaBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          alpha: this.alphaBehaviorStore.getActiveConfig() as AlphaBehaviorConfig,
-        },
-      });
-    });
-    this.speedBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          speed: this.speedBehaviorStore.getActiveConfig() as AlphaBehaviorConfig,
-        },
-      });
-    });
-    this.scaleBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          scale: this.scaleBehaviorStore.getActiveConfig() as AlphaBehaviorConfig,
-        },
-      });
-    });
-    this.spawnShapeBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          spawnShape: this.spawnShapeBehaviorStore.getSpawnShapeBehavior(),
-        },
-      });
-    });
-    this.colorBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          color: this.colorBehaviorStore.getActiveConfig(),
-        },
-      });
-    });
-    this.lifetimeBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          lifeTime: this.lifetimeBehaviorStore.getActiveConfig(),
-        },
-      });
-    });
-    this.directionBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          direction: this.directionBehaviorStore.getActiveConfig(),
-        },
-      });
-    });
-    this.rotationBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          rotation: this.rotationBehaviorStore.getActiveConfig() as RotationBehaviorConfig,
-        },
-      });
-    });
-    this.gravityBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          gravity: this.gravityBehaviorStore.getActiveConfig(),
-        },
-      });
-    });
-    this.emitterConfigStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        emitterConfig: this.emitterConfigStore.getConfig(),
-      });
-    });
-    this.pathBehaviorStore.subscribe(() => {
-      this.setState({
-        ...this.state,
-        particleConfig: {
-          ...this.state.particleConfig,
-          path: this.pathBehaviorStore.getActiveConfig(),
-        },
-      });
-    });
-  }
-
-  public setSpawnPosition(position: SpawnPositionConfig): void {
-    this.setState({
-      ...this.state,
-      particleConfig: {
-        ...this.state.particleConfig,
-        spawnPosition: position,
-      },
-    });
-  }
-
-  public reset(): void {
-    this.emitterConfigStore.reset();
-    this.alphaBehaviorStore.reset();
-    this.scaleBehaviorStore.reset();
-    this.speedBehaviorStore.reset();
-    this.spawnShapeBehaviorStore.reset();
-    this.colorBehaviorStore.reset();
-    this.lifetimeBehaviorStore.reset();
-    this.directionBehaviorStore.reset();
-    this.rotationBehaviorStore.reset();
-    this.gravityBehaviorStore.reset();
-    this.pathBehaviorStore.reset();
-  }
-
-  public restore(config: ParticleEmitterConfig): void {
-    this.emitterConfigStore.restore(config.emitterConfig);
-
-    const { alpha, color, direction, gravity, lifeTime, path, rotation, scale, spawnShape, speed } =
-      config.particleConfig;
-
-    this.lifetimeBehaviorStore.restore(lifeTime);
-
-    if (alpha) {
-      this.alphaBehaviorStore.restore(alpha);
-    } else {
-      this.alphaBehaviorStore.disable();
-    }
-
-    if (color) {
-      this.colorBehaviorStore.restore(color);
-    } else {
-      this.colorBehaviorStore.disable();
-    }
-
-    if (direction) {
-      this.directionBehaviorStore.restore(direction);
-    } else {
-      this.directionBehaviorStore.reset();
-    }
-
-    if (gravity) {
-      this.gravityBehaviorStore.restore(gravity);
-    } else {
-      this.gravityBehaviorStore.disable();
-    }
-
-    if (path) {
-      this.pathBehaviorStore.restore(path);
-    } else {
-      this.pathBehaviorStore.disable();
-    }
-
-    if (rotation) {
-      this.rotationBehaviorStore.restore(rotation);
-    } else {
-      this.rotationBehaviorStore.disable();
-    }
-
-    if (scale) {
-      this.scaleBehaviorStore.restore(scale);
-    } else {
-      this.scaleBehaviorStore.disable();
-    }
-
-    if (spawnShape) {
-      this.spawnShapeBehaviorStore.restore(spawnShape);
-    } else {
-      this.spawnShapeBehaviorStore.setShapeList([
-        {
-          x: 0,
-          y: 0,
-          type: SpawnShapeType.Point,
-        },
-      ]);
-    }
-
-    if (speed) {
-      this.speedBehaviorStore.restore(speed);
-    } else {
-      this.speedBehaviorStore.disable();
-    }
   }
 
   public getConfig(): ParticleEmitterConfig {
     return this.state;
   }
-}
 
-injected(
-  ParticleFluxConfigStore,
-  DI_TOKENS.emitterConfigStore,
-  DI_TOKENS.alphaBehaviorStore,
-  DI_TOKENS.scaleBehaviorStore,
-  DI_TOKENS.speedBehaviorStore,
-  DI_TOKENS.spawnShapeBehaviorStore,
-  DI_TOKENS.colorBehaviorStore,
-  DI_TOKENS.lifetimeBehaviorStore,
-  DI_TOKENS.directionBehaviorStore,
-  DI_TOKENS.rotationBehaviorStore,
-  DI_TOKENS.gravityBehaviorStore,
-  DI_TOKENS.pathBehaviorStore
-);
+  public setFullConfig(config: ParticleEmitterConfig): void {
+    this.setState(config);
+  }
+
+  public setParticleConfigValue<K extends keyof ParticleConfig>(key: K, value: ParticleConfig[K]): void {
+    this.setState({
+      ...this.state,
+      particleConfig: {
+        ...this.state.particleConfig,
+        [key]: value,
+      },
+    });
+  }
+
+  public setParticleConfig(config: ParticleConfig): void {
+    this.setState({
+      ...this.state,
+      particleConfig: config,
+    });
+  }
+
+  public setEmitterConfig(config: EmitterConfig): void {
+    this.setState({
+      ...this.state,
+      emitterConfig: config,
+    });
+  }
+}

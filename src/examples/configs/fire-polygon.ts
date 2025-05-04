@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
+import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
 
 export const FLAME_POLYGON_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -27,8 +27,8 @@ export const FLAME_POLYGON_EMITTER_CONFIG: ParticleEmitterConfig = {
       end: 0.75,
     },
     color: {
-      start: "#fff191",
-      end: "#ff622c",
+      start: '#fff191',
+      end: '#ff622c',
     },
     spawnShape: {
       shape: {

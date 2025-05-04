@@ -1,33 +1,34 @@
-import React from "react";
-import { useApplyExampleEmitterConfigUseCaseToken } from "src/di/di.hooks";
-import { PARTICLE_EMITTER_EXAMPLES } from "src/examples/examples";
-import { Modal } from "src/ui/kit/Modal/Modal";
-import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import "./ExamplesModal.style.scss";
+import {useApplyExampleEmitterConfigUseCaseToken} from 'src/di/di.hooks';
+
+import React from 'react';
+
+import {PARTICLE_EMITTER_EXAMPLES} from 'src/examples/examples';
+import {Button, ButtonStyleType} from 'src/ui/kit/Button/Button';
+import {Modal} from 'src/ui/kit/Modal/Modal';
+import {Typography, TypographyColor, TypographyVariant} from 'src/ui/kit/Typography/Typography';
+
+import s from './ExamplesModal.module.css';
 
 interface Props {
   onClose: VoidFunction;
 }
 
-export function ExamplesModal({ onClose }: Props) {
+export function ExamplesModal({onClose}: Props) {
   const applyExampleEmitterConfigUseCase = useApplyExampleEmitterConfigUseCaseToken();
 
   return (
     <Modal onClose={onClose}>
-      <div className="examples-modal">
-        <Typography
-          color={TypographyColor.PrimaryTitle}
-          variant={TypographyVariant.H2}
-          className="textures-gallery-modal__title"
-        >
+      <div className={s.root}>
+        <Typography color={TypographyColor.PrimaryTitle} variant={TypographyVariant.H2} className={s.title}>
           Particle Emitter Examples
         </Typography>
 
-        <div className="examples-modal__list">
+        <div>
           {PARTICLE_EMITTER_EXAMPLES.map((item) => (
-            <button
+            <Button
               key={item.name}
-              className="examples-modal__item"
+              styleType={ButtonStyleType.Common}
+              className={s.item}
               onClick={async () => {
                 await applyExampleEmitterConfigUseCase.applyExample(item);
                 onClose();
@@ -36,7 +37,7 @@ export function ExamplesModal({ onClose }: Props) {
               <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P}>
                 {item.name}
               </Typography>
-            </button>
+            </Button>
           ))}
         </div>
       </div>

@@ -1,0 +1,19 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-background-color);
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - var(--top-bar-height));
+  overflow: hidden;
+}
+
+.editorContainer {
+  position: relative;
+  width: 100%;
+}

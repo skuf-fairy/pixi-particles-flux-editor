@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
+import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
 
 export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -27,8 +27,8 @@ export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
       maxAngle: 360,
     },
     color: {
-      start: "#aee3ff",
-      end: "#ecf8ff",
+      start: '#aee3ff',
+      end: '#ecf8ff',
     },
     spawnShape: {
       shape: [
@@ -36,29 +36,29 @@ export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
           type: SpawnShapeType.Chain,
           // L
           chain: [
-            { x: -250, y: 0 },
-            { x: -250, y: 200 },
-            { x: -150, y: 200 },
+            {x: -250, y: 0},
+            {x: -250, y: 200},
+            {x: -150, y: 200},
           ],
         },
         {
           type: SpawnShapeType.Chain,
           // O
           chain: [
-            { x: -50, y: 0 },
-            { x: 50, y: 0 },
-            { x: 50, y: 200 },
-            { x: -50, y: 200 },
-            { x: -50, y: 0 },
+            {x: -50, y: 0},
+            {x: 50, y: 0},
+            {x: 50, y: 200},
+            {x: -50, y: 200},
+            {x: -50, y: 0},
           ],
         },
         {
           type: SpawnShapeType.Chain,
           // L
           chain: [
-            { x: 150, y: 0 },
-            { x: 150, y: 200 },
-            { x: 250, y: 200 },
+            {x: 150, y: 0},
+            {x: 150, y: 200},
+            {x: 250, y: 200},
           ],
         },
       ],

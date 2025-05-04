@@ -1,6 +1,8 @@
-import { ViewContainer } from "particle-flux";
-import { ParticleContainer } from "pixi.js";
-import { ParticleAdapter } from "./ParticleAdapter";
+import {ParticleContainer} from 'pixi.js';
+
+import {ViewContainer} from 'particle-flux';
+
+import {ParticleAdapter} from './ParticleAdapter';
 
 export class ContainerAdapter implements ViewContainer<ParticleAdapter> {
   constructor(private readonly container: ParticleContainer) {}

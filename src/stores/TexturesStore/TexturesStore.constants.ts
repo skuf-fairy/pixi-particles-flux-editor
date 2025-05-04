@@ -1,14 +1,14 @@
-import bloomParticleTexture from "src/assets/bloom-particle.png";
-import bubbleTexture from "src/assets/bubble.png";
-import cartoonSmokeTexture from "src/assets/cartoon-smoke.png";
-import defaultParticleTexture from "src/assets/default.png";
-import fireTexture from "src/assets/fire.png";
-import rainDropTexture from "src/assets/rain-drop.png";
-import sparkleTexture from "src/assets/sparkle.png";
-import starTexture from "src/assets/star.png";
-import trailTexture from "src/assets/trail.png";
-import waveTexture from "src/assets/wave.png";
-import { CollectionTexture, ParticleTexture } from "./TextureStore.types";
+import {CollectionTexture, ParticleTexture} from './TexturesStore.types';
+import bloomParticleTexture from 'src/assets/bloom-particle.png';
+import bubbleTexture from 'src/assets/bubble.png';
+import cartoonSmokeTexture from 'src/assets/cartoon-smoke.png';
+import defaultParticleTexture from 'src/assets/default.png';
+import fireTexture from 'src/assets/fire.png';
+import rainDropTexture from 'src/assets/rain-drop.png';
+import sparkleTexture from 'src/assets/sparkle.png';
+import starTexture from 'src/assets/star.png';
+import trailTexture from 'src/assets/trail.png';
+import waveTexture from 'src/assets/wave.png';
 
 export const AVAILABLE_TEXTURES: ParticleTexture[] = [
   {

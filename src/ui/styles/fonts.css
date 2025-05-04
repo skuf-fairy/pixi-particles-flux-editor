@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Baloo';
+  font-weight: 400;
+  src: url('src/fonts/Baloo/Baloo-Regular.ttf') format('ttf'), url('src/fonts/Baloo/Baloo-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Baloo';
+  font-weight: 500;
+  src: url('src/fonts/Baloo/Baloo-Medium.ttf') format('ttf'), url('src/fonts/Baloo/Baloo-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Baloo';
+  font-weight: 600;
+  src: url('src/fonts/Baloo/Baloo-SemiBold.ttf') format('ttf'),
+    url('src/fonts/Baloo/Baloo-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Baloo';
+  font-weight: 700;
+  src: url('src/fonts/Baloo/Baloo-Bold.ttf') format('ttf'), url('src/fonts/Baloo/Baloo-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Baloo';
+  font-weight: 800;
+  src: url('src/fonts/Baloo/Baloo-ExtraBold.ttf') format('ttf'),
+    url('src/fonts/Baloo/Baloo-ExtraBold.woff') format('woff');
+}

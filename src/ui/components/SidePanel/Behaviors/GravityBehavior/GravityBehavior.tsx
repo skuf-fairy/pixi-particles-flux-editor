@@ -1,13 +1,17 @@
-import React from "react";
-import { useGravityBehaviorStore } from "src/hooks/connectors";
-import { BehaviorType } from "src/stores/types";
-import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
-import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
-import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
-import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
-import { BehaviorName } from "../../BehaviorName/BehaviorName";
-import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { BehaviorEnabled } from "../BehaviorEnabled/BehaviorEnabled";
+import {GravityBehaviorType} from 'src/stores/GravityBehaviorStore/GravityBehavior.types';
+
+import React from 'react';
+
+import {useGravityBehaviorStore} from 'src/hooks/connectors';
+import {BehaviorType} from 'src/stores/types';
+import {BehaviorTypeSelect} from 'src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect';
+import {ScalarStaticBehaviorOption} from 'src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption';
+import {ScalarTransitionBehaviorOption} from 'src/ui/components/ScalarTransitionBehaviorOption/ScalarTransitionBehaviorOption';
+
+import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
+import {BehaviorName} from '../../BehaviorName/BehaviorName';
+import {ItemContainer} from '../../ItemContainer/ItemContainer';
+import {BehaviorEnabled} from '../BehaviorEnabled/BehaviorEnabled';
 
 export function GravityBehavior() {
   const store = useGravityBehaviorStore();
@@ -24,9 +28,7 @@ export function GravityBehavior() {
               type={state.activeType}
               availableTypes={state.availableTypes}
               onChange={(type) => {
-                if (type === BehaviorType.Static || type === BehaviorType.Dynamic) {
-                  store.setActiveConfigType(type);
-                }
+                store.setActiveConfigType(type as GravityBehaviorType);
               }}
             />
 
@@ -51,9 +53,9 @@ export function GravityBehavior() {
         />
       )}
 
-      {state.activeType === BehaviorType.Dynamic && (
-        <ScalarDynamicBehaviorOption
-          config={state.scalarDynamicBehaviorConfig}
+      {state.activeType === BehaviorType.Transition && (
+        <ScalarTransitionBehaviorOption
+          config={state.scalarTransitionBehaviorConfig}
           onChange={(v) => store.setDynamicConfig(v)}
         />
       )}

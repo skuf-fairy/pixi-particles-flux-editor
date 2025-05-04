@@ -1,0 +1,23 @@
+.scriptBehavior {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.item {
+  display: flex;
+  align-items: end;
+  gap: var(--gap);
+
+  &:not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+}
+
+.stepsList {
+  margin-bottom: var(--gap);
+}
+
+.addButton {
+  margin-bottom: var(--gap2x);
+}

@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig } from "particle-flux";
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const CARTOON_SMOKE_BLAST_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {

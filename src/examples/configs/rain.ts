@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
+import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
 
 export const RAIN_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {

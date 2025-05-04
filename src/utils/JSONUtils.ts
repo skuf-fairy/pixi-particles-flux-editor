@@ -8,13 +8,6 @@ export class JSONUtils {
   }
 
   public static parse<V>(value: string): V {
-    try {
-      return JSON.parse(value) as V;
-    } catch (e) {
-      //todo
-      console.log(e);
-
-      throw e;
-    }
+    return JSON.parse(value) as V;
   }
 }

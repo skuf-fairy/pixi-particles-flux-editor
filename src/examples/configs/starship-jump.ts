@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
+import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
 
 export const STARSHIP_JUMP_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -28,7 +28,7 @@ export const STARSHIP_JUMP_EMITTER_CONFIG: ParticleEmitterConfig = {
           value: 2,
         },
         {
-          time: 1,
+          time: 100,
           value: 2,
         },
       ],
@@ -49,7 +49,7 @@ export const STARSHIP_JUMP_EMITTER_CONFIG: ParticleEmitterConfig = {
           value: 2,
         },
         {
-          time: 1,
+          time: 100,
           value: 4,
         },
       ],
@@ -67,7 +67,7 @@ export const STARSHIP_JUMP_EMITTER_CONFIG: ParticleEmitterConfig = {
       },
     },
     color: {
-      value: "#ffffff",
+      value: '#ffffff',
     },
     direction: {
       minAngle: 0,

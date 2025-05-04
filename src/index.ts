@@ -1,9 +1,11 @@
-import { createElement } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App";
-import "./styles/index.scss";
+import {createElement} from 'react';
+import {createRoot} from 'react-dom/client';
 
-const rootNode = document.getElementById("page-root");
+import {App} from './App';
+
+import './ui/styles/index.css';
+
+const rootNode = document.getElementById('page-root');
 
 if (rootNode) {
   const root = createRoot(rootNode);

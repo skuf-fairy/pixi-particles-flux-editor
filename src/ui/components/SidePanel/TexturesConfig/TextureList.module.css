@@ -1,0 +1,36 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-bottom: var(--gap2x);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+}
+
+.image {
+  width: 48px;
+  height: 48px;
+  margin-right: var(--gap);
+  object-fit: contain;
+}
+
+.name {
+  margin-right: var(--gap);
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.deleteIcon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--primary-text-color);
+}

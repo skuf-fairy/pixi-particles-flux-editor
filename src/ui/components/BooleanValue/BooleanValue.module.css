@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  margin-right: var(--gap-half);
+}

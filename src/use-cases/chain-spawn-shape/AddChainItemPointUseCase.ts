@@ -1,7 +1,8 @@
-import { injected } from "brandi";
-import { Point2d, SpawnChainShape } from "particle-flux";
-import { DI_TOKENS } from "src/di/di.tokens";
-import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
+import {DI_TOKENS} from 'src/di/di.tokens';
+
+import {injected} from 'brandi';
+import {Point2d, SpawnChainShape} from 'particle-flux';
+import {SpawnShapeBehaviorStore} from 'src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore';
 
 export class AddChainItemPointUseCase {
   constructor(private readonly spawnShapeBehaviorStore: SpawnShapeBehaviorStore) {}

@@ -1,0 +1,31 @@
+@import '../../styles/typography.css';
+
+.paragraph {
+  composes: text;
+}
+
+.h2 {
+  composes: head2;
+}
+
+.h3 {
+  composes: head3;
+}
+
+.h5 {
+  composes: head5;
+}
+
+.typographyColor {
+  &_PrimaryTitle {
+    color: var(--primary-title-color);
+  }
+
+  &_PrimaryText {
+    color: var(--primary-text-color);
+  }
+
+  &_SecondaryText {
+    color: var(--secondary-text-color);
+  }
+}

@@ -1,6 +1,7 @@
-import React from "react";
-import "./PageLoader.style.scss";
+import React from 'react';
+
+import s from './PageLoader.module.css';
 
 export function PageLoader() {
-  return <div className="page-loader">LOADING...</div>;
+  return <div className={s.root}>LOADING...</div>;
 }

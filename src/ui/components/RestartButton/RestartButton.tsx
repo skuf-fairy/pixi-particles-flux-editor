@@ -1,14 +1,18 @@
-import React from "react";
-import { useEditorAppToken } from "src/di/di.hooks";
-import { RepeatIcon } from "src/ui/kit/icons/RepeatIcon";
-import "./RestartButton.style.scss";
+import {useEditorAppToken} from 'src/di/di.hooks';
+
+import React from 'react';
+
+import {Button, ButtonStyleType} from 'src/ui/kit/Button/Button';
+import {RepeatIcon} from 'src/ui/kit/icons/RepeatIcon';
+
+import s from './RestartButton.module.css';
 
 export function RestartButton() {
   const app = useEditorAppToken();
 
   return (
-    <button className="repeat-button" onClick={() => app.restart()}>
+    <Button styleType={ButtonStyleType.Common} className={s.root} onClick={() => app.restart()}>
       <RepeatIcon />
-    </button>
+    </Button>
   );
 }

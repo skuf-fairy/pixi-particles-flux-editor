@@ -1,13 +1,17 @@
-import React, { useRef } from "react";
 import {
   useCopyParticleFluxConfigUseCaseToken,
   useResetParticleFluxConfigUseCaseToken,
   useRestoreParticleFluxConfigUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,
-} from "src/di/di.hooks";
-import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
-import { ItemContainer } from "../ItemContainer/ItemContainer";
-import "./AppOptions.style.scss";
+} from 'src/di/di.hooks';
+
+import React, {useRef} from 'react';
+
+import {Button, ButtonSize, ButtonStyleType} from 'src/ui/kit/Button/Button';
+
+import {ItemContainer} from '../ItemContainer/ItemContainer';
+
+import s from './AppOptions.module.css';
 
 export function AppOptions() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -19,19 +23,19 @@ export function AppOptions() {
 
   return (
     <ItemContainer>
-      <div className="config-options">
+      <div className={s.root}>
         <Button
           styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={() => inputRef.current?.click()}
-          className="config-options__button"
+          className={s.button}
         >
           Restore
           <input
             ref={inputRef}
             type="file"
             accept="application/json"
-            className="upload-input"
+            className={s.uploadInput}
             onChange={restoreParticleFluxConfigUseCase.restore}
           />
         </Button>
@@ -39,7 +43,7 @@ export function AppOptions() {
           styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={saveParticleFluxConfigUseCase.save}
-          className="config-options__button"
+          className={s.button}
         >
           Download
         </Button>
@@ -47,7 +51,7 @@ export function AppOptions() {
           styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={copyParticleFluxConfigUseCase.copy}
-          className="config-options__button"
+          className={s.button}
         >
           Copy
         </Button>
@@ -55,7 +59,7 @@ export function AppOptions() {
           styleType={ButtonStyleType.Primary}
           size={ButtonSize.Medium}
           onClick={resetParticleFluxConfigUseCase.reset}
-          className="config-options__button"
+          className={s.button}
         >
           Reset
         </Button>

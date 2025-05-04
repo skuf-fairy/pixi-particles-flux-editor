@@ -1,6 +1,8 @@
-import cn from "classnames";
-import React from "react";
-import "./Switch.style.scss";
+import React from 'react';
+
+import cn from 'classnames';
+
+import s from './Switch.module.css';
 
 interface Props {
   checked: boolean;
@@ -8,16 +10,16 @@ interface Props {
   className?: string;
 }
 
-export function Switch({ checked, onChange, className }: Props) {
+export function Switch({checked, onChange, className}: Props) {
   return (
     <div
       onClick={() => onChange(!checked)}
-      className={cn("switch", className, { ["switch__checked"]: checked, ["switch__unchecked"]: !checked })}
+      className={cn(s.switch, className, {[s.checked]: checked, [s.unchecked]: !checked})}
     >
       <div
-        className={cn("switch__slider", {
-          ["switch__slider--checked"]: checked,
-          ["switch__slider--unchecked"]: !checked,
+        className={cn(s.slider, {
+          [s.sliderChecked]: checked,
+          [s.sliderUnchecked]: !checked,
         })}
       />
     </div>

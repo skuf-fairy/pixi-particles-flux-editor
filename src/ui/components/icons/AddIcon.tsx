@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   className?: string;
 }
 
-export function AddIcon({ className }: Props) {
+export function AddIcon({className}: Props) {
   return (
     <svg
       className={className}

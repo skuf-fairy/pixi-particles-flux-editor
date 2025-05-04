@@ -1,13 +1,17 @@
-import cn from "classnames";
-import React, { useEffect, useState } from "react";
-import "./DropDown.style.scss";
+import React, {useEffect, useState} from 'react';
 
-type DropDownItem = { key: string; value: string };
+import cn from 'classnames';
+
+import {Button, ButtonStyleType} from '../Button/Button';
+
+import s from './DropDown.module.css';
+
+type DropDownItem = {key: string; value: string};
 
 export enum DropDownSize {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
 }
 
 interface Props {
@@ -18,57 +22,58 @@ interface Props {
   className?: string;
 }
 
-export function DropDown({ options, value, onChange, size = DropDownSize.Medium, className }: Props) {
+export function DropDown({options, value, onChange, size = DropDownSize.Medium, className}: Props) {
   const [isOptionsShown, setIsOptionsShown] = useState(false);
 
   useEffect(() => {
     const handleClick = (e: PointerEvent) => {
-      const dropDownOptionNodeList = Array.from(document.querySelectorAll(".drop-down__item"));
-
+      const dropDownOptionNodeList = Array.from(document.querySelectorAll('.drop-down-option'));
       if (e.target !== null && !dropDownOptionNodeList.includes(e.target as HTMLElement)) {
         setIsOptionsShown(false);
       }
     };
 
-    window.addEventListener("pointerdown", handleClick);
+    window.addEventListener('pointerdown', handleClick);
 
-    return () => window.removeEventListener("pointerdown", handleClick);
+    return () => window.removeEventListener('pointerdown', handleClick);
   }, []);
 
   return (
-    <div className={cn("drop-down", className)}>
-      <button
+    <div className={cn(s.dropDown, className)}>
+      <Button
+        styleType={ButtonStyleType.Common}
         onClick={() => setIsOptionsShown((v) => !v)}
-        className={cn("drop-down__button", {
-          ["drop-down__button--small"]: size === DropDownSize.Small,
-          ["drop-down__button--medium"]: size === DropDownSize.Medium,
-          ["drop-down__button--large"]: size === DropDownSize.Large,
+        className={cn(s.button, {
+          [s.buttonSmall]: size === DropDownSize.Small,
+          [s.buttonMedium]: size === DropDownSize.Medium,
+          [s.buttonLarge]: size === DropDownSize.Large,
         })}
       >
         {value.value}
-      </button>
+      </Button>
 
       {isOptionsShown && (
         <div
           id="drop-down-options"
-          className={cn("drop-down__list", {
-            ["drop-down__list--small"]: size === DropDownSize.Small,
-            ["drop-down__list--medium"]: size === DropDownSize.Medium,
-            ["drop-down__list--large"]: size === DropDownSize.Large,
+          className={cn(s.list, {
+            [s.listSmall]: size === DropDownSize.Small,
+            [s.listMedium]: size === DropDownSize.Medium,
+            [s.listLarge]: size === DropDownSize.Large,
           })}
         >
           {options.map((item) => {
             return (
-              <button
+              <Button
                 key={item.key}
+                styleType={ButtonStyleType.Common}
                 onClick={() => {
                   onChange(item);
                   setIsOptionsShown(false);
                 }}
-                className="drop-down__item"
+                className={cn(s.item, 'drop-down-option')}
               >
                 {item.value}
-              </button>
+              </Button>
             );
           })}
         </div>

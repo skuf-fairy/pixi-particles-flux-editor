@@ -1,24 +1,21 @@
+import {GravityBehaviorStoreState} from './GravityBehavior.types';
+
 import {
   EasingName,
   GravityBehaviorConfig,
-  ScalarDynamicBehaviorConfig,
   ScalarStaticBehaviorConfig,
-  isScalarDynamicBehaviorConfig,
+  ScalarTransitionBehaviorConfig,
   isScalarStaticBehaviorConfig,
-} from "particle-flux";
-import { Store } from "../Store";
-import { BehaviorType } from "../types";
+  isScalarTransitionBehaviorConfig,
+} from 'particle-flux';
 
-export class GravityBehaviorStore extends Store<{
-  scalarStaticBehaviorConfig: ScalarStaticBehaviorConfig;
-  scalarDynamicBehaviorConfig: ScalarDynamicBehaviorConfig;
-  activeType: BehaviorType.Dynamic | BehaviorType.Static;
-  availableTypes: BehaviorType[];
-  enabled: boolean;
-}> {
+import {Store} from '../Store';
+import {BehaviorType} from '../types';
+
+export class GravityBehaviorStore extends Store<GravityBehaviorStoreState> {
   constructor() {
     super({
-      scalarDynamicBehaviorConfig: {
+      scalarTransitionBehaviorConfig: {
         start: 0,
         end: 1,
         multiplier: 1,
@@ -28,17 +25,17 @@ export class GravityBehaviorStore extends Store<{
         value: 0.3,
       },
       activeType: BehaviorType.Static,
-      availableTypes: [BehaviorType.Static, BehaviorType.Dynamic],
+      availableTypes: [BehaviorType.Static, BehaviorType.Transition],
       enabled: false,
     });
   }
 
-  public setDynamicConfig(config: ScalarDynamicBehaviorConfig): void {
-    this.setState({ ...this.state, scalarDynamicBehaviorConfig: config });
+  public setDynamicConfig(config: ScalarTransitionBehaviorConfig): void {
+    this.setState({...this.state, scalarTransitionBehaviorConfig: config});
   }
 
   public setStaticConfig(config: ScalarStaticBehaviorConfig): void {
-    this.setState({ ...this.state, scalarStaticBehaviorConfig: config });
+    this.setState({...this.state, scalarStaticBehaviorConfig: config});
   }
 
   public isEnabled(): boolean {
@@ -46,11 +43,11 @@ export class GravityBehaviorStore extends Store<{
   }
 
   public enable(): void {
-    this.setState({ ...this.state, enabled: true });
+    this.setState({...this.state, enabled: true});
   }
 
   public disable(): void {
-    this.setState({ ...this.state, enabled: false });
+    this.setState({...this.state, enabled: false});
   }
 
   public getActiveConfig(): GravityBehaviorConfig | undefined {
@@ -60,24 +57,24 @@ export class GravityBehaviorStore extends Store<{
       case BehaviorType.Static:
         return this.state.scalarStaticBehaviorConfig;
 
-      case BehaviorType.Dynamic:
-        return this.state.scalarDynamicBehaviorConfig;
+      case BehaviorType.Transition:
+        return this.state.scalarTransitionBehaviorConfig;
     }
   }
 
-  public setActiveConfigType(type: BehaviorType.Dynamic | BehaviorType.Static): void {
+  public setActiveConfigType(type: BehaviorType.Transition | BehaviorType.Static): void {
     this.setState({
       ...this.state,
       activeType: type,
     });
   }
 
-  public restore(config: GravityBehaviorConfig): void {
-    this.reset();
-
-    if (isScalarDynamicBehaviorConfig(config)) {
+  public restore(config: GravityBehaviorConfig | undefined): void {
+    if (config === undefined) {
+      this.disable();
+    } else if (isScalarTransitionBehaviorConfig(config)) {
       this.setDynamicConfig(config);
-      this.setActiveConfigType(BehaviorType.Dynamic);
+      this.setActiveConfigType(BehaviorType.Transition);
       this.enable();
     } else if (isScalarStaticBehaviorConfig(config)) {
       this.setStaticConfig(config);

@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   className?: string;
 }
 
-export function UploadIcon({ className }: Props) {
+export function UploadIcon({className}: Props) {
   return (
     <svg viewBox="0 -2 30 30" xmlns="http://www.w3.org/2000/svg" className={className}>
       <g transform="translate(-571 -676)">

@@ -1,5 +1,6 @@
-import { Point2d, ViewParticle } from "particle-flux";
-import { Particle } from "pixi.js";
+import {Particle} from 'pixi.js';
+
+import {Point2d, ViewParticle} from 'particle-flux';
 
 export class ParticleAdapter implements ViewParticle {
   constructor(public readonly particle: Particle) {}
@@ -31,7 +32,7 @@ export class ParticleAdapter implements ViewParticle {
 
   set tint(value: string | number) {
     // todo string=>number
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       this.particle.color = value;
     }
   }

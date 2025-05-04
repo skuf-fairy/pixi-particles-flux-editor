@@ -1,56 +1,58 @@
+import {BehaviorStoreState, ColorBehaviorType} from './ColorBehaviorStore.types';
+
 import {
+  ColorBehaviorConfig,
   ColorDynamicBehaviorConfig,
   ColorStaticBehaviorConfig,
-  EasingName,
   ScriptBehaviorConfig,
   isColorDynamicBehaviorConfig,
   isColorStaticBehaviorConfig,
   isScriptBehaviorConfig,
-} from "particle-flux";
-import { Store } from "../Store";
-import { BehaviorType } from "../types";
+} from 'particle-flux';
 
-export interface BehaviorStoreState {
-  dynamicConfig: ColorDynamicBehaviorConfig;
-  staticConfig: ColorStaticBehaviorConfig;
-  scriptConfig: ScriptBehaviorConfig<string>;
-  activeType: BehaviorType;
-  availableTypes: BehaviorType[];
-  enabled: boolean;
-}
+import {Store} from '../Store';
+import {BehaviorType} from '../types';
 
 export class ColorBehaviorStore extends Store<BehaviorStoreState> {
   constructor() {
     super({
       staticConfig: {
-        value: "#ffffff",
+        value: '#ffffff',
       },
-      dynamicConfig: {
-        start: "#ffffff",
-        end: "#9ed1f0",
+      transitionConfig: {
+        start: '#ffffff',
+        end: '#9ed1f0',
       },
       scriptConfig: {
         script: [
-          { time: 0, value: "#ffffff" },
-          { time: 1, value: "#ffffff" },
+          {time: 0, value: '#ffffff'},
+          {time: 100, value: '#ffffff'},
         ],
       },
       activeType: BehaviorType.Static,
       enabled: true,
-      availableTypes: [BehaviorType.Static, BehaviorType.Dynamic, BehaviorType.Script],
+      availableTypes: [BehaviorType.Static, BehaviorType.Transition, BehaviorType.Script],
     });
   }
 
   public setStaticConfig(staticConfig: ColorStaticBehaviorConfig): void {
-    this.setState({ ...this.state, staticConfig });
+    this.setState({...this.state, staticConfig});
   }
 
-  public setDynamicConfig(dynamicConfig: ColorDynamicBehaviorConfig): void {
-    this.setState({ ...this.state, dynamicConfig });
+  public getActiveType(): ColorBehaviorType {
+    return this.state.activeType;
+  }
+
+  public getAvailableTypes(): ColorBehaviorType[] {
+    return this.state.availableTypes;
+  }
+
+  public setTransitionConfig(transitionConfig: ColorDynamicBehaviorConfig): void {
+    this.setState({...this.state, transitionConfig});
   }
 
   public setScriptConfig(scriptConfig: ScriptBehaviorConfig<string>): void {
-    this.setState({ ...this.state, scriptConfig });
+    this.setState({...this.state, scriptConfig});
   }
 
   public isEnabled(): boolean {
@@ -58,18 +60,18 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
   }
 
   public enable(): void {
-    this.setState({ ...this.state, enabled: true });
+    this.setState({...this.state, enabled: true});
   }
 
   public disable(): void {
-    this.setState({ ...this.state, enabled: false });
+    this.setState({...this.state, enabled: false});
   }
 
-  public setAvailableTypes(types: BehaviorType[]): void {
-    this.setState({ ...this.state, availableTypes: types });
+  public setAvailableTypes(types: ColorBehaviorType[]): void {
+    this.setState({...this.state, availableTypes: types});
   }
 
-  public setActiveConfigType(type: BehaviorType): void {
+  public setActiveConfigType(type: ColorBehaviorType): void {
     this.setState({
       ...this.state,
       activeType: type,
@@ -87,8 +89,8 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
       case BehaviorType.Static:
         return this.state.staticConfig;
 
-      case BehaviorType.Dynamic:
-        return this.state.dynamicConfig;
+      case BehaviorType.Transition:
+        return this.state.transitionConfig;
 
       case BehaviorType.Script:
         return this.state.scriptConfig;
@@ -99,26 +101,29 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
     return this.state.activeType === BehaviorType.Static;
   }
 
-  public isDynamicConfigActive(): boolean {
-    return this.state.activeType === BehaviorType.Dynamic;
+  public isTransitionConfigActive(): boolean {
+    return this.state.activeType === BehaviorType.Transition;
   }
 
   public isScriptConfigActive(): boolean {
     return this.state.activeType === BehaviorType.Script;
   }
 
-  public restore(config: ColorDynamicBehaviorConfig | ColorStaticBehaviorConfig | ScriptBehaviorConfig<string>): void {
-    if (isColorDynamicBehaviorConfig(config)) {
-      this.setDynamicConfig(config);
-      this.setActiveConfigType(BehaviorType.Dynamic);
+  public restore(config: ColorBehaviorConfig | undefined): void {
+    if (config === undefined) {
+      this.disable();
+    } else if (isColorDynamicBehaviorConfig(config)) {
+      this.setTransitionConfig(config);
+      this.setActiveConfigType(BehaviorType.Transition);
+      this.enable();
     } else if (isColorStaticBehaviorConfig(config)) {
       this.setStaticConfig(config);
       this.setActiveConfigType(BehaviorType.Static);
+      this.enable();
     } else if (isScriptBehaviorConfig(config)) {
       this.setScriptConfig(config);
       this.setActiveConfigType(BehaviorType.Script);
+      this.enable();
     }
-
-    this.enable();
   }
 }

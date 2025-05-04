@@ -1,0 +1,6 @@
+.segment {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--secondary-border-color);
+  border-radius: 50%;
+}

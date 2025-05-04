@@ -1,0 +1,4 @@
+.item {
+  margin-bottom: var(--gap);
+  align-items: end;
+}

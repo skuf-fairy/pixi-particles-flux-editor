@@ -1,0 +1,36 @@
+.head1 {
+  font-size: 56px;
+  font-family: var(--font-baloo);
+  line-height: 120%;
+}
+
+.head2 {
+  font-size: 32px;
+  font-family: var(--font-baloo);
+  line-height: 120%;
+}
+
+.head3 {
+  font-size: 24px;
+  font-family: var(--font-baloo);
+  line-height: 120%;
+}
+
+.head5 {
+  font-size: 16px;
+  font-family: var(--font-baloo);
+  line-height: 120%;
+}
+
+.text {
+  font-size: 14px;
+  font-family: var(--font-baloo);
+  line-height: 120%;
+}
+
+.buttonText {
+  font-size: 14px;
+  font-family: var(--font-baloo);
+  line-height: 120%;
+  color: var(--primary-text-color);
+}

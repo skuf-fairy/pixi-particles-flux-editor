@@ -1,9 +1,12 @@
-import React, { useRef } from "react";
-import { useUploadTextureUseCaseToken } from "src/di/di.hooks";
-import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
-import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
-import { UploadIcon } from "src/ui/kit/icons/UploadIcon";
-import "./UploadTextureButton.style.scss";
+import {useUploadTextureUseCaseToken} from 'src/di/di.hooks';
+
+import React, {useRef} from 'react';
+
+import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
+import {Button, ButtonSize, ButtonStyleType} from 'src/ui/kit/Button/Button';
+import {UploadIcon} from 'src/ui/kit/icons/UploadIcon';
+
+import s from './UploadTextureButton.module.css';
 
 export function UploadTextureButton() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -12,15 +15,10 @@ export function UploadTextureButton() {
 
   return (
     <>
-      <Button
-        styleType={ButtonStyleType.Primary}
-        size={ButtonSize.Medium}
-        onClick={() => inputRef.current?.click()}
-        className="upload-button"
-      >
-        <div className="upload-button__content">
-          <UploadIcon className="upload-button__icon" />
-          <p className="upload-button__text">Upload</p>
+      <Button styleType={ButtonStyleType.Primary} size={ButtonSize.Medium} onClick={() => inputRef.current?.click()}>
+        <div className={s.content}>
+          <UploadIcon className={s.icon} />
+          <p className={s.text}>Upload</p>
         </div>
       </Button>
       <input
@@ -28,7 +26,7 @@ export function UploadTextureButton() {
         type="file"
         // @ts-ignore
         accept={TexturesStore.acceptMimeTypes}
-        className="upload-input"
+        className={s.uploadInput}
         onChange={uploadTextureUseCase.upload}
       />
     </>

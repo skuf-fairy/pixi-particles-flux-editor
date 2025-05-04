@@ -1,7 +1,8 @@
-import { injected } from "brandi";
-import { DI_TOKENS } from "src/di/di.tokens";
-import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
-import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
+import {DI_TOKENS} from 'src/di/di.tokens';
+import {ParticleTexture} from 'src/stores/TexturesStore/TexturesStore.types';
+
+import {injected} from 'brandi';
+import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
 
 export class DropTextureUseCase {
   constructor(private readonly texturesStore: TexturesStore) {}

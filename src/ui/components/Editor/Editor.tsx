@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useEditorAppToken, useInitializeUseCaseToken } from "src/di/di.hooks";
-import { PageLoader } from "../PageLoader/PageLoader";
-import "./Editor.style.scss";
+import {useEditorAppToken, useInitializeUseCaseToken} from 'src/di/di.hooks';
+
+import React, {useEffect, useRef, useState} from 'react';
+
+import {PageLoader} from '../PageLoader/PageLoader';
+
+import s from './Editor.module.css';
 
 export function Editor() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -28,7 +31,7 @@ export function Editor() {
 
   return (
     <>
-      <div ref={containerRef} className="editor"></div>
+      <div ref={containerRef} className={s.editor}></div>
 
       {!isReady && <PageLoader />}
     </>

@@ -1,8 +1,10 @@
-import cn from "classnames";
-import React from "react";
-import { InputNumber } from "src/ui/kit/Input/InputNumber";
-import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import "./NumberOption.style.scss";
+import React from 'react';
+
+import cn from 'classnames';
+import {InputNumber} from 'src/ui/kit/Input/InputNumber';
+import {Typography, TypographyColor, TypographyVariant} from 'src/ui/kit/Typography/Typography';
+
+import s from './NumberOption.module.css';
 
 interface Props {
   value: number;
@@ -13,13 +15,13 @@ interface Props {
   className?: string;
 }
 
-export function NumberOption({ value, text, min, max, onBlur, className }: Props) {
+export function NumberOption({value, text, min, max, onBlur, className}: Props) {
   return (
-    <div className={cn("number-option", className)}>
-      <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="number-option__title">
+    <div className={cn(s.numberOption, className)}>
+      <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className={s.title}>
         {text}
       </Typography>
-      <InputNumber value={value} min={min} max={max} onBlur={onBlur} className="number-option__input" />
+      <InputNumber value={value} min={min} max={max} onBlur={onBlur} className={s.input} />
     </div>
   );
 }

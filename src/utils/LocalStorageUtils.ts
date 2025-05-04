@@ -1,10 +1,10 @@
-import { JSONUtils } from "./JSONUtils";
+import {JSONUtils} from './JSONUtils';
 
 export enum LocalStorageKeys {
-  Config = "particle-flux-config",
-  Textures = "particle-flux-textures",
-  BloomFilter = "bloom-filter-option",
-  AppSettings = "app-settings",
+  Config = 'particle-flux-config',
+  Textures = 'particle-flux-textures',
+  BloomFilter = 'bloom-filter-option',
+  AppSettings = 'app-settings',
 }
 
 export class LocalStorageUtils {
@@ -12,12 +12,7 @@ export class LocalStorageUtils {
     const value = localStorage.getItem(key);
 
     if (value) {
-      try {
-        return JSON.parse(value) as T;
-      } catch (e) {
-        // todo error
-        throw e;
-      }
+      return JSON.parse(value) as T;
     }
   }
 

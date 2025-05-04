@@ -1,7 +1,0 @@
-.config-options {
-  display: flex;
-
-  &__button:not(:last-child) {
-    margin-right: var(--gap);
-  }
-}

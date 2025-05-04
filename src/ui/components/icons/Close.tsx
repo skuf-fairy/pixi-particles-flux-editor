@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 interface Props {
   className?: string;
 }
 
-export function Close({ className }: Props) {
+export function Close({className}: Props) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" className={className}>
       <path

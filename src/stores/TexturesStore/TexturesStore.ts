@@ -1,6 +1,7 @@
-import defaultParticleTexture from "src/assets/default.png";
-import { Store } from "../Store";
-import { CollectionTexture, ParticleTexture, TexturesStoreState } from "./TextureStore.types";
+import {CollectionTexture, ParticleTexture, TexturesStoreState} from './TexturesStore.types';
+import defaultParticleTexture from 'src/assets/default.png';
+
+import {Store} from '../Store';
 
 export class TexturesStore extends Store<TexturesStoreState> {
   static defaultParticle: ParticleTexture = {
@@ -8,9 +9,9 @@ export class TexturesStore extends Store<TexturesStoreState> {
     name: CollectionTexture.DefaultParticle,
   };
 
-  static availableImageTypes = ["png", "jpeg", "jpg", "webp", "avif"];
+  static availableImageTypes = ['png', 'jpeg', 'jpg', 'webp', 'avif'];
 
-  static acceptMimeTypes = TexturesStore.availableImageTypes.map((type) => "image/" + type);
+  static acceptMimeTypes = TexturesStore.availableImageTypes.map((type) => 'image/' + type);
 
   constructor() {
     super({
@@ -19,11 +20,11 @@ export class TexturesStore extends Store<TexturesStoreState> {
   }
 
   public set(textures: ParticleTexture[]): void {
-    this.setState({ list: textures });
+    this.setState({list: textures});
   }
 
   public add(texture: ParticleTexture): void {
-    this.setState({ list: [...this.state.list, texture] });
+    this.setState({list: [...this.state.list, texture]});
   }
 
   public drop(textureName: string): void {
@@ -34,12 +35,12 @@ export class TexturesStore extends Store<TexturesStoreState> {
         list: [TexturesStore.defaultParticle],
       });
     } else {
-      this.setState({ list: newList });
+      this.setState({list: newList});
     }
   }
 
   public setTextures(textures: ParticleTexture[]): void {
-    this.setState({ list: textures });
+    this.setState({list: textures});
   }
 
   public getTextureList(): ParticleTexture[] {

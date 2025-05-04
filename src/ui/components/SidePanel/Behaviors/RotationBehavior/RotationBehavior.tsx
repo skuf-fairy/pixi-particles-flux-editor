@@ -1,15 +1,16 @@
-import { ScalarDynamicBehaviorConfig, ScalarStaticBehaviorConfig } from "particle-flux";
-import React from "react";
-import { useRotationBehaviorStore } from "src/hooks/connectors";
-import { BehaviorType } from "src/stores/types";
-import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
-import { DeltaBehaviorRotation } from "src/ui/components/DeltaBehaviorOption/DeltaBehaviorOption";
-import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
-import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
-import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
-import { BehaviorName } from "../../BehaviorName/BehaviorName";
-import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { BehaviorEnabled } from "../BehaviorEnabled/BehaviorEnabled";
+import React from 'react';
+
+import {useRotationBehaviorStore} from 'src/hooks/connectors';
+import {BehaviorType} from 'src/stores/types';
+import {BehaviorTypeSelect} from 'src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect';
+import {DeltaBehaviorRotation} from 'src/ui/components/DeltaBehaviorOption/DeltaBehaviorOption';
+import {ScalarStaticBehaviorOption} from 'src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption';
+import {ScalarTransitionBehaviorOption} from 'src/ui/components/ScalarTransitionBehaviorOption/ScalarTransitionBehaviorOption';
+
+import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
+import {BehaviorName} from '../../BehaviorName/BehaviorName';
+import {ItemContainer} from '../../ItemContainer/ItemContainer';
+import {BehaviorEnabled} from '../BehaviorEnabled/BehaviorEnabled';
 
 export function RotationBehavior() {
   const store = useRotationBehaviorStore();
@@ -24,7 +25,7 @@ export function RotationBehavior() {
           <>
             <BehaviorTypeSelect
               type={state.activeType}
-              availableTypes={state.availableTypes}
+              availableTypes={state.availableBehaviorTypes}
               onChange={(type) => {
                 store.setActiveConfigType(type);
               }}
@@ -47,8 +48,11 @@ export function RotationBehavior() {
         <ScalarStaticBehaviorOption config={state.staticConfig} onChange={(v) => store.setStaticConfig(v)} />
       )}
 
-      {state.activeType === BehaviorType.Dynamic && (
-        <ScalarDynamicBehaviorOption config={state.dynamicConfig} onChange={(v) => store.setDynamicConfig(v)} />
+      {state.activeType === BehaviorType.Transition && (
+        <ScalarTransitionBehaviorOption
+          config={state.transitionConfig}
+          onChange={(v) => store.setTransitionConfig(v)}
+        />
       )}
 
       {state.activeType === BehaviorType.Delta && (

@@ -1,6 +1,8 @@
-import cn from "classnames";
-import React, { useEffect, useState } from "react";
-import "./Input.style.scss";
+import React, {useEffect, useState} from 'react';
+
+import cn from 'classnames';
+
+import s from './Input.module.css';
 
 interface Props {
   value: number;
@@ -12,7 +14,7 @@ interface Props {
   className?: string;
 }
 
-export function InputNumber({ value, onBlur, min, max, disabled, placeholder, className }: Props) {
+export function InputNumber({value, onBlur, min, max, disabled, placeholder, className}: Props) {
   const [inputValue, setInputValue] = useState(value.toString());
 
   useEffect(() => {
@@ -40,7 +42,7 @@ export function InputNumber({ value, onBlur, min, max, disabled, placeholder, cl
           setInputValue(clampedValue.toString());
         }
       }}
-      className={cn("input", className)}
+      className={cn(s.input, className)}
       placeholder={placeholder}
     />
   );

@@ -1,0 +1,66 @@
+@import '../../styles/typography.css';
+
+.dropDown {
+  position: relative;
+  height: fit-content;
+}
+
+.button {
+  composes: text;
+
+  cursor: pointer;
+  border: 1px solid var(--secondary-border-color);
+  border-radius: 10px;
+  color: white;
+  background-color: rgb(3 17 22);
+
+  transition: border-color var(--default-transition-time) var(--default-transition-easing);
+}
+
+.buttonSmall {
+  padding: 8px;
+}
+
+.buttonMedium {
+  padding: 12px;
+}
+
+.buttonLarge {
+  padding: 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  border: 1px solid var(--secondary-border-color);
+  border-radius: 10px;
+  background-color: rgb(3 17 22);
+  z-index: 1000;
+}
+
+.listSmall {
+  padding: 8px;
+}
+
+.listMedium {
+  padding: 12px;
+}
+
+.listLarge {
+  padding: 16px;
+}
+
+.item {
+  composes: text;
+
+  cursor: pointer;
+  color: white;
+  text-align: left;
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}

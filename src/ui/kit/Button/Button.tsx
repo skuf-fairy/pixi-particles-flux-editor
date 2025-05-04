@@ -1,16 +1,18 @@
-import cn from "classnames";
-import React, { PropsWithChildren } from "react";
-import "./Button.style.scss";
+import React, {PropsWithChildren} from 'react';
+
+import cn from 'classnames';
+
+import s from './Button.module.css';
 
 export enum ButtonStyleType {
-  Common = "common",
-  Primary = "primary", // зеленая кнопка
+  Common = 'common',
+  Primary = 'primary', // зеленая кнопка
 }
 
 export enum ButtonSize {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
+  Small = 'small',
+  Medium = 'medium',
+  Large = 'large',
 }
 
 interface Props {
@@ -21,17 +23,12 @@ interface Props {
   className?: string;
 }
 
-export function Button({ children, disabled, size, onClick, styleType, className }: PropsWithChildren<Props>) {
+export function Button({children, disabled, size, onClick, styleType, className}: PropsWithChildren<Props>) {
   return (
     <button
       disabled={disabled}
-      onPointerDown={onClick}
-      className={cn(
-        "button",
-        { "button--disabled": disabled, [`button--${size}`]: size },
-        `button--type-${styleType}`,
-        className
-      )}
+      onClick={onClick}
+      className={cn(s.button, {[s.disabled]: disabled}, s[`${size}Size`], s[`${styleType}Type`], className)}
     >
       {children}
     </button>

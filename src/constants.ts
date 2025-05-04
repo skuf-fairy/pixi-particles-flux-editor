@@ -1,7 +1,7 @@
-import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
+import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
 
-export const CONFIG_JSON_FILE_NAME = "config.json";
-export const TEXTURES_ZIP_FILE_NAME = "particle-textures.zip";
+export const CONFIG_JSON_FILE_NAME = 'config.json';
+export const TEXTURES_ZIP_FILE_NAME = 'particle-textures.zip';
 
 export const DEFAULT_PARTICLE_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -37,7 +37,7 @@ export const DEFAULT_PARTICLE_CONFIG: ParticleEmitterConfig = {
       },
     },
     color: {
-      value: "#ffffff",
+      value: '#ffffff',
     },
     direction: {
       minAngle: 0,

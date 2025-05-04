@@ -1,14 +1,14 @@
-import { EventEmitter } from "pixi.js";
+import {EventEmitter} from 'pixi.js';
 
 export class Store<S> {
   public state: S;
   private initialState: S;
-  private readonly emitEventname = "state-changed";
+  private readonly emitEventname = 'state-changed';
   private readonly eventEmitter: EventEmitter;
 
   constructor(state: S) {
-    this.state = { ...state };
-    this.initialState = { ...state };
+    this.state = {...state};
+    this.initialState = {...state};
     this.eventEmitter = new EventEmitter();
   }
 
@@ -31,12 +31,12 @@ export class Store<S> {
   }
 
   public setValue<K extends keyof S>(key: K, value: S[K]): void {
-    this.state = { ...this.state, [key]: value };
+    this.state = {...this.state, [key]: value};
     this.emit();
   }
 
   protected emit() {
-    this.state = { ...this.state };
+    this.state = {...this.state};
     this.eventEmitter.emit(this.emitEventname);
   }
 }

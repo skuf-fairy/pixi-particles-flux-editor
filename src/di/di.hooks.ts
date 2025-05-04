@@ -1,5 +1,6 @@
-import { createInjectionHooks } from "brandi-react";
-import { DI_TOKENS } from "./di.tokens";
+import {DI_TOKENS} from './di.tokens';
+
+import {createInjectionHooks} from 'brandi-react';
 
 const [
   useEditorAppToken,
@@ -19,6 +20,7 @@ const [
   useParticleFluxConfigStoreToken,
   useAppConfigStoreToken,
   usePerformanceStoreToken,
+  useErrorsStoreToken,
   // use-cases
   useInitializeUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,
@@ -34,8 +36,10 @@ const [
   useSelectTextureFromCollectionUseCaseToken,
   useApplyExampleEmitterConfigUseCaseToken,
   useDownloadTexturesUseCaseToken,
-  useAddSpawnShapeItemToken,
-  useDropSpawnShapeItemToken,
+  useAddSpawnShapeItemUseCaseToken,
+  useDropSpawnShapeItemUseCaseToken,
+  // services
+  useErrorsServiceToken,
 ] = createInjectionHooks(
   DI_TOKENS.editorApp,
   //stores
@@ -55,6 +59,7 @@ const [
   DI_TOKENS.particleFluxConfigStore,
   DI_TOKENS.appConfigStore,
   DI_TOKENS.performanceStore,
+  DI_TOKENS.errorsStore,
   // use-cases
   DI_TOKENS.initializeUseCase,
   DI_TOKENS.saveParticleFluxConfigUseCase,
@@ -70,8 +75,10 @@ const [
   DI_TOKENS.selectTextureFromCollectionUseCase,
   DI_TOKENS.applyExampleEmitterConfigUseCase,
   DI_TOKENS.downloadTexturesUseCase,
-  DI_TOKENS.addSpawnShapeItem,
-  DI_TOKENS.dropSpawnShapeItem
+  DI_TOKENS.addSpawnShapeItemUseCase,
+  DI_TOKENS.dropSpawnShapeItemUseCase,
+  // services
+  DI_TOKENS.errorsService,
 );
 
 export {
@@ -92,6 +99,7 @@ export {
   useParticleFluxConfigStoreToken,
   useAppConfigStoreToken,
   usePerformanceStoreToken,
+  useErrorsStoreToken,
   // use-cases
   useInitializeUseCaseToken,
   useSaveParticleFluxConfigUseCaseToken,
@@ -107,6 +115,8 @@ export {
   useSelectTextureFromCollectionUseCaseToken,
   useApplyExampleEmitterConfigUseCaseToken,
   useDownloadTexturesUseCaseToken,
-  useAddSpawnShapeItemToken,
-  useDropSpawnShapeItemToken,
+  useAddSpawnShapeItemUseCaseToken,
+  useDropSpawnShapeItemUseCaseToken,
+  // services
+  useErrorsServiceToken,
 };

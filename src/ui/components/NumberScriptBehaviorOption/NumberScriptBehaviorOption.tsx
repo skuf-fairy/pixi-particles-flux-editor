@@ -1,9 +1,12 @@
-import { NumberScriptBehaviorConfig, ScriptTimeConfig } from "particle-flux";
-import React from "react";
-import { NumberOption } from "src/ui/components/NumberOption/NumberOption";
-import { SymbolButton } from "src/ui/kit/SymbolButton/SymbolButton";
-import { BooleanValue } from "../BooleanValue/BooleanValue";
-import "./NumberScriptBehaviorOption.style.scss";
+import React from 'react';
+
+import {NumberScriptBehaviorConfig, ScriptTimeConfig} from 'particle-flux';
+import {NumberOption} from 'src/ui/components/NumberOption/NumberOption';
+import {SymbolButton} from 'src/ui/kit/SymbolButton/SymbolButton';
+
+import {BooleanValue} from '../BooleanValue/BooleanValue';
+
+import s from './NumberScriptBehaviorOption.module.css';
 
 interface Props {
   config: NumberScriptBehaviorConfig;
@@ -12,21 +15,20 @@ interface Props {
   max?: number;
 }
 
-export function NumberScriptBehaviorOption({ config, onChange, min, max }: Props) {
+export function NumberScriptBehaviorOption({config, onChange, min, max}: Props) {
   const handlePushItemClick = () =>
-    onChange({ ...config, script: [...config.script, { ...config.script[config.script.length - 1] }] });
-  console.log(config);
+    onChange({...config, script: [...config.script, {...config.script[config.script.length - 1]}]});
 
   return (
-    <div className="script-behavior">
-      <div className="script-behavior__steps-list">
+    <div className={s.scriptBehavior}>
+      <div className={s.stepsList}>
         {config.script.map((item, scriptIndex) => {
           const isDisabled = scriptIndex === config.script.length - 1 || scriptIndex === 0;
 
           const handleTimeChange = (time: number) => {
             const newScript = config.script.reduce<ScriptTimeConfig<number>>((result, item, i) => {
               if (scriptIndex === i) {
-                result.push({ time, value: item.value });
+                result.push({time, value: item.value});
               } else {
                 result.push(item);
               }
@@ -34,13 +36,13 @@ export function NumberScriptBehaviorOption({ config, onChange, min, max }: Props
               return result;
             }, []);
 
-            onChange({ ...config, script: newScript });
+            onChange({...config, script: newScript});
           };
 
           const handleValueChange = (v: number) => {
             const newScript = config.script.reduce<ScriptTimeConfig<number>>((result, item, i) => {
               if (scriptIndex === i) {
-                result.push({ time: item.time, value: v });
+                result.push({time: item.time, value: v});
               } else {
                 result.push(item);
               }
@@ -48,15 +50,15 @@ export function NumberScriptBehaviorOption({ config, onChange, min, max }: Props
               return result;
             }, []);
 
-            onChange({ ...config, script: newScript });
+            onChange({...config, script: newScript});
           };
 
           const handleDropItemClick = () =>
-            onChange({ ...config, script: config.script.filter((_, n) => scriptIndex !== n) });
+            onChange({...config, script: config.script.filter((_, n) => scriptIndex !== n)});
 
           return (
-            <div key={scriptIndex} className="script-behavior__item">
-              <NumberOption value={item.time} max={1} min={0} text="Time" onBlur={handleTimeChange} />
+            <div key={scriptIndex} className={s.item}>
+              <NumberOption value={item.time} max={100} min={0} text="Time" onBlur={handleTimeChange} />
               <NumberOption value={item.value} min={min} max={max} text="Value" onBlur={handleValueChange} />
               <SymbolButton onClick={handleDropItemClick} disabled={isDisabled}>
                 -
@@ -66,7 +68,7 @@ export function NumberScriptBehaviorOption({ config, onChange, min, max }: Props
         })}
       </div>
 
-      <SymbolButton onClick={handlePushItemClick} className="script-behavior__add-button">
+      <SymbolButton onClick={handlePushItemClick} className={s.addButton}>
         +
       </SymbolButton>
 
@@ -74,7 +76,7 @@ export function NumberScriptBehaviorOption({ config, onChange, min, max }: Props
         <BooleanValue
           label="Interpolate"
           checked={config.isInterpolate}
-          onChange={(v) => onChange({ ...config, isInterpolate: v })}
+          onChange={(v) => onChange({...config, isInterpolate: v})}
         />
       )}
     </div>

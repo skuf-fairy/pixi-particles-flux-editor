@@ -1,8 +1,24 @@
 {
-  "extends": "eslint-config-recommended",
-
-  "rules": {
-    "jsx-quotes": [1, "prefer-double"]
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "sourceType": "module"
   },
-  "plugins": ["prettier"]
+  "ignorePatterns": ["*.js"],
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  }
 }

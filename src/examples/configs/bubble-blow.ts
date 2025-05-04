@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig, SpawnShapeType } from "particle-flux";
+import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
 
 export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -43,7 +43,7 @@ export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
       isGroupWave: true,
     },
     color: {
-      value: "#ffffff",
+      value: '#ffffff',
     },
     direction: {
       minAngle: -140,

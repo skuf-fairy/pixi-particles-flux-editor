@@ -1,0 +1,41 @@
+@import '../../styles/typography.css';
+
+.button {
+  cursor: pointer;
+  transition: background-color var(--default-transition-time) var(--default-transition-easing);
+}
+
+.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.smallSize {
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.mediumSize {
+  padding: 12px;
+}
+
+.largeSize {
+  padding: 16px;
+}
+
+.commonType {
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.primaryType {
+  composes: buttonText;
+  background-color: var(--primary-button-color);
+  border-radius: 10px;
+  color: var(--secondary-text-color);
+
+  &:hover {
+    background-color: rgb(173 255 206);
+  }
+}

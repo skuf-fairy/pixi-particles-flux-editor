@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: end;
+  margin-bottom: var(--gap);
+}
+
+.coordinate {
+  margin-right: var(--gap2x);
+  margin-bottom: var(--gap-half);
+}

@@ -1,0 +1,17 @@
+.root {
+  width: 100%;
+  padding: 0 8px;
+  background-color: var(--primary-background-color);
+  height: var(--top-bar-height);
+
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  margin-right: var(--gap);
+}
+
+.text {
+  text-transform: uppercase;
+}

@@ -1,31 +1,33 @@
-import { ParticleEmitterConfig } from "particle-flux";
-import { CollectionTexture } from "src/stores/TexturesStore/TextureStore.types";
-import { BUBBLE_BLOW_EMITTER_CONFIG } from "./configs/bubble-blow";
-import { BUBBLES_EMITTER_CONFIG } from "./configs/bubbles";
-import { BUBBLES_PATH_EMITTER_CONFIG } from "./configs/bubbles-path";
-import { CARTOON_SMOKE_BLAST_EMITTER_CONFIG } from "./configs/cartoon-smoke-blast";
-import { FLAME_POLYGON_EMITTER_CONFIG } from "./configs/fire-polygon";
-import { FLAME_EMITTER_CONFIG } from "./configs/flame";
-import { FOUNTAIN_EMITTER_CONFIG } from "./configs/fountain";
-import { LOL_TEXT_EMITTER_CONFIG } from "./configs/lol-text";
-import { PULSE_EMITTER_CONFIG } from "./configs/pulse";
-import { RAIN_EMITTER_CONFIG } from "./configs/rain";
-import { STARSHIP_JUMP_EMITTER_CONFIG } from "./configs/starship-jump";
-import { TRAIL_EMITTER_CONFIG } from "./configs/trail";
+import {BUBBLE_BLOW_EMITTER_CONFIG} from './configs/bubble-blow';
+import {BUBBLES_PATH_EMITTER_CONFIG} from './configs/bubbles-path';
+import {CARTOON_SMOKE_BLAST_EMITTER_CONFIG} from './configs/cartoon-smoke-blast';
+import {FLAME_POLYGON_EMITTER_CONFIG} from './configs/fire-polygon';
+import {LOL_TEXT_EMITTER_CONFIG} from './configs/lol-text';
+import {STARSHIP_JUMP_EMITTER_CONFIG} from './configs/starship-jump';
+import {CollectionTexture} from 'src/stores/TexturesStore/TexturesStore.types';
+
+import {ParticleEmitterConfig} from 'particle-flux';
+
+import {BUBBLES_EMITTER_CONFIG} from './configs/bubbles';
+import {FLAME_EMITTER_CONFIG} from './configs/flame';
+import {FOUNTAIN_EMITTER_CONFIG} from './configs/fountain';
+import {PULSE_EMITTER_CONFIG} from './configs/pulse';
+import {RAIN_EMITTER_CONFIG} from './configs/rain';
+import {TRAIL_EMITTER_CONFIG} from './configs/trail';
 
 export enum AnimationExample {
-  Pulse = "Pulse",
-  Trail = "Trail",
-  LolText = "Lol Text",
-  Fountain = "Fountain",
-  Rain = "Rain",
-  FlamePolygon = "Flame Polygon",
-  Flame = "Flame",
-  CartoonSmokeBlast = "Cartoon Smoke Blast",
-  BubblesPath = "Bubbles Path",
-  Bubbles = "Bubbles",
-  BubbleBlow = "BubbleBlow",
-  StarshipJump = "StarshipJump",
+  Pulse = 'Pulse',
+  Trail = 'Trail',
+  LolText = 'Lol Text',
+  Fountain = 'Fountain',
+  Rain = 'Rain',
+  FlamePolygon = 'Flame Polygon',
+  Flame = 'Flame',
+  CartoonSmokeBlast = 'Cartoon Smoke Blast',
+  BubblesPath = 'Bubbles Path',
+  Bubbles = 'Bubbles',
+  BubbleBlow = 'BubbleBlow',
+  StarshipJump = 'StarshipJump',
 }
 
 export interface Example {

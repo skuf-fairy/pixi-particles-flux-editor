@@ -1,26 +1,29 @@
+import React from 'react';
+
 import {
   SpawnShape,
   isSpawnPointShape,
   isSpawnPolygonalShape,
   isSpawnRectangleShape,
   isSpawnTorusShape,
-} from "particle-flux";
-import React from "react";
-import { useSpawnShapeBehaviorStore } from "src/hooks/connectors";
-import { BooleanValue } from "src/ui/components/BooleanValue/BooleanValue";
-import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
-import { BehaviorName } from "../../BehaviorName/BehaviorName";
-import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { AddSpawnShapeItem } from "./AddSpawnShapeItem";
-import "./SpawnShapeBehavior.style.scss";
-import { PointSpawnShapeBehavior } from "./shapes/PointSpawnShapeBehavior/PointSpawnShapeBehavior";
-import { PolygonalChain } from "./shapes/PolygonalChainSpawnShape/PolygonalChain";
-import { RectangleSpawnShapeBehavior } from "./shapes/RectangleSpawnShapeBehavior/RectangleSpawnShapeBehavior";
-import { TorusSpawnShapeBehavior } from "./shapes/TorusSpawnShapeBehavior/TorusSpawnShapeBehavior";
+} from 'particle-flux';
+import {useSpawnShapeBehaviorStore} from 'src/hooks/connectors';
+import {BooleanValue} from 'src/ui/components/BooleanValue/BooleanValue';
+
+import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
+import {BehaviorName} from '../../BehaviorName/BehaviorName';
+import {ItemContainer} from '../../ItemContainer/ItemContainer';
+import {AddSpawnShapeItem} from './AddSpawnShapeItem';
+import {PointSpawnShapeBehavior} from './shapes/PointSpawnShapeBehavior/PointSpawnShapeBehavior';
+import {PolygonalChain} from './shapes/PolygonalChainSpawnShape/PolygonalChain';
+import {RectangleSpawnShapeBehavior} from './shapes/RectangleSpawnShapeBehavior/RectangleSpawnShapeBehavior';
+import {TorusSpawnShapeBehavior} from './shapes/TorusSpawnShapeBehavior/TorusSpawnShapeBehavior';
+
+import s from './SpawnShapeBehavior.module.css';
 
 export function SpawnShapeBehavior() {
   const store = useSpawnShapeBehaviorStore();
-  const { shapeList, isDisplayShape, isGroupWave } = store.getState();
+  const {shapeList, isDisplayShape, isGroupWave} = store.getState();
 
   const renderShape = (shape: SpawnShape, shapeIndex: number) => {
     if (isSpawnRectangleShape(shape)) {
@@ -71,9 +74,9 @@ export function SpawnShapeBehavior() {
     <ItemContainer>
       <BehaviorHeader left={<BehaviorName name="Spawn Shape" />} right={null} />
 
-      <div className="spawn-shape-list">
+      <div className={s.root}>
         {shapeList.map((shape, key) => (
-          <div key={key} className="spawn-shape-list__item">
+          <div key={key} className={s.item}>
             {renderShape(shape, key)}
           </div>
         ))}
@@ -85,13 +88,13 @@ export function SpawnShapeBehavior() {
         checked={isDisplayShape}
         label="Display shape"
         onChange={(checked) => store.setDisplayShape(checked)}
-        className="spawn-shape-list__toggle"
+        className={s.toggle}
       />
       <BooleanValue
         checked={isGroupWave}
         label="Group Wave"
         onChange={(checked) => store.setIsGroupWave(checked)}
-        className="spawn-shape-list__toggle"
+        className={s.toggle}
       />
     </ItemContainer>
   );

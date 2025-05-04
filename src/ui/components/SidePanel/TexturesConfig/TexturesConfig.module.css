@@ -1,0 +1,9 @@
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+.button:not(:last-child) {
+  margin-right: var(--gap);
+}

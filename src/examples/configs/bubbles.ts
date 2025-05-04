@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig } from "particle-flux";
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const BUBBLES_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {

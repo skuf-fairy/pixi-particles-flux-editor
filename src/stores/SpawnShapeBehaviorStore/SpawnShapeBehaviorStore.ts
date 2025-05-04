@@ -1,11 +1,10 @@
-import { SpawnShape, SpawnShapeBehavior, SpawnShapeType } from "particle-flux";
-import { Store } from "../Store";
+import {SpawnShapeBehaviorStoreState} from './SpawnShapeBehaviorStore.types';
 
-export class SpawnShapeBehaviorStore extends Store<{
-  shapeList: SpawnShape[];
-  isGroupWave: boolean;
-  isDisplayShape: boolean;
-}> {
+import {SpawnShape, SpawnShapeBehavior, SpawnShapeType} from 'particle-flux';
+
+import {Store} from '../Store';
+
+export class SpawnShapeBehaviorStore extends Store<SpawnShapeBehaviorStoreState> {
   constructor() {
     super({
       shapeList: [
@@ -21,11 +20,11 @@ export class SpawnShapeBehaviorStore extends Store<{
   }
 
   public setShapeList(shapeList: SpawnShape[]): void {
-    this.setValue("shapeList", shapeList);
+    this.setValue('shapeList', shapeList);
   }
 
   public setIsGroupWave(value: boolean): void {
-    this.setValue("isGroupWave", value);
+    this.setValue('isGroupWave', value);
   }
 
   public isGroupWave(): boolean {
@@ -45,20 +44,30 @@ export class SpawnShapeBehaviorStore extends Store<{
     };
   }
 
-  public restore(shapeBehavior: SpawnShapeBehavior): void {
-    const shape = shapeBehavior.shape;
-
-    if (Array.isArray(shape)) {
-      this.setValue("shapeList", shape);
+  public restore(shapeBehavior: SpawnShapeBehavior | undefined): void {
+    if (shapeBehavior === undefined) {
+      this.setShapeList([
+        {
+          x: 0,
+          y: 0,
+          type: SpawnShapeType.Point,
+        },
+      ]);
     } else {
-      this.setValue("shapeList", [shape]);
-    }
+      const shape = shapeBehavior.shape;
 
-    this.setIsGroupWave(shapeBehavior.isGroupWave || false);
+      if (Array.isArray(shape)) {
+        this.setValue('shapeList', shape);
+      } else {
+        this.setValue('shapeList', [shape]);
+      }
+
+      this.setIsGroupWave(shapeBehavior.isGroupWave || false);
+    }
   }
 
   public setDisplayShape(isDisplayShape: boolean): void {
-    this.setValue("isDisplayShape", isDisplayShape);
+    this.setValue('isDisplayShape', isDisplayShape);
   }
 
   public isDisplayShape(): boolean {

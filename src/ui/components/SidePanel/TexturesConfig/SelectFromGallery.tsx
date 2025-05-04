@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Button, ButtonSize, ButtonStyleType } from "src/ui/kit/Button/Button";
-import { TexturesGalleryModal } from "../../TexturesGalleryModal/TexturesGalleryModal";
+import React, {useState} from 'react';
+
+import {Button, ButtonSize, ButtonStyleType} from 'src/ui/kit/Button/Button';
+
+import {TexturesGalleryModal} from '../../TexturesGalleryModal/TexturesGalleryModal';
 
 export function SelectFromGallery() {
   const [isGalleryModalActive, setGalleryModalActive] = useState(false);

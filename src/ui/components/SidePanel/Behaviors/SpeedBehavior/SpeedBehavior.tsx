@@ -1,13 +1,15 @@
-import React from "react";
-import { useSpeedBehaviorStore } from "src/hooks/connectors";
-import { BehaviorTypeSelect } from "src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect";
-import { ScalarDynamicBehaviorOption } from "src/ui/components/ScalarDynamicBehaviorOption/ScalarDynamicBehaviorOption";
-import { ScalarStaticBehaviorOption } from "src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption";
-import { NumberScriptBehaviorOption } from "../../../NumberScriptBehaviorOption/NumberScriptBehaviorOption";
-import { BehaviorHeader } from "../../BehaviorHeader/BehaviorHeader";
-import { BehaviorName } from "../../BehaviorName/BehaviorName";
-import { ItemContainer } from "../../ItemContainer/ItemContainer";
-import { BehaviorEnabled } from "../BehaviorEnabled/BehaviorEnabled";
+import React from 'react';
+
+import {useSpeedBehaviorStore} from 'src/hooks/connectors';
+import {BehaviorTypeSelect} from 'src/ui/components/BehaviorTypeSelect/BehaviorTypeSelect';
+import {ScalarStaticBehaviorOption} from 'src/ui/components/ScalarStaticBehavior/ScalarStaticBehaviorOption';
+import {ScalarTransitionBehaviorOption} from 'src/ui/components/ScalarTransitionBehaviorOption/ScalarTransitionBehaviorOption';
+
+import {NumberScriptBehaviorOption} from '../../../NumberScriptBehaviorOption/NumberScriptBehaviorOption';
+import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
+import {BehaviorName} from '../../BehaviorName/BehaviorName';
+import {ItemContainer} from '../../ItemContainer/ItemContainer';
+import {BehaviorEnabled} from '../BehaviorEnabled/BehaviorEnabled';
 
 export function SpeedBehavior() {
   const store = useSpeedBehaviorStore();
@@ -21,7 +23,7 @@ export function SpeedBehavior() {
           <>
             <BehaviorTypeSelect
               type={store.state.activeType}
-              availableTypes={state.availableTypes}
+              availableTypes={state.availableBehaviorTypes}
               onChange={(t) => store.setActiveConfigType(t)}
             />
             <BehaviorEnabled
@@ -47,12 +49,12 @@ export function SpeedBehavior() {
         />
       )}
 
-      {store.isDynamicConfigActive() && (
-        <ScalarDynamicBehaviorOption
-          config={state.dynamicConfig}
+      {store.isTransitionConfigActive() && (
+        <ScalarTransitionBehaviorOption
+          config={state.transitionConfig}
           min={0}
           max={Number.MAX_SAFE_INTEGER}
-          onChange={(v) => store.setDynamicConfig(v)}
+          onChange={(v) => store.setTransitionConfig(v)}
         />
       )}
 

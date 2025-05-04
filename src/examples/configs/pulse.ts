@@ -1,7 +1,7 @@
-import { ParticleEmitterConfig } from "particle-flux";
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const PULSE_EMITTER_CONFIG: ParticleEmitterConfig = {
-  emitterConfig: { spawnInterval: 1000 },
+  emitterConfig: {spawnInterval: 1000},
   particleConfig: {
     lifeTime: {
       value: 1000,

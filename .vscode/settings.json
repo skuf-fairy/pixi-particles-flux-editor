@@ -1,0 +1,4 @@
+{
+  "npm-scripts.showStartNotification": false,
+  "prettier.configPath": "prettier.config.js"
+}

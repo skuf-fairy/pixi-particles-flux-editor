@@ -1,6 +1,4 @@
-import { injected } from "brandi";
-import { ParticleEmitter, Point2d, SpawnShape, SpawnShapeType } from "particle-flux";
-import { AdvancedBloomFilter } from "pixi-filters";
+import {SPAWN_SHAPE_STROKE, UPDATE_PARTICLE_COUNT_INTERVAL} from './EditorApp.constants';
 import {
   Application,
   Assets,
@@ -11,16 +9,20 @@ import {
   Point,
   Sprite,
   Texture,
-} from "pixi.js";
-import { DI_TOKENS } from "src/di/di.tokens";
-import { AppConfigStore } from "src/stores/AppConfigStore/AppConfigStore";
-import { BloomFilterConfigStore } from "src/stores/BloomFilterConfigStore/BloomFilterConfigStore";
-import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
-import { PerformanceStore } from "src/stores/PerfomanceStore/PerformanceStore";
-import { SpawnShapeBehaviorStore } from "src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore";
-import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
-import { SPAWN_SHAPE_STROKE, UPDATE_PARTICLE_COUNT_INTERVAL } from "./EditorApp.constants";
-import { ParticleAdapter } from "./ParticleAdapter";
+} from 'pixi.js';
+import {DI_TOKENS} from 'src/di/di.tokens';
+
+import {injected} from 'brandi';
+import {ParticleEmitter, Point2d, SpawnShape, SpawnShapeType} from 'particle-flux';
+import {AdvancedBloomFilter} from 'pixi-filters';
+import {AppConfigStore} from 'src/stores/AppConfigStore/AppConfigStore';
+import {BloomFilterConfigStore} from 'src/stores/BloomFilterConfigStore/BloomFilterConfigStore';
+import {ParticleFluxConfigStore} from 'src/stores/ParticleFluxConfigStore';
+import {PerformanceStore} from 'src/stores/PerfomanceStore/PerformanceStore';
+import {SpawnShapeBehaviorStore} from 'src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore';
+import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
+
+import {ParticleAdapter} from './ParticleAdapter';
 
 export class EditorApp {
   private app: Application;
@@ -37,18 +39,15 @@ export class EditorApp {
     private readonly texturesStore: TexturesStore,
     private readonly spawnShapeStore: SpawnShapeBehaviorStore,
     private readonly bloomFilterConfigStore: BloomFilterConfigStore,
-    private readonly performanceStore: PerformanceStore
+    private readonly performanceStore: PerformanceStore,
   ) {
     this.updateInterval = -1;
   }
 
   public async init(containerNode: HTMLElement) {
-    const { width: widthContainer, height: heightContainer } = containerNode.getBoundingClientRect();
+    const {width: widthContainer, height: heightContainer} = containerNode.getBoundingClientRect();
 
     this.app = new Application();
-
-    // todo init use case
-    await Assets.load(this.texturesStore.getTextureList().map((t) => t.url));
 
     await this.app.init({
       background: this.appConfigStore.getBackgroundColor(),
@@ -65,10 +64,10 @@ export class EditorApp {
 
     this.background = new Graphics()
       .rect(0, 0, widthContainer, heightContainer)
-      .fill({ color: this.appConfigStore.getBackgroundColor() });
+      .fill({color: this.appConfigStore.getBackgroundColor()});
 
     this.appConfigStore.subscribe((state) => {
-      this.background.clear().rect(0, 0, widthContainer, heightContainer).fill({ color: state.backgroundColor });
+      this.background.clear().rect(0, 0, widthContainer, heightContainer).fill({color: state.backgroundColor});
 
       if (this.appConfigStore.isFollowPointer()) {
         this.enableFollowPointer();
@@ -127,7 +126,7 @@ export class EditorApp {
       //@ts-ignore
       this.particlesContainer,
       this.texturesStore.getTextureList().map((t) => () => this.createParticleSprite(Texture.from(t.url))),
-      this.particleFluxConfigStore.getConfig()
+      this.particleFluxConfigStore.getConfig(),
       // {
       //   emitterConfig: {
       //     spawnInterval: 250,
@@ -186,14 +185,14 @@ export class EditorApp {
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
       this.spawnShapeStore.getShapeList(),
-      this.spawnShapeStore.isDisplayShape()
+      this.spawnShapeStore.isDisplayShape(),
     );
 
     this.spawnShapeStore.subscribe((state) => {
       this.renderSpawnShape(
         this.particlesEmitter.config.spawnPosition || new Point(),
         this.spawnShapeStore.getShapeList(),
-        state.isDisplayShape
+        state.isDisplayShape,
       );
     });
 
@@ -212,16 +211,16 @@ export class EditorApp {
 
   private enableFollowPointer() {
     this.background.interactive = true;
-    this.background.cursor = "pointer";
-    this.background.on("pointermove", this.handlePointerMove);
-    this.background.on("pointerleave", this.handlePointerLeave);
+    this.background.cursor = 'pointer';
+    this.background.on('pointermove', this.handlePointerMove);
+    this.background.on('pointerleave', this.handlePointerLeave);
   }
 
   private disableFollowPointer() {
     this.background.interactive = false;
-    this.background.cursor = "";
-    this.background.off("pointermove", this.handlePointerMove);
-    this.background.off("pointerleave", this.handlePointerLeave);
+    this.background.cursor = '';
+    this.background.off('pointermove', this.handlePointerMove);
+    this.background.off('pointerleave', this.handlePointerLeave);
   }
 
   private createParticleSprite(texture: Texture): Sprite {
@@ -232,7 +231,7 @@ export class EditorApp {
   }
 
   private createParticle(texture: Texture): ParticleAdapter {
-    const particle = new Particle({ texture, anchorX: 0.5, anchorY: 0.5 });
+    const particle = new Particle({texture, anchorX: 0.5, anchorY: 0.5});
     const particleAdapter = new ParticleAdapter(particle);
 
     return particleAdapter;
@@ -247,7 +246,7 @@ export class EditorApp {
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
       this.spawnShapeStore.getShapeList(),
-      this.spawnShapeStore.isDisplayShape()
+      this.spawnShapeStore.isDisplayShape(),
     );
   };
 
@@ -257,7 +256,7 @@ export class EditorApp {
     this.renderSpawnShape(
       this.particlesEmitter.config.spawnPosition || new Point(),
       this.spawnShapeStore.getShapeList(),
-      this.spawnShapeStore.isDisplayShape()
+      this.spawnShapeStore.isDisplayShape(),
     );
   };
 
@@ -289,7 +288,7 @@ export class EditorApp {
           spawnPosition.x + spawnShape.x,
           spawnPosition.y + spawnShape.y,
           spawnShape.width || 1,
-          spawnShape.height || 1
+          spawnShape.height || 1,
         )
         .stroke(SPAWN_SHAPE_STROKE);
     } else if (spawnShape.type === SpawnShapeType.Torus) {
@@ -337,5 +336,5 @@ injected(
   DI_TOKENS.texturesStore,
   DI_TOKENS.spawnShapeBehaviorStore,
   DI_TOKENS.bloomFilterConfigStore,
-  DI_TOKENS.performanceStore
+  DI_TOKENS.performanceStore,
 );

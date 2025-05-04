@@ -1,0 +1,12 @@
+.numberOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: var(--gap-half);
+}
+
+.input {
+  width: min(100%, 157px);
+}

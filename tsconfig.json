@@ -16,7 +16,8 @@
     "declarationMap": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "isolatedModules": true
   },
   "types": ["node"],
   "exclude": ["node_modules"]

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
+
 // import { useEditorAppToken, usePerformanceStoreToken } from "src/di/di.hooks";
-import "./FPSCounter.style.scss";
+import s from './FPSCounter.module.css';
 
 export function FPSCounter() {
   const [fps, setFPS] = useState(0);
@@ -39,5 +40,5 @@ export function FPSCounter() {
     refreshLoop();
   }, []);
 
-  return <p className="fps-counter">FPS: {fps}</p>;
+  return <p className={s.root}>FPS: {fps}</p>;
 }

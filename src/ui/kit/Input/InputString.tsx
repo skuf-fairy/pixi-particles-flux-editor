@@ -1,5 +1,6 @@
-import React from "react";
-import "./Input.style.scss";
+import React from 'react';
+
+import s from './Input.module.css';
 
 interface Props {
   value: string;
@@ -8,7 +9,7 @@ interface Props {
   placeholder?: string;
 }
 
-export function InputString({ value, onChange, disabled, placeholder }: Props) {
+export function InputString({value, onChange, disabled, placeholder}: Props) {
   return (
     <input
       type="string"
@@ -17,7 +18,7 @@ export function InputString({ value, onChange, disabled, placeholder }: Props) {
       onChange={(e) => {
         onChange(e.target.value);
       }}
-      className="input"
+      className={s.input}
       placeholder={placeholder}
     />
   );

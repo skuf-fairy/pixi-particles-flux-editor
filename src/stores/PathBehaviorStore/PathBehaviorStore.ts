@@ -1,21 +1,21 @@
-import { PathConfig } from "particle-flux";
-import { Store } from "../Store";
+import {PathBehaviorStoreState} from './PathBehaviorStore.types';
 
-export class PathBehaviorStore extends Store<{
-  config: PathConfig;
-  enabled: boolean;
-}> {
+import {PathConfig} from 'particle-flux';
+
+import {Store} from '../Store';
+
+export class PathBehaviorStore extends Store<PathBehaviorStoreState> {
   constructor() {
     super({
       config: {
-        path: "sin(x)",
+        path: 'sin(x)',
       },
       enabled: false,
     });
   }
 
   public setPath(path: string): void {
-    this.setState({ ...this.state, config: { path } });
+    this.setState({...this.state, config: {path}});
   }
 
   public getPath(): string {
@@ -27,11 +27,11 @@ export class PathBehaviorStore extends Store<{
   }
 
   public enable(): void {
-    this.setState({ ...this.state, enabled: true });
+    this.setState({...this.state, enabled: true});
   }
 
   public disable(): void {
-    this.setState({ ...this.state, enabled: false });
+    this.setState({...this.state, enabled: false});
   }
 
   public getActiveConfig(): PathConfig | undefined {
@@ -40,8 +40,12 @@ export class PathBehaviorStore extends Store<{
     return this.state.config;
   }
 
-  public restore(config: PathConfig): void {
-    this.setValue("config", config);
-    this.enable();
+  public restore(config: PathConfig | undefined): void {
+    if (config === undefined) {
+      this.disable();
+    } else {
+      this.setValue('config', config);
+      this.enable();
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig } from "particle-flux";
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const BUBBLES_PATH_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -20,7 +20,7 @@ export const BUBBLES_PATH_EMITTER_CONFIG: ParticleEmitterConfig = {
       angle: -90,
     },
     path: {
-      path: "sin(x/10)*35",
+      path: 'sin(x/10)*35',
     },
     scale: {
       value: 0.35,

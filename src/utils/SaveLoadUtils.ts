@@ -1,20 +1,22 @@
-import { saveAs } from "file-saver";
-import JSZip from "jszip";
-import { TEXTURES_ZIP_FILE_NAME } from "src/constants";
-import { ParticleTexture } from "src/stores/TexturesStore/TextureStore.types";
-import { TexturesStore } from "src/stores/TexturesStore/TexturesStore";
-import { last } from "./last";
+import {ParticleTexture} from 'src/stores/TexturesStore/TexturesStore.types';
+
+import {saveAs} from 'file-saver';
+import JSZip from 'jszip';
+import {TEXTURES_ZIP_FILE_NAME} from 'src/constants';
+import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
+
+import {last} from './last';
 
 export enum ReaderContentType {
-  URL = "URL",
-  Text = "Text",
+  URL = 'URL',
+  Text = 'Text',
 }
 
 export class SaveLoadUtils {
   public static downloadJSON(jsonString: string, name: string): void {
-    const blob = new Blob([jsonString], { type: "application/json" });
+    const blob = new Blob([jsonString], {type: 'application/json'});
     const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = url;
     link.download = name;
     document.body.appendChild(link);
@@ -54,30 +56,28 @@ export class SaveLoadUtils {
         const response = await fetch(texture.url);
 
         if (!response.ok) {
-          // todo error
-          throw new Error("Download Texture Error");
+          throw new Error('Download Texture Error');
         }
 
         const blob = await response.blob();
 
         let fileType: string;
-        const fileTypeFromName = last(texture.name.split("."));
+        const fileTypeFromName = last(texture.name.split('.'));
 
         if (fileTypeFromName && TexturesStore.availableImageTypes.includes(fileTypeFromName)) {
-          fileType = "";
+          fileType = '';
         } else {
-          fileType = blob.type.split("/")[1] || TexturesStore.availableImageTypes[0];
+          fileType = blob.type.split('/')[1] || TexturesStore.availableImageTypes[0];
         }
 
-        const fileName = fileType !== "" ? texture.name + "." + fileType : texture.name;
+        const fileName = fileType !== '' ? texture.name + '.' + fileType : texture.name;
 
         zip.file(fileName, blob);
       }
 
-      const content = await zip.generateAsync({ type: "blob" });
+      const content = await zip.generateAsync({type: 'blob'});
       saveAs(content, TEXTURES_ZIP_FILE_NAME);
     } catch (e) {
-      // todo error
       throw e;
     }
   }

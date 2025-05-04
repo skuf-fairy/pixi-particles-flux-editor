@@ -1,12 +1,14 @@
-import { AdvancedBloomFilterOptions } from "pixi-filters";
-import { Store } from "../Store";
-import { BloomFilterConfigStoreState } from "./BloomFilterConfigStore.types";
+import {BloomFilterConfigStoreState} from './BloomFilterConfigStore.types';
+
+import {AdvancedBloomFilterOptions} from 'pixi-filters';
+
+import {Store} from '../Store';
 
 export class BloomFilterConfigStore extends Store<BloomFilterConfigStoreState> {
   constructor() {
     super({
       enabled: false,
-      blendMode: "normal",
+      blendMode: 'normal',
       options: {
         bloomScale: 1,
         brightness: 1,
@@ -22,11 +24,11 @@ export class BloomFilterConfigStore extends Store<BloomFilterConfigStoreState> {
   }
 
   public enable(): void {
-    this.setValue("enabled", true);
+    this.setValue('enabled', true);
   }
 
   public disable(): void {
-    this.setValue("enabled", false);
+    this.setValue('enabled', false);
   }
 
   public getOptions(): AdvancedBloomFilterOptions {
@@ -34,6 +36,6 @@ export class BloomFilterConfigStore extends Store<BloomFilterConfigStoreState> {
   }
 
   public setOptions(options: AdvancedBloomFilterOptions) {
-    return this.setValue("options", options);
+    return this.setValue('options', options);
   }
 }

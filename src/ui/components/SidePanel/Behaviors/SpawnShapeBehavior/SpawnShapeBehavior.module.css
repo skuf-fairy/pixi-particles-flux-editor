@@ -1,0 +1,11 @@
+.root {
+  margin-bottom: var(--gap);
+}
+
+.toggle:not(:last-child) {
+  margin-bottom: var(--gap);
+}
+
+.item {
+  margin-bottom: var(--gap2x);
+}

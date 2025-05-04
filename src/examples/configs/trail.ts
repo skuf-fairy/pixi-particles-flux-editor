@@ -1,4 +1,4 @@
-import { ParticleEmitterConfig } from "particle-flux";
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const TRAIL_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -23,8 +23,8 @@ export const TRAIL_EMITTER_CONFIG: ParticleEmitterConfig = {
       end: 1,
     },
     color: {
-      start: "#ffffff",
-      end: "#9ff3ff",
+      start: '#ffffff',
+      end: '#9ff3ff',
     },
     direction: {
       minAngle: -150,

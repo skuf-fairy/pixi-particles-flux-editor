@@ -1,18 +1,21 @@
-import React from "react";
-import { Editor } from "../Editor/Editor";
-import { InfoPanel } from "../InfoPanel/InfoPanel";
-import { RestartButton } from "../RestartButton/RestartButton";
-import { SidePanel } from "../SidePanel/SidePanel";
-import { TopBar } from "../TopBar/TopBar";
-import "./MainPage.style.scss";
+import React from 'react';
+
+import {Editor} from '../Editor/Editor';
+import {ErrorNotification} from '../ErrorNotification/ErrorNotification';
+import {InfoPanel} from '../InfoPanel/InfoPanel';
+import {RestartButton} from '../RestartButton/RestartButton';
+import {SidePanel} from '../SidePanel/SidePanel';
+import {TopBar} from '../TopBar/TopBar';
+
+import s from './MainPage.module.css';
 
 export function MainPage() {
   return (
     <>
-      <div className="page">
+      <div className={s.page}>
         <TopBar />
-        <div className="page__container">
-          <div style={{ position: "relative", width: "100%" }}>
+        <div className={s.container}>
+          <div className={s.editorContainer}>
             <Editor />
             <RestartButton />
           </div>
@@ -20,6 +23,7 @@ export function MainPage() {
         </div>
       </div>
       <InfoPanel />
+      <ErrorNotification />
     </>
   );
 }

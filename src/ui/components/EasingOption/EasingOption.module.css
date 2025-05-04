@@ -1,0 +1,8 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: var(--gap-half);
+}

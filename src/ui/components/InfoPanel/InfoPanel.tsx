@@ -1,11 +1,13 @@
-import React from "react";
-import { FPSCounter } from "../FPSCounter/FPSCounter";
-import { ParticlesCount } from "../ParticlesCount/ParticlesCount";
-import "./InfoPanel.style.scss";
+import React from 'react';
+
+import {FPSCounter} from '../FPSCounter/FPSCounter';
+import {ParticlesCount} from '../ParticlesCount/ParticlesCount';
+
+import s from './InfoPanel.module.css';
 
 export function InfoPanel() {
   return (
-    <div className="info-panel">
+    <div className={s.root}>
       <FPSCounter />
       <ParticlesCount />
     </div>

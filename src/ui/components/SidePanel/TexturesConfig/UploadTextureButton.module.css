@@ -1,0 +1,23 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  margin-right: var(--gap);
+  fill: var(--secondary-text-color);
+}
+
+.text {
+  color: var(--secondary-text-color);
+}
+
+.uploadInput {
+  opacity: 0;
+  position: absolute;
+  left: -1000px;
+  top: -1000px;
+}

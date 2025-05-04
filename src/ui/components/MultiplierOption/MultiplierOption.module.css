@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--gap);
+}
+
+.title {
+  margin-right: var(--gap);
+}
+
+.content {
+  display: flex;
+  gap: var(--gap);
+}

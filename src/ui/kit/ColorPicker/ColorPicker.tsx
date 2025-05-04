@@ -1,7 +1,9 @@
-import cn from "classnames";
-import React, { useEffect, useRef, useState } from "react";
-import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import "./ColorPicker.style.scss";
+import React, {useEffect, useRef, useState} from 'react';
+
+import cn from 'classnames';
+import {Typography, TypographyColor, TypographyVariant} from 'src/ui/kit/Typography/Typography';
+
+import s from './ColorPicker.module.css';
 
 interface Props {
   onChange(color: string): void;
@@ -9,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-export function ColorPicker({ color, onChange, className }: Props) {
+export function ColorPicker({color, onChange, className}: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [currentColor, setCurrentColor] = useState(color);
 
@@ -18,8 +20,8 @@ export function ColorPicker({ color, onChange, className }: Props) {
   }, [color]);
 
   return (
-    <div className={cn("color-picker", className)}>
-      <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="color-picker__hex">
+    <div className={cn(s.colorPicker, className)}>
+      <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P}>
         {color}
       </Typography>
 
@@ -27,7 +29,7 @@ export function ColorPicker({ color, onChange, className }: Props) {
         ref={inputRef}
         value={currentColor}
         type="color"
-        className="color-picker__input"
+        className={s.input}
         onChange={(e) => {
           setCurrentColor(e.target.value);
         }}

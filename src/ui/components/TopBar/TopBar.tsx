@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { Typography, TypographyColor, TypographyVariant } from "src/ui/kit/Typography/Typography";
-import { ExamplesModal } from "../ExamplesModal/ExamplesModal";
-import { AppSettingsModal } from "../MenuModal/AppSettingsModal";
-import "./TopBar.style.scss";
+import React, {useState} from 'react';
+
+import {Button, ButtonStyleType} from 'src/ui/kit/Button/Button';
+import {Typography, TypographyColor, TypographyVariant} from 'src/ui/kit/Typography/Typography';
+
+import {ExamplesModal} from '../ExamplesModal/ExamplesModal';
+import {AppSettingsModal} from '../MenuModal/AppSettingsModal';
+
+import s from './TopBar.module.css';
 
 export function TopBar() {
   const [isAppSettingsModalOpened, setAppSettingsModalOpened] = useState(false);
@@ -10,27 +14,28 @@ export function TopBar() {
 
   return (
     <>
-      <header className="top-bar">
-        <button onClick={() => setAppSettingsModalOpened(true)} className="top-bar__item">
-          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
+      <header className={s.root}>
+        <Button styleType={ButtonStyleType.Common} onClick={() => setAppSettingsModalOpened(true)} className={s.item}>
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className={s.text}>
             Settings
           </Typography>
-        </button>
+        </Button>
 
-        <button onClick={() => setExamplesModalOpened(true)} className="top-bar__item">
-          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
+        <Button styleType={ButtonStyleType.Common} onClick={() => setExamplesModalOpened(true)} className={s.item}>
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className={s.text}>
             Examples
           </Typography>
-        </button>
+        </Button>
 
-        <button
-          className="top-bar__item"
-          onClick={() => window.open("https://www.npmjs.com/package/particle-flux", "_blank")}
+        <Button
+          styleType={ButtonStyleType.Common}
+          className={s.item}
+          onClick={() => window.open('https://www.npmjs.com/package/particle-flux', '_blank')}
         >
-          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className="top-bar__item-text">
+          <Typography color={TypographyColor.PrimaryText} variant={TypographyVariant.P} className={s.text}>
             NPM
           </Typography>
-        </button>
+        </Button>
       </header>
       {isAppSettingsModalOpened && <AppSettingsModal onClose={() => setAppSettingsModalOpened(false)} />}
       {isExamplesModalOpened && <ExamplesModal onClose={() => setExamplesModalOpened(false)} />}

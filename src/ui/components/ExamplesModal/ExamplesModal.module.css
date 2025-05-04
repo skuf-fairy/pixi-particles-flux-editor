@@ -1,0 +1,18 @@
+.root {
+  padding: var(--gap2x);
+}
+
+.title {
+  color: var(--primary-title-color);
+  margin-bottom: var(--gap2x);
+}
+
+.item {
+  border: 1px solid var(--secondary-border-color);
+  padding: 6px 8px;
+  border-radius: 8px;
+
+  &:not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+}

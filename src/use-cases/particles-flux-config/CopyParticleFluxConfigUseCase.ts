@@ -1,8 +1,9 @@
-import { injected } from "brandi";
-import { DI_TOKENS } from "src/di/di.tokens";
-import { ParticleFluxConfigStore } from "src/stores/ParticleFluxConfigStore";
-import { CopyUtils } from "src/utils/CopyUtils";
-import { JSONUtils } from "src/utils/JSONUtils";
+import {DI_TOKENS} from 'src/di/di.tokens';
+
+import {injected} from 'brandi';
+import {ParticleFluxConfigStore} from 'src/stores/ParticleFluxConfigStore';
+import {CopyUtils} from 'src/utils/CopyUtils';
+import {JSONUtils} from 'src/utils/JSONUtils';
 
 export class CopyParticleFluxConfigUseCase {
   constructor(private readonly particleFluxConfigStore: ParticleFluxConfigStore) {}

@@ -1,0 +1,23 @@
+@import '../../styles/typography.css';
+
+.root {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translateX(-50%);
+  border: 1px solid rgb(255, 153, 153);
+  background-color: rgb(24, 15, 15);
+  border-radius: 12px;
+  padding: 8px 16px;
+}
+
+.title {
+  composes: head3;
+  margin-bottom: var(--gap);
+  color: var(--primary-title-color);
+}
+
+.text {
+  composes: text;
+  color: var(--primary-text-color);
+}

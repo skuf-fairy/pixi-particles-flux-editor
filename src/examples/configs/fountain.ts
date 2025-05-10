@@ -18,7 +18,7 @@ export const FOUNTAIN_EMITTER_CONFIG: ParticleEmitterConfig = {
       end: 6,
     },
     gravity: {
-      value: 0.3,
+      value: 6.25,
     },
     scale: {
       start: 0.25,

@@ -16,7 +16,7 @@ import {GravityBehaviorStore} from 'src/stores/GravityBehaviorStore/GravityBehav
 import {LifetimePropertyStore} from 'src/stores/LifetimePropertyStore/LifetimePropertyStore';
 import {ParticleFluxConfigStore} from 'src/stores/ParticleFluxConfigStore';
 import {PathBehaviorStore} from 'src/stores/PathBehaviorStore/PathBehaviorStore';
-import {PerformanceStore} from 'src/stores/PerfomanceStore/PerformanceStore';
+import {PerformanceStore} from 'src/stores/PerformanceStore/PerformanceStore';
 import {SpawnShapeBehaviorStore} from 'src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore';
 import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
 import {BehaviorType} from 'src/stores/types';

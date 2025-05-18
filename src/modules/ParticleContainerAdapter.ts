@@ -4,7 +4,7 @@ import {ViewContainer} from 'particle-flux';
 
 import {ParticleAdapter} from './ParticleAdapter';
 
-export class ContainerAdapter implements ViewContainer<ParticleAdapter> {
+export class ParticleContainerAdapter implements ViewContainer<ParticleAdapter> {
   constructor(private readonly container: ParticleContainer) {}
 
   addChild(children: ParticleAdapter): void {

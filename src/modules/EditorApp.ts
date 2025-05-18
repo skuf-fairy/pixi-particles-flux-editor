@@ -1,7 +1,6 @@
 import {SPAWN_SHAPE_STROKE, UPDATE_PARTICLE_COUNT_INTERVAL} from './EditorApp.constants';
 import {
   Application,
-  Assets,
   Container,
   FederatedPointerEvent,
   Graphics,
@@ -18,7 +17,7 @@ import {AdvancedBloomFilter} from 'pixi-filters';
 import {AppConfigStore} from 'src/stores/AppConfigStore/AppConfigStore';
 import {BloomFilterConfigStore} from 'src/stores/BloomFilterConfigStore/BloomFilterConfigStore';
 import {ParticleFluxConfigStore} from 'src/stores/ParticleFluxConfigStore';
-import {PerformanceStore} from 'src/stores/PerfomanceStore/PerformanceStore';
+import {PerformanceStore} from 'src/stores/PerformanceStore/PerformanceStore';
 import {SpawnShapeBehaviorStore} from 'src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore';
 import {TexturesStore} from 'src/stores/TexturesStore/TexturesStore';
 

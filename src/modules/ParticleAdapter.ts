@@ -35,6 +35,7 @@ export class ParticleAdapter implements ViewParticle {
     if (typeof value === 'number') {
       this.particle.color = value;
     }
+
   }
 
   set angle(angle: number) {

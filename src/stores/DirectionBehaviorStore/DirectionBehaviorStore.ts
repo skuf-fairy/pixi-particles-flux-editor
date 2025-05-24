@@ -1,24 +1,35 @@
-import {DirectionBehaviorStoreState} from './DirectionBehaviorStore.types';
+import {DirectionBehaviorStoreState, DirectionConfigType} from './DirectionBehaviorStore.types';
 
 import {
   DirectionConfig,
   RangeDirectionConfig,
-  StaticDirectionConfig,
   isDirectionRangeBehaviorConfig,
   isStaticDirectionBehaviorConfig,
+  isSpawnBurstDirectionBehaviorConfig,
+  SpawnBurstDirectionConfig,
+  StaticDirectionConfig,
 } from 'particle-flux';
 
 import {Store} from '../Store';
-import {BehaviorType} from '../types';
 
 export class DirectionBehaviorStore extends Store<DirectionBehaviorStoreState> {
   constructor() {
     super({
+      staticConfig: {
+        angle: 0,
+        isRotateByDirection: false,
+      },
       rangeConfig: {
         minAngle: 0,
         maxAngle: 360,
         isRotateByDirection: false,
       },
+      spawnBurstConfig: {
+        startAngle: 0,
+        deltaAngle: Math.trunc(360 / 12),
+        isRotateByDirection: false,
+      },
+      configActive: 'range',
     });
   }
 
@@ -40,7 +51,40 @@ export class DirectionBehaviorStore extends Store<DirectionBehaviorStoreState> {
     });
   }
 
-  public getActiveConfig(): DirectionConfig | undefined {
+  public setSpawnBurstConfig(config: SpawnBurstDirectionConfig): void {
+    this.setState({
+      ...this.state,
+      spawnBurstConfig: config,
+    });
+  }
+
+  public setStaticConfig(config: StaticDirectionConfig): void {
+    this.setState({
+      ...this.state,
+      staticConfig: config,
+    });
+  }
+
+  public setConfigActive(configActive: DirectionConfigType): void {
+    this.setState({
+      ...this.state,
+      configActive,
+    });
+  }
+
+  public getActiveConfigType(): DirectionConfigType {
+    return this.state.configActive;
+  }
+
+  public getActiveConfig(): DirectionConfig {
+    if (this.state.configActive === 'static') {
+      return this.state.staticConfig;
+    }
+
+    if (this.state.configActive === 'spawnBurst') {
+      return this.state.spawnBurstConfig;
+    }
+
     return this.state.rangeConfig;
   }
 
@@ -48,12 +92,22 @@ export class DirectionBehaviorStore extends Store<DirectionBehaviorStoreState> {
     if (config === undefined) {
       this.reset();
     } else if (isDirectionRangeBehaviorConfig(config)) {
-      this.setRangeConfig(config);
+      this.setState({
+        ...this.state,
+        rangeConfig: config,
+        configActive: 'range',
+      });
     } else if (isStaticDirectionBehaviorConfig(config)) {
-      this.setRangeConfig({
-        minAngle: config.angle,
-        maxAngle: config.angle,
-        isRotateByDirection: config.isRotateByDirection,
+      this.setState({
+        ...this.state,
+        staticConfig: config,
+        configActive: 'static',
+      });
+    } else if (isSpawnBurstDirectionBehaviorConfig(config)) {
+      this.setState({
+        ...this.state,
+        spawnBurstConfig: config,
+        configActive: 'spawnBurst',
       });
     }
   }

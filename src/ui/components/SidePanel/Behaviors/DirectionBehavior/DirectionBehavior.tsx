@@ -1,58 +1,51 @@
 import React from 'react';
 
 import {useDirectionBehaviorStore} from 'src/hooks/connectors';
-import {BooleanValue} from 'src/ui/components/BooleanValue/BooleanValue';
-import {FieldsGrid} from 'src/ui/components/FieldsGrid/FieldsGrid';
-import {NumberOption} from 'src/ui/components/NumberOption/NumberOption';
 
 import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
 import {BehaviorName} from '../../BehaviorName/BehaviorName';
 import {ItemContainer} from '../../ItemContainer/ItemContainer';
 
-import s from './DirectionBehavior.module.css';
+import {RangeConfigDirection} from './RangeConfigDirection';
+import {SpawnBurstDirection} from './SpawnBurstDirection';
+import {StaticConfigDirection} from './StaticConfigDirection';
+import {DropDown, DropDownSize} from 'src/ui/kit/DropDown/DropDown';
+import {DirectionConfigType} from 'src/stores/DirectionBehaviorStore/DirectionBehaviorStore.types';
+
+const options: Array<{
+  key: DirectionConfigType;
+  value: string;
+}> = [
+  {key: 'static', value: 'Static'},
+  {key: 'range', value: 'Range'},
+  {key: 'spawnBurst', value: 'Spawn Burst'},
+];
 
 export function DirectionBehavior() {
   const store = useDirectionBehaviorStore();
-  const state = store.getState();
-  const {minAngle, maxAngle} = state.rangeConfig;
-
-  const startAngle = minAngle;
-  const endAngle = maxAngle;
-  const delta = endAngle - startAngle;
+  const type = store.getActiveConfigType();
+  console.log(
+    type,
+    options.find((o) => o.key === type),
+  );
 
   return (
     <ItemContainer>
-      <BehaviorHeader left={<BehaviorName name="Direction" />} right={null} />
+      <BehaviorHeader
+        left={<BehaviorName name="Direction" />}
+        right={
+          <DropDown
+            value={options.find((o) => o.key === type) || options[0]}
+            options={options}
+            onChange={(v) => store.setConfigActive(v.key as DirectionConfigType)}
+            size={DropDownSize.Small}
+          />
+        }
+      />
 
-      <FieldsGrid>
-        <NumberOption
-          value={minAngle}
-          text="Min angle"
-          onBlur={(v) => store.setRangeConfig({...state.rangeConfig, minAngle: v})}
-        />
-        <NumberOption
-          value={maxAngle}
-          text="Max angle"
-          onBlur={(v) => store.setRangeConfig({...state.rangeConfig, maxAngle: v})}
-        />
-
-        <BooleanValue
-          checked={store.isRotateByDirection()}
-          label="Rotate by direction"
-          onChange={() => store.toggleFollowDirection()}
-        />
-
-        <div
-          style={{
-            background: getCircleSegment(startAngle, delta),
-          }}
-          className={s.segment}
-        />
-      </FieldsGrid>
+      {type === 'static' && <StaticConfigDirection />}
+      {type === 'range' && <RangeConfigDirection />}
+      {type === 'spawnBurst' && <SpawnBurstDirection />}
     </ItemContainer>
   );
-}
-
-function getCircleSegment(startAngle: number, delta: number): string {
-  return `conic-gradient(from ${startAngle + 90}deg, var(--primary-text-color) ${delta}deg, transparent ${delta}deg)`;
 }

@@ -24,10 +24,6 @@ const options: Array<{
 export function DirectionBehavior() {
   const store = useDirectionBehaviorStore();
   const type = store.getActiveConfigType();
-  console.log(
-    type,
-    options.find((o) => o.key === type),
-  );
 
   return (
     <ItemContainer>

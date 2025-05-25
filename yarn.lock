@@ -5279,10 +5279,10 @@ parseurl@~1.3.2, parseurl@~1.3.3:
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
 
-particle-flux@0.13.3:
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/particle-flux/-/particle-flux-0.13.3.tgz#18333f88eae99795eb835d0f7193c5f09883b274"
-  integrity sha512-pywPGBl8qjfAGKIbJZfQ82ul6YJt+Rs8fPJGtwaa/gah2hQ03u6bm/nuJwrz1ys/PkQcAiNsg/i8Otw+CNEWWA==
+particle-flux@0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/particle-flux/-/particle-flux-0.14.0.tgz#475fdc8333ea1064caa2c37915dd10d291e293ce"
+  integrity sha512-SL93qQ6jDFOCG7gr9LVwH3FR+RMIf/Rtr/0M89XchzITBFQi5LrS56CLhDHcgUXcVNJhjuE9hmAGbawCfXYj4A==
 
 pascal-case@^3.1.2:
   version "3.1.2"

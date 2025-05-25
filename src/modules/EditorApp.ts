@@ -1,14 +1,5 @@
 import {SPAWN_SHAPE_STROKE, UPDATE_PARTICLE_COUNT_INTERVAL} from './EditorApp.constants';
-import {
-  Application,
-  Container,
-  FederatedPointerEvent,
-  Graphics,
-  Particle,
-  Point,
-  Sprite,
-  Texture,
-} from 'pixi.js';
+import {Application, Container, FederatedPointerEvent, Graphics, Particle, Point, Sprite, Texture} from 'pixi.js';
 import {DI_TOKENS} from 'src/di/di.tokens';
 
 import {injected} from 'brandi';
@@ -121,8 +112,7 @@ export class EditorApp {
     // );
     // this.particlesEmitter.fillPool(50000);
 
-    this.particlesEmitter = new ParticleEmitter(
-      //@ts-ignore
+    this.particlesEmitter = new ParticleEmitter<Sprite>(
       this.particlesContainer,
       this.texturesStore.getTextureList().map((t) => () => this.createParticleSprite(Texture.from(t.url))),
       this.particleFluxConfigStore.getConfig(),

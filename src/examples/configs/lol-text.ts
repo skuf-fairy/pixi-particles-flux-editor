@@ -33,7 +33,7 @@ export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
     spawnShape: {
       shape: [
         {
-          type: SpawnShapeType.Chain,
+          type: 'Chain',
           // L
           chain: [
             {x: -250, y: 0},
@@ -42,7 +42,7 @@ export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
           ],
         },
         {
-          type: SpawnShapeType.Chain,
+          type: 'Chain',
           // O
           chain: [
             {x: -50, y: 0},
@@ -53,7 +53,7 @@ export const LOL_TEXT_EMITTER_CONFIG: ParticleEmitterConfig = {
           ],
         },
         {
-          type: SpawnShapeType.Chain,
+          type: 'Chain',
           // L
           chain: [
             {x: 150, y: 0},

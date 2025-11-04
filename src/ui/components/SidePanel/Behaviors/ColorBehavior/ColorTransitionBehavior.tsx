@@ -1,19 +1,19 @@
 import React from 'react';
 
-import {ColorDynamicBehaviorConfig, EasingName} from 'particle-flux';
+import {ColorTransitionBehaviorConfig} from 'particle-flux';
 import {EasingOption} from 'src/ui/components/EasingOption/EasingOption';
 import {FieldsGrid} from 'src/ui/components/FieldsGrid/FieldsGrid';
 import {ColorPicker} from 'src/ui/kit/ColorPicker/ColorPicker';
 import {Typography, TypographyColor, TypographyVariant} from 'src/ui/kit/Typography/Typography';
 
-import s from './ColorDynamicBehavior.module.css';
+import s from './ColorTransitionBehavior.module.css';
 
 interface Props {
-  config: ColorDynamicBehaviorConfig;
-  onChange(config: ColorDynamicBehaviorConfig): void;
+  config: ColorTransitionBehaviorConfig;
+  onChange(config: ColorTransitionBehaviorConfig): void;
 }
 
-export function ColorDynamicBehavior({config, onChange}: Props) {
+export function ColorTransitionBehavior({config, onChange}: Props) {
   return (
     <FieldsGrid>
       <div>
@@ -40,7 +40,7 @@ export function ColorDynamicBehavior({config, onChange}: Props) {
         />
       </div>
 
-      <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({...config, easing: v})} />
+      <EasingOption easing={config.easing || 'linear'} onChange={(v) => onChange({...config, easing: v})} />
     </FieldsGrid>
   );
 }

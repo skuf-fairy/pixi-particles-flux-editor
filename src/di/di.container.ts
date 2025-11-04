@@ -60,7 +60,7 @@ function createDIContainer(): Container {
             start: 0,
             end: 1,
             multiplier: 1,
-            easing: EasingName.linear,
+            easing: 'linear',
           },
           scriptConfig: {
             script: [
@@ -88,7 +88,7 @@ function createDIContainer(): Container {
             start: 0,
             end: 1,
             multiplier: 1,
-            easing: EasingName.linear,
+            easing: 'linear',
           },
           scriptConfig: {
             script: [
@@ -102,13 +102,13 @@ function createDIContainer(): Container {
               start: 0,
               end: 1,
               multiplier: 1,
-              easing: EasingName.linear,
+              easing: 'linear',
             },
             y: {
               start: 0,
               end: 1,
               multiplier: 1,
-              easing: EasingName.linear,
+              easing: 'linear',
             },
           },
           activeType: BehaviorType.Static,
@@ -135,7 +135,7 @@ function createDIContainer(): Container {
             start: 0,
             end: 1,
             multiplier: 1,
-            easing: EasingName.linear,
+            easing: 'linear',
           },
           scriptConfig: {
             script: [
@@ -164,7 +164,7 @@ function createDIContainer(): Container {
             start: 0,
             end: 1,
             multiplier: 1,
-            easing: EasingName.linear,
+            easing: 'linear',
           },
           staticConfig: {
             value: 0,

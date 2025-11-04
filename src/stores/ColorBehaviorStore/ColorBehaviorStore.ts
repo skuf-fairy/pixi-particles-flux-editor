@@ -2,10 +2,10 @@ import {BehaviorStoreState, ColorBehaviorType} from './ColorBehaviorStore.types'
 
 import {
   ColorBehaviorConfig,
-  ColorDynamicBehaviorConfig,
+  ColorTransitionBehaviorConfig,
   ColorStaticBehaviorConfig,
   ScriptBehaviorConfig,
-  isColorDynamicBehaviorConfig,
+  isColorTransitionBehaviorConfig,
   isColorStaticBehaviorConfig,
   isScriptBehaviorConfig,
 } from 'particle-flux';
@@ -47,7 +47,7 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
     return this.state.availableTypes;
   }
 
-  public setTransitionConfig(transitionConfig: ColorDynamicBehaviorConfig): void {
+  public setTransitionConfig(transitionConfig: ColorTransitionBehaviorConfig): void {
     this.setState({...this.state, transitionConfig});
   }
 
@@ -79,7 +79,7 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
   }
 
   public getActiveConfig():
-    | ColorDynamicBehaviorConfig
+    | ColorTransitionBehaviorConfig
     | ColorStaticBehaviorConfig
     | ScriptBehaviorConfig<string>
     | undefined {
@@ -112,7 +112,7 @@ export class ColorBehaviorStore extends Store<BehaviorStoreState> {
   public restore(config: ColorBehaviorConfig | undefined): void {
     if (config === undefined) {
       this.disable();
-    } else if (isColorDynamicBehaviorConfig(config)) {
+    } else if (isColorTransitionBehaviorConfig(config)) {
       this.setTransitionConfig(config);
       this.setActiveConfigType(BehaviorType.Transition);
       this.enable();

@@ -33,7 +33,7 @@ export const FLAME_EMITTER_CONFIG: ParticleEmitterConfig = {
     },
     spawnShape: {
       shape: {
-        type: SpawnShapeType.Torus,
+        type: 'Torus',
         x: 0,
         y: 0,
         outerRadius: 5,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {EasingName} from 'particle-flux';
+import {EASING_NAME_LIST, EasingName} from 'particle-flux';
 import {DropDown, DropDownSize} from 'src/ui/kit/DropDown/DropDown';
 
 interface Props {
@@ -12,7 +12,7 @@ export function EasingSelect({value, onChange}: Props) {
   return (
     <DropDown
       value={{key: value, value}}
-      options={Object.values(EasingName).map((e) => ({value: e, key: e}))}
+      options={EASING_NAME_LIST.map((e) => ({value: e, key: e}))}
       onChange={(v) => onChange(v.value as EasingName)}
       size={DropDownSize.Small}
     />

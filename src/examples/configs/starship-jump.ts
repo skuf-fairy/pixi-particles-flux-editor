@@ -57,7 +57,7 @@ export const STARSHIP_JUMP_EMITTER_CONFIG: ParticleEmitterConfig = {
     },
     spawnShape: {
       shape: {
-        type: SpawnShapeType.Torus,
+        type: 'Torus',
         x: 0,
         y: 0,
         innerRadius: 0,

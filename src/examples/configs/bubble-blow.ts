@@ -1,4 +1,4 @@
-import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -34,7 +34,7 @@ export const BUBBLE_BLOW_EMITTER_CONFIG: ParticleEmitterConfig = {
     },
     spawnShape: {
       shape: {
-        type: SpawnShapeType.Rectangle,
+        type: 'Rectangle',
         x: -500,
         y: -500,
         width: 1000,

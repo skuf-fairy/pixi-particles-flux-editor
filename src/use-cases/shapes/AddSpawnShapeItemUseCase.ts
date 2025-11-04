@@ -8,31 +8,31 @@ export class AddSpawnShapeItemUseCase {
   constructor(private readonly spawnShapeStore: SpawnShapeBehaviorStore) {}
 
   public add(spawnShapeType: SpawnShapeType): void {
-    if (spawnShapeType === SpawnShapeType.Point) {
+    if (spawnShapeType === 'Point') {
       this.spawnShapeStore.setShapeList([
         ...this.spawnShapeStore.getShapeList(),
         {
-          type: SpawnShapeType.Point,
+          type: 'Point',
           x: 0,
           y: 0,
         },
       ]);
-    } else if (spawnShapeType === SpawnShapeType.Rectangle) {
+    } else if (spawnShapeType === 'Rectangle') {
       this.spawnShapeStore.setShapeList([
         ...this.spawnShapeStore.getShapeList(),
         {
-          type: SpawnShapeType.Rectangle,
+          type: 'Rectangle',
           x: 0,
           y: 0,
           width: 0,
           height: 0,
         },
       ]);
-    } else if (spawnShapeType === SpawnShapeType.Torus) {
+    } else if (spawnShapeType === 'Torus') {
       this.spawnShapeStore.setShapeList([
         ...this.spawnShapeStore.getShapeList(),
         {
-          type: SpawnShapeType.Torus,
+          type: 'Torus',
           x: 0,
           y: 0,
           innerRadius: 0,
@@ -41,11 +41,11 @@ export class AddSpawnShapeItemUseCase {
           endAngle: 360,
         },
       ]);
-    } else if (spawnShapeType === SpawnShapeType.Chain) {
+    } else if (spawnShapeType === 'Chain') {
       this.spawnShapeStore.setShapeList([
         ...this.spawnShapeStore.getShapeList(),
         {
-          type: SpawnShapeType.Chain,
+          type: 'Chain',
           chain: [
             {
               x: 0,

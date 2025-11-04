@@ -1,6 +1,6 @@
 import {SpawnShapeBehaviorStoreState} from './SpawnShapeBehaviorStore.types';
 
-import {SpawnShape, SpawnShapeBehavior, SpawnShapeType} from 'particle-flux';
+import {SpawnShape, SpawnShapeBehavior} from 'particle-flux';
 
 import {Store} from '../Store';
 
@@ -9,7 +9,7 @@ export class SpawnShapeBehaviorStore extends Store<SpawnShapeBehaviorStoreState>
     super({
       shapeList: [
         {
-          type: SpawnShapeType.Point,
+          type: 'Point',
           x: 0,
           y: 0,
         },
@@ -50,7 +50,7 @@ export class SpawnShapeBehaviorStore extends Store<SpawnShapeBehaviorStoreState>
         {
           x: 0,
           y: 0,
-          type: SpawnShapeType.Point,
+          type: 'Point',
         },
       ]);
     } else {

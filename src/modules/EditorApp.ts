@@ -267,11 +267,11 @@ export class EditorApp {
   }
 
   private renderSingleSpawnShape(spawnPosition: Point2d, spawnShape: SpawnShape, isDisplay: boolean) {
-    if (spawnShape.type === SpawnShapeType.Point) {
+    if (spawnShape.type === 'Point') {
       this.spawnShape
         .circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, 1)
         .stroke(SPAWN_SHAPE_STROKE);
-    } else if (spawnShape.type === SpawnShapeType.Rectangle) {
+    } else if (spawnShape.type === 'Rectangle') {
       this.spawnShape
         .rect(
           spawnPosition.x + spawnShape.x,
@@ -280,7 +280,7 @@ export class EditorApp {
           spawnShape.height || 1,
         )
         .stroke(SPAWN_SHAPE_STROKE);
-    } else if (spawnShape.type === SpawnShapeType.Torus) {
+    } else if (spawnShape.type === 'Torus') {
       if (spawnShape.innerRadius !== undefined && spawnShape.innerRadius !== 0) {
         this.spawnShape.circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, spawnShape.innerRadius);
       }
@@ -288,7 +288,7 @@ export class EditorApp {
       this.spawnShape
         .circle(spawnPosition.x + spawnShape.x, spawnPosition.y + spawnShape.y, spawnShape.outerRadius || 1)
         .stroke(SPAWN_SHAPE_STROKE);
-    } else if (spawnShape.type === SpawnShapeType.Chain) {
+    } else if (spawnShape.type === 'Chain') {
       // if (Array.isArray(spawnShape.chain)) {
       //   this.spawnShape
       //     .clear()

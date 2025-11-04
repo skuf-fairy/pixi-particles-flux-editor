@@ -1,4 +1,4 @@
-import {ColorDynamicBehaviorConfig, ColorStaticBehaviorConfig, ScriptBehaviorConfig} from 'particle-flux';
+import {ColorTransitionBehaviorConfig, ColorStaticBehaviorConfig, ScriptBehaviorConfig} from 'particle-flux';
 
 import {BehaviorType} from '../types';
 
@@ -6,7 +6,7 @@ export type ColorBehaviorType = BehaviorType.Static | BehaviorType.Transition | 
 
 export interface BehaviorStoreState {
   staticConfig: ColorStaticBehaviorConfig;
-  transitionConfig: ColorDynamicBehaviorConfig;
+  transitionConfig: ColorTransitionBehaviorConfig;
   scriptConfig: ScriptBehaviorConfig<string>;
   activeType: ColorBehaviorType;
   availableTypes: ColorBehaviorType[];

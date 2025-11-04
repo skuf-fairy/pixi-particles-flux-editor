@@ -1,7 +1,6 @@
 import {DI_TOKENS} from 'src/di/di.tokens';
 
 import {injected} from 'brandi';
-import {SpawnShapeType} from 'particle-flux';
 import {SpawnShapeBehaviorStore} from 'src/stores/SpawnShapeBehaviorStore/SpawnShapeBehaviorStore';
 
 export class DropSpawnShapeItemUseCase {
@@ -13,7 +12,7 @@ export class DropSpawnShapeItemUseCase {
     if (shapeList.length === 1) {
       this.spawnShapeStore.setShapeList([
         {
-          type: SpawnShapeType.Point,
+          type: 'Point',
           x: 0,
           y: 0,
         },

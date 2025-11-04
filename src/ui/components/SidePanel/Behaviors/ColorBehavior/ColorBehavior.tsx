@@ -10,7 +10,7 @@ import {BehaviorHeader} from '../../BehaviorHeader/BehaviorHeader';
 import {BehaviorName} from '../../BehaviorName/BehaviorName';
 import {ItemContainer} from '../../ItemContainer/ItemContainer';
 import {BehaviorEnabled} from '../BehaviorEnabled/BehaviorEnabled';
-import {ColorDynamicBehavior} from './ColorDynamicBehavior';
+import {ColorTransitionBehavior} from './ColorTransitionBehavior';
 import {ColorScriptBehavior} from './ColorScriptBehavior';
 
 export function ColorBehavior() {
@@ -54,7 +54,7 @@ export function ColorBehavior() {
       )}
 
       {store.isTransitionConfigActive() && (
-        <ColorDynamicBehavior
+        <ColorTransitionBehavior
           config={store.state.transitionConfig}
           onChange={(config) => store.setTransitionConfig(config)}
         />

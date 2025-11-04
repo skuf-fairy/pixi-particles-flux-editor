@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {EasingName, ScalarTransitionBehaviorConfig} from 'particle-flux';
+import {ScalarTransitionBehaviorConfig} from 'particle-flux';
 
 import {EasingOption} from '../EasingOption/EasingOption';
 import {FieldsGrid} from '../FieldsGrid/FieldsGrid';
@@ -31,7 +31,7 @@ export function ScalarTransitionBehaviorOption({config, onChange, min, max}: Pro
         max={max}
         onBlur={(v) => onChange({...config, end: v})}
       />
-      <EasingOption easing={config.easing || EasingName.linear} onChange={(v) => onChange({...config, easing: v})} />
+      <EasingOption easing={config.easing || 'linear'} onChange={(v) => onChange({...config, easing: v})} />
       {config.multiplier && (
         <MultiplierOption multiplier={config.multiplier} onChange={(v) => onChange({...config, multiplier: v})} />
       )}

@@ -1,4 +1,4 @@
-import {ParticleEmitterConfig, SpawnShapeType} from 'particle-flux';
+import {ParticleEmitterConfig} from 'particle-flux';
 
 export const FLAME_POLYGON_EMITTER_CONFIG: ParticleEmitterConfig = {
   emitterConfig: {
@@ -32,7 +32,7 @@ export const FLAME_POLYGON_EMITTER_CONFIG: ParticleEmitterConfig = {
     },
     spawnShape: {
       shape: {
-        type: SpawnShapeType.Chain,
+        type: 'Chain',
         chain: [
           {
             x: -300,

@@ -2,7 +2,6 @@ import {BaseBehaviorStoreState} from './BaseBehaviorStore.types';
 
 import {
   DeltaBehaviorConfig,
-  EasingName,
   NumberScriptBehaviorConfig,
   Point2d,
   ScalarStaticBehaviorConfig,
@@ -29,7 +28,7 @@ export class BaseBehaviorStore extends Store<BaseBehaviorStoreState> {
       transitionConfig: {
         start: 0,
         end: 1,
-        easing: EasingName.linear,
+        easing: 'linear',
         multiplier: 1,
       },
       vectorConfig: {

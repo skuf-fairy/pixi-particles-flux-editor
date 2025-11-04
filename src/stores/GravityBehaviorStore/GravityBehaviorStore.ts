@@ -19,7 +19,7 @@ export class GravityBehaviorStore extends Store<GravityBehaviorStoreState> {
         start: 0,
         end: 1,
         multiplier: 1,
-        easing: EasingName.linear,
+        easing: 'linear',
       },
       scalarStaticBehaviorConfig: {
         value: 0.3,
